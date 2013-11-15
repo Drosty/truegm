@@ -27,7 +27,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# Rspec Gem for testing
 gem 'rspec-rails', '~> 2.0'
+
+# Cancan for User Authorization
+gem 'cancan'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
