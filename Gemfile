@@ -33,6 +33,9 @@ gem 'rspec-rails', '~> 2.0'
 # Cancan for User Authorization
 gem 'cancan'
 
+# Devise for user authentication
+gem 'devise'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
