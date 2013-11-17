@@ -1,0 +1,11 @@
+development:
+  app_id: OIiKHpyPNNgYss6gzheQ
+  secret: 7FYIlBt952rDx6fkj7knmxxdyqRXAQKjTSW2QNZ6ms
+
+test:
+  app_id: OIiKHpyPNNgYss6gzheQ
+  secret: 7FYIlBt952rDx6fkj7knmxxdyqRXAQKjTSW2QNZ6ms
+
+production:
+  app_id: OIiKHpyPNNgYss6gzheQ
+  secret: 7FYIlBt952rDx6fkj7knmxxdyqRXAQKjTSW2QNZ6ms
