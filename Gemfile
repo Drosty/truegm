@@ -27,9 +27,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# Rspec Gem for testing
-gem 'rspec-rails', '~> 2.0'
-
 # Cancan for User Authorization
 gem 'cancan'
 
@@ -66,7 +63,7 @@ gem 'simple_form'
 gem 'cancan'
 
 # For testing
-gem 'rspec-rails', group: [:development, :test]
+gem 'rspec-rails', '~> 2.0', group: [:development, :test]
 gem 'parallel_tests', group: [:development, :test]
 gem 'capybara', group: [:development, :test]
 gem 'guard-rspec', group: [:development, :test]
