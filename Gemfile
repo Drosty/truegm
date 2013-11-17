@@ -62,6 +62,9 @@ gem 'simple_form'
 # For Authorization
 gem 'cancan'
 
+# To Keep attr_accessible
+gem 'protected_attributes'
+
 # For testing
 gem 'rspec-rails', '~> 2.0', group: [:development, :test]
 gem 'parallel_tests', group: [:development, :test]
