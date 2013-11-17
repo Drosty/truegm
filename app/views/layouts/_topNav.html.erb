@@ -1,0 +1,60 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <% if @current_league.present? %>
+        <%= link_to t('truegm'), league_path(@current_league), :class => "brand" %>
+      <% else %>
+        <%= link_to t('truegm'), root_path, :class => "brand" %>
+      <% end %>
+      <div class="nav-collapse">
+        <ul class="nav">
+
+          <% if defined? @current_league %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Teams
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              <% @current_league.teams.each do |t| %>
+                <li><%= link_to t.name, league_team_path(@current_league, t) %></li>
+              <% end %>
+              </ul>
+            </li>
+          <% end %>
+          
+          <% if defined? @current_league %>
+            <li><%= link_to "Forum", league_forum_topics_path(@current_league) %></li>
+            <li><%= link_to "Players" %></li>
+          <% end %>
+        </ul>
+
+        <% if user_signed_in? %>
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= current_user.email %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <ul class="nav pull-right">
+              <li><%= link_to 'Signup', new_user_registration_path %></li>
+              <li><%= link_to 'Login', new_user_session_path %></li>
+            </ul>
+          </ul>
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="span9">
+    <h1><%= @team.name %></h1>
+  </div>
+
+  <% if can? :update, Team %>
+    <div class="span3">
+      <%= link_to 'Edit', edit_league_team_path(@current_league, @team), :class => 'btn' %>
+    </div>
+  <% end %>
+</div>
+
+

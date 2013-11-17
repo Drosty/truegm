@@ -1,0 +1,35 @@
+<%- model_class = ForumTopic -%>
+<div class="row">
+  <div class="span8">
+    <h1><%= @forum_topic.name %></h1>
+    <h5><%= @forum_topic.description %></h5>
+  </div>
+  <div class="span4">
+    <%= link_to "Create new Post",
+            new_league_forum_topic_forum_post_path(@current_league, @forum_topic),
+            :class => 'btn btn-primary' %>
+
+    <%= link_to "Back to forums",
+            league_forum_topics_path(@current_league),
+            :class => 'btn' %>
+  </div>
+</div>
+
+<% if @forum_topic.forum_posts == nil or @forum_topic.forum_posts.count == 0 %>
+  <div class="row">
+    <div class="span12">
+      <p><%= t 'forum_post.no_post_message' %></p>
+    </div>
+  </div>
+<% else %>
+  <% @forum_topic.forum_posts.each do |post| %>
+    <div class="row">
+      <div class="span12">
+        <blockquote>
+          <p><%= post.post_body %></p>
+          <small><%= post.user.email %> <cite title="Source Title"><%= post.created_at.strftime("on %B %d at %I:%M %p") %></cite></small>
+        </blockquote>
+      </div>
+    </div>
+  <% end %>
+<% end %>

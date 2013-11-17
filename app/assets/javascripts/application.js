@@ -5,12 +5,24 @@
 // or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
+// the compiled file.
 //
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require twitter/bootstrap/bootstrap-transition
+//= require twitter/bootstrap/bootstrap-alert
+//= require twitter/bootstrap/bootstrap-modal
+//= require twitter/bootstrap/bootstrap-dropdown
+//= require twitter/bootstrap/bootstrap-scrollspy
+//= require twitter/bootstrap/bootstrap-tab
+//= require twitter/bootstrap/bootstrap-tooltip
+//= require twitter/bootstrap/bootstrap-popover
+//= require twitter/bootstrap/bootstrap-button
+//= require twitter/bootstrap/bootstrap-collapse
+//= require twitter/bootstrap/bootstrap-carousel
+//= require twitter/bootstrap/bootstrap-typeahead
+//= require twitter/bootstrap/bootstrap-affix
 //= require_tree .
