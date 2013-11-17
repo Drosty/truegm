@@ -27,9 +27,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# Rspec Gem for testing
-gem 'rspec-rails', '~> 2.0'
-
 # Cancan for User Authorization
 gem 'cancan'
 
@@ -52,3 +49,34 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# For authentication
+gem 'devise'
+
+# For using Twitter with Authentication
+gem 'omniauth-twitter'
+
+# For making forms simpler
+gem 'simple_form'
+
+# For Authorization
+gem 'cancan'
+
+# To Keep attr_accessible
+gem 'protected_attributes'
+
+# For testing
+gem 'rspec-rails', '~> 2.0', group: [:development, :test]
+gem 'parallel_tests', group: [:development, :test]
+gem 'capybara', group: [:development, :test]
+gem 'guard-rspec', group: [:development, :test]
+gem 'database_cleaner', group: [:development, :test]
+gem 'launchy', group: [:development, :test]
+
+gem 'rb-inotify', :require => false, group: [:development, :test]
+gem 'rb-fsevent', :require => false, group: [:development, :test]
+gem 'rb-fchange', :require => false, group: [:development, :test]
+
+gem 'factory_girl_rails', group: [:development, :test]
+gem 'rack-mini-profiler', group: [:development, :test]
+
