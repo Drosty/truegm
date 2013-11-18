@@ -11,179 +11,176 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410233039) do
+ActiveRecord::Schema.define(version: 20130410233039) do
 
-  create_table "draft_picks", :force => true do |t|
+  create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
     t.integer  "year"
     t.integer  "round"
     t.integer  "position"
     t.integer  "original_team_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "draft_picks", ["original_team_id"], :name => "draft_pick_original_team_fk"
-  add_index "draft_picks", ["team_id"], :name => "draft_pick_current_team_fk"
+  add_index "draft_picks", ["original_team_id"], name: "draft_pick_original_team_fk", using: :btree
+  add_index "draft_picks", ["team_id"], name: "draft_pick_current_team_fk", using: :btree
 
-  create_table "external_links", :force => true do |t|
+  create_table "external_links", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
     t.string   "url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "external_links", ["user_id"], :name => "link_url_fk"
+  add_index "external_links", ["user_id"], name: "link_url_fk", using: :btree
 
-  create_table "forum_posts", :force => true do |t|
+  create_table "forum_posts", force: true do |t|
     t.integer  "user_id"
     t.integer  "forum_topic_id"
     t.text     "post_body"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "forum_posts", ["forum_topic_id"], :name => "forum_post_forum_topic_fk"
-  add_index "forum_posts", ["user_id"], :name => "forum_post_user_fk"
+  add_index "forum_posts", ["forum_topic_id"], name: "forum_post_forum_topic_fk", using: :btree
+  add_index "forum_posts", ["user_id"], name: "forum_post_user_fk", using: :btree
 
-  create_table "forum_topics", :force => true do |t|
+  create_table "forum_topics", force: true do |t|
     t.integer  "league_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "forumposts_count", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forumposts_count", default: 0
   end
 
-  add_index "forum_topics", ["league_id"], :name => "forum_topic_league_fk"
+  add_index "forum_topics", ["league_id"], name: "forum_topic_league_fk", using: :btree
 
-  create_table "leagues", :force => true do |t|
+  create_table "leagues", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.string   "tagline"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "matchups", :force => true do |t|
+  create_table "matchups", force: true do |t|
     t.integer  "year"
     t.integer  "week"
     t.integer  "home_team_id"
     t.integer  "away_team_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "matchups", ["away_team_id"], :name => "matchup_away_team_fk"
-  add_index "matchups", ["home_team_id"], :name => "matchup_home_team_fk"
+  add_index "matchups", ["away_team_id"], name: "matchup_away_team_fk", using: :btree
+  add_index "matchups", ["home_team_id"], name: "matchup_home_team_fk", using: :btree
 
-  create_table "nfl_players", :force => true do |t|
+  create_table "nfl_players", force: true do |t|
     t.integer  "nfl_team_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "position"
     t.integer  "salary"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "nfl_players", ["nfl_team_id"], :name => "nfl_player_nfl_team_id"
+  add_index "nfl_players", ["nfl_team_id"], name: "nfl_player_nfl_team_id", using: :btree
 
-  create_table "nfl_players_teams", :id => false, :force => true do |t|
+  create_table "nfl_players_teams", id: false, force: true do |t|
     t.integer "team_id"
     t.integer "nfl_player_id"
   end
 
-  create_table "nfl_teams", :force => true do |t|
+  create_table "nfl_teams", force: true do |t|
     t.string   "location"
     t.string   "mascot"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "power_rankings", :force => true do |t|
+  create_table "power_rankings", force: true do |t|
     t.integer  "team_id"
     t.text     "description"
     t.integer  "rank"
     t.integer  "week"
     t.integer  "year"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "power_rankings", ["team_id"], :name => "power_ranking_team_fk"
+  add_index "power_rankings", ["team_id"], name: "power_ranking_team_fk", using: :btree
 
-  create_table "teams", :force => true do |t|
+  create_table "teams", force: true do |t|
     t.string   "name"
     t.string   "tagline"
     t.integer  "league_id"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "total_salary", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "total_salary", default: 0
     t.string   "invite_code"
   end
 
-  add_index "teams", ["league_id"], :name => "team_league_fk"
-  add_index "teams", ["user_id"], :name => "team_user_fk"
+  add_index "teams", ["league_id"], name: "team_league_fk", using: :btree
+  add_index "teams", ["user_id"], name: "team_user_fk", using: :btree
 
-  create_table "trade_items", :force => true do |t|
+  create_table "trade_items", force: true do |t|
     t.integer  "trade_id"
     t.integer  "item_id"
     t.string   "item_type"
     t.integer  "team"
     t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "trade_items", ["trade_id"], :name => "trade_item_trade_fk"
+  add_index "trade_items", ["trade_id"], name: "trade_item_trade_fk", using: :btree
 
-  create_table "trade_votes", :force => true do |t|
+  create_table "trade_votes", force: true do |t|
     t.integer  "trade_id"
     t.integer  "team_id"
     t.string   "vote"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "trade_votes", ["team_id"], :name => "trade_vote_user_fk"
-  add_index "trade_votes", ["trade_id"], :name => "trade_vote_trade_fk"
+  add_index "trade_votes", ["team_id"], name: "trade_vote_user_fk", using: :btree
+  add_index "trade_votes", ["trade_id"], name: "trade_vote_trade_fk", using: :btree
 
-  create_table "trades", :force => true do |t|
+  create_table "trades", force: true do |t|
     t.integer  "from_team_id"
     t.integer  "to_team_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "trades", ["from_team_id"], :name => "trade_from_team_fk"
-  add_index "trades", ["to_team_id"], :name => "trade_to_team_fk"
+  add_index "trades", ["from_team_id"], name: "trade_from_team_fk", using: :btree
+  add_index "trades", ["to_team_id"], name: "trade_to_team_fk", using: :btree
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",               :null => false
-    t.string   "encrypted_password",     :default => "",               :null => false
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "forem_admin",            :default => false
-    t.string   "forem_state",            :default => "pending_review"
-    t.boolean  "forem_auto_subscribe",   :default => false
     t.boolean  "is_admin"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
