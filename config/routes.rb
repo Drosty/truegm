@@ -17,7 +17,7 @@ EvokeTruegmRails::Application.routes.draw do
 
   resources :nflteams, :only => [:index, :show]
   resources :nflplayers, :only => [:index, :show]
-  
+  resources :user 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
