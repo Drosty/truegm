@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= simple_form_for @user, :html => { :class => 'form-horizontal' }  do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -9,9 +9,11 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-
+  <% end %> 
   <div class="actions">
+    <%= f.input :email %>
+    
+    <%= f.association :teams, :label_method => lambda { |team| "#{team.league.name} | #{team.name}" }  %>
     <%= f.submit %>
   </div>
 <% end %>
