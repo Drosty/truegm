@@ -1,6 +1,6 @@
 EvokeTruegmRails::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-                     controllers: {omniauth_callbacks: "omniauth_callbacks"} 
+                     controllers: {omniauth_callbacks: "omniauth_callbacks"}, :path_prefix => 'd' 
 
   scope "/users/:user_id" do
     resources :external_link
@@ -17,7 +17,7 @@ EvokeTruegmRails::Application.routes.draw do
 
   resources :nflteams, :only => [:index, :show]
   resources :nflplayers, :only => [:index, :show]
-  resources :user 
+  resources :users 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
