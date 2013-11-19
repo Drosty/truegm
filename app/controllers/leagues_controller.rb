@@ -43,8 +43,8 @@ class LeaguesController < ApplicationController
   # POST /leagues
   # POST /leagues.json
   def create
-    # Create 8 teams for the league
-    8.times do |n|
+    # Create 10 teams for the league
+    10.times do |n|
       team = Team.new
       team.name = "Team " + (n+1).to_s
 
