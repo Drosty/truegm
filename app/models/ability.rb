@@ -10,7 +10,9 @@ class Ability
         can :destroy, :all
       else
         # League Rule
-        can :read, League, :teams => { :user_id => user.id }
+        can :read, League do |league|
+          league.teams.select{|team| team.user_id == user.id }.count > 0  
+        end
 
         # Team Rules
         can :update, Team, :user_id => user.id
