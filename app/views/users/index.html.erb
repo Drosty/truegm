@@ -1,8 +1,9 @@
 <h1>Listing users</h1>
 
-<table>
+<table class="table table-stripped">
   <thead>
     <tr>
+      <th>Email</th>
       <th></th>
       <th></th>
       <th></th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= link_to user.email, edit_user_path(user) %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -22,4 +24,6 @@
 
 <br>
 
+<% if can? :create, User %>
 <%= link_to 'New User', new_user_path %>
+<% end %>
