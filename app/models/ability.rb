@@ -46,6 +46,16 @@ class Ability
           end
         end
         can :update, ForumPost, :user => user
+      
+        # rules on trade votes
+        can :create, TradeVote do |vote|
+          if vote == nil or vote.trade == nil  or vote.trade.to_team == nil or vote.trade.from_team == nil or vote.trade.to_team.league == nil or vote.trade.from_team.league == nil
+            false
+          else
+            user.leagues.select{|l| l.id == vote.trade.to_team.league.id}.count > 0 
+          end
+        end
+       
       end
     end
   end

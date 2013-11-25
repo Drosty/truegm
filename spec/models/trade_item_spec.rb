@@ -8,8 +8,4 @@ describe TradeItem do
   it "Factory Generates Valid Model" do
     @trade_item.should be_valid
   end
-  
-  it "can be of type money, player or pick" do
-  
-  end
 end
