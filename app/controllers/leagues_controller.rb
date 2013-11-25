@@ -4,7 +4,7 @@ class LeaguesController < ApplicationController
   before_filter :set_current_league, only: [:show, :index, :edit, :new]
  
   def set_current_league
-    @current_league = League.find(params[:id]) if params[:id].present? else nil
+    @current_league = League.find(params[:id]) if params[:id].present? 
   end
 
   # GET /leagues
