@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'cancan/matchers'
 
 describe TradeVote do
   before(:each) do
@@ -46,7 +47,8 @@ describe TradeVote do
     end
 
     it 'can vote for trade in league' do
-      
+      trade = create(:trade, :from_team => @user.leagues.first.teams.first, :to_team => @user.leagues.first.teams.fetch(1, nil))
+      assert @ability.can?(:create, create(:trade_vote, :trade => trade)) 
     end
     
     it 'cannot vote for trade in other league' do

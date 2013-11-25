@@ -46,6 +46,10 @@ class Ability
           end
         end
         can :update, ForumPost, :user => user
+      
+        # rules on trade votes
+        can :create, TradeVote
+       
       end
     end
   end
