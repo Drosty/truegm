@@ -9,16 +9,6 @@ describe Team do
     @team.should be_valid
   end
 
-  describe "general team valid rules" do
-    it "cant have same invite code as team in same league" do
-    
-    end
-    
-    it "can have same invite code as team in different league" do
-    
-    end
-  end
-
   describe "NFL Players on Team" do
     before(:each) do
       # create a valid team
@@ -77,30 +67,6 @@ describe Team do
     before(:each) do
       league = build(:league)
       league.teams << @team
-    end
-
-    it "cannot have more QBs than allowed" do 
-      
-    end
-
-    it "cannot have more RBs than allowed" do 
-      
-    end
-    
-    it "cannot have more WRs than allowed" do 
-      
-    end
-    
-    it "cannot have more TEs than allowed" do 
-      
-    end
-    
-    it "cannot have more Kickers than allowed" do 
-      
-    end
-    
-    it "cannot have more Defenses than allowed" do 
-      
     end
   end
 end
