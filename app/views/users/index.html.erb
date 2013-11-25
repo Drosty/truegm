@@ -1,6 +1,10 @@
 <h1>Listing users</h1>
 
+<<<<<<< HEAD
 <table class="table table-striped">
+=======
+<table class="table table-stripped">
+>>>>>>> bb37d79b1b2150641670163d4e2f6f31a7e7fc5b
   <thead>
     <tr>
       <th>Email</th>
@@ -13,7 +17,11 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+<<<<<<< HEAD
         <td><%= user.email %></td> 
+=======
+        <td><%= link_to user.email, edit_user_path(user) %></td>
+>>>>>>> bb37d79b1b2150641670163d4e2f6f31a7e7fc5b
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,7 +31,14 @@
 </table>
 
 <br>
+<<<<<<< HEAD
 <%if can? :create, User %> 
 <%= link_to 'New User', new_user_path %>
 <% end %> 
 
+=======
+
+<% if can? :create, User %>
+<%= link_to 'New User', new_user_path %>
+<% end %>
+>>>>>>> bb37d79b1b2150641670163d4e2f6f31a7e7fc5b

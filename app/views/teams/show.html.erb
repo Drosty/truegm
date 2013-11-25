@@ -12,4 +12,19 @@
   <% end %>
 </div>
 
-
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>NFL Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.quarterbacks.each do |player| %>
+      <tr>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+        <td>Bears</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

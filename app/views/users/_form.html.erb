@@ -13,7 +13,9 @@
   <div class="actions">
     <%= f.input :email %>
     
-    <%= f.association :teams, :label_method => lambda { |team| "#{team.league.name} | #{team.name}" }  %>
+    <%= f.association :teams,
+         collection: Team. 
+         :label_method => lambda { |team| "#{team.league.name} | #{team.name}" }  %>
     <%= f.submit %>
   </div>
 <% end %>
