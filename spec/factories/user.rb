@@ -8,21 +8,21 @@ FactoryGirl.define do
     password "qwerty1234!!!"
 
     factory :user_with_one_team do
-      after_build { |user|
+      after(:build) { |user|
         user.teams << FactoryGirl.build(:team, :user => user) 
       }
 
-      after_create { |user|
+      after(:creae) { |user|
         user.teams << FactoryGirl.create(:team, :user => user) 
       }
     end 
 
     factory :user_with_two_teams do
-      after_build { |user|
+      after(:build) { |user|
         user.teams { FactoryGirl.build_list(:team, 2, :user => user) }
       }
 
-      after_create { |user|
+      after(:create) { |user|
         user.teams << FactoryGirl.create_list(:team, 2, :user => user) 
       }
     end
