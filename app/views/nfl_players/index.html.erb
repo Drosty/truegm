@@ -6,16 +6,15 @@
       <th>Name</th>
       <th>Position</th>
       <th>Salary</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @nfl_players.each do |nfl_player| %>
       <tr>
-	<td><%= nfl_player.first_name + ' ' + nfl_player.last_name %></td>
+	<td><%= link_to nfl_player.first_name + ' ' + nfl_player.last_name,
+                 league_nfl_player_path(@current_league, nfl_player)  %></td>
 	<td><%= nfl_player.position %></td>
-	<td><%= nfl_player.salary %></td>
-        <td><%= link_to 'Show', league_nfl_player_path(@current_league, nfl_player) %></td>
+	<td><%= number_to_currency(nfl_player.salary, precision: 0) %></td>
       </tr>
     <% end %>
   </tbody>
