@@ -1,4 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_nfl_player_path(@nfl_player) %> |
-<%= link_to 'Back', nfl_players_path %>
+<h3><%= @nfl_player.position + ' ' +  @nfl_player.first_name + ' ' + @nfl_player.last_name %></h3>
+<p>Salary: <%= number_to_currency @nfl_player.salary, precision: 0 %></p>
+
+<p>Currently a Free Agent</p>
+
+<%= link_to 'Back', league_nfl_players_path(@current_league, @nfl_player) %>
