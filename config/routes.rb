@@ -13,10 +13,10 @@ EvokeTruegmRails::Application.routes.draw do
     end
 
     resources :trades
+    resources :nfl_players, :only => [:index, :show]
   end
 
   resources :nflteams, :only => [:index, :show]
-  resources :nflplayers, :only => [:index, :show]
   resources :users 
 
   # The priority is based upon order of creation:
