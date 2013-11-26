@@ -30,7 +30,7 @@
           
           <% if defined? @current_league %>
             <li><%= link_to "Forum", league_forum_topics_path(@current_league) %></li>
-            <li><%= link_to "Players" %></li>
+            <li><%= link_to "Players", league_nfl_players_path(@current_league) %></li>
           <% end %>
         </ul>
 
