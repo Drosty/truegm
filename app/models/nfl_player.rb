@@ -16,7 +16,7 @@ class NflPlayer < ActiveRecord::Base
   scope :positions, ->(pos) { 
                               case pos
                               when 'all'
-                                scoped
+                                where(nil)
                               when 'flex'
                                 where(:position => ['rb', 'wr'])
                               else
