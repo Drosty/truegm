@@ -65,6 +65,9 @@ gem 'cancan'
 # To Keep attr_accessible
 gem 'protected_attributes'
 
+# For Pagination
+gem 'will_paginate', '~> 3.0'
+
 # For LESS Rails
 gem "less-rails"
 
