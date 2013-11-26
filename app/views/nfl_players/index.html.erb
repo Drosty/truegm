@@ -1,5 +1,7 @@
 <h1>Listing nfl_players</h1>
 
+<%= page_entries_info @nfl_players %>
+
 <table class="table">
   <thead>
     <tr>
@@ -19,4 +21,5 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @nfl_players, :class => 'apple_pagination' %>
+
+<%= will_paginate @nfl_players, :inner_window => 1, :outer_window => 1, :class => 'apple_pagination' %>
