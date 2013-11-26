@@ -17,11 +17,11 @@ class NflPlayersController < ApplicationController
   end
 
   def sort_column 
-    NflPlayer.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+    NflPlayer.column_names.include?(params[:sort]) ? params[:sort] : "salary"
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def position_selected
