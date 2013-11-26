@@ -13,8 +13,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
-      <th>Number of Posts</th>
+      <th>Posts</th>
       <% if can? :update, ForumTopic or can? :delete, ForumTopic %>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       <% end %>
@@ -24,8 +23,7 @@
     <% @forum_topics.each do |forum_topic| %>
       <tr>
         <td><%= link_to forum_topic.name, league_forum_topic_path(@current_league, forum_topic) %></td>
-        <td><%= forum_topic.description %></td>
-        <td><%= pluralize forum_topic.forumposts_count, 'post' %></td>
+        <td><%= pluralize forum_topic.forumposts_count, 'post' %> - Updated <%= distance_of_time_in_words(Time.now, forum_topic.updated_at) %> ago.</td>
         <% if can? :update, ForumTopic or can? :delete, ForumTopic %>
           <td>
             <% if can? :update, ForumTopic %>

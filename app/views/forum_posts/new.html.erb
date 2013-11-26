@@ -1,7 +1,7 @@
 <h1><%= t 'forum_post.new_message' %></h1>
-<h5><%= @current_topic.name %></h5>
-
-
+<h3>Posting in topic: <%= @current_topic.name %></h3>
+<hr />
+<h4>Here are the most recent posts</h4>
   <% @recent_posts.each do |post| %>
     <div class="row">
       <div class="span12">
@@ -12,6 +12,6 @@
       </div>
     </div>
   <% end %>
-
+<hr />
 <%= render 'form' %>
-<%= link_to 'Back to Topic', league_forum_topic_path(@current_league, @current_topic) %>
+<%= link_to 'Back to Topic', league_forum_topic_path(@current_league, @current_topic), :class => 'btn' %>

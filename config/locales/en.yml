@@ -14,8 +14,8 @@ en:
     message: 'Welcome to TrueGM'
 
   forum_post:
-    edit_message: 'Editing forum_post'
-    new_message: 'New Forum Post'
+    edit_message: 'Editing Post'
+    new_message: 'New Post'
     no_post_message: 'There are no Posts yet.'
 
   forum_topic:

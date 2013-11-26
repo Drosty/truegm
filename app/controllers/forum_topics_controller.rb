@@ -11,7 +11,7 @@ class ForumTopicsController < ApplicationController
   # GET /forum_topics
   # GET /forum_topics.json
   def index
-    @forum_topics = ForumTopic.where(:league_id => @current_league.id)
+    @forum_topics = @current_league.forum_topics
 
     respond_to do |format|
       format.html # index.html.erb
