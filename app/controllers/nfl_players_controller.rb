@@ -8,7 +8,7 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    @nfl_players = NflPlayer.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    @nfl_players = NflPlayer.positions(position_selected).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   # GET /nfl_players/1
@@ -22,6 +22,11 @@ class NflPlayersController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def position_selected
+    pos_param = params[:pos] == nil ? "all" : params[:pos].downcase
+    NflPlayer.available_positions_for_filter.include?(pos_param) ? pos_param : "all" 
   end
 
   private

@@ -5,6 +5,22 @@ class NflPlayer < ActiveRecord::Base
 
   has_and_belongs_to_many :teams
 
+  def self.available_positions_for_filter
+    ['all', 'qb', 'rb', 'wr', 'te', 'd', 'k', 'flex']
+  end
+
   # This is for pagination
   self.per_page = 15
+
+  # Named_Scopes
+  scope :positions, ->(pos) { 
+                              case pos
+                              when 'all'
+                                scoped
+                              when 'flex'
+                                where(:position => ['rb', 'wr'])
+                              else
+                                where(:position => pos)
+                              end 
+                            }
 end
