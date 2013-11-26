@@ -1,4 +1,5 @@
 class NflPlayersController < ApplicationController
+  helper_method :sort_column, :sort_direction
   load_and_authorize_resource
 
   before_filter :set_current_league, only: [:show, :index]
@@ -7,12 +8,20 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    @nfl_players = NflPlayer.paginate(:page => params[:page])
+    @nfl_players = NflPlayer.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
+  end
+
+  def sort_column 
+    NflPlayer.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   private

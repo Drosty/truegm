@@ -1,13 +1,13 @@
-<h1>Listing nfl_players</h1>
+<h1>Nfl Players</h1>
 
 <%= page_entries_info @nfl_players %>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Position</th>
-      <th>Salary</th>
+      <th><%= sortable_link "last_name", "Name" %></th>
+      <th><%= sortable_link "position" %></th>
+      <th><%= sortable_link "salary" %></th>
     </tr>
   </thead>
   <tbody>
