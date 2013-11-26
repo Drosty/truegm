@@ -6,5 +6,5 @@ class NflPlayer < ActiveRecord::Base
   has_and_belongs_to_many :teams
 
   # This is for pagination
-  self.per_page = 10
+  self.per_page = 15
 end
