@@ -1,4 +1,17 @@
 <h1><%= t 'forum_post.new_message' %></h1>
 <h5><%= @current_topic.name %></h5>
+
+
+  <% @recent_posts.each do |post| %>
+    <div class="row">
+      <div class="span12">
+        <blockquote>
+          <p><%= post.post_body %></p>
+          <small><%= post.user.email %> <cite title="Source Title"><%= post.created_at.strftime("on %B %d at %I:%M %p") %></cite></small>
+        </blockquote>
+      </div>
+    </div>
+  <% end %>
+
 <%= render 'form' %>
 <%= link_to 'Back to Topic', league_forum_topic_path(@current_league, @current_topic) %>

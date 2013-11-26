@@ -14,6 +14,9 @@ class ForumPostsController < ApplicationController
   # GET /forum_posts/new
   # GET /forum_posts/new.json
   def new
+    @recent_posts = @current_topic.forum_posts.order(created_at: :desc).limit(3)
+    @recent_posts.reverse!
+
     respond_to do |format|
       if @is_topic_in_current_league
         format.html # new.html.erb
