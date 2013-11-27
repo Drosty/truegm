@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to team.name, league_team_path(@league, team) %></td>
         <td>$1,000,000</td>
-        <td><%= team.user.presence ? team.user.email : 'no user'  %></td>
+        <td><%= team.user.presence ? team.user.name : 'no user'  %></td>
         <% if can? :edit, team %>
           <td><%= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_league_team_path(@league, team), :class => 'btn' %></td>

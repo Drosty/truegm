@@ -27,7 +27,7 @@
       <div class="span12">
         <blockquote>
           <p><%= post.post_body %></p>
-          <small><%= post.user.email %> <cite title="Source Title"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</cite></small>
+          <small><%= post.user.name %> <cite title="Source Title"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</cite></small>
         </blockquote>
       </div>
     </div>
