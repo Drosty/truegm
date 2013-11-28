@@ -5,7 +5,8 @@ FactoryGirl.define do
 
   factory :user do
     email
-    password "qwerty1234!!!"
+    password 'qwerty1234!!!'
+    name 'Ryan Drost' 
 
     factory :user_with_one_team do
       after(:build) { |user|
