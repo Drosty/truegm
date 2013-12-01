@@ -3,5 +3,6 @@ FactoryGirl.define do
     league { FactoryGirl.create(:league) }
     name "MyString"
     description "MyText"
+    user { FactoryGirl.create(:user) }
   end
 end

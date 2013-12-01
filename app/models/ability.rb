@@ -25,7 +25,7 @@ class Ability
         end
 
         # Forum Topic Rules
-        can :read, ForumTopic do |topic|
+        can [:read, :create], ForumTopic do |topic|
           if topic == nil or topic.league == nil
             false
           else
@@ -33,8 +33,15 @@ class Ability
           end
         end
 
-        can :create, ForumTopic
-        can :update, ForumTopic  # BIG TODO HERE - ONLY UPDATE ONES YOU CREATE!
+       # can :create, ForumTopic do |topic|
+       #   if topic == nil or topic.league == nil or topic.user == nil
+       #     false
+       #   else
+       #     user.leagues.select{|l| l.id == topic.league_id}.count > 0
+       #   end
+       # end 
+
+        can :update, ForumTopic, :user => user  
 
         # Forum Post Rules
         can :read, ForumPost

@@ -60,16 +60,19 @@ class LeaguesController < ApplicationController
     ftOne.name = 'Trades'
     ftOne.description = 'Discus Trades and Stuff'
     ftOne.league = @league
+    ftOne.user = current_user
 
     ftTwo = ForumTopic.new
     ftTwo.name = 'General'
     ftTwo.description = 'Discus Anything that you want'
     ftTwo.league = @league
+    ftTwo.user = current_user
 
     ftThree = ForumTopic.new
     ftThree.name = 'Another One'
     ftThree.description = 'There is going to be something here'
     ftThree.league = @league
+    ftThree.user = current_user
 
     @league.forum_topics << ftOne
     @league.forum_topics << ftTwo

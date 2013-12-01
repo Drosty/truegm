@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127143914) do
+ActiveRecord::Schema.define(version: 20131201164403) do
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 20131127143914) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "forumposts_count", default: 0
+    t.integer  "user_id"
   end
 
   add_index "forum_topics", ["league_id"], name: "forum_topic_league_fk", using: :btree
+  add_index "forum_topics", ["user_id"], name: "index_forum_topics_on_user_id", using: :btree
 
   create_table "leagues", force: true do |t|
     t.string   "name"

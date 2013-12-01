@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_protected :is_admin
 
   has_many :external_links
+  has_many :forum_topics
   has_many :forum_posts
   has_many :teams
   has_many :leagues, :through => :teams

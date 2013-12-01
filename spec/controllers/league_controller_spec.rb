@@ -33,7 +33,7 @@ describe LeaguesController do
         League.last.attributes == valid_attributes
       end
 
-      it "creates 18 teams for the league" do
+      it "creates 10 teams for the league" do
         page.driver.post leagues_path, :league => valid_attributes
         League.last.teams.length.should == 10 
       end
