@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h3><%= @nfl_player.position + ' ' +  @nfl_player.first_name + ' ' + @nfl_player.last_name %></h3>
+<h3><%= @nfl_player.position + ' ' +  @nfl_player.full_name %></h3>
 <p>Salary: <%= number_to_currency @nfl_player.salary, precision: 0 %></p>
 
 <p>Currently a Free Agent</p>

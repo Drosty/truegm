@@ -13,7 +13,7 @@
   <tbody>
     <% @nfl_players.each do |nfl_player| %>
       <tr>
-	<td><%= link_to nfl_player.first_name + ' ' + nfl_player.last_name,
+	<td><%= link_to nfl_player.full_name,
                  league_nfl_player_path(@current_league, nfl_player)  %></td>
 	<td><%= nfl_player.position %></td>
 	<td><%= number_to_currency(nfl_player.salary, precision: 0) %></td>
