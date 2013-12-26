@@ -235,6 +235,7 @@ DEPENDENCIES
   launchy
   less-rails
   mysql2
+  nokogiri
   omniauth-twitter
   parallel_tests
   protected_attributes

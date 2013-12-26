@@ -74,6 +74,9 @@ gem "less-rails"
 # For Twitter Bootstrap
 gem "twitter-bootstrap-rails"
 
+# for HTML/XML parsing
+gem 'nokogiri'
+
 # For testing
 gem 'rspec-rails', '~> 2.0', group: [:development, :test]
 gem 'parallel_tests', group: [:development, :test]
