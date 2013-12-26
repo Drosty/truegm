@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201164403) do
+ActiveRecord::Schema.define(version: 20131226200722) do
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20131201164403) do
     t.integer  "salary"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "spotrac_url"
+    t.string   "full_name"
   end
 
   add_index "nfl_players", ["nfl_team_id"], name: "nfl_player_nfl_team_id", using: :btree
@@ -103,6 +105,7 @@ ActiveRecord::Schema.define(version: 20131201164403) do
     t.string   "mascot"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "spotrac_url"
   end
 
   create_table "owners", force: true do |t|
