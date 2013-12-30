@@ -71,6 +71,9 @@ gem 'will_paginate', '~> 3.0'
 # For LESS Rails
 gem "less-rails"
 
+# Rails Best Practices gem
+gem 'rails_best_practices'
+
 # For Twitter Bootstrap
 gem "twitter-bootstrap-rails"
 
