@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131226200722) do
+ActiveRecord::Schema.define(version: 20140101074347) do
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20131226200722) do
     t.integer "nfl_player_id"
   end
 
+  add_index "nfl_players_teams", ["nfl_player_id"], name: "index_nfl_players_teams_on_nfl_player_id", using: :btree
+  add_index "nfl_players_teams", ["team_id"], name: "index_nfl_players_teams_on_team_id", using: :btree
+
   create_table "nfl_teams", force: true do |t|
     t.string   "location"
     t.string   "mascot"
@@ -163,6 +166,7 @@ ActiveRecord::Schema.define(version: 20131226200722) do
     t.datetime "updated_at"
   end
 
+  add_index "trade_items", ["item_id", "item_type"], name: "index_trade_items_on_item_id_and_item_type", using: :btree
   add_index "trade_items", ["trade_id"], name: "trade_item_trade_fk", using: :btree
 
   create_table "trade_votes", force: true do |t|
