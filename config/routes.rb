@@ -9,7 +9,7 @@ EvokeTruegmRails::Application.routes.draw do
   resources :leagues do
     resources :teams, :only => [:show, :edit, :update]
     resources :forum_topics, :path => "topics" do
-      resources :forum_posts
+      resources :forum_posts, only: [:new, :create, :destroy]
     end
 
     resources :trades
