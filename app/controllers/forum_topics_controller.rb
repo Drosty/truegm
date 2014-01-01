@@ -59,7 +59,7 @@ class ForumTopicsController < ApplicationController
         format.html { redirect_to league_forum_topic_path(@current_league, @forum_topic), notice: 'Forum topic was successfully created.' }
         format.json { render json: @forum_topic, status: :created, location: @forum_topic }
       else
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @forum_topic.errors, status: :unprocessable_entity }
       end
     end
@@ -73,7 +73,7 @@ class ForumTopicsController < ApplicationController
         format.html { redirect_to league_forum_topics_path(@current_league), notice: 'Forum topic was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit" }
         format.json { render json: @forum_topic.errors, status: :unprocessable_entity }
       end
     end

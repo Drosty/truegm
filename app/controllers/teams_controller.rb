@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
         format.html { redirect_to league_team_path(@current_league, @team), notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit" }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end

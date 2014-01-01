@@ -39,7 +39,7 @@ class ForumPostsController < ApplicationController
         format.html { redirect_to league_forum_topic_path(@current_league, @current_topic), notice: 'Forum post was successfully created.' }
         format.json { render json: @forum_post, status: :created, location: @forum_post }
       else
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @forum_post.errors, status: :unprocessable_entity }
       end
     end
