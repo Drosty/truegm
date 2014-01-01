@@ -70,7 +70,7 @@ class ForumTopicsController < ApplicationController
   def update
     respond_to do |format|
       if @forum_topic.update_attributes(params[:forum_topic])
-        format.html { redirect_to league_forum_topic_path(@current_league), notice: 'Forum topic was successfully updated.' }
+        format.html { redirect_to league_forum_topics_path(@current_league), notice: 'Forum topic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
