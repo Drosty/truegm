@@ -13,7 +13,7 @@ class NflPlayer < ActiveRecord::Base
   self.per_page = 15
 
   # Named_Scopes
-  scope :positions, ->(pos) { 
+  scope :positions, ->(pos) {
                               case pos
                               when 'all'
                                 where(nil)
@@ -21,6 +21,6 @@ class NflPlayer < ActiveRecord::Base
                                 where(:position => ['rb', 'wr'])
                               else
                                 where(:position => pos)
-                              end 
+                              end
                             }
 end

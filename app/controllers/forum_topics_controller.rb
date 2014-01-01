@@ -7,7 +7,7 @@ class ForumTopicsController < ApplicationController
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
     @current_team = Team.find(params[:id]) if params[:id].present?
   end
-  
+
   # GET /forum_topics
   # GET /forum_topics.json
   def index

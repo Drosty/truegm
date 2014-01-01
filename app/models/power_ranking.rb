@@ -4,5 +4,5 @@ class PowerRanking < ActiveRecord::Base
   belongs_to :team
 
   validates_presence_of :description
-  
+
 end

@@ -8,7 +8,7 @@ class ForumPostsController < ApplicationController
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
     @current_topic = ForumTopic.find(params[:forum_topic_id]) if params[:forum_topic_id].present?
 
-    @is_topic_in_current_league = @current_topic.league.id == @current_league.id 
+    @is_topic_in_current_league = @current_topic.league.id == @current_league.id
   end
 
   # GET /forum_posts/new

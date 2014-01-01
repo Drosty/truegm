@@ -10,7 +10,7 @@ class ExternalLink < ActiveRecord::Base
   validates_presence_of :url
 
   private
-  
+
   def fix_url
     self.url = "http://" + self.url if !self.url.starts_with? 'http://' and !self.url.starts_with? 'https://'
   end

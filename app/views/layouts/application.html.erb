@@ -14,7 +14,7 @@
   <%= render :partial => 'layouts/topNav' %>
 
   <div id="main" class="container">
-    
+
     <% flash.each do |name, msg| %>
       <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
         <a class="close" data-dismiss="alert">×</a>
@@ -23,7 +23,7 @@
     <% end %>
 
     <%= yield %>
-    
+
   </div>
 <%= javascript_include_tag "application" %>
 </body>

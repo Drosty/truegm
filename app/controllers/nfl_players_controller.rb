@@ -16,7 +16,7 @@ class NflPlayersController < ApplicationController
   def show
   end
 
-  def sort_column 
+  def sort_column
     NflPlayer.column_names.include?(params[:sort]) ? params[:sort] : "salary"
   end
 
@@ -26,7 +26,7 @@ class NflPlayersController < ApplicationController
 
   def position_selected
     pos_param = params[:pos] == nil ? "all" : params[:pos].downcase
-    NflPlayer.available_positions_for_filter.include?(pos_param) ? pos_param : "all" 
+    NflPlayer.available_positions_for_filter.include?(pos_param) ? pos_param : "all"
   end
 
   private
@@ -34,11 +34,11 @@ class NflPlayersController < ApplicationController
     def set_nfl_player
       @nfl_player = NflPlayer.find(params[:id])
     end
-    
+
     def set_current_league
-      @current_league = League.find(params[:league_id]) if params[:league_id].present? 
+      @current_league = League.find(params[:league_id]) if params[:league_id].present?
     end
-    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def nfl_player_params
       params[:nfl_player]

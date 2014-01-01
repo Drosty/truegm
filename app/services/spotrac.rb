@@ -8,7 +8,7 @@ module Spotrac
       process_spotrac_player_data
       process_spotrac_salary_data
     end
- 
+
     def self.process_spotrac_team_data
       base_url = "http://www.spotrac.com/nfl/"
 
@@ -21,7 +21,7 @@ module Spotrac
     def self.process_spotrac_player_data
       NflTeam.all.each do |nfl_team|
         puts "processing: " + nfl_team.location + " " + nfl_team.mascot
-        
+
 	nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
 	nfl_page.css("table#teamTable").css("tr").each do |player|
           position_node = player.css("td")[1]
@@ -65,9 +65,9 @@ module Spotrac
       location = team_name.split.first
 
       if team_name.split.count > 2
-        location = team_name.split[0] + " " + team_name.split[1]    
-      end  
-	
+        location = team_name.split[0] + " " + team_name.split[1]
+      end
+
       team = NflTeam.find_by(mascot: mascot, location: location)
       team = NflTeam.new if team.nil?
       team.mascot = mascot
