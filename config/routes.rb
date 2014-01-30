@@ -6,7 +6,7 @@ EvokeTruegmRails::Application.routes.draw do
     resources :external_link
   end
 
-  resources :leagues do
+  resources :leagues, :only => [:show, :index]  do
     resources :teams, :only => [:show, :edit, :update]
     resources :forum_topics, :path => "topics" do
       resources :forum_posts, only: [:new, :create, :destroy]
@@ -18,6 +18,13 @@ EvokeTruegmRails::Application.routes.draw do
 
   resources :nflteams, :only => [:index, :show]
   resources :users
+
+
+  namespace :admin do
+    # Directs /admin/products/* to Admin::ProductsController
+    # (app/conrrollers/admin/products_controller.rb)
+    resources :leagues
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

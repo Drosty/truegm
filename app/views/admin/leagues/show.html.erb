@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>Good place to use angular, on every change the data is synced back to the server</p>
+<p>Maybe not have an "edit" page and just have that information on this page as well in the angular data</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Team Name</th>
+      <th>Owner</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @league.teams.each do |team| %>
+      <tr>
+        <td>Input Here :: <%= team.name %></td>
+        <td>Dropdown Here :: <%= team.user.presence ? team.user.name : 'no user'  %></td>
+        <td>Edit team link here to admin part</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>HERE WE WILL BE ABLE TO CLICK ON A TEAM (OR HAVE FORM FIELDS RIGHT ON HERE TO UPDATE THE TEAM INFORMATION</p>
+
+<%= link_to 'Edit League Information', edit_admin_league_path(@admin_league) %> |
+<%= link_to 'Back', admin_leagues_path %>

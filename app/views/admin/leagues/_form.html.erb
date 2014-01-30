@@ -1,4 +1,4 @@
-<%= simple_form_for @league, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for([:admin,  @admin_league], :html => { :class => 'form-horizontal' }) do |f| %>
 
   <%= f.input :name %>
   <%= f.input :description %>
@@ -7,6 +7,6 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                leagues_path, :class => 'btn' %>
+                admin_leagues_path, :class => 'btn' %>
   </div>
 <% end %>
