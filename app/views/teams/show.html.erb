@@ -5,12 +5,6 @@
     <h1><%= @team.name %></h1>
     <h4>Owner: <%= @team.user.name if @team.user != nil %></h4>
   </div>
-
-  <% if can? :update, Team %>
-    <div class="span3">
-      <%= link_to 'Edit', edit_league_team_path(@current_league, @team), :class => 'btn' %>
-    </div>
-  <% end %>
 </div>
 
 <table class="table table-striped">

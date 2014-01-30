@@ -14,31 +14,16 @@
     <tr>
       <th>Name</th>
       <th>Posts</th>
-      <% if can? :update, ForumTopic or can? :delete, ForumTopic %>
-        <th><%=t '.actions', :default => t("helpers.actions") %></th>
-      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @forum_topics.each do |forum_topic| %>
       <tr>
-        <td><%= link_to forum_topic.name, league_forum_topic_path(@current_league, forum_topic) %></td>
-        <td><%= pluralize forum_topic.forumposts_count, 'post' %> - Updated <%= distance_of_time_in_words(Time.now, forum_topic.updated_at) %> ago.</td>
-        <% if can? :update, ForumTopic or can? :delete, ForumTopic %>
-          <td>
-            <% if can? :update, ForumTopic %>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_league_forum_topic_path(@current_league, forum_topic), :class => 'btn btn-mini' %>
-            <% end %>
-            <% if can? :delete, ForumTopic %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          league_forum_topic_path(@current_league, forum_topic),
-                          :method => :delete,
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-mini btn-danger' %>
-            <% end %>
-          </td>
-        <% end %>
+        <td><%= link_to forum_topic.name, 
+                    league_forum_topic_path(@current_league, forum_topic) %></td>
+
+        <td><%= pluralize forum_topic.forumposts_count, 'post' %> 
+                 - Updated <%= distance_of_time_in_words(Time.now, forum_topic.updated_at) %> ago.</td>
       </tr>
     <% end %>
   </tbody>
