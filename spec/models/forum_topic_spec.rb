@@ -15,11 +15,6 @@ describe ForumTopic do
       @ft.should_not be_valid
     end
 
-    it "Has to have a user" do
-      @ft.user = nil
-      @ft.should_not be_valid
-    end
-   
     it "Has a description" do
       @ft.description = nil
       @ft.should_not be_valid
