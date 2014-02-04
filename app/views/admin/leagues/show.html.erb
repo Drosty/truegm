@@ -1,3 +1,4 @@
+<h3>Teams in League: <%= @league.name %></h3>
 <p id="notice"><%= notice %></p>
 
 <table class="table table-striped">
@@ -5,7 +6,7 @@
     <tr>
       <th>Team Name</th>
       <th>Owner</th>
-      <th>Action</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +14,7 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= team.user.presence ? team.user.name : 'no user'  %></td>
-        <td><%= "link here"  %></td>
+        <td><%= link_to 'Edit Team', edit_admin_league_team_path(@admin_league, team) %></td>
       </tr>
     <% end %>
   </tbody>
