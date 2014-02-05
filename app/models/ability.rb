@@ -24,36 +24,6 @@ class Ability
           end
         end
 
-        # Forum Topic Rules
-        can [:read, :create], ForumTopic do |topic|
-          if topic == nil or topic.league == nil
-            false
-          else
-            user.leagues.select{|l| l.id == topic.league_id}.count > 0
-          end
-        end
-
-       # can :create, ForumTopic do |topic|
-       #   if topic == nil or topic.league == nil or topic.user == nil
-       #     false
-       #   else
-       #     user.leagues.select{|l| l.id == topic.league_id}.count > 0
-       #   end
-       # end
-
-        can :update, ForumTopic, :user => user
-
-        # Forum Post Rules
-        can :read, ForumPost
-        can :create, ForumPost do |post|
-          if post == nil or post.league == nil
-            false
-          else
-            user.leagues.select{|l| l.id == post.league.id}.count > 0
-          end
-        end
-        can :update, ForumPost, :user => user
-
         # rules on trade votes
         can :create, TradeVote do |vote|
           if vote == nil or vote.trade == nil  or vote.trade.to_team == nil or vote.trade.from_team == nil or vote.trade.to_team.league == nil or vote.trade.from_team.league == nil
