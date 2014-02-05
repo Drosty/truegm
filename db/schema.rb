@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130010735) do
+ActiveRecord::Schema.define(version: 20140205032814) do
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -36,30 +36,6 @@ ActiveRecord::Schema.define(version: 20140130010735) do
   end
 
   add_index "external_links", ["user_id"], name: "link_url_fk", using: :btree
-
-  create_table "forum_posts", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "forum_topic_id"
-    t.text     "post_body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "forum_posts", ["forum_topic_id"], name: "forum_post_forum_topic_fk", using: :btree
-  add_index "forum_posts", ["user_id"], name: "forum_post_user_fk", using: :btree
-
-  create_table "forum_topics", force: true do |t|
-    t.integer  "league_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "forumposts_count", default: 0
-    t.integer  "user_id"
-  end
-
-  add_index "forum_topics", ["league_id"], name: "forum_topic_league_fk", using: :btree
-  add_index "forum_topics", ["user_id"], name: "index_forum_topics_on_user_id", using: :btree
 
   create_table "leagues", force: true do |t|
     t.string   "name"
