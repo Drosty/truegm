@@ -26,7 +26,7 @@ class TeamsController < BaseController
   def update
     respond_to do |format|
       if @admin_team.update(admin_team_params)
-        format.html { redirect_to admin_league_team_path(@admin_team.league_id, @admin_team), notice: 'Team was successfully updated.' }
+        format.html { redirect_to admin_team_path(@admin_team), notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

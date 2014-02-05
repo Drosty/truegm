@@ -14,7 +14,7 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= team.user.presence ? team.user.name : 'no user'  %></td>
-        <td><%= link_to 'Edit Team', edit_admin_league_team_path(@admin_league, team) %></td>
+        <td><%= link_to 'Edit Team', edit_admin_team_path(team) %></td>
       </tr>
     <% end %>
   </tbody>

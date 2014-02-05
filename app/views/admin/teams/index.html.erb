@@ -15,8 +15,8 @@
       <tr>
 	<td><%= admin_team.name %></td>
 	<td><%= admin_team.user.nil? ? "No Owner" : admin_team.user.name %></td>
-        <td><%= link_to 'Show', admin_league_team_path(admin_team.league_id, admin_team.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_league_team_path(admin_team.league_id, admin_team.id) %></td>
+        <td><%= link_to 'Show', admin_team_path(admin_team.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_team_path(admin_team.league_id, admin_team.id) %></td>
       </tr>
     <% end %>
   </tbody>

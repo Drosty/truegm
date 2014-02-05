@@ -27,9 +27,8 @@ EvokeTruegmRails::Application.routes.draw do
   namespace :admin do
     get "/" => "leagues#index"
 
-    resources :leagues do
-      resources :teams, :only => [:index, :show, :edit, :update]
-    end
+    resources :leagues
+    resources :teams, :only => [:index, :show, :edit, :update]
   end
 
   # You can have the root of your site routed with "root"
