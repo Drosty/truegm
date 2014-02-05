@@ -7,7 +7,7 @@ EvokeTruegmRails::Application.routes.draw do
   end
 
   resources :leagues, :only => [:show, :index]  do
-    resources :teams, :only => [:show]
+    resources :nfl_players, :only => [:index, :show]
 
 # I am removing these from the project
 # These were initially going to be used as a way to keep communication
@@ -17,11 +17,10 @@ EvokeTruegmRails::Application.routes.draw do
 #    resources :forum_topics, :path => "topics" do
 #      resources :forum_posts, only: [:new, :create, :destroy]
 #    end
-
-    resources :trades
-    resources :nfl_players, :only => [:index, :show]
   end
 
+  resources :teams, :only => [:show]
+  resources :trades
   resources :nflteams, :only => [:index, :show]
   resources :users
 

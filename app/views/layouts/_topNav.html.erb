@@ -33,7 +33,7 @@
               </a>
               <ul class="dropdown-menu">
               <% @current_league.teams.each do |t| %>
-                <li><%= link_to t.name, league_team_path(@current_league, t) %></li>
+                <li><%= link_to t.name, team_path(t) %></li>
               <% end %>
               </ul>
             </li>

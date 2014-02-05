@@ -20,7 +20,7 @@ describe TeamsController do
     end
 
     it 'can access team that are owner of' do
-      visit league_team_path @one_team_user.teams.first.league, @one_team_user.teams.first
+      visit team_path(@one_team_user.teams.first)
       page.should have_content(@one_team_user.teams.first.name)
     end
 
@@ -28,7 +28,7 @@ describe TeamsController do
       league = @one_team_user.leagues.first
       new_team = create(:team, :league => league)
 
-      visit league_team_path league, new_team
+      visit team_path(new_team)
       page.should have_content(new_team.name)
     end 
     
