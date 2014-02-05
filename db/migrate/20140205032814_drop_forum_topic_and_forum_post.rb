@@ -1,5 +1,5 @@
 class DropForumTopicAndForumPost < ActiveRecord::Migration
-  def up 
+  def up
     drop_table :forum_posts
     drop_table :forum_topics
   end
