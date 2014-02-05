@@ -31,10 +31,4 @@ describe League do
     end
   end
 
-  describe "functionality" do
-   it "Forum Topics are ordered by updated date" do
-     topics_ordered = @league.forum_topics.order('updated_at desc')
-     expect(topics_ordered).to match_array(@league.forum_topics)
-   end
-  end
 end

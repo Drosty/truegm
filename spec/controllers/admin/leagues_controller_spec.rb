@@ -38,10 +38,6 @@ describe LeaguesController do
         League.last.teams.length.should == 10 
       end
 
-      it "creates the 3 forums for the league" do
-        page.driver.post admin_leagues_path, :league => valid_attributes
-        League.last.forum_topics.length.should == 3
-      end
     end
 
   end

@@ -1,7 +1,6 @@
 class League < ActiveRecord::Base
   attr_accessible :description, :name, :tagline
 
-  has_many :forum_topics
   has_many :teams
 
   validates_presence_of :tagline

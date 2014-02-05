@@ -35,26 +35,6 @@ class LeaguesController < BaseController
       @league.teams << team
     end
 
-    # Create the 3 Forum Topics - these shouldn't change
-    ftOne = ForumTopic.new
-    ftOne.name = 'Trades'
-    ftOne.description = 'Discus Trades and Stuff'
-    ftOne.league = @league
-
-    ftTwo = ForumTopic.new
-    ftTwo.name = 'General'
-    ftTwo.description = 'Discus Anything that you want'
-    ftTwo.league = @league
-
-    ftThree = ForumTopic.new
-    ftThree.name = 'Another One'
-    ftThree.description = 'There is going to be something here'
-    ftThree.league = @league
-
-    @league.forum_topics << ftOne
-    @league.forum_topics << ftTwo
-    @league.forum_topics << ftThree
-
     respond_to do |format|
       if @league.save
         format.html { redirect_to [:admin, @league], notice: 'League was successfully created.' }
