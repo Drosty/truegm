@@ -1,0 +1,7 @@
+<h1>Editing <%= @admin_team.name %></h1>
+<h3>League Name : <%= @admin_team.league.name %></h3>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', admin_league_team_path(@admin_team.league_id, @admin_team) %> |
+<%= link_to 'Back', admin_league_teams_path(@admin_team.league_id) %>

@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>I will have this page show the players and be able to change them as needed.</p>
+
+<div class="row">
+  <div class="span9">
+    <h1><%= @team.name %></h1>
+    <h4>Owner: <%= @team.user.name if @team.user != nil %></h4>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Salary</th>
+      <th>NFL Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.quarterbacks.each do |player| %>
+      <tr>
+	<td>QB</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+
+    <% @team.runningbacks.each do |player| %>
+      <tr>
+	<td>RB</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+
+    <% @team.receivers.each do |player| %>
+      <tr>
+	<td>WR</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+
+    <% @team.tightends.each do |player| %>
+      <tr>
+	<td>TE</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+
+    <% @team.defenses.each do |player| %>
+      <tr>
+	<td>D</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+
+    <% @team.kickers.each do |player| %>
+      <tr>
+	<td>K</td>
+        <td><%= player.first_name + ' ' + player.last_name %></td>
+	<td><%= number_to_currency player.salary, precision: 0 %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_admin_league_team_path(@admin_team.league_id, @admin_team) %> |
+<%= link_to 'Back', admin_league_teams_path(@admin_team.league_id) %>
