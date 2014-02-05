@@ -8,9 +8,15 @@ EvokeTruegmRails::Application.routes.draw do
 
   resources :leagues, :only => [:show, :index]  do
     resources :teams, :only => [:show]
-    resources :forum_topics, :path => "topics" do
-      resources :forum_posts, only: [:new, :create, :destroy]
-    end
+
+# I am removing these from the project
+# These were initially going to be used as a way to keep communication
+# for the group open and flowing, but I have decided to use the
+# GroupMe service and tie into their API for league communication.
+#
+#    resources :forum_topics, :path => "topics" do
+#      resources :forum_posts, only: [:new, :create, :destroy]
+#    end
 
     resources :trades
     resources :nfl_players, :only => [:index, :show]
