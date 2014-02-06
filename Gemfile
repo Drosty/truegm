@@ -50,9 +50,6 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# For authentication
-gem 'devise'
-
 # For using Twitter with Authentication
 gem 'omniauth-twitter'
 
