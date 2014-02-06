@@ -17,3 +17,6 @@
 
 # Ignore VIM swp files
 *.swp
+
+# ignore database yml
+config/database.yml
