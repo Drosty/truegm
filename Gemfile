@@ -59,9 +59,6 @@ gem 'omniauth-twitter'
 # For making forms simpler
 gem 'simple_form'
 
-# For Authorization
-gem 'cancan'
-
 # To Keep attr_accessible
 gem 'protected_attributes'
 
