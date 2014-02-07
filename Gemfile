@@ -59,7 +59,6 @@ gem 'nokogiri'
 
 # For testing
 gem 'rspec-rails', '~> 2.0', group: [:development, :test]
-gem 'parallel_tests', group: [:development, :test]
 gem 'capybara', group: [:development, :test]
 gem 'database_cleaner', group: [:development, :test]
 
