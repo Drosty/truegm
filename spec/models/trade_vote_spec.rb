@@ -22,17 +22,4 @@ describe TradeVote do
     end
   end
 
-  describe "can toggle" do
-    it "Can toggle from up to down" do
-      @trade_vote_obj.vote = "up"
-      @trade_vote_obj.toggle_vote
-      @trade_vote_obj.vote.should == "down"
-    end
-
-    it "Can toggle from down to up" do
-      @trade_vote_obj.vote = "down"
-      @trade_vote_obj.toggle_vote
-      @trade_vote_obj.vote.should == "up"
-    end
-  end
 end
