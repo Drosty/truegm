@@ -33,23 +33,6 @@ gem 'cancan'
 # Devise for user authentication
 gem 'devise'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 # For using Twitter with Authentication
 gem 'omniauth-twitter'
 
@@ -78,14 +61,7 @@ gem 'nokogiri'
 gem 'rspec-rails', '~> 2.0', group: [:development, :test]
 gem 'parallel_tests', group: [:development, :test]
 gem 'capybara', group: [:development, :test]
-gem 'guard-rspec', group: [:development, :test]
 gem 'database_cleaner', group: [:development, :test]
-gem 'launchy', group: [:development, :test]
-
-gem 'rb-inotify', :require => false, group: [:development, :test]
-gem 'rb-fsevent', :require => false, group: [:development, :test]
-gem 'rb-fchange', :require => false, group: [:development, :test]
 
 gem 'factory_girl_rails', group: [:development, :test]
 gem 'rack-mini-profiler', group: [:development, :test]
-
