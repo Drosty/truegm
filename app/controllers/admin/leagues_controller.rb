@@ -54,7 +54,7 @@ class LeaguesController < BaseController
         format.html { redirect_to [:admin, @league], notice: 'League was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @league.errors, status: :unprocessable_entity }
       end
     end

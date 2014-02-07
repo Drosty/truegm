@@ -29,7 +29,7 @@ class TeamsController < BaseController
         format.html { redirect_to admin_team_path(@admin_team), notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @admin_team.errors, status: :unprocessable_entity }
       end
     end
