@@ -42,6 +42,8 @@ module EvokeTruegmRails
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
+    # Deprecation warning, StackOverflow said to do this
+    config.i18n.enforce_available_locales = true
 
     config.assets.initialize_on_precompile = false
 
