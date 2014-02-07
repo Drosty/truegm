@@ -20,3 +20,5 @@
 
 # ignore database yml
 config/database.yml
+
+coverage/*
