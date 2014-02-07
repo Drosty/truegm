@@ -7,11 +7,4 @@ class TradeVote < ActiveRecord::Base
   validates_presence_of :team
   validates_presence_of :trade
 
-  def toggle_vote
-    if self.vote == "down"
-      self.vote = "up"
-    else
-      self.vote = "down"
-    end
-  end
 end
