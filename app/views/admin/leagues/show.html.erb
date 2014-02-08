@@ -13,7 +13,7 @@
     <% @league.teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><%= team.user.presence ? team.user.name : 'no user'  %></td>
+        <td><%= team.user.presence ? team.user_name : 'no user'  %></td>
         <td><%= link_to 'Edit Team', edit_admin_team_path(team) %></td>
       </tr>
     <% end %>

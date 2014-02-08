@@ -13,6 +13,8 @@ class Team < ActiveRecord::Base
 
   before_save :update_total_salary
 
+  delegate :name, :to => :user, :prefix => true
+
   def quarterbacks
     get_players_by_position "QB"
   end

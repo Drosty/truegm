@@ -5,7 +5,7 @@
 <div class="row">
   <div class="span9">
     <h1><%= @team.name %></h1>
-    <h4>Owner: <%= @team.user.name if @team.user != nil %></h4>
+    <h4>Owner: <%= @team.user_name if @team.user != nil %></h4>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
 	<td>QB</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
 
@@ -33,7 +33,7 @@
 	<td>RB</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
 
@@ -42,7 +42,7 @@
 	<td>WR</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
 
@@ -51,7 +51,7 @@
 	<td>TE</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
 
@@ -60,7 +60,7 @@
 	<td>D</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
 
@@ -69,7 +69,7 @@
 	<td>K</td>
         <td><%= player.first_name + ' ' + player.last_name %></td>
 	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team.mascot %></td>
+        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
       </tr>
     <% end %>
   </tbody>
