@@ -1,4 +1,4 @@
-# NFL Players
+# NFL Players This should be updated with new data.
 NflPlayer.create(first_name: "Derek", last_name: "Stanley", salary: "", position: "WR")
 NflPlayer.create(first_name: "Charles", last_name: "Clay", salary: "465000", position: "RB")
 NflPlayer.create(first_name: "Brandon", last_name: "Weeden", salary: "390000", position: "QB")
@@ -1266,3 +1266,35 @@ NflPlayer.create(first_name: "Korey", last_name: "Hall", salary: "750000", posit
 NflPlayer.create(first_name: "Jameel", last_name: "Cook", salary: "", position: "RB")
 NflPlayer.create(first_name: "Jared", last_name: "Cook", salary: "615000", position: "TE")
 NflPlayer.create(first_name: "Marcus", last_name: "Pollard", salary: "", position: "TE")
+
+# create a test user for logging in
+User.create(email: "test@gmail.com", password: "qwerty1234", name: "Test User")
+
+# Create a league for us to use
+League.create(name: "First Test League", description: "Test league from seed data", tagline: "test")
+
+team_list = [
+  [ "Team Uno", "tagline"],
+  [ "Basken Robins", "tagline" ],
+  [ "All Days",  "tagline"],
+  [ "One Timerz", "tagline" ],
+  [ "someone top, someone bottom", "Tagline" ],
+  [ "really really really long team name that is super obnoxious", "tagline" ],
+  [ "Jimmerz", "tag" ],
+  [ "Teach me how to Dougie", "taglinez" ],
+  [ "Show me your TDs", "line of tag" ],
+  [ "Ballerz", "tag" ]
+]
+
+league = League.find_by(name: "First Test League")
+first_user = User.find_by(name: "Test User")
+team_list.each do |name, tagline|
+  t = Team.create(name: name, tagline: tagline)
+  t.league = league
+  t.user = first_user
+  t.save
+
+  first_user = nil
+end
+
+
