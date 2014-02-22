@@ -1288,6 +1288,7 @@ team_list = [
 
 league = League.find_by(name: "First Test League")
 first_user = User.find_by(name: "Test User")
+
 team_list.each do |name, tagline|
   t = Team.create(name: name, tagline: tagline)
   t.league = league
@@ -1297,4 +1298,28 @@ team_list.each do |name, tagline|
   first_user = nil
 end
 
+10.times do |idx|
+  team = league.teams[idx]
+  idx = idx +1
+  team.nfl_players << NflPlayer.positions('qb').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('qb').select { |p| p.id % idx == 0 }[1]
+
+  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[1]
+  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[2]
+  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[3]
+  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[4]
+
+  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[1]
+  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[2]
+  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[3]
+
+  team.nfl_players << NflPlayer.positions('te').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('te').select { |p| p.id % idx == 0 }[1]
+
+  team.nfl_players << NflPlayer.positions('d').select { |p| p.id % idx == 0 }[0]
+
+  team.nfl_players << NflPlayer.positions('pk').select { |p| p.id % idx == 0 }[0]
+end
 
