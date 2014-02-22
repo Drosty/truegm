@@ -25,4 +25,10 @@ class NflPlayer < ActiveRecord::Base
                                 where(:position => pos)
                               end
                             }
+
+  def full_name
+    return read_attribute(:full_name) unless read_attribute(:full_name).nil?
+    return "#{first_name} #{last_name}"
+  end
+
 end
