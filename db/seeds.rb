@@ -1298,28 +1298,51 @@ team_list.each do |name, tagline|
   first_user = nil
 end
 
+qb_idx = 0
+rb_idx = 0
+wr_idx = 0
+te_idx = 0
+d_idx = 0
+k_idx = 0
+
 10.times do |idx|
   team = league.teams[idx]
-  idx = idx +1
-  team.nfl_players << NflPlayer.positions('qb').select { |p| p.id % idx == 0 }[0]
-  team.nfl_players << NflPlayer.positions('qb').select { |p| p.id % idx == 0 }[1]
+  idx += 1
 
-  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[0]
-  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[1]
-  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[2]
-  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[3]
-  team.nfl_players << NflPlayer.positions('rb').select { |p| p.id % idx == 0 }[4]
+  team.nfl_players << NflPlayer.positions('qb')[qb_idx]
+  qb_idx += 1
+  team.nfl_players << NflPlayer.positions('qb')[qb_idx]
+  qb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[0]
-  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[1]
-  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[2]
-  team.nfl_players << NflPlayer.positions('wr').select { |p| p.id % idx == 0 }[3]
+  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  rb_idx += 1
+  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  rb_idx += 1
+  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  rb_idx += 1
+  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  rb_idx += 1
+  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  rb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('te').select { |p| p.id % idx == 0 }[0]
-  team.nfl_players << NflPlayer.positions('te').select { |p| p.id % idx == 0 }[1]
+  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  wr_idx += 1
+  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  wr_idx += 1
+  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  wr_idx += 1
+  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  wr_idx += 1
 
-  team.nfl_players << NflPlayer.positions('d').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('te')[te_idx]
+  te_idx += 1
+  team.nfl_players << NflPlayer.positions('te')[te_idx]
+  te_idx += 1
 
-  team.nfl_players << NflPlayer.positions('pk').select { |p| p.id % idx == 0 }[0]
+  team.nfl_players << NflPlayer.positions('d')[d_idx]
+  d_idx += 1
+
+  team.nfl_players << NflPlayer.positions('pk')[k_idx]
+  k_idx += 1
 end
 
