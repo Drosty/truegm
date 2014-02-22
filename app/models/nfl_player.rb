@@ -8,7 +8,7 @@ class NflPlayer < ActiveRecord::Base
   delegate :mascot, :to  => :nfl_team, :prefix => true
 
   def self.available_positions_for_filter
-    ['all', 'qb', 'rb', 'wr', 'te', 'd', 'k', 'flex']
+    ['all', 'qb', 'rb', 'wr', 'te', 'd', 'pk', 'flex']
   end
 
   # This is for pagination
