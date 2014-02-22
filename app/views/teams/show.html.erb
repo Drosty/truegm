@@ -17,58 +17,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @team.quarterbacks.each do |player| %>
-      <tr>
-	<td>QB</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
-
-    <% @team.runningbacks.each do |player| %>
-      <tr>
-	<td>RB</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
-
-    <% @team.receivers.each do |player| %>
-      <tr>
-	<td>WR</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
-
-    <% @team.tightends.each do |player| %>
-      <tr>
-	<td>TE</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
-
-    <% @team.defenses.each do |player| %>
-      <tr>
-	<td>D</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
-
-    <% @team.kickers.each do |player| %>
-      <tr>
-	<td>K</td>
-        <td><%= player.first_name + ' ' + player.last_name %></td>
-	<td><%= number_to_currency player.salary, precision: 0 %></td>
-        <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_mascot %></td>
-      </tr>
-    <% end %>
+    <%= render :partial => 'positionrow', :collection => @team.quarterbacks, :as => :player %>
+    <%= render :partial => 'positionrow', :collection => @team.runningbacks, :as => :player %>
+    <%= render :partial => 'positionrow', :collection => @team.receivers, :as => :player %>
+    <%= render :partial => 'positionrow', :collection => @team.tightends, :as => :player %>
+    <%= render :partial => 'positionrow', :collection => @team.defenses, :as => :player %>
+    <%= render :partial => 'positionrow', :collection => @team.kickers, :as => :player %>
   </tbody>
 </table>
