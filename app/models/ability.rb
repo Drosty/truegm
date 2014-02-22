@@ -24,6 +24,9 @@ class Ability
           end
         end
 
+	# if we want rules around this, add here.
+	can :read, NflPlayer
+
         # rules on trade votes
         can :create, TradeVote do |vote|
           if vote == nil or vote.trade == nil  or vote.trade.to_team == nil or vote.trade.from_team == nil or vote.trade.to_team.league == nil or vote.trade.from_team.league == nil
