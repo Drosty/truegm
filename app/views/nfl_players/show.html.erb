@@ -3,6 +3,6 @@
 <h3><%= @nfl_player.position %>&nbsp;<%= @nfl_player.full_name %></h3>
 <p>Salary: <%= number_to_currency @nfl_player.salary, precision: 0 %></p>
 
-<p>Currently a Free Agent</p>
+<p><%= @current_league.get_team_name_for_player @nfl_player %></p>
 
-<%= link_to 'Back', league_nfl_players_path(@current_league) %>
+<%= link_to 'All Players', league_nfl_players_path(@current_league) %>
