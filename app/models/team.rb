@@ -39,7 +39,8 @@ class Team < ActiveRecord::Base
     get_players_by_position "D"
   end
 
-  private
+private
+
   def update_total_salary
     total_salary = nfl_players.map(&:salary).inject(0, &:+)
   end
@@ -47,4 +48,5 @@ class Team < ActiveRecord::Base
   def get_players_by_position position
     nfl_players.select { |p| p.position == position }
   end
+
 end
