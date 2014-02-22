@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205032814) do
+ActiveRecord::Schema.define(version: 20140222062359) do
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -76,8 +76,7 @@ ActiveRecord::Schema.define(version: 20140205032814) do
     t.integer "nfl_player_id"
   end
 
-  add_index "nfl_players_teams", ["nfl_player_id"], name: "index_nfl_players_teams_on_nfl_player_id", using: :btree
-  add_index "nfl_players_teams", ["team_id"], name: "index_nfl_players_teams_on_team_id", using: :btree
+  add_index "nfl_players_teams", ["team_id", "nfl_player_id"], name: "by_team_and_player", unique: true, using: :btree
 
   create_table "nfl_teams", force: true do |t|
     t.string   "location"
