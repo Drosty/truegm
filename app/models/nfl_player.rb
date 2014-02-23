@@ -41,8 +41,6 @@ class NflPlayer < ActiveRecord::Base
     return ft.name
   end
 
-private
-
   def fantasy_team league_id
     self.teams.where(:league_id => league_id).first
   end
