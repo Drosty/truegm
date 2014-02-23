@@ -31,4 +31,20 @@ class NflPlayer < ActiveRecord::Base
     return "#{first_name} #{last_name}"
   end
 
+  def free_agent? league_id
+    fantasy_team(league_id).nil?
+  end
+
+  def fantasy_team_name league_id
+    ft = fantasy_team league_id
+    return "FA" if ft.nil?
+    return ft.name
+  end
+
+private
+
+  def fantasy_team league_id
+    self.teams.where(:league_id => league_id).first
+  end
+
 end
