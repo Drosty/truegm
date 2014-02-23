@@ -15,7 +15,7 @@
     <% @league.teams.each do |team| %>
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
-        <td>$1,000,000</td>
+        <td><%= number_to_currency team.total_salary, precision: 0 %></td>
         <td><%= team.user.presence ? team.user_name : 'no user'  %></td>
       </tr>
     <% end %>
