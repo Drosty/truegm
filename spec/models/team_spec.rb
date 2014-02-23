@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Team do
   before(:each) do
-    @team = build(:team)
+    @team = create(:team)
   end
 
   it "Factory generates valid Team" do
@@ -12,7 +12,6 @@ describe Team do
   describe "Adding players to Team" do
     it "will add player to team" do
       @team.add_player build(:nfl_player)
-      @team.save
       @team.nfl_players.count.should eq(1)
     end
 
@@ -25,13 +24,40 @@ describe Team do
 
       second_team.add_player player
       @team.add_player player
-      second_team.save
-      @team.save
 
       second_team.nfl_players.count.should eq(0)
       @team.nfl_players.count.should eq(1)
     end
 
+    it "will update team salary when player added" do
+      @team.add_player build(:nfl_player, salary: 1000)
+      @team.save
+      @team.total_salary.should eq(1000)
+    end
+
+    it "will update team salary when player added" do
+      @team.add_player build(:nfl_player, salary: 1000)
+      @team.add_player build(:nfl_player, salary: 1000)
+      @team.save
+      @team.total_salary.should eq(2000)
+    end
+
+    it "will update team salary when player moves to different team" do
+      league = @team.league
+      player = create(:nfl_player, salary: 1000)
+      second_team = create(:team)
+
+      league.teams << second_team
+
+      second_team.add_player player
+      @team.add_player player
+
+      second_team.save
+      @team.save
+
+      second_team.total_salary.should eq(0)
+      @team.total_salary.should eq(1000)
+    end
   end
 
   describe "NFL Players on Team" do

@@ -52,7 +52,7 @@ class Team < ActiveRecord::Base
 private
 
   def update_total_salary
-    total_salary = nfl_players.map(&:salary).inject(0, &:+)
+    self.total_salary = nfl_players.sum(:salary)
   end
 
   def get_players_by_position position
