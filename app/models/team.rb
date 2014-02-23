@@ -53,6 +53,7 @@ private
 
   def update_total_salary
     self.total_salary = nfl_players.sum(:salary)
+    self.total_salary = 0 if total_salary.nil? || total_salary < 0
   end
 
   def get_players_by_position position
