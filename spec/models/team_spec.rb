@@ -9,6 +9,31 @@ describe Team do
     @team.should be_valid
   end
 
+  describe "Adding players to Team" do
+    it "will add player to team" do
+      @team.add_player build(:nfl_player)
+      @team.save
+      @team.nfl_players.count.should eq(1)
+    end
+
+    it "will remove from other team if in same league when adding" do
+      league = @team.league
+      player = create(:nfl_player)
+      second_team = create(:team)
+
+      league.teams << second_team
+
+      second_team.add_player player
+      @team.add_player player
+      second_team.save
+      @team.save
+
+      second_team.nfl_players.count.should eq(0)
+      @team.nfl_players.count.should eq(1)
+    end
+
+  end
+
   describe "NFL Players on Team" do
     before(:each) do
       # create a valid team

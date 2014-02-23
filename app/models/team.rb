@@ -15,6 +15,16 @@ class Team < ActiveRecord::Base
 
   delegate :name, :to => :user, :prefix => true
 
+  def add_player player
+    team = player.fantasy_team self.league_id
+    
+    unless team.nil?
+      team.nfl_players.delete(player.id)
+    end
+
+    self.nfl_players << player
+  end
+
   def quarterbacks
     get_players_by_position "QB"
   end
