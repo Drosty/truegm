@@ -105,12 +105,14 @@ describe Team do
     end
 
     it "should update salary on save" do
-      @team.send(:update_total_salary).should == 300000
+      @team.save
+      @team.total_salary.should == 300000
     end
 
     it "Add player and the salary changes" do
       @team.nfl_players << build(:nfl_player, :salary => 300000)
-      @team.send(:update_total_salary).should == 600000
+      @team.save
+      @team.total_salary.should == 600000
     end
   end
 
