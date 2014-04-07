@@ -2,9 +2,9 @@ en:
   truegm: 'TrueGM'
 
   leagues:
-    header: 'Current Leagues In'
+    header: 'Leagues'
 
-  error: 
+  error:
     message: 'Access Denied'
 
   teams:
@@ -20,6 +20,6 @@ en:
 
   forum_topic:
     message: 'Forums'
-  
+
   will_paginate:
     previous_label: "&#8592; Back"
