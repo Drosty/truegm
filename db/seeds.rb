@@ -1309,40 +1309,39 @@ k_idx = 0
   team = league.teams[idx]
   idx += 1
 
-  team.nfl_players << NflPlayer.positions('qb')[qb_idx]
+  team.nfl_players << NflPlayer.positions('QB')[qb_idx]
   qb_idx += 1
-  team.nfl_players << NflPlayer.positions('qb')[qb_idx]
+  team.nfl_players << NflPlayer.positions('QB')[qb_idx]
   qb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('rb')[rb_idx]
+  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
   rb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('wr')[wr_idx]
+  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
   wr_idx += 1
 
-  team.nfl_players << NflPlayer.positions('te')[te_idx]
+  team.nfl_players << NflPlayer.positions('TE')[te_idx]
   te_idx += 1
-  team.nfl_players << NflPlayer.positions('te')[te_idx]
+  team.nfl_players << NflPlayer.positions('TE')[te_idx]
   te_idx += 1
 
-  team.nfl_players << NflPlayer.positions('d')[d_idx]
+  team.nfl_players << NflPlayer.positions('D')[d_idx]
   d_idx += 1
 
-  team.nfl_players << NflPlayer.positions('pk')[k_idx]
+  team.nfl_players << NflPlayer.positions('PK')[k_idx]
   k_idx += 1
 end
-
