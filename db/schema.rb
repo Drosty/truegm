@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222062359) do
+ActiveRecord::Schema.define(version: 20140415222016) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -67,8 +70,10 @@ ActiveRecord::Schema.define(version: 20140222062359) do
     t.datetime "updated_at"
     t.string   "spotrac_url"
     t.string   "full_name"
+    t.integer  "nfl_data_id", limit: 8
   end
 
+  add_index "nfl_players", ["nfl_data_id"], name: "index_nfl_players_on_nfl_data_id", unique: true, using: :btree
   add_index "nfl_players", ["nfl_team_id"], name: "nfl_player_nfl_team_id", using: :btree
 
   create_table "nfl_players_teams", id: false, force: true do |t|
@@ -84,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140222062359) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "spotrac_url"
+    t.string   "abbreviation"
   end
 
   create_table "owners", force: true do |t|
