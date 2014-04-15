@@ -22,8 +22,8 @@ module Spotrac
       NflTeam.all.each do |nfl_team|
         puts "processing: " + nfl_team.location + " " + nfl_team.mascot
 
-	nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
-	nfl_page.css("table#teamTable").css("tr").each do |player|
+	        nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
+	        nfl_page.css("table#teamTable").css("tr").each do |player|
           position_node = player.css("td")[1]
           name_node = player.css("td")[0]
           next if name_node.nil?
@@ -48,8 +48,8 @@ module Spotrac
       end
     end
 
-
   private
+
     def self.get_nfl_player_from_spotrac(full_name, position, href, nfl_team)
       player = NflPlayer.find_by(full_name: full_name, position: position, nfl_team: nfl_team)
       player = NflPlayer.new if player.nil?
@@ -76,4 +76,5 @@ module Spotrac
       team.save
     end
   end
+
 end
