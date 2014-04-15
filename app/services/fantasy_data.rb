@@ -19,13 +19,13 @@ module FantasyData
       end
     end
 
-    private
+  private
 
-    def get_week_from_file filename
+    def self.get_week_from_file filename
       filename.split('_')[1]
     end
 
-    def get_year_from_file filename
+    def self.get_year_from_file filename
       filename.split('_')[0]
     end
 

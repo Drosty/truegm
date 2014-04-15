@@ -1,5 +1,5 @@
 class NflPlayer < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :position, :salary
+  attr_accessible :first_name, :last_name, :position, :salary, :nfl_data_id
 
   belongs_to :nfl_team
 
