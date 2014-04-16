@@ -12,6 +12,9 @@ module FantasyData
 
         CSV.foreach(filename, :headers => true) do |row|
           object = Import::ImportOffense.new(row.to_hash)
+          object.PassTDs = row[5]
+          object.RushTds = row[8]
+          object.RecTds = row[11]
           object.week = week
           object.year = year
           object.process_player_stats
@@ -22,11 +25,15 @@ module FantasyData
   private
 
     def self.get_week_from_file filename
-      filename.split('_')[1]
+      filename = File.basename(filename)
+      filename = filename.split('_')[1]
+      filename
     end
 
     def self.get_year_from_file filename
-      filename.split('_')[0]
+      filename = File.basename(filename)
+      filename = filename.split('_')[0]
+      filename
     end
 
   end
