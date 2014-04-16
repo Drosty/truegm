@@ -52,4 +52,30 @@ class NflPlayer < ActiveRecord::Base
     Zlib.crc32 "#{name}#{pos}#{team_abbreviation}"
   end
 
+  def self.fuzzy_find_by_spotrac name, position, team
+    player = NflPlayer.find_by(full_name: name, position: position.downcase, nfl_team: team)
+    return player unless player.nil?
+
+    names = get_name_variations(name).map do |in_name|
+      NflPlayer.generate_hash(in_name, position, team.abbreviation)
+    end
+
+    match = NflPlayer.all.find do |player|
+      next if player.nfl_team.nil?
+      names.include?(NflPlayer.generate_hash(player.full_name, player.position, player.nfl_team.abbreviation))
+    end
+    match
+  end
+
+private
+
+  def self.get_name_variations name
+    names = []
+    names << name
+    name = name.downcase
+    names << name.gsub('jr', '')
+    names << name.gsub('iii', '')
+    names
+  end
+
 end

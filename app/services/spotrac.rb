@@ -33,7 +33,7 @@ module Spotrac
           next unless ["qb", "rb", "wr", "te", "k"].include? position_node.text.downcase
 
           href = name_node.children[1].attributes["href"].text
-          set_nfl_player_spotrac_url(name_node.text, position_node.text, href, nfl_team)
+          set_nfl_player_spotrac_url(name_node.children[1].text, position_node.text, href, nfl_team)
         end
       end
     end
@@ -42,9 +42,11 @@ module Spotrac
       NflPlayer.all.find_each do |player|
         puts "processing: " + player.full_name
         next if player.spotrac_url.nil?
+
         player_page = Nokogiri::HTML(open(player.spotrac_url))
         salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.bold")[0]
         next if salary_node.nil?
+
         player.salary = salary_node.text.delete(',').strip
         player.save
       end
@@ -53,7 +55,7 @@ module Spotrac
   private
 
     def self.set_nfl_player_spotrac_url(full_name, position, href, nfl_team)
-      player = NflPlayer.find_by(full_name: full_name, position: position, nfl_team: nfl_team)
+      player = NflPlayer.fuzzy_find_by_spotrac(full_name, position.downcase, nfl_team)
       return nil if player.nil?
 
       player.spotrac_url = href
