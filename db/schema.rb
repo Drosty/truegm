@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415222016) do
+ActiveRecord::Schema.define(version: 20140415224436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,23 @@ ActiveRecord::Schema.define(version: 20140415222016) do
   end
 
   add_index "power_rankings", ["team_id"], name: "power_ranking_team_fk", using: :btree
+
+  create_table "stats", force: true do |t|
+    t.integer "nfl_player_id"
+    t.integer "passing_yards"
+    t.integer "passing_touchdowns"
+    t.integer "interceptions"
+    t.integer "rushing_yards"
+    t.integer "rushing_touchdowns"
+    t.integer "receptions"
+    t.integer "receiving_yards"
+    t.integer "receiving_touchdowns"
+    t.integer "fumbles_lost"
+    t.integer "year"
+    t.integer "week"
+  end
+
+  add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name"

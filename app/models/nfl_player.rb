@@ -5,6 +5,8 @@ class NflPlayer < ActiveRecord::Base
 
   has_and_belongs_to_many :teams
 
+  has_many :stats
+
   delegate :mascot, :to  => :nfl_team, :prefix => true
 
   def self.available_positions_for_filter
