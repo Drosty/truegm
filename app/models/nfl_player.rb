@@ -2,9 +2,7 @@ class NflPlayer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :salary, :nfl_data_id
 
   belongs_to :nfl_team
-
   has_and_belongs_to_many :teams
-
   has_many :stats
 
   delegate :mascot, :to  => :nfl_team, :prefix => true
@@ -45,6 +43,13 @@ class NflPlayer < ActiveRecord::Base
 
   def fantasy_team league_id
     self.teams.where(:league_id => league_id).first
+  end
+
+  def self.generate_hash name, pos, team_abbreviation
+    name = name.gsub(/[^0-9A-Za-z]/, '').downcase
+    pos = pos.gsub(/[^0-9A-Za-z]/, '').downcase
+    team_abbreviation = team_abbreviation.gsub(/[^0-9A-Za-z]/, '').downcase
+    Zlib.crc32 "#{name}#{pos}#{team_abbreviation}"
   end
 
 end
