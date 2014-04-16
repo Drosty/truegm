@@ -1,9 +1,10 @@
-
 # create a test user for logging in
-User.create(email: "test@gmail.com", password: "qwerty1234", name: "Test User")
+u = User.find_or_create_by(email: "test@gmail.com", name: "Test User")
+u.password = "qwerty1234"
+u.save
 
 # Create a league for us to use
-League.create(name: "First Test League", description: "Test league from seed data", tagline: "test")
+League.find_or_create_by(name: "First Test League", description: "Test league from seed data", tagline: "test")
 
 team_list = [
   [ "Team Uno", "tagline"],
@@ -18,11 +19,11 @@ team_list = [
   [ "Ballerz", "tag" ]
 ]
 
-league = League.find_by(name: "First Test League")
-first_user = User.find_by(name: "Test User")
+league = League.find_or_create_by(name: "First Test League")
+first_user = User.find_or_create_by(name: "Test User")
 
 team_list.each do |name, tagline|
-  t = Team.create(name: name, tagline: tagline)
+  t = Team.find_or_create_by(name: name, tagline: tagline)
   t.league = league
   t.user = first_user
   t.save
@@ -39,6 +40,7 @@ k_idx = 0
 
 10.times do |idx|
   team = league.teams[idx]
+  team.nfl_players = []
   idx += 1
 
   team.nfl_players << NflPlayer.positions('QB')[qb_idx]
@@ -71,9 +73,9 @@ k_idx = 0
   team.nfl_players << NflPlayer.positions('TE')[te_idx]
   te_idx += 1
 
-  team.nfl_players << NflPlayer.positions('D')[d_idx]
+  team.nfl_players << NflPlayer.positions('D')[d_idx] if NflPlayer.positions('D').count > 0
   d_idx += 1
 
-  team.nfl_players << NflPlayer.positions('PK')[k_idx]
+  team.nfl_players << NflPlayer.positions('PK')[k_idx] if NflPlayer.positions('PK').count > 0
   k_idx += 1
 end

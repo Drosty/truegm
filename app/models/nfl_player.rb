@@ -18,13 +18,13 @@ class NflPlayer < ActiveRecord::Base
 
   # Named_Scopes
   scope :positions, ->(pos) {
-                              case pos
+                              case pos.downcase
                               when 'all'
                                 where(nil)
                               when 'flex'
                                 where(:position => ['rb', 'wr'])
                               else
-                                where(:position => pos)
+                                where(:position => pos.downcase)
                               end
                             }
 

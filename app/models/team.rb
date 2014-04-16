@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
 
   def add_player player
     team = player.fantasy_team self.league_id
-    
+
     unless team.nil?
       team.nfl_players.delete(player.id)
     end
@@ -57,7 +57,7 @@ private
   end
 
   def get_players_by_position position
-    nfl_players.select { |p| p.position == position }
+    nfl_players.select { |p| p.position == position.downcase }
   end
 
 end
