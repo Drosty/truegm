@@ -10,6 +10,7 @@ The roadmap of this application includes importing stats, a forum, projections, 
 
 ### Database Project Setup
 In order to get the database setup and running run the following commands in this order:
+
 ``` ruby
 bundle exec rake db:create
 bundle exec rake db:schema:load
