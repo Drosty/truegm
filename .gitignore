@@ -22,3 +22,6 @@
 config/database.yml
 
 coverage/*
+
+# ignore mac files
+.DS_STORE
