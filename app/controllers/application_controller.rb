@@ -1,11 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = t ('error.message')
-    redirect_to root_url
-  end
-
   before_filter :configure_devise_params, if: :devise_controller?
 
   def configure_devise_params
