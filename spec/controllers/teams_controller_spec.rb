@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "cancan/matchers"
 
 describe TeamsController do
   include Warden::Test::Helpers
@@ -30,8 +29,8 @@ describe TeamsController do
 
       visit team_path(new_team)
       page.should have_content(new_team.name)
-    end 
-    
+    end
+
     it 'cant access team in another league' do
       league = create(:league)
       team = create(:team, :league => league)
