@@ -63,13 +63,13 @@ describe LeaguesController do
     end
 
   end
-  
+
   describe "SHOW as normal user" do
-    before(:each) do 
+    before(:each) do
       user = create(:user_with_one_team)
       login(user)
       @league = user.leagues.first
-      3.times do 
+      3.times do
         @league.teams << create(:team, :league => @league)
       end
     end
