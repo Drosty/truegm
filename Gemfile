@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 1.2'
 # Devise for user authentication
 gem 'devise'
 
+# Pundit for User Authorization
+gem "pundit"
+
 # For using Twitter with Authentication
 gem 'omniauth-twitter'
 
