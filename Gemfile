@@ -30,9 +30,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# Cancan for User Authorization
-gem 'cancan'
-
 # Devise for user authentication
 gem 'devise'
 
