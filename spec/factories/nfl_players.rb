@@ -16,27 +16,27 @@ FactoryGirl.define do
   end
 
   trait :qb do
-    position "QB"
+    position "qb"
   end
 
   trait :rb do
-    position "RB"
+    position "rb"
   end
 
   trait :wr do
-    position "WR"
+    position "wr"
   end
 
   trait :te do
-    position "TE"
+    position "te"
   end
 
   trait :def do
-    position "D"
+    position "d"
   end
 
   trait :pk do
-    position "K"
+    position "k"
   end
 
 end

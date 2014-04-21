@@ -70,3 +70,5 @@ gem 'rack-mini-profiler', group: [:development, :test]
 
 # For the Coveralls integration
 gem 'coveralls', require: false
+
+gem 'pry'

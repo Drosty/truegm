@@ -50,7 +50,7 @@ module Import
     end
 
     def nfl_player_import_id
-      Zlib.crc32 "#{self.Player}#{self.Team}#{self.Pos}"
+      NflPlayer.generate_hash self.Player, self.Pos, self.Team
     end
 
     def first_name

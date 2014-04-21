@@ -36,7 +36,25 @@ describe NflPlayer do
   it "will return Team Name when player is on a team in the league" do
     team = create(:team)
     team.nfl_players << @player
-    @player.fantasy_team_name(team.league_id).should eq(team.name) 
+    @player.fantasy_team_name(team.league_id).should eq(team.name)
+  end
+
+  it "will create same hash with same string except whitespace" do
+    first = NflPlayer.generate_hash(" Henry Smith ", "WR ", "ARI ")
+    second = NflPlayer.generate_hash("Henry Smith", " WR", " ARI")
+    assert_equal first, second
+  end
+
+  it "will create same hash with same string except Special chars" do
+    first = NflPlayer.generate_hash(" Henry.Smith$!", "WR**", ".,:ARI;")
+    second = NflPlayer.generate_hash("+{|`~Henry Smith#", " WR()", "!@ARI-_'")
+    assert_equal first, second
+  end
+
+  it "will create same hash with same string except case" do
+    first = NflPlayer.generate_hash(" Henry SMITH ", "WR ", "ARI ")
+    second = NflPlayer.generate_hash("Henry Smith", " Wr", " Ari")
+    assert_equal first, second
   end
 
 end
