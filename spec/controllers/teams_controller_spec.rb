@@ -15,7 +15,6 @@ describe TeamsController do
     before(:each) do
       @one_team_user = create(:user_with_one_team)
       login(@one_team_user)
-      @ability = Ability.new(@one_team_user)
     end
 
     it 'can access team that are owner of' do
@@ -30,12 +29,6 @@ describe TeamsController do
       visit team_path(new_team)
       page.should have_content(new_team.name)
     end
-
-    it 'cant access team in another league' do
-      league = create(:league)
-      team = create(:team, :league => league)
-
-      assert @ability.cannot?(:read, create(:team, :league => league))
-    end
+    
   end
 end

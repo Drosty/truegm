@@ -15,7 +15,6 @@ describe UsersController do
     attributes_for(:user)
   end
 
-
   describe "POST create as admin user" do
     before(:each) do
       @user_admin = create(:user, :admin)

@@ -1,6 +1,6 @@
 module Admin
   class LeaguesController < BaseController
-  
+
     before_action :set_admin_league, only: [:show, :edit, :update, :destroy]
 
     # GET /admin/leagues
@@ -26,21 +26,22 @@ module Admin
     # POST /admin/leagues
     # POST /admin/leagues.json
     def create
+      @admin_league = League.new(admin_league_params)
       # Create 10 teams for the league
       10.times do |n|
         team = Team.new
         team.name = "Team " + (n+1).to_s
 
-        @league.teams << team
+        @admin_league.teams << team
       end
 
       respond_to do |format|
-        if @league.save
-          format.html { redirect_to [:admin, @league], notice: 'League was successfully created.' }
-          format.json { render json: @league, status: :created, location: @league }
+        if @admin_league.save
+          format.html { redirect_to [:admin, @admin_league], notice: 'League was successfully created.' }
+          format.json { render json: @admin_league, status: :created, location: @admin_league }
         else
           format.html { render "new" }
-          format.json { render json: @league.errors, status: :unprocessable_entity }
+          format.json { render json: @admin_league.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -49,12 +50,12 @@ module Admin
     # PATCH/PUT /admin/leagues/1.json
     def update
       respond_to do |format|
-        if @league.update(admin_league_params)
-          format.html { redirect_to [:admin, @league], notice: 'League was successfully updated.' }
+        if @admin_league.update(admin_league_params)
+          format.html { redirect_to [:admin, @admin_league], notice: 'League was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render :edit }
-          format.json { render json: @league.errors, status: :unprocessable_entity }
+          format.json { render json: @admin_league.errors, status: :unprocessable_entity }
         end
       end
     end
