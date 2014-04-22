@@ -1,5 +1,10 @@
 class TeamsController < ApplicationController
+  before_filter :set_current_team
   before_filter :set_current_league
+
+  def set_current_team
+    @team = Team.find(params[:id]) if params[:id].present?
+  end
 
   def set_current_league
     @current_league = @team.league
