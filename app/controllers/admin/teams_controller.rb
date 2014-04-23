@@ -1,9 +1,8 @@
 module Admin
   class TeamsController < BaseController
-    load_and_authorize_resource
   
     before_action :set_admin_team, only: [:show, :edit, :update, :destroy]
-  
+
     # GET /admin/teams
     # GET /admin/teams.json
     def index
@@ -11,16 +10,16 @@ module Admin
       @league_name = league.name
       @admin_teams = Team.where(league: league)
     end
-  
+
     # GET /admin/teams/1
     # GET /admin/teams/1.json
     def show
     end
-  
+
     # GET /admin/teams/1/edit
     def edit
     end
-  
+
     # PATCH/PUT /admin/teams/1
     # PATCH/PUT /admin/teams/1.json
     def update
@@ -34,19 +33,19 @@ module Admin
         end
       end
     end
-  
+
   private
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_team
       @admin_team = Team.find(params[:id])
     end
-  
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_team_params
       params[:team]
     end
-  
+
   end
 
 end

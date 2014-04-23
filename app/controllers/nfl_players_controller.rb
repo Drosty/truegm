@@ -1,6 +1,5 @@
 class NflPlayersController < ApplicationController
   helper_method :sort_column, :sort_direction
-  load_and_authorize_resource
 
   before_filter :set_current_league, only: [:show, :index]
   before_action :set_nfl_player, only: [:show, :edit, :update, :destroy]
