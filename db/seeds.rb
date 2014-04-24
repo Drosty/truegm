@@ -31,9 +31,16 @@ NflTeam.find_or_create_by(mascot: 'Buccaneers', location: 'Tampa Bay', abbreviat
 NflTeam.find_or_create_by(mascot: 'Titans', location: 'Tennessee', abbreviation: 'TEN')
 NflTeam.find_or_create_by(mascot: 'Redskins', location: 'Washington', abbreviation: 'WAS')
 
-# create a test user for logging in
+# create a admin test user for logging in
+u = User.find_or_create_by(email: "admin@gmail.com", name: "Admin User")
+u.password = "qwerty1234"
+u.is_admin = true
+u.save
+
+# create a regular test user for logging in
 u = User.find_or_create_by(email: "test@gmail.com", name: "Test User")
 u.password = "qwerty1234"
+u.is_admin = false
 u.save
 
 # Create a league for us to use
