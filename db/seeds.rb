@@ -60,15 +60,16 @@ team_list = [
 ]
 
 league = League.find_or_create_by(name: "First Test League")
-first_user = User.find_or_create_by(name: "Test User")
+first_user = User.find_by(name: "Test User")
+second_user = User.find_by(name: "Admin User")
 
 team_list.each do |name, tagline|
   t = Team.find_or_create_by(name: name, tagline: tagline)
   t.league = league
-  t.user = first_user
+  t.user = nil
+  t.user = first_user if name == "Team Uno"
+  t.user = second_user if name == "All Days"
   t.save
-
-  first_user = nil
 end
 
 qb_idx = 0
