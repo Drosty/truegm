@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+    authorize @team
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
@@ -18,12 +19,14 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    authorize @team
     respond_to do |format|
         format.html
     end
   end
 
   def update
+    authorize @team
     respond_to do |format|
       if @team.update_attributes(params[:team])
         format.html { redirect_to team_path(@team), notice: 'Team was successfully updated.' }
@@ -34,4 +37,5 @@ class TeamsController < ApplicationController
       end
     end
   end
+
 end
