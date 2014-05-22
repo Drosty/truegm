@@ -1,0 +1,16 @@
+<div class="accordion" id="player-stats">
+  <div class="accordion-group">
+    <% stats.each do |stat| %>
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats" href="#week<%= stat.week %>">
+        <%= stat.summary %>
+      </a>
+    </div>
+    <div id="week<%= stat.week %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Here is a more description mini table of the week.
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

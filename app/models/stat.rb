@@ -6,4 +6,8 @@ class Stat < ActiveRecord::Base
 
   belongs_to :nfl_player
 
+  def summary
+    "Week #{week} - 12 pts - #{passing_yards}/#{passing_touchdowns}/#{interceptions}"
+  end
+
 end
