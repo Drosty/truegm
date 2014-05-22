@@ -6,6 +6,8 @@ class NflPlayer < ActiveRecord::Base
   has_many :stats
 
   delegate :mascot, :to  => :nfl_team, :prefix => true
+  delegate :abbreviation, :to  => :nfl_team, :prefix => true
+
 
   def self.available_positions_for_filter
     ['all', 'qb', 'rb', 'wr', 'te', 'd', 'pk', 'flex']
