@@ -1,6 +1,7 @@
 <div class="accordion" id="player-stats-<%= year %>">
-  <div class="accordion-group">
+
     <% stats.each do |stat| %>
+  <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats-<%= year %>" href="#week<%= stat.week %>">
         <%= stat.summary(position) %>
@@ -11,6 +12,7 @@
         <%= render :partial => "stat_table", :locals => { :stat => stat, :position => position } %>
       </div>
     </div>
-    <% end %>
   </div>
+
+  <% end %>
 </div>
