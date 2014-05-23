@@ -6,16 +6,27 @@ class Stat < ActiveRecord::Base
 
   belongs_to :nfl_player
 
-  def summary
-    "Week #{week} - 12 pts - #{passing_yards}/#{passing_touchdowns}/#{interceptions}"
+  def summary position = "qb"
+    case position
+    when "qb"
+      summary = "Week #{week} - 12 pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
+    when "rb"
+      summary = "Week #{week} - 12 pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+    when "wr", "te"
+      summary = "Week #{week} - 12 pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+    end
+
+    summary
   end
 
-  def position_specific_stats position
+  def position_specific_stats position = "qb"
     case position
     when "qb"
       stats = get_stats_for_qb
-    when "rb", "wr", "te"
-      stats = get_stats_for_skill_player
+    when "rb"
+      stats = get_stats_for_rb
+    when "wr", "te"
+      stats = get_stats_for_wr_or_te
     end
 
     stats
@@ -34,13 +45,24 @@ class Stat < ActiveRecord::Base
       }
     end
 
-    def get_stats_for_skill_player
+    def get_stats_for_rb
       {
         :rushing_yards => self.rushing_yards,
         :rushing_touchdown => self.rushing_touchdowns,
         :receptions => self.receptions,
         :receiving_yards => self.receiving_yards,
         :receiving_touchdowns => self.receiving_touchdowns,
+        :fumbles_lost => self.fumbles_lost
+      }
+    end
+
+    def get_stats_for_wr_or_te
+      {
+        :receiving_yards => self.receiving_yards,
+        :receiving_touchdowns => self.receiving_touchdowns,
+        :rushing_yards => self.rushing_yards,
+        :rushing_touchdown => self.rushing_touchdowns,
+        :receptions => self.receptions,
         :fumbles_lost => self.fumbles_lost
       }
     end
