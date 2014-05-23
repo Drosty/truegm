@@ -9,13 +9,20 @@
       <a href="#<%= year[0] %>" data-toggle="tab"><%= year[0] %></a>
     </li>
     <% end %>
+    <li>
+      <a href="#actions" data-toggle="tab">Actions</a>
+    </li>
   </ul>
   <div id="myTabContent" class="tab-content">
     <% view_model.stats_by_year.each do |year| %>
       <div class="tab-pane fade active in" id="<%= year[0] %>">
-        <%= render :partial => "stat_table", :locals => { :stats => year[1], :position => view_model.player_position } %>
+        <%= render :partial => "stats_accordian", :locals => { :year => year[0], :stats => year[1], :position => view_model.player_position } %>
       </div>
     <% end %>
+
+    <div class="tab-pane fade in" id="actions">
+      <%= render :partial => "player_actions", :locals => { :player => view_model.player } %>
+    </div>
   </div>
 </div>
 

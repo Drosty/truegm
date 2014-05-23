@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe NflPlayerStatViewModel do
+describe NflPlayerViewModel do
+
+  let(:player) { build(:nfl_player) }
 
   describe "no stats in View Model" do
     before(:each) do
