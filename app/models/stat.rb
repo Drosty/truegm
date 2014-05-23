@@ -25,11 +25,11 @@ class Stat < ActiveRecord::Base
   def summary position = "qb"
     case position
     when "qb"
-      summary = "Week #{week} - #{self.total_points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
+      summary = "Week #{week} - #{total_points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
     when "rb"
-      summary = "Week #{week} - #{self.total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+      summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
     when "wr", "te"
-      summary = "Week #{week} - #{self.total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+      summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
     end
 
     summary
