@@ -6,14 +6,30 @@ class Stat < ActiveRecord::Base
 
   belongs_to :nfl_player
 
+  def total_points
+    @total_points ||= begin
+      [
+        (passing_yards.to_f / 25).round(2),
+        passing_touchdowns * 5,
+        -(interceptions * 2),
+        -(fumbles_lost * 2),
+        rushing_yards.to_f / 10,
+        rushing_touchdowns * 6,
+        receiving_yards.to_f / 10,
+        receiving_touchdowns * 6,
+        receptions
+      ].sum.round(2)
+    end
+  end
+
   def summary position = "qb"
     case position
     when "qb"
-      summary = "Week #{week} - 12 pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
+      summary = "Week #{week} - #{self.total_points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
     when "rb"
-      summary = "Week #{week} - 12 pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+      summary = "Week #{week} - #{self.total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
     when "wr", "te"
-      summary = "Week #{week} - 12 pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+      summary = "Week #{week} - #{self.total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
     end
 
     summary
