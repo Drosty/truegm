@@ -1,11 +1,13 @@
 <h3><%= @nfl_player.position.upcase %>&nbsp;<%= @nfl_player.full_name %></h3>
-<p>Salary: <%= number_to_currency @nfl_player.salary, precision: 0 %></p>
 <p>Owned by: <%= @nfl_player.fantasy_team_name(@current_league.id) %></p>
 
 <div class="bs-component">
   <ul class="nav nav-tabs">
-    <% view_model.stats_by_year.each do |year| %>
     <li class="active">
+      <a href="#info" data-toggle="tab">Info</a>
+    </li>
+    <% view_model.stats_by_year.each do |year| %>
+    <li>
       <a href="#<%= year[0] %>" data-toggle="tab"><%= year[0] %></a>
     </li>
     <% end %>
@@ -14,16 +16,20 @@
     </li>
   </ul>
   <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+      <%= render :partial => "player_information", :locals => { :player => view_model.player } %>
+    </div>
     <% view_model.stats_by_year.each do |year| %>
-      <div class="tab-pane fade active in" id="<%= year[0] %>">
+      <div class="tab-pane fade in" id="<%= year[0] %>">
         <%= render :partial => "stats_accordian", :locals => { :year => year[0], :stats => year[1], :position => view_model.player_position } %>
       </div>
     <% end %>
-
     <div class="tab-pane fade in" id="actions">
       <%= render :partial => "player_actions", :locals => { :player => view_model.player } %>
     </div>
   </div>
 </div>
 
-<%= link_to 'All Players', league_nfl_players_path(@current_league) %>
+<div class="form-actions">
+  <%= link_to 'All Players', league_nfl_players_path(@current_league), :class => "btn" %>
+</div>
