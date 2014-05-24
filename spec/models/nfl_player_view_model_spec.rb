@@ -51,6 +51,12 @@ describe NflPlayerViewModel do
       model = NflPlayerViewModel.new(NflPlayer.new({position: "wr"}), nil)
       model.player_position.should == "wr"
     end
+
+    it "will return the player model" do
+      player = build(:nfl_player)
+      model = NflPlayerViewModel.new(player, nil)
+      model.player.should == player
+    end
   end
 
 end
