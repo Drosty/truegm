@@ -69,3 +69,6 @@ gem 'rack-mini-profiler', group: [:development, :test]
 gem 'coveralls', require: false
 
 gem 'pry'
+
+# for tracking salary history
+gem 'paper_trail', '~> 3.0.2'
