@@ -49,6 +49,10 @@ class Team < ActiveRecord::Base
     get_players_by_position "D"
   end
 
+  def under_cap?
+    self.total_salary < league.salary_cap
+  end
+
 private
 
   def update_total_salary
