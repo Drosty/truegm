@@ -1,5 +1,7 @@
 # TrueGM
 
+[![Coverage Status](https://coveralls.io/repos/Drosty/truegm/badge.png?branch=master)](https://coveralls.io/r/Drosty/truegm?branch=master)
+
 This is a Fantasy Football tracking Site for my Fantasy Football league.
 
 It tracks multiple leagues which has multiple teams.  Each team has a roster of NFL Players and will calculate teams salaries.
