@@ -13,9 +13,9 @@ class Stat < ActiveRecord::Base
         passing_touchdowns * 5,
         -(interceptions * 2),
         -(fumbles_lost * 2),
-        rushing_yards.to_f / 10,
+        rushing_yards.to_f / 10.0,
         rushing_touchdowns * 6,
-        receiving_yards.to_f / 10,
+        receiving_yards.to_f / 10.0,
         receiving_touchdowns * 6,
         receptions
       ].sum.round(2)
