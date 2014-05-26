@@ -50,6 +50,7 @@ class Team < ActiveRecord::Base
   end
 
   def under_cap?
+    return true if league.salary_cap.nil?
     self.total_salary < league.salary_cap
   end
 

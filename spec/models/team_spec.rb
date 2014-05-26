@@ -143,6 +143,12 @@ describe Team do
       @team.under_cap?.should == false
     end
 
+    it "will return true when salary cap is not set" do
+      @team.league.salary_cap = nil
+      @team.total_salary = 1000
+      @team.under_cap?.should == true
+    end
+
   end
 
 end
