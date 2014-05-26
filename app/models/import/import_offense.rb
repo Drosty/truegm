@@ -1,29 +1,11 @@
 module Import
-  class ImportOffense
+  class ImportOffense < BaseImport
 
     #TD is just there for the initializer part, not used
     #Yds is reception yards
     attr_accessor :Rk, :Player, :Team, :Pos, :PassYds, :PassTDs,
                   :Int, :RushYds, :RushTds, :Rec, :Yds, :RecTds, :FumLost,
                   :FantasyPoints, :year, :week, :TD
-
-    def initialize(attributes = {})
-      attributes.each do |name, value|
-        send("#{name.gsub(/\s+/, "")}=", value)
-      end
-    end
-
-    def process_player_stats
-      return unless NflPlayer.available_positions_for_filter.include?(self.Pos.downcase)
-
-      player = create_or_update_and_return_player_model
-      player.save
-
-      stat = create_or_update_and_return_stats_model player.id
-      stat.save
-    end
-
-  private
 
     def create_or_update_and_return_player_model
       player = NflPlayer.find_or_create_by(nfl_data_id: nfl_player_import_id)
@@ -48,6 +30,8 @@ module Import
       stat.fumbles_lost = self.FumLost
       stat
     end
+
+private
 
     def nfl_player_import_id
       NflPlayer.generate_hash self.Player, self.Pos, self.Team
