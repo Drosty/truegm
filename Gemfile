@@ -63,7 +63,6 @@ gem 'capybara', group: [:development, :test]
 gem 'database_cleaner', group: [:development, :test]
 
 gem 'factory_girl_rails', group: [:development, :test]
-gem 'rack-mini-profiler', group: [:development, :test]
 
 # For the Coveralls integration
 gem 'coveralls', require: false
