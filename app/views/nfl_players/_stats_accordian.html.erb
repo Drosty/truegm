@@ -1,18 +1,16 @@
 <div class="accordion" id="player-stats-<%= year %>">
-
-    <% stats.each do |stat| %>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats-<%= year %>" href="#week<%= stat.week %>">
-        <%= stat.summary(position) %>
-      </a>
-    </div>
-    <div id="week<%= stat.week %>" class="accordion-body collapse">
-      <div class="accordion-inner">
-        <%= render :partial => "stat_table", :locals => { :stat => stat, :position => position } %>
+  <% stats.each do |stat| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats-<%= year %>" href="#week<%= stat.week %>">
+          <%= stat.summary(position) %>
+        </a>
+      </div>
+      <div id="week<%= stat.week %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= render :partial => "stat_table", :locals => { :stat => stat, :position => position } %>
+        </div>
       </div>
     </div>
-  </div>
-
   <% end %>
 </div>

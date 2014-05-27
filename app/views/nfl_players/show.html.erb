@@ -1,5 +1,5 @@
 <h3><%= @nfl_player.position.upcase %>&nbsp;<%= @nfl_player.full_name %></h3>
-<p>Owned by: <%= @nfl_player.fantasy_team_name(@current_league.id) %></p>
+<p>Owned by: <%= truncate(@nfl_player.fantasy_team_name(@current_league.id)) %></p>
 
 <div class="bs-component">
   <ul class="nav nav-tabs">

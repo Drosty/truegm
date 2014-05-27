@@ -1,5 +1,5 @@
-<p><%= player.nfl_team.location %> <%= player.nfl_team.mascot %></p>
-<% if player.versions.count > 0 %>
+<p><%= display_team_name(player) %></p>
+<% if player.versions.count > 1 %>
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#salary-history" href="#salary-history">
@@ -9,6 +9,7 @@
     <div id="salary-history" class="accordion-body collapse">
       <div class="accordion-inner">
         <% player.versions.reverse_each do |version| %>
+          <% next if version.reify.nil? %>
           <p>
             <%= version.reify.updated_at.to_s(:truegm_date) %>
             - <%= number_to_currency version.reify.salary, precision: 0 %>
