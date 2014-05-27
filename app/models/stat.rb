@@ -108,6 +108,9 @@ class Stat < ActiveRecord::Base
     end
 
     def defensive_points_allowed_points
+      return 0 if nfl_player.nil?
+      return 0 unless nfl_player.position == "def"
+
       if self.points_allowed.to_i <= 6
         return 10
       end
