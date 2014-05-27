@@ -10,14 +10,21 @@ class Stat < ActiveRecord::Base
     @total_points ||= begin
       [
         (passing_yards.to_f / 25).round(2),
-        passing_touchdowns * 5,
-        -(interceptions * 2),
-        -(fumbles_lost * 2),
+        passing_touchdowns.to_i * 5,
+        -(interceptions.to_i * 2),
+        -(fumbles_lost.to_i * 2),
         rushing_yards.to_f / 10.0,
-        rushing_touchdowns * 6,
+        rushing_touchdowns.to_i * 6,
         receiving_yards.to_f / 10.0,
-        receiving_touchdowns * 6,
-        receptions
+        receiving_touchdowns.to_i * 6,
+        receptions.to_i,
+
+        defensive_interceptions.to_i * 2,
+        fumbles_recovered.to_i * 2,
+        sacks.to_i * 1,
+        safties.to_i * 2,
+        defensive_tds.to_i * 6,
+        defensive_points_allowed_points
       ].sum.round(2)
     end
   end
@@ -30,12 +37,15 @@ class Stat < ActiveRecord::Base
       summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
     when "wr", "te"
       summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+    when "def"
+      summary = "Week #{week} - #{total_points} fantasy pts"
     end
 
     summary
   end
 
   def position_specific_stats position = "qb"
+    stats = []
     case position
     when "qb"
       stats = get_stats_for_qb
@@ -43,6 +53,8 @@ class Stat < ActiveRecord::Base
       stats = get_stats_for_rb
     when "wr", "te"
       stats = get_stats_for_wr_or_te
+    when "def"
+      stats = get_stats_for_def
     end
 
     stats
@@ -81,6 +93,42 @@ class Stat < ActiveRecord::Base
         :receptions => self.receptions,
         :fumbles_lost => self.fumbles_lost
       }
+    end
+
+    def get_stats_for_def
+      {
+        :points_allowed => self.points_allowed,
+        :sacks => self.sacks,
+        :interceptions => self.defensive_interceptions,
+        :fumbles_recovered => self.fumbles_recovered,
+        :defensive_touchdowns => self.defensive_tds,
+        :returned_touchdowns => self.return_tds,
+        :safties => self.safties
+      }
+    end
+
+    def defensive_points_allowed_points
+      if self.points_allowed.to_i <= 6
+        return 10
+      end
+
+      if self.points_allowed.to_i <= 13
+        return 7
+      end
+
+      if self.points_allowed.to_i <= 20
+        return 1
+      end
+
+      if self.points_allowed.to_i <= 27
+        return 0
+      end
+
+      if self.points_allowed.to_i <= 34
+        return -1
+      end
+
+      -4
     end
 
 end
