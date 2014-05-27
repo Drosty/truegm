@@ -3,7 +3,7 @@ module Import
 
     #TD is just there for the initializer part, not used
     #Yds is reception yards
-    attr_accessor :Rk, :Player, :Team, :Pos, :PassYds, :PassTDs,
+    attr_accessor :Rk, :Player, :Team, :PassYds, :PassTDs,
                   :Int, :RushYds, :RushTds, :Rec, :Yds, :RecTds, :FumLost,
                   :FantasyPoints, :year, :week, :TD
 

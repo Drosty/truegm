@@ -29,9 +29,6 @@ module FantasyData
 
         CSV.foreach(filename, :headers => true) do |row|
           object = Import::ImportDefense.new(row.to_hash)
-          object.PassTDs = row[5]
-          object.RushTds = row[8]
-          object.RecTds = row[11]
           object.week = week
           object.year = year
           object.process_player_stats

@@ -5,4 +5,9 @@ namespace :import_data do
     FantasyData::ImportService.import_offense_files
   end
 
+  task :defense => :environment do
+    FantasyData::ImportService.import_defensive_files
+  end
+
+
 end

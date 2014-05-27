@@ -1,6 +1,8 @@
 module Import
   class BaseImport
 
+    attr_accessor :Pos
+
     def initialize(attributes = {})
       attributes.each do |name, value|
         send("#{name.gsub(/\s+/, "")}=", value)
