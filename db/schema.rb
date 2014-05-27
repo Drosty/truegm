@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525131650) do
+ActiveRecord::Schema.define(version: 20140526233106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 20140525131650) do
     t.integer "fumbles_lost"
     t.integer "year"
     t.integer "week"
+    t.integer "tfl"
+    t.integer "sacks"
+    t.integer "qbhits"
+    t.integer "defensive_interceptions"
+    t.integer "fumbles_recovered"
+    t.integer "safties"
+    t.integer "defensive_tds"
+    t.integer "return_tds"
+    t.integer "points_allowed"
   end
 
   add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree
