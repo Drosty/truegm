@@ -2,6 +2,8 @@ require 'csv'
 
 module FantasyData
   class ImportService
+    include FantasyData::StatImportProcessing
+
     attr_reader :fantasy_footbal_nerd_party
 
     def initialize(fantasy_football_party = FantasFootballNerdParty.new)
@@ -43,8 +45,6 @@ module FantasyData
 
         p_to_save.save
       end
-
-
     end
 
     def import_nfl_schedule
@@ -80,7 +80,9 @@ module FantasyData
     end
 
     def import_stats
-
+      NflPlayer.all.each do |nfl_player|
+        process_stats_for_player nfl_player.nfl_data_id
+      end
     end
 
   end
