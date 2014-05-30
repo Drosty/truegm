@@ -39,7 +39,9 @@ class FantasyFootballNerdParty
 
   def nfl_schedule
     response = self.class.get("/schedule/json/test/")
-    response.parsed_response["Schedule"]
+    response.parsed_response["Schedule"].map do |schedule|
+      Import::Schedule.new(schedule)
+    end
   end
 
   def current_week

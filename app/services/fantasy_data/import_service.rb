@@ -49,8 +49,26 @@ module FantasyData
     end
 
     def import_nfl_schedule
+      matchups = @fantasy_footbal_nerd_party.nfl_schedule
 
+      matchups.each do |matchup|
+        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId, week: matchup.gameWeek)
+
+        db_matchup.home_team = NflTeam.find_by(code: matchup.homeTeam)
+        db_matchup.away_team = NflTeam.find_by(code: matchup.awayTeam)
+        db_matchup.tv_station = matchup.tvStation
+        db_matchup.game_date = Time.parse(matchup.gameDate + " " + matchup.gameTimeET).utc
+
+        db_matchup.save
+      end
     end
+
+#    t.datetime "game_date"
+    #t.integer  "away_team_id"
+    #t.integer  "home_team_id"
+    #t.string   "tv_station"
+    #t.datetime "created_at"
+    #t.datetime "updated_at"
 
     def import_injury_status
 

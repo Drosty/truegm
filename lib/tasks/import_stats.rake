@@ -13,6 +13,10 @@ namespace :import do
     get_import_service().import_nfl_player_data nil
   end
 
+  task :nfl_schedule => :environment do
+    get_import_service().import_nfl_schedule
+  end
+
   def get_import_service
     FantasyData::ImportService.new(FantasyFootballNerdParty.new)
   end
