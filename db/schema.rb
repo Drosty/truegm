@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530033106) do
+ActiveRecord::Schema.define(version: 20140530041253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,21 @@ ActiveRecord::Schema.define(version: 20140530033106) do
     t.integer "defensive_tds"
     t.integer "return_tds"
     t.integer "points_allowed"
+    t.string  "opponent"
+    t.string  "final_score"
+    t.boolean "played"
+    t.boolean "started"
+    t.integer "passing_completions"
+    t.integer "passing_attempts"
+    t.float   "passing_percentage"
+    t.float   "average_pass_yards"
+    t.float   "qb_rating"
+    t.integer "rushing_attempts"
+    t.float   "rushing_average"
+    t.integer "fumbles"
+    t.integer "longRun"
+    t.float   "receiving_average"
+    t.integer "receiving_long"
   end
 
   add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree
