@@ -20,7 +20,7 @@ module FantasyData
 
     def import_nfl_player_data position
       players = @fantasy_footbal_nerd_party.nfl_players position
-
+      NflPlayer.update_all(active: false)
       players.each do |player|
         p_to_save = NflPlayer.find_or_create_by(nfl_data_id: player["playerId"])
 
