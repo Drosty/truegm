@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530031558) do
+ActiveRecord::Schema.define(version: 20140530033106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,12 @@ ActiveRecord::Schema.define(version: 20140530031558) do
     t.string   "spotrac_url"
     t.string   "full_name"
     t.integer  "nfl_data_id", limit: 8
+    t.string   "jersey"
+    t.string   "height"
+    t.string   "weight"
+    t.datetime "dob"
+    t.string   "college"
+    t.boolean  "active"
   end
 
   add_index "nfl_players", ["nfl_data_id"], name: "index_nfl_players_on_nfl_data_id", unique: true, using: :btree
