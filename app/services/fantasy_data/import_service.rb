@@ -18,7 +18,32 @@ module FantasyData
       end
     end
 
-    def import_player_data
+    def import_nfl_player_data position
+      players = @fantasy_footbal_nerd_party.nfl_players position
+
+      players.each do |player|
+        p_to_save = NflPlayer.find_or_create_by(nfl_data_id: player["playerId"])
+
+        p_to_save.active = player["active"].to_s == "1"
+        p_to_save.jersey = player["jersey"]
+        p_to_save.last_name = player["lname"]
+        p_to_save.first_name = player["fname"]
+        p_to_save.full_name = player["displayName"]
+        p_to_save.nfl_team = NflTeam.find_by(code: player["team"])
+        p_to_save.position = player["position"]
+        p_to_save.height = player["height"]
+        p_to_save.weight = player["weight"]
+        p_to_save.college = player["college"]
+
+        begin
+          p_to_save.dob = player["dob"].to_datetime
+        rescue => e
+          p_to_save.dob = nil
+        end
+
+        p_to_save.save
+      end
+
 
     end
 
