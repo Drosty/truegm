@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530192109) do
+ActiveRecord::Schema.define(version: 20140530202511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,18 @@ ActiveRecord::Schema.define(version: 20140530192109) do
 
   add_index "matchups", ["away_team_id"], name: "matchup_away_team_fk", using: :btree
   add_index "matchups", ["home_team_id"], name: "matchup_home_team_fk", using: :btree
+
+  create_table "nfl_matchups", force: true do |t|
+    t.integer  "import_game_id"
+    t.integer  "week"
+    t.integer  "year"
+    t.datetime "game_date"
+    t.integer  "away_team_id"
+    t.integer  "home_team_id"
+    t.string   "tv_station"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "nfl_players", force: true do |t|
     t.integer  "nfl_team_id"
