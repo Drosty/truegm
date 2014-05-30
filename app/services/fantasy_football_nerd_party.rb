@@ -23,6 +23,16 @@ class FantasyFootballNerdParty
     rtn_response["Players"]
   end
 
+  def stats player_id
+    response = self.class.get("/player/json/test/#{player_id}/")
+    response.parsed_response["Stats"]
+  end
+
+  def player_videos player_id
+    response = self.class.get("/player/json/test/#{player_id}/")
+    response.parsed_response["Videos"]
+  end
+
   def nfl_schedule
     response = self.class.get("/schedule/json/test/")
     response.parsed_response["Schedule"]
