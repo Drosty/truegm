@@ -5,7 +5,9 @@ class FantasyFootballNerdParty
 
   def nfl_teams
     response = self.class.get("/nfl-teams/json/test/")
-    response.parsed_response["NFLTeams"]
+    response.parsed_response["NFLTeams"].map do |team|
+      Import::NflTeam.new(team)
+    end
   end
 
   def nfl_players position = nil
@@ -20,7 +22,9 @@ class FantasyFootballNerdParty
       rtn_response = response.parsed_response
     end
 
-    rtn_response["Players"]
+    rtn_response["Players"].map do |player|
+      # map to import player model
+    end
   end
 
   def stats player_id
