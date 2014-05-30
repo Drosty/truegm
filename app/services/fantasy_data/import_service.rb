@@ -14,9 +14,9 @@ module FantasyData
       teams = @fantasy_footbal_nerd_party.nfl_teams
 
       teams.each do |team|
-        NflTeam.find_or_create_by(code: team["code"],
-                                  full_name: team["fullName"],
-                                  short_name: team["shortName"])
+        NflTeam.find_or_create_by(code: team.code,
+                                  full_name: team.fullName,
+                                  short_name: team.shortName)
       end
     end
 
