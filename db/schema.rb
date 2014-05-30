@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530041253) do
+ActiveRecord::Schema.define(version: 20140530192109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 20140530041253) do
     t.integer "rushing_attempts"
     t.float   "rushing_average"
     t.integer "fumbles"
-    t.integer "longRun"
+    t.integer "long_run"
     t.float   "receiving_average"
     t.integer "receiving_long"
   end
