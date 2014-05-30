@@ -22,7 +22,6 @@ class FantasyFootballNerdParty
       rtn_response = response.parsed_response
     end
 
-    binding.pry
     rtn_response["Players"].map do |player|
       Import::NflPlayer.new(player)
     end
