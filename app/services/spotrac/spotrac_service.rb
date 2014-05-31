@@ -3,6 +3,7 @@ require 'open-uri'
 
 module Spotrac
   class SpotracService
+
     def self.scrape_site
       process_spotrac_team_data
       process_spotrac_player_data
@@ -64,20 +65,7 @@ module Spotrac
     end
 
     def self.set_spotrac_team_url(href, team_name)
-      puts "GOING TO HAVE TO UPDATE THIS WHOLE CLASS!!!!"
-
-      parts = team_name.split
-
-      mascot = parts.last
-      parts.delete(mascot)
-      location = parts.join(' ') if parts.is_a? Array
-      location = parts if parts.is_a? String
-
-      if team_name.split.count > 2
-        location = team_name.split[0] + " " + team_name.split[1]
-      end
-
-      team = NflTeam.find_by(mascot: mascot, location: location)
+      team = NflTeam.find_by(full_name: team_name)
       return nil if team.nil?
 
       team.spotrac_url = href
