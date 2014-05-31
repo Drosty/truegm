@@ -5,7 +5,7 @@ module Import
                   :avgPassYards, :passTD, :interceptions, :QBRating, :rushAttempts,
                   :rushYards, :rushAvg, :rushTD, :longRun, :fumble, :fumbleLost,
                   :receptions, :recYards, :recAvg, :longRec, :gameDate, :Sacks,
-                  :SackYards
+                  :SackYards, :recTD
 
   end
 end
