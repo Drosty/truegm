@@ -63,13 +63,6 @@ module FantasyData
       end
     end
 
-#    t.datetime "game_date"
-    #t.integer  "away_team_id"
-    #t.integer  "home_team_id"
-    #t.string   "tv_station"
-    #t.datetime "created_at"
-    #t.datetime "updated_at"
-
     def import_injury_status
 
     end
