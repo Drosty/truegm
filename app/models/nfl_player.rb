@@ -5,8 +5,8 @@ class NflPlayer < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_many :stats
 
-  delegate :mascot, :to  => :nfl_team, :prefix => true
-  delegate :abbreviation, :to  => :nfl_team, :prefix => true
+  delegate :code, :to  => :nfl_team, :prefix => true
+  delegate :full_name, :to  => :nfl_team, :prefix => true
 
   has_paper_trail :only => [:salary]
 
@@ -23,9 +23,9 @@ class NflPlayer < ActiveRecord::Base
                               when 'all'
                                 where(nil)
                               when 'flex'
-                                where(:position => ['rb', 'wr'])
+                                where(:position => ['RB', 'WR'])
                               else
-                                where(:position => pos.downcase)
+                                where(:position => pos.upcase)
                               end
                             }
 
