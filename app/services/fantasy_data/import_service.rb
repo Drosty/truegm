@@ -52,7 +52,9 @@ module FantasyData
       matchups = @fantasy_footbal_nerd_party.nfl_schedule
 
       matchups.each do |matchup|
-        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId, week: matchup.gameWeek)
+        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId,
+                                                  week: matchup.gameWeek,
+                                                  year: ENV['current_year'])
 
         db_matchup.home_team = NflTeam.find_by(code: matchup.homeTeam)
         db_matchup.away_team = NflTeam.find_by(code: matchup.awayTeam)

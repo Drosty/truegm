@@ -9,6 +9,7 @@ EvokeTruegmRails::Application.routes.draw do
   resources :leagues, :only => [:show, :index]  do
     resources :nfl_players, :only => [:index, :show], :path => 'player'
 
+    get 'schedule/:week' => "schedule#index", as: 'schedule'
 # I am removing these from the project
 # These were initially going to be used as a way to keep communication
 # for the group open and flowing, but I have decided to use the

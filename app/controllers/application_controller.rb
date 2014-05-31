@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
+  helper_method :current_week
+
   before_filter :configure_devise_params, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -17,6 +19,14 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     leagues_path
+  end
+
+  def current_week
+    Rails.cache.fetch(:current_week) do
+      binding.pry
+      party = FantasyFootballNerdParty.new(ENV['ffn_api_key'])
+      party.current_week
+    end
   end
 
 private
