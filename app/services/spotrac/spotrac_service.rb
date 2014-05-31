@@ -52,9 +52,20 @@ module Spotrac
         player.salary = salary_node.text.delete(',').strip
         player.save
       end
+
+      save_all_teams_updating_their_total_salary
     end
 
   private
+
+    def save_all_teams_updating_their_total_salary
+      # calling save so that it will update
+      # each fantasy teams overal total salary
+      # just in case someones salary changed
+      Teams.all.each do |t|
+        t.save
+      end
+    end
 
     def self.set_nfl_player_spotrac_url(full_name, position, href, nfl_team)
       player = NflPlayer.fuzzy_find_by_spotrac(full_name, position.downcase, nfl_team)
