@@ -29,31 +29,31 @@ class Stat < ActiveRecord::Base
     end
   end
 
-  def summary position = "qb"
+  def summary position = "QB"
     case position
-    when "qb"
+    when "QB"
       summary = "Week #{week} - #{total_points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
-    when "rb"
+    when "RB"
       summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
-    when "wr", "te"
+    when "WR", "TE"
       summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
-    when "def"
+    when "DEF"
       summary = "Week #{week} - #{total_points} fantasy pts"
     end
 
     summary
   end
 
-  def position_specific_stats position = "qb"
+  def position_specific_stats position = "QB"
     stats = []
     case position
-    when "qb"
+    when "QB"
       stats = get_stats_for_qb
-    when "rb"
+    when "RB"
       stats = get_stats_for_rb
-    when "wr", "te"
+    when "WR", "TE"
       stats = get_stats_for_wr_or_te
-    when "def"
+    when "DEF"
       stats = get_stats_for_def
     end
 
@@ -109,7 +109,7 @@ class Stat < ActiveRecord::Base
 
     def defensive_points_allowed_points
       return 0 if nfl_player.nil?
-      return 0 unless nfl_player.position == "def"
+      return 0 unless nfl_player.position == "DEF"
 
       if self.points_allowed.to_i <= 6
         return 10
