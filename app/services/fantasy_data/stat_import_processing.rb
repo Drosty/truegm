@@ -59,6 +59,7 @@ module FantasyData
       db_stat.receiving_yards = stat_info.recYards
       db_stat.receiving_average = stat_info.recAvg
       db_stat.receiving_long = stat_info.longRec
+      db_stat.receiving_touchdowns = stat_info.recTD
 
       db_stat.save
     end
