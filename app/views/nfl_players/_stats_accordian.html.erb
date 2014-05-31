@@ -3,12 +3,12 @@
     <div class="accordion-group">
       <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats-<%= year %>" href="#year-<%=stat.year %>-week-<%= stat.week %>">
-          <%= stat.summary(position) %>
+          <%= stat.summary %>
         </a>
       </div>
       <div id="year-<%=stat.year %>-week-<%= stat.week %>" class="accordion-body collapse">
         <div class="accordion-inner">
-          <%= render :partial => "stat_table", :locals => { :stat => stat, :position => position } %>
+          <%= render :partial => "stat_table", :locals => { :stat => stat } %>
         </div>
       </div>
     </div>

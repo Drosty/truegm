@@ -21,7 +21,7 @@
     </div>
     <% view_model.stats_by_year.each do |year| %>
       <div class="tab-pane fade in" id="<%= year[0] %>">
-        <%= render :partial => "stats_accordian", :locals => { :year => year[0], :stats => year[1], :position => view_model.player_position } %>
+        <%= render :partial => "stats_accordian", :locals => { :year => year[0], :stats => year[1] } %>
       </div>
     <% end %>
     <div class="tab-pane fade in" id="actions">
