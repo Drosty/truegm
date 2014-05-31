@@ -64,6 +64,8 @@ module Spotrac
     end
 
     def self.set_spotrac_team_url(href, team_name)
+      puts "GOING TO HAVE TO UPDATE THIS WHOLE CLASS!!!!"
+
       parts = team_name.split
 
       mascot = parts.last
@@ -81,6 +83,7 @@ module Spotrac
       team.spotrac_url = href
       team.save
     end
+
   end
 
 end

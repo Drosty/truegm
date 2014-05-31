@@ -6,6 +6,8 @@ class Stat < ActiveRecord::Base
 
   belongs_to :nfl_player
 
+  default_scope { includes(:nfl_player) }
+
   def total_points
     @total_points ||= begin
       [
@@ -29,31 +31,31 @@ class Stat < ActiveRecord::Base
     end
   end
 
-  def summary position = "qb"
-    case position
-    when "qb"
+  def summary
+    case nfl_player.position
+    when "QB"
       summary = "Week #{week} - #{total_points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
-    when "rb"
+    when "RB"
       summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
-    when "wr", "te"
-      summary = "Week #{week} - #{total_points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
-    when "def"
+    when "WR", "TE"
+      summary = "Week #{week} - #{total_points} pts - #{receiving_yards} yds / #{receiving_touchdowns} tds"
+    when "DEF"
       summary = "Week #{week} - #{total_points} fantasy pts"
     end
 
     summary
   end
 
-  def position_specific_stats position = "qb"
+  def position_specific_stats
     stats = []
-    case position
-    when "qb"
+    case nfl_player.position
+    when "QB"
       stats = get_stats_for_qb
-    when "rb"
+    when "RB"
       stats = get_stats_for_rb
-    when "wr", "te"
+    when "WR", "TE"
       stats = get_stats_for_wr_or_te
-    when "def"
+    when "DEF"
       stats = get_stats_for_def
     end
 
@@ -86,11 +88,11 @@ class Stat < ActiveRecord::Base
 
     def get_stats_for_wr_or_te
       {
+        :receptions => self.receptions,
         :receiving_yards => self.receiving_yards,
         :receiving_touchdowns => self.receiving_touchdowns,
         :rushing_yards => self.rushing_yards,
         :rushing_touchdown => self.rushing_touchdowns,
-        :receptions => self.receptions,
         :fumbles_lost => self.fumbles_lost
       }
     end
@@ -109,7 +111,7 @@ class Stat < ActiveRecord::Base
 
     def defensive_points_allowed_points
       return 0 if nfl_player.nil?
-      return 0 unless nfl_player.position == "def"
+      return 0 unless nfl_player.position == "DEF"
 
       if self.points_allowed.to_i <= 6
         return 10

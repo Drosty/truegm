@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_filter :ensure_user_logged_in
   before_filter :set_current_team
   before_filter :set_current_league
 

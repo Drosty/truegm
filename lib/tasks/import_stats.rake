@@ -1,13 +1,24 @@
-namespace :import_data do
+namespace :import do
   desc "Scrape salaries off of Spotrac.com"
 
-  task :offense => :environment do
-    FantasyData::ImportService.import_offense_files
+  task :stats => :environment do
+    get_import_service().import_stats
   end
 
-  task :defense => :environment do
-    FantasyData::ImportService.import_defensive_files
+  task :nfl_teams => :environment do
+    get_import_service().import_nfl_team_data
   end
 
+  task :nfl_players => :environment do
+    get_import_service().import_nfl_player_data nil
+  end
+
+  task :nfl_schedule => :environment do
+    get_import_service().import_nfl_schedule
+  end
+
+  def get_import_service
+    FantasyData::ImportService.new(FantasyFootballNerdParty.new)
+  end
 
 end

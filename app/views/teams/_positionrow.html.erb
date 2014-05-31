@@ -3,5 +3,5 @@
   <td><%= link_to player.full_name,
           league_nfl_player_path(@current_league, player)  %></td>
   <td><%= number_to_currency player.salary, precision: 0 %></td>
-  <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_abbreviation %></td>
+  <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_code %></td>
 </tr>

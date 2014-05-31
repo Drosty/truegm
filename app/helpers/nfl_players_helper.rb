@@ -10,7 +10,7 @@ module NflPlayersHelper
   def display_team_name player
     display = ""
     if player.position != "def" && player.nfl_team != nil
-      display = "#{player.nfl_team.location} #{player.nfl_team.mascot}"
+      display = "#{player.nfl_team_full_name}"
     elsif player.position != "def"
       display = "Free Agent"
     end

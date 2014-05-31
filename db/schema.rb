@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526233106) do
+ActiveRecord::Schema.define(version: 20140530202511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,18 @@ ActiveRecord::Schema.define(version: 20140526233106) do
   add_index "matchups", ["away_team_id"], name: "matchup_away_team_fk", using: :btree
   add_index "matchups", ["home_team_id"], name: "matchup_home_team_fk", using: :btree
 
+  create_table "nfl_matchups", force: true do |t|
+    t.integer  "import_game_id"
+    t.integer  "week"
+    t.integer  "year"
+    t.datetime "game_date"
+    t.integer  "away_team_id"
+    t.integer  "home_team_id"
+    t.string   "tv_station"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nfl_players", force: true do |t|
     t.integer  "nfl_team_id"
     t.string   "first_name"
@@ -72,6 +84,12 @@ ActiveRecord::Schema.define(version: 20140526233106) do
     t.string   "spotrac_url"
     t.string   "full_name"
     t.integer  "nfl_data_id", limit: 8
+    t.string   "jersey"
+    t.string   "height"
+    t.string   "weight"
+    t.datetime "dob"
+    t.string   "college"
+    t.boolean  "active"
   end
 
   add_index "nfl_players", ["nfl_data_id"], name: "index_nfl_players_on_nfl_data_id", unique: true, using: :btree
@@ -85,12 +103,12 @@ ActiveRecord::Schema.define(version: 20140526233106) do
   add_index "nfl_players_teams", ["team_id", "nfl_player_id"], name: "by_team_and_player", unique: true, using: :btree
 
   create_table "nfl_teams", force: true do |t|
-    t.string   "location"
-    t.string   "mascot"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "spotrac_url"
-    t.string   "abbreviation"
+    t.string   "code"
+    t.string   "full_name"
+    t.string   "short_name"
   end
 
   create_table "owners", force: true do |t|
@@ -146,6 +164,21 @@ ActiveRecord::Schema.define(version: 20140526233106) do
     t.integer "defensive_tds"
     t.integer "return_tds"
     t.integer "points_allowed"
+    t.string  "opponent"
+    t.string  "final_score"
+    t.boolean "played"
+    t.boolean "started"
+    t.integer "passing_completions"
+    t.integer "passing_attempts"
+    t.float   "passing_percentage"
+    t.float   "average_pass_yards"
+    t.float   "qb_rating"
+    t.integer "rushing_attempts"
+    t.float   "rushing_average"
+    t.integer "fumbles"
+    t.integer "long_run"
+    t.float   "receiving_average"
+    t.integer "receiving_long"
   end
 
   add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree

@@ -69,5 +69,7 @@ gem 'coveralls', require: false
 
 gem 'pry'
 
+gem 'httparty'
+
 # for tracking salary history
 gem 'paper_trail', '~> 3.0.2'
