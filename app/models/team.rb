@@ -62,7 +62,7 @@ private
   end
 
   def get_players_by_position position
-    nfl_players.select { |p| p.position == position.upcase }
+    nfl_players.select { |p| p.position == position.upcase || p.position == position.downcase }
   end
 
 end
