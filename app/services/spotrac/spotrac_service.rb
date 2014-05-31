@@ -21,7 +21,7 @@ module Spotrac
 
     def self.process_spotrac_player_data
       NflTeam.all.each do |nfl_team|
-        puts "processing: " + nfl_team.location + " " + nfl_team.mascot + " " + nfl_team.spotrac_url
+        puts "processing: " + nfl_team.full_name + " " + nfl_team.spotrac_url
 
         nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
         nfl_page.css("table#teamTable").css("tr").each do |player|
