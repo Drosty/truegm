@@ -16,6 +16,8 @@ class ScheduleController < ApplicationController
     nfl_matchups = NflMatchup.where(week: week, year: year)
     fantasy_matchups = Matchup.where(week: week, year: year)
 
+    view_model = ScheduleViewModel.new(nfl_matchups, fantasy_matchups)
+    render :locals => { :view_model => view_model }
   end
 
 end
