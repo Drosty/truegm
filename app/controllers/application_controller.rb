@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
     leagues_path
   end
 
+  def current_week
+    Rails.cache.fetch(:current_week) do
+      binding.pry
+      party = FantasyFootballNerdParty.new(ENV['ffn_api_key'])
+      party.current_week
+    end
+  end
+
 private
 
   def user_not_authorized
