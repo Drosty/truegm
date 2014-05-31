@@ -71,5 +71,7 @@ gem 'pry'
 
 gem 'httparty'
 
+gem 'dotenv-rails'
+
 # for tracking salary history
 gem 'paper_trail', '~> 3.0.2'
