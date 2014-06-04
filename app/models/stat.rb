@@ -8,6 +8,8 @@ class Stat < ActiveRecord::Base
 
   default_scope { includes(:nfl_player) }
 
+  validates_presence_of :week, :year, :nfl_player_id
+
   def total_points
     @total_points ||= begin
       [
