@@ -17,18 +17,6 @@ namespace :import do
     get_import_service().import_nfl_schedule
   end
 
-  task :generate_fake_salaries => :environment do
-    NflPlayer.all.each do |player|
-      player.salary = rand(250000..8000000).to_s
-      player.save
-    end
-
-    # save all teams so the team salary is updated
-    Team.all.each do |team|
-      team.save
-    end
-  end
-
   def get_import_service
     FantasyData::ImportService.new(FantasyFootballNerdParty.new)
   end
