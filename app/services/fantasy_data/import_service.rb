@@ -59,7 +59,9 @@ module FantasyData
         db_matchup.home_team = NflTeam.find_by(code: matchup.homeTeam)
         db_matchup.away_team = NflTeam.find_by(code: matchup.awayTeam)
         db_matchup.tv_station = matchup.tvStation
-        db_matchup.game_date = Time.parse(matchup.gameDate + " " + matchup.gameTimeET).utc
+
+        Time.zone = 'Eastern Time (US & Canada)'
+        db_matchup.game_date = Time.zone.parse(matchup.gameDate + " " + matchup.gameTimeET).utc
 
         db_matchup.save
       end
