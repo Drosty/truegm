@@ -6,8 +6,6 @@ class Stat < ActiveRecord::Base
 
   belongs_to :nfl_player
 
-  default_scope { includes(:nfl_player) }
-
   validates_presence_of :week, :year, :nfl_player_id
 
   def total_points
