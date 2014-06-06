@@ -1,12 +1,9 @@
 <%- model_class = ForumTopic -%>
 <div class="row">
-  <div class="span9">
-      <h1><%= t 'forum_topic.message' %></h1>
-  </div>
-  <div class="span3">
-    <%= link_to t('.new', :default => t("helpers.links.new")),
+  <div class="span12">
+    <%= link_to "New Forum Topic",
             new_league_forum_topic_path(@current_league),
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary pull-right' %>
   </div>
 </div>
 <table class="table table-striped">

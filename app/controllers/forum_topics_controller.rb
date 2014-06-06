@@ -1,9 +1,15 @@
 class ForumTopicsController < ApplicationController
   before_filter :ensure_user_logged_in
   before_filter :set_current_league
+  before_filter :set_forum_topic, :except => [:index, :create]
 
   def set_current_league
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
+  end
+
+  def set_forum_topic
+    @forum_topic = ForumTopic.new
+    @forum_topic = ForumTopic.find(params[:id]) if params[:id]
   end
 
   # GET /forum_topics
@@ -34,23 +40,16 @@ class ForumTopicsController < ApplicationController
   # GET /forum_topics/new
   # GET /forum_topics/new.json
   def new
-    binding.pry
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @forum_topic }
     end
   end
 
-  # GET /forum_topics/1/edit
-  def edit
-    if @forum_topic.league_id != @current_league.id
-      redirect_to league_forum_topics_path(@current_league), notice: 'Could not find Topic'
-    end
-  end
-
   # POST /forum_topics
   # POST /forum_topics.json
   def create
+    @forum_topic = ForumTopic.new(params[:forum_topic])
     @forum_topic.league = @current_league
 
     respond_to do |format|
@@ -64,28 +63,4 @@ class ForumTopicsController < ApplicationController
     end
   end
 
-  # PUT /forum_topics/1
-  # PUT /forum_topics/1.json
-  def update
-    respond_to do |format|
-      if @forum_topic.update_attributes(params[:forum_topic])
-        format.html { redirect_to league_forum_topics_path(@current_league), notice: 'Forum topic was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render "edit" }
-        format.json { render json: @forum_topic.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /forum_topics/1
-  # DELETE /forum_topics/1.json
-  def destroy
-    @forum_topic.destroy
-
-    respond_to do |format|
-      format.html { redirect_to league_forum_topics_path(@current_league) }
-      format.json { head :no_content }
-    end
-  end
 end
