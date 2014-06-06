@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530202511) do
+ActiveRecord::Schema.define(version: 20140606010222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,24 @@ ActiveRecord::Schema.define(version: 20140530202511) do
   end
 
   add_index "external_links", ["user_id"], name: "link_url_fk", using: :btree
+
+  create_table "forum_posts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_topic_id"
+    t.text     "post_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_topics", force: true do |t|
+    t.integer  "league_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forumposts_count", default: 0
+    t.integer  "user_id"
+  end
 
   create_table "leagues", force: true do |t|
     t.string   "name"

@@ -38,6 +38,7 @@
               </ul>
             </li>
 
+            <li><%= link_to "Forum", league_forum_topics_path(@current_league) %></li>
             <li><%= link_to "Schedules", league_schedule_path(@current_league, current_week) %></li>
             <li><%= link_to "Players", league_nfl_players_path(@current_league) %></li>
           <% end %>

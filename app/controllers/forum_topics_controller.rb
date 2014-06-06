@@ -1,11 +1,9 @@
 class ForumTopicsController < ApplicationController
-  load_and_authorize_resource
-
-  before_filter :set_current_league, only: [:index, :show, :edit, :new, :create, :update]
+  before_filter :ensure_user_logged_in
+  before_filter :set_current_league
 
   def set_current_league
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
-    @current_team = Team.find(params[:id]) if params[:id].present?
   end
 
   # GET /forum_topics
@@ -36,6 +34,7 @@ class ForumTopicsController < ApplicationController
   # GET /forum_topics/new
   # GET /forum_topics/new.json
   def new
+    binding.pry
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @forum_topic }

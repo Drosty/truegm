@@ -1,7 +1,5 @@
 class ForumPostsController < ApplicationController
-  load_and_authorize_resource
-
-  before_filter :authenticate_user!
+  before_filter :ensure_user_logged_in
   before_filter :set_current_league
 
   def set_current_league
