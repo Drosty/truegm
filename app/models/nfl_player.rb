@@ -34,6 +34,12 @@ class NflPlayer < ActiveRecord::Base
     return "#{first_name} #{last_name}"
   end
 
+  def week_nfl_opponent_code week
+    opponent, at_or_home = self.nfl_team.week_opponent_and_home_or_away(week)
+    return "#{at_or_home} #{opponent.code}" unless opponent.nil?
+    return "BYE"
+  end
+
   def free_agent? league_id
     fantasy_team(league_id).nil?
   end

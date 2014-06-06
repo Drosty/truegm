@@ -1,7 +1,12 @@
 <tr>
-  <td><%= player.position.upcase %></td>
-  <td><%= link_to player.full_name,
-          league_nfl_player_path(@current_league, player)  %></td>
-  <td><%= number_to_currency player.salary, precision: 0 %></td>
-  <td><%= player.nfl_team == nil ? "FA" : player.nfl_team_code %></td>
+  <td>
+    <%= link_to player.full_name,
+          league_nfl_player_path(@current_league, player)  %><br />
+    <%= player.position.upcase %> - <%= player.nfl_team == nil ? "FA" : player.nfl_team_code %><br />
+    <%= number_to_currency player.salary, precision: 0 %>
+  </td>
+  <td>
+    <%= player.week_nfl_opponent_code(current_week) %> <br />
+    43.25 pts
+  </td>
 </tr>
