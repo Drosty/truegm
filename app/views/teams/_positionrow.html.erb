@@ -6,7 +6,7 @@
     <%= number_to_currency player.salary, precision: 0 %>
   </td>
   <td>
-    <%= player.week_nfl_opponent_code(current_week) %> <br />
-    43.25 pts
+    <%= matchup_for_table_row(player.nfl_team, player.week_nfl_matchup(current_week)) %> <br />
+    <%= player.points_in_week(current_week) %> pts
   </td>
 </tr>

@@ -7,20 +7,14 @@ class NflTeam < ActiveRecord::Base
 
   # this will return the NFL Team that this NFL Team is player and then
   # if it 'vs' or 'at' as a string
-  def week_opponent_and_home_or_away week
+  def week_nfl_matchup week
     year = ENV["current_year"]
 
     matchup = home_matchups.where(year: year, week: week).first
-    unless matchup.nil?
-      return matchup.away_team, "vs"
-    end
+    return matchup unless matchup.nil?
 
     matchup = away_matchups.where(year: year, week: week).first
-    unless matchup.nil?
-      return matchup.home_team, "at"
-    end
-
-    return nil, nil
+    return matchup
   end
 
 end

@@ -34,10 +34,15 @@ class NflPlayer < ActiveRecord::Base
     return "#{first_name} #{last_name}"
   end
 
-  def week_nfl_opponent_code week
-    opponent, at_or_home = self.nfl_team.week_opponent_and_home_or_away(week)
-    return "#{at_or_home} #{opponent.code}" unless opponent.nil?
-    return "BYE"
+  def week_nfl_matchup week
+    return self.nfl_team.week_nfl_matchup(week)
+  end
+
+  def points_in_week week
+    year = ENV["current_year"]
+    stat = self.stats.where(year: year, week: week).first
+    return stat.total_points unless stat.nil?
+    return 0
   end
 
   def free_agent? league_id
