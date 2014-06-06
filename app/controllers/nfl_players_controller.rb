@@ -35,7 +35,7 @@ class NflPlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nfl_player
-      @nfl_player = NflPlayer.find(params[:id])
+      @nfl_player = NflPlayer.includes(:stats).find(params[:id])
     end
 
     def set_current_league
