@@ -1,8 +1,11 @@
 <h1><%= t 'forum_post.new_message' %></h1>
 <h3>Posting in topic: <%= @current_topic.name %></h3>
-<hr />
 
-<h4>Here are the most recent posts</h4>
+  <% if !@recent_posts.nil? && @recent_posts.any? %>
+  <hr />
+  <h4>Here are the most recent posts</h4>
+  <% end %>
+
   <% @recent_posts.each do |post| %>
     <div class="row">
       <div class="span12">
