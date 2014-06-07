@@ -21,7 +21,9 @@ module SiteMaintenance
     end
 
     def process_stat_for_league stat, league
-
+      processed_stat = ProcessedStat.find_or_create_by(stat_id: stat.id, league_id: league.id)
+      processed_stat.value = stat.calculate_stat league
+      processed_stat.save
     end
 
   end
