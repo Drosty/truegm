@@ -64,6 +64,31 @@ class Stat < ActiveRecord::Base
 
   private
 
+    # This will calculate the stats value based on the
+    # leagues settings
+    def calculate_stat league
+      @total_points ||= begin
+        [
+          (passing_yards.to_f / 25).round(2),
+          passing_touchdowns.to_i * 5,
+          -(interceptions.to_i * 2),
+          -(fumbles_lost.to_i * 2),
+          rushing_yards.to_f / 10.0,
+          rushing_touchdowns.to_i * 6,
+          receiving_yards.to_f / 10.0,
+          receiving_touchdowns.to_i * 6,
+          receptions.to_i,
+
+          defensive_interceptions.to_i * 2,
+          fumbles_recovered.to_i * 2,
+          sacks.to_i * 1,
+          safties.to_i * 2,
+          defensive_tds.to_i * 6,
+          defensive_points_allowed_points
+        ].sum.round(2)
+      end
+    end
+
     def get_stats_for_qb
       {
         :passing_yards => self.passing_yards,
