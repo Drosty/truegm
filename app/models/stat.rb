@@ -5,6 +5,9 @@ class Stat < ActiveRecord::Base
                   :year, :week, :nfl_player_id
 
   belongs_to :nfl_player
+  has_many :processed_stats
+
+  default_scope -> { includes(:processed_stats) }
 
   validates_presence_of :week, :year, :nfl_player_id
 
