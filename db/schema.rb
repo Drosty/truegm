@@ -65,25 +65,26 @@ ActiveRecord::Schema.define(version: 20140607132756) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "salary_cap"
-    t.float    "passing_yard_points"
-    t.integer  "passing_touchdown_points"
-    t.float    "passing_interception_points"
-    t.float    "fumbles_lost_points"
-    t.float    "rushing_yards_points"
-    t.integer  "rushing_touchdown_points"
-    t.float    "receiving_yards_points"
-    t.integer  "receiving_touchdown_points"
-    t.float    "points_per_reception_points"
-    t.float    "defensive_interception_points"
-    t.float    "defensive_fumble_recovered_points"
-    t.integer  "defensive_sack_points"
-    t.integer  "defensive_saftey_points"
-    t.integer  "defensive_touchdown_points"
-    t.float    "defensive_points_allowed_under_7_points"
-    t.float    "defensive_points_allowed_under_14_points"
-    t.float    "defensive_points_allowed_under_21_points"
-    t.float    "defensive_points_allowed_under_28_points"
-    t.float    "defensive_points_allowed_under_35_points"
+    t.float    "passing_yard_points",                              default: 0.04
+    t.integer  "passing_touchdown_points",                         default: 5
+    t.float    "passing_interception_points",                      default: -2.0
+    t.float    "fumbles_lost_points",                              default: -2.0
+    t.float    "rushing_yards_points",                             default: 0.1
+    t.integer  "rushing_touchdown_points",                         default: 6
+    t.float    "receiving_yards_points",                           default: 0.1
+    t.integer  "receiving_touchdown_points",                       default: 6
+    t.float    "points_per_reception_points",                      default: 1.0
+    t.float    "defensive_interception_points",                    default: 2.0
+    t.float    "defensive_fumble_recovered_points",                default: 2.0
+    t.integer  "defensive_sack_points",                            default: 1
+    t.integer  "defensive_saftey_points",                          default: 2
+    t.integer  "defensive_touchdown_points",                       default: 6
+    t.float    "defensive_points_allowed_under_7_points",          default: 10.0
+    t.float    "defensive_points_allowed_under_14_points",         default: 7.0
+    t.float    "defensive_points_allowed_under_21_points",         default: 1.0
+    t.float    "defensive_points_allowed_under_28_points",         default: 0.0
+    t.float    "defensive_points_allowed_under_35_points",         default: -1.0
+    t.float    "defensive_points_allowed_equal_or_over_35_points", default: -4.0
   end
 
   create_table "matchups", force: true do |t|

@@ -3,7 +3,8 @@ namespace :site do
 
   # pre-populate stats for all players and all stats
   task :process_stats => :environment do
-    
+    runner = SiteMaintenance::ProcessStatsService.new
+    runner.process
   end
 
 end

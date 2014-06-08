@@ -13,7 +13,9 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
-    stats = @nfl_player.stats.where("year > ?", Time.now.year - 3)
+    stats = Stat.eager_load(:processed_stats)
+                .where(nfl_player_id: @nfl_player.id)
+                .where("year > ?", Time.now.year - 3)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
 
     render :locals => { :view_model => view_model }
