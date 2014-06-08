@@ -38,10 +38,10 @@ class NflPlayer < ActiveRecord::Base
     return self.nfl_team.week_nfl_matchup(week)
   end
 
-  def points_in_week week
+  def points_in_week week, league
     year = ENV["current_year"]
     stat = self.stats.where(year: year, week: week).first
-    return stat.total_points unless stat.nil?
+    return stat.total_points(league) unless stat.nil?
     return 0
   end
 

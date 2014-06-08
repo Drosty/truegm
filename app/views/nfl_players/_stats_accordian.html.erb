@@ -3,7 +3,7 @@
     <div class="accordion-group">
       <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#player-stats-<%= year %>" href="#year-<%=stat.year %>-week-<%= stat.week %>">
-          <%= stat.summary %>
+          <%= stat.summary(@current_league) %>
         </a>
       </div>
       <div id="year-<%=stat.year %>-week-<%= stat.week %>" class="accordion-body collapse">

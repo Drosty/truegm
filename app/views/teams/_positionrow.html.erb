@@ -7,6 +7,6 @@
   </td>
   <td>
     <%= matchup_for_table_row(player.nfl_team, player.week_nfl_matchup(current_week)) %> <br />
-    <%= player.points_in_week(current_week) %> pts
+    <%= player.points_in_week(current_week, @current_league) %> pts
   </td>
 </tr>

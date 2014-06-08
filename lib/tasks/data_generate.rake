@@ -1,5 +1,5 @@
 namespace :generate do
-  desc "Scrape salaries off of Spotrac.com"
+  desc "Generate Fake Data when needed"
 
   task :fake_salaries => :environment do
     service = FantasyData::DataGeneratorService.new

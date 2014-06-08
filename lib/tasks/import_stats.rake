@@ -1,5 +1,5 @@
 namespace :import do
-  desc "Scrape salaries off of Spotrac.com"
+  desc "Import Data from Fantasy Football Nerd API"
 
   task :stats => :environment do
     get_import_service().import_stats
