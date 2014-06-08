@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607131030) do
+ActiveRecord::Schema.define(version: 20140607132756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,25 @@ ActiveRecord::Schema.define(version: 20140607131030) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "salary_cap"
+    t.float    "passing_yard_points"
+    t.integer  "passing_touchdown_points"
+    t.float    "passing_interception_points"
+    t.float    "fumbles_lost_points"
+    t.float    "rushing_yards_points"
+    t.integer  "rushing_touchdown_points"
+    t.float    "receiving_yards_points"
+    t.integer  "receiving_touchdown_points"
+    t.float    "points_per_reception_points"
+    t.float    "defensive_interception_points"
+    t.float    "defensive_fumble_recovered_points"
+    t.integer  "defensive_sack_points"
+    t.integer  "defensive_saftey_points"
+    t.integer  "defensive_touchdown_points"
+    t.float    "defensive_points_allowed_under_7_points"
+    t.float    "defensive_points_allowed_under_14_points"
+    t.float    "defensive_points_allowed_under_21_points"
+    t.float    "defensive_points_allowed_under_28_points"
+    t.float    "defensive_points_allowed_under_35_points"
   end
 
   create_table "matchups", force: true do |t|
