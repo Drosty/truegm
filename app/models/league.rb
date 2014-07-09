@@ -1,5 +1,5 @@
 class League < ActiveRecord::Base
-  attr_accessible :description, :name, :tagline
+  attr_accessible :description, :name, :tagline, :salary_cap
 
   has_many :teams
   has_many :forum_topics

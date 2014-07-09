@@ -1,11 +1,7 @@
-<%= simple_form_for :search_params, { url: league_nfl_players_path(@current_league), method: :get } do |f| %>
-  <%= f.input :email %>
+<%= form_tag league_nfl_players_path(@current_league), method: :get do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
 
-    <%= check_box_tag 'positions[]', 'qb' -%>
-    <%= "QB" -%>
-
-    <%= check_box_tag 'positions[]', 'wr' -%>
-    <%= "WR" -%>
-
-  <%= f.button :submit, "Search" %>
+  <%= text_field_tag :player_name, params[:player_name] %>
+  <%= submit_tag "Search", :name => nil %>
 <% end %>

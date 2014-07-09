@@ -29,6 +29,14 @@ class NflPlayer < ActiveRecord::Base
                               end
                             }
 
+  def self.search(name)
+    if name
+      where('lower(first_name) LIKE ?', "%#{name.downcase}%")
+    else
+      scoped
+    end
+  end
+
   def full_name
     return read_attribute(:full_name) unless read_attribute(:full_name).nil?
     return "#{first_name} #{last_name}"

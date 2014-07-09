@@ -11,7 +11,7 @@ u.is_admin = false
 u.save
 
 # Create a league for us to use
-League.find_or_create_by(name: "First Test League", description: "Test league from seed data", tagline: "test", salary: "32000000")
+League.find_or_create_by(name: "First Test League", description: "Test league from seed data", tagline: "test", salary_cap: "32000000")
 
 team_list = [
   [ "Team Uno", "tagline"],
