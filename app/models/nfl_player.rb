@@ -21,7 +21,7 @@ class NflPlayer < ActiveRecord::Base
   scope :positions, ->(pos) {
                               case pos.downcase
                               when 'all'
-                                scoped
+                                all
                               when 'flex'
                                 where(:position => ['RB', 'WR'])
                               else
@@ -29,11 +29,23 @@ class NflPlayer < ActiveRecord::Base
                               end
                             }
 
+  def self.by_status(status, league)
+    case status.downcase
+    when 'fa'
+      includes(:teams).where("teams.id is null or teams.id not in (?)", league.teams.map(&:id)).references(:teams)
+    when 'owned'
+      includes(:teams).where({:teams => {:id => league.teams.map(&:id)}})
+    else
+      # all will fall to here
+      all
+    end
+  end
+
   def self.search(name)
     if name
       where('lower(first_name) LIKE ?', "%#{name.downcase}%")
     else
-      scoped
+      all
     end
   end
 

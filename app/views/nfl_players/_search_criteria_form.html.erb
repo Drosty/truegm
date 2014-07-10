@@ -3,6 +3,11 @@
   <%= hidden_field_tag :sort, params[:sort] %>
 
   <p>
+    <%= text_field_tag :player_name, params[:player_name], placeholder: 'Search by Player Name' %>
+  </p>
+
+  <p>
+    <span>Filter by Position</span>
     <div class="radio">
       <%= radio_button_tag 'position', 'qb', params[:position] == 'qb' %>
       <%= label_tag "position_qb", "QB" %>
@@ -37,8 +42,23 @@
       <%= radio_button_tag 'position', 'k', params[:position] == 'k' %>
       <%= label_tag "position_k", "K" %>
     </div>
+  </p>
   <p>
-    <%= text_field_tag :player_name, params[:player_name], placeholder: 'Search by Player Name' %>
+    <span>Filter by Status</span>
+    <div class="radio">
+      <%= radio_button_tag 'own_status', 'fa', params[:own_status] == 'fa' || params[:own_status].blank? %>
+      <%= label_tag "own_status_fa", "Free Agents" %>
+    </div>
+
+    <div class="radio">
+      <%= radio_button_tag 'own_status', 'owned', params[:own_status] == 'owned' %>
+      <%= label_tag "own_status_owned", "Players Owned" %>
+    </div>
+
+    <div class="radio">
+      <%= radio_button_tag 'own_status', 'all', params[:own_status] == 'all' %>
+      <%= label_tag "own_status_all", "All Players" %>
+    </div>
   </p>
 
   <%= submit_tag "Search", :name => nil, class: "btn btn-default" %>

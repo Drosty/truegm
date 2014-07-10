@@ -10,8 +10,12 @@ class NflPlayersController < ApplicationController
     position = params[:position]
     position = "all" if position.blank?
 
+    status = params[:own_status]
+    status = "fa" if status.blank?
+
     @nfl_players = NflPlayer.search(params[:player_name])
                             .positions(position)
+                            .by_status(status, @current_league)
                             .order(sort_column + " " + sort_direction)
                             .paginate(:page => params[:page])
   end
