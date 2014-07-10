@@ -2,6 +2,29 @@
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
 
+  <%= radio_button_tag 'position', 'qb', params[:position] == 'qb' -%>
+  <%= "QB" -%>
+
+  <%= radio_button_tag 'position', 'rb', params[:position] == 'rb' -%>
+  <%= "RB" -%>
+
+  <%= radio_button_tag 'position', 'wr', params[:position] == 'wr' -%>
+  <%= "WR" -%>
+
+  <%= radio_button_tag 'position', 'te', params[:position] == 'te' -%>
+  <%= "TE" -%>
+
+  <%= radio_button_tag 'position', 'flex', params[:position] == 'flex' -%>
+  <%= "FLEX" -%>
+
+  <%= radio_button_tag 'position', 'def', params[:position] == 'def' -%>
+  <%= "DEF" -%>
+
+  <%= radio_button_tag 'position', 'k', params[:position] == 'k' -%>
+  <%= "K" -%>
+
+
   <%= text_field_tag :player_name, params[:player_name] %>
   <%= submit_tag "Search", :name => nil %>
+  <%= link_to "Clear Criteria", league_nfl_players_path(@current_league) %>
 <% end %>

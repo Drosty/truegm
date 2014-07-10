@@ -7,7 +7,13 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    @nfl_players = NflPlayer.search(params[:player_name]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    position = params[:position]
+    position = "all" if position.blank?
+
+    @nfl_players = NflPlayer.search(params[:player_name])
+                            .positions(position)
+                            .order(sort_column + " " + sort_direction)
+                            .paginate(:page => params[:page])
   end
 
   # GET /nfl_players/1
