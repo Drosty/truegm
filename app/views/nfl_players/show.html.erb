@@ -1,5 +1,5 @@
 <h3><%= view_model.player.position.upcase %>&nbsp;<%= view_model.player.full_name %></h3>
-<p>Owned by: <%= truncate(view_model.player.fantasy_team_name(@current_league.id)) %></p>
+<p>Owned by: <%= link_to_players_owner_team view_model.player %></p>
 
 <div class="bs-component">
   <ul class="nav nav-tabs">

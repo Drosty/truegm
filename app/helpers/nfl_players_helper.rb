@@ -17,4 +17,11 @@ module NflPlayersHelper
     display
   end
 
+  def link_to_players_owner_team player
+    player_fantasy_team = player.fantasy_team(@current_league.id)
+    return "FA" if player_fantasy_team.nil?
+
+    link_to player_fantasy_team.name, team_path(player_fantasy_team)
+  end
+
 end

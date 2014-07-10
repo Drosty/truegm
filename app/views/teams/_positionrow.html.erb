@@ -2,7 +2,7 @@
   <td>
     <%= link_to player.full_name,
           league_nfl_player_path(@current_league, player)  %><br />
-    <%= player.position.upcase %> - <%= player.nfl_team == nil ? "FA" : player.nfl_team_code %><br />
+    <%= position_team_display_for_player player %><br />
     <%= number_to_currency player.salary, precision: 0 %>
   </td>
   <td>
