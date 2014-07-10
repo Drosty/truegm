@@ -5,9 +5,16 @@
   <p>
     <%= text_field_tag :player_name, params[:player_name], placeholder: 'Search by Player Name' %>
   </p>
-
   <p>
-    <span>Filter by Position</span>
+    Filter by
+  </p>
+  <div class="pull-left search-box">
+    <span>Position</span>
+    <div class="radio">
+      <%= radio_button_tag 'position', 'all', params[:position] == 'all' || params[:position].blank? %>
+      <%= label_tag "position_all", "All" %>
+    </div>
+
     <div class="radio">
       <%= radio_button_tag 'position', 'qb', params[:position] == 'qb' %>
       <%= label_tag "position_qb", "QB" %>
@@ -42,9 +49,9 @@
       <%= radio_button_tag 'position', 'k', params[:position] == 'k' %>
       <%= label_tag "position_k", "K" %>
     </div>
-  </p>
-  <p>
-    <span>Filter by Status</span>
+  </div>
+  <div class="pull-left search-box">
+    <span>Status</span>
     <div class="radio">
       <%= radio_button_tag 'own_status', 'fa', params[:own_status] == 'fa' || params[:own_status].blank? %>
       <%= label_tag "own_status_fa", "Free Agents" %>
@@ -59,8 +66,9 @@
       <%= radio_button_tag 'own_status', 'all', params[:own_status] == 'all' %>
       <%= label_tag "own_status_all", "All Players" %>
     </div>
-  </p>
-
-  <%= submit_tag "Search", :name => nil, class: "btn btn-default" %>
-  <%= link_to "Clear Criteria", league_nfl_players_path(@current_league), class: "btn btn-default" %>
+  </div>
+  <div class="clearfix">
+    <%= submit_tag "Search", :name => nil, class: "btn btn-default" %>
+    <%= link_to "Clear Criteria", league_nfl_players_path(@current_league), class: "btn btn-default" %>
+  </div>
 <% end %>
