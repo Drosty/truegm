@@ -3,7 +3,7 @@
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#salary-history" href="#salary-history">
-        <%= number_to_currency player.salary, precision: 0 %> <span class="pull-right">(click for history)</span>
+        <%= format_as_money player.salary %> <span class="pull-right">(click for history)</span>
       </a>
     </div>
     <div id="salary-history" class="accordion-body collapse">
@@ -12,12 +12,12 @@
           <% next if version.reify.nil? %>
           <p>
             <%= version.reify.updated_at.to_s(:truegm_date) %>
-            - <%= number_to_currency version.reify.salary, precision: 0 %>
+            - <%= format_as_money version.reify.salary %>
           </p>
         <% end %>
       </div>
     </div>
   </div>
 <% else %>
-  <p>Salary: <%= number_to_currency player.salary, precision: 0 %></p>
+  <p>Salary: <%= format_as_money player.salary %></p>
 <% end %>

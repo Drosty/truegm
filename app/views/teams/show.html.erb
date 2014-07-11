@@ -2,6 +2,7 @@
   <div class="span9">
     <h2><%= @team.name %></h2>
     <h4>Owner: <%= @team.user_name if @team.user != nil %></h4>
+    <h4>Total Salary: <%= format_as_money @team.total_salary %></h4>
   </div>
 </div>
 

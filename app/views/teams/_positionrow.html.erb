@@ -3,7 +3,7 @@
     <%= link_to player.full_name,
           league_nfl_player_path(@current_league, player)  %><br />
     <%= position_team_display_for_player player %><br />
-    <%= number_to_currency player.salary, precision: 0 %>
+    <%= format_as_money player.salary %>
   </td>
   <td>
     <%= matchup_for_table_row(player.nfl_team, player.week_nfl_matchup(current_week)) %> <br />
