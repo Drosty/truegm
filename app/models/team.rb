@@ -54,6 +54,10 @@ class Team < ActiveRecord::Base
     self.total_salary < league.salary_cap
   end
 
+  def cap_delta
+    return (self.total_salary - league.salary_cap).abs
+  end
+
 private
 
   def update_total_salary
