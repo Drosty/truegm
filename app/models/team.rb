@@ -55,7 +55,9 @@ class Team < ActiveRecord::Base
   end
 
   def cap_delta
-    return (self.total_salary - league.salary_cap).abs
+    cap = league.salary_cap unless league.nil?
+    cap = 0 if cap.nil?
+    return (self.total_salary - cap).abs
   end
 
 private

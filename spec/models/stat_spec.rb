@@ -5,27 +5,30 @@ describe Stat do
   describe "stat calculation" do
 
     it "will calculate QB stats" do
+      league = build(:league_with_stats)
       stat = build(:stat_qb_good)
-      stat.total_points.should eq(27)
+      stat.calculate_stat(league).should eq(27)
 
       stat = build(:stat_qb_bad)
-      stat.total_points.should eq(4)
+      stat.calculate_stat(league).should eq(4)
     end
 
     it "will calculate RB stats" do
+      league = build(:league_with_stats)
       stat = build(:stat_rb_good)
-      stat.total_points.should eq(39)
+      stat.calculate_stat(league).should eq(39)
 
       stat = build(:stat_rb_bad)
-      stat.total_points.should eq(3.2)
+      stat.calculate_stat(league).should eq(3.2)
     end
 
     it "will calculate WR stats" do
+      league = build(:league_with_stats)
       stat = build(:stat_wr_good)
-      stat.total_points.should eq(39.5)
+      stat.calculate_stat(league).should eq(39.5)
 
       stat = build(:stat_wr_bad)
-      stat.total_points.should eq(0.3)
+      stat.calculate_stat(league).should eq(0.3)
     end
 
   end
