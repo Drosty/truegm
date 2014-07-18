@@ -15,17 +15,16 @@ class Stat < ActiveRecord::Base
     return stat.value
   end
 
-  def summary league
-    points = total_points(league)
+  def summary
     case nfl_player.position
     when "QB"
-      summary = "Week #{week} - #{points} pts - #{passing_yards} / #{passing_touchdowns} / #{interceptions}"
+      summary = "#{passing_yards} yards / #{passing_touchdowns} TDs / #{interceptions} INTs"
     when "RB"
-      summary = "Week #{week} - #{points} pts - #{rushing_yards} yds / #{rushing_touchdowns} tds"
+      summary = "#{rushing_yards} yards / #{rushing_touchdowns} TDs"
     when "WR", "TE"
-      summary = "Week #{week} - #{points} pts - #{receiving_yards} yds / #{receiving_touchdowns} tds"
+      summary = "#{receptions} rec / #{receiving_yards} yards / #{receiving_touchdowns} TDs"
     when "DEF"
-      summary = "Week #{week} - #{points} fantasy pts"
+      summary = "defensive stats"
     end
 
     summary
