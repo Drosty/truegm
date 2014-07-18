@@ -2,15 +2,14 @@
   <div class="span9">
     <h2><%= @team.name %></h2>
     <h4>Owner: <%= @team.user_name if @team.user != nil %></h4>
-    <h4 class="<%= salary_display_color_class @team %>">
+    <h4>
       Total Salary: <%= format_as_money @team.total_salary %>
-
+      <br />
       <% if @team.under_cap? %>
-        <span>under by:
+        <span class="<%= salary_display_color_class @team %>">under by:
       <% else %>
-        <span>over by:
+        <span class="<%= salary_display_color_class @team %>">over by:
       <% end %>
-      
         <%= format_as_money @team.cap_delta %>
       </span>
     </h4>
