@@ -1,0 +1,27 @@
+<%- model_class = ForumTopic -%>
+<div class="row">
+  <div class="span12">
+    <%= link_to "New Forum Topic",
+            new_league_forum_topic_path(@current_league),
+            :class => 'btn btn-primary pull-right' %>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Posts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @forum_topics.each do |forum_topic| %>
+      <tr>
+        <td><%= link_to forum_topic.name,
+                    league_forum_topic_path(@current_league, forum_topic) %></td>
+
+        <td><%= pluralize forum_topic.forumposts_count, 'post' %>
+                 - Updated <%= distance_of_time_in_words(Time.now, forum_topic.updated_at) %> ago.</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

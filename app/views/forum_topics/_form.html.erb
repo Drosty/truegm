@@ -1,0 +1,9 @@
+<%= simple_form_for [@current_league, @forum_topic], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                league_forum_topics_path(@current_league), :class => 'btn' %>
+  </div>
+<% end %>

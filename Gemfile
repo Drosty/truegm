@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# for Heroku
-gem 'rails_12factor', group: :production
-
 # Use postgres as the database for Active Record
 gem 'pg'
 
@@ -24,17 +21,14 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# Cancan for User Authorization
-gem 'cancan'
-
 # Devise for user authentication
 gem 'devise'
+
+# Pundit for User Authorization
+gem "pundit"
 
 # For using Twitter with Authentication
 gem 'omniauth-twitter'
@@ -66,7 +60,15 @@ gem 'capybara', group: [:development, :test]
 gem 'database_cleaner', group: [:development, :test]
 
 gem 'factory_girl_rails', group: [:development, :test]
-gem 'rack-mini-profiler', group: [:development, :test]
 
 # For the Coveralls integration
 gem 'coveralls', require: false
+
+gem 'pry'
+
+gem 'httparty'
+
+gem 'dotenv-rails'
+
+# for tracking salary history
+gem 'paper_trail', '~> 3.0.2'

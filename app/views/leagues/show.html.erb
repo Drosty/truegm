@@ -1,6 +1,6 @@
 <%- model_class = League -%>
 <div class="page-header">
-  <h1><%=t '.title', :default =>  @league.name %></h1>
+  <h3><%=t '.title', :default => @current_league.name %></h3>
 </div>
 
 <table class="table table-striped">
@@ -12,10 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @league.teams.each do |team| %>
+    <% @current_league.teams.each do |team| %>
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
-        <td><%= number_to_currency team.total_salary, precision: 0 %></td>
+        <td class="<%= salary_display_color_class(team) %>">
+          <%= format_as_money team.total_salary %>
+        </td>
         <td><%= team.user.presence ? team.user_name : 'no user'  %></td>
       </tr>
     <% end %>

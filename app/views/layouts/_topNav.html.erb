@@ -38,6 +38,8 @@
               </ul>
             </li>
 
+            <li><%= link_to "Forum", league_forum_topics_path(@current_league) %></li>
+            <li><%= link_to "Schedules", league_schedule_path(@current_league, current_week) %></li>
             <li><%= link_to "Players", league_nfl_players_path(@current_league) %></li>
           <% end %>
         </ul>
@@ -50,7 +52,7 @@
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-		<li><%= link_to 'View Leagues', leagues_path %></li>
+		            <li><%= link_to 'View Leagues', leagues_path %></li>
                 <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
                 <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
                 <% if current_user.is_admin? && !is_admin_page? %>

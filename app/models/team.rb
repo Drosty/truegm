@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
 
   def add_player player
     team = player.fantasy_team self.league_id
-    
+
     unless team.nil?
       team.nfl_players.delete(player.id)
     end
@@ -49,6 +49,17 @@ class Team < ActiveRecord::Base
     get_players_by_position "D"
   end
 
+  def under_cap?
+    return true if league.salary_cap.nil?
+    self.total_salary < league.salary_cap
+  end
+
+  def cap_delta
+    cap = league.salary_cap unless league.nil?
+    cap = 0 if cap.nil?
+    return (self.total_salary - cap).abs
+  end
+
 private
 
   def update_total_salary
@@ -57,7 +68,7 @@ private
   end
 
   def get_players_by_position position
-    nfl_players.select { |p| p.position == position }
+    nfl_players.select { |p| p.position == position.upcase || p.position == position.downcase }
   end
 
 end

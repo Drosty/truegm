@@ -122,4 +122,33 @@ describe Team do
       league.teams << @team
     end
   end
+
+  describe "Salary Cap rules" do
+
+    it "will return true when under the cap" do
+      @team.league.salary_cap = 1000
+      @team.total_salary = 100
+      @team.under_cap?.should == true
+    end
+
+    it "will return false when over the cap" do
+      @team.league.salary_cap = 1000
+      @team.total_salary = 10000
+      @team.under_cap?.should == false
+    end
+
+    it "will return false when equal to the cap" do
+      @team.league.salary_cap = 1000
+      @team.total_salary = 1000
+      @team.under_cap?.should == false
+    end
+
+    it "will return true when salary cap is not set" do
+      @team.league.salary_cap = nil
+      @team.total_salary = 1000
+      @team.under_cap?.should == true
+    end
+
+  end
+
 end

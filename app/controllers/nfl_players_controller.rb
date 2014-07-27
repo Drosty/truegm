@@ -1,6 +1,5 @@
 class NflPlayersController < ApplicationController
   helper_method :sort_column, :sort_direction
-  load_and_authorize_resource
 
   before_filter :set_current_league, only: [:show, :index]
   before_action :set_nfl_player, only: [:show, :edit, :update, :destroy]
@@ -8,12 +7,28 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    @nfl_players = NflPlayer.positions(position_selected).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    position = params[:position]
+    position = "all" if position.blank?
+
+    status = params[:own_status]
+    status = "fa" if status.blank?
+
+    @nfl_players = NflPlayer.search(params[:player_name])
+                            .positions(position)
+                            .by_status(status, @current_league)
+                            .order(sort_column + " " + sort_direction)
+                            .paginate(:page => params[:page])
   end
 
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
+    stats = Stat.eager_load(:processed_stats)
+                .where(nfl_player_id: @nfl_player.id)
+                .where("year > ?", Time.now.year - 3)
+    view_model = NflPlayerViewModel.new(@nfl_player, stats)
+
+    render :locals => { :view_model => view_model }
   end
 
   def sort_column
@@ -32,7 +47,7 @@ class NflPlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nfl_player
-      @nfl_player = NflPlayer.find(params[:id])
+      @nfl_player = NflPlayer.includes(:stats).find(params[:id])
     end
 
     def set_current_league

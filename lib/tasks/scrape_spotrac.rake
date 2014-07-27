@@ -16,5 +16,5 @@ namespace :spotrac do
   task :salaries => :environment do
     Spotrac::SpotracService.process_spotrac_salary_data
   end
+  
 end
-

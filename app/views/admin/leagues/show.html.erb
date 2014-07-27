@@ -1,5 +1,4 @@
-<h3>Teams in League: <%= @league.name %></h3>
-<p id="notice"><%= notice %></p>
+<h3>Teams in League: <%= @admin_league.name %></h3>
 
 <table class="table table-striped">
   <thead>
@@ -10,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @league.teams.each do |team| %>
+    <% @admin_league.teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
         <td><%= team.user.presence ? team.user_name : 'no user'  %></td>

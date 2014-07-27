@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :external_links
   has_many :teams
   has_many :leagues, :through => :teams
+  
+  has_many :forum_topics
+  has_many :forum_posts
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|

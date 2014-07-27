@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222062359) do
+ActiveRecord::Schema.define(version: 20140607132756) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "draft_picks", force: true do |t|
     t.integer  "team_id"
@@ -37,12 +40,51 @@ ActiveRecord::Schema.define(version: 20140222062359) do
 
   add_index "external_links", ["user_id"], name: "link_url_fk", using: :btree
 
+  create_table "forum_posts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_topic_id"
+    t.text     "post_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_topics", force: true do |t|
+    t.integer  "league_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forumposts_count", default: 0
+    t.integer  "user_id"
+  end
+
   create_table "leagues", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.string   "tagline"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "salary_cap"
+    t.float    "passing_yard_points",                              default: 0.04
+    t.integer  "passing_touchdown_points",                         default: 5
+    t.float    "passing_interception_points",                      default: -2.0
+    t.float    "fumbles_lost_points",                              default: -2.0
+    t.float    "rushing_yards_points",                             default: 0.1
+    t.integer  "rushing_touchdown_points",                         default: 6
+    t.float    "receiving_yards_points",                           default: 0.1
+    t.integer  "receiving_touchdown_points",                       default: 6
+    t.float    "points_per_reception_points",                      default: 1.0
+    t.float    "defensive_interception_points",                    default: 2.0
+    t.float    "defensive_fumble_recovered_points",                default: 2.0
+    t.integer  "defensive_sack_points",                            default: 1
+    t.integer  "defensive_saftey_points",                          default: 2
+    t.integer  "defensive_touchdown_points",                       default: 6
+    t.float    "defensive_points_allowed_under_7_points",          default: 10.0
+    t.float    "defensive_points_allowed_under_14_points",         default: 7.0
+    t.float    "defensive_points_allowed_under_21_points",         default: 1.0
+    t.float    "defensive_points_allowed_under_28_points",         default: 0.0
+    t.float    "defensive_points_allowed_under_35_points",         default: -1.0
+    t.float    "defensive_points_allowed_equal_or_over_35_points", default: -4.0
   end
 
   create_table "matchups", force: true do |t|
@@ -57,6 +99,18 @@ ActiveRecord::Schema.define(version: 20140222062359) do
   add_index "matchups", ["away_team_id"], name: "matchup_away_team_fk", using: :btree
   add_index "matchups", ["home_team_id"], name: "matchup_home_team_fk", using: :btree
 
+  create_table "nfl_matchups", force: true do |t|
+    t.integer  "import_game_id"
+    t.integer  "week"
+    t.integer  "year"
+    t.datetime "game_date"
+    t.integer  "away_team_id"
+    t.integer  "home_team_id"
+    t.string   "tv_station"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nfl_players", force: true do |t|
     t.integer  "nfl_team_id"
     t.string   "first_name"
@@ -67,8 +121,16 @@ ActiveRecord::Schema.define(version: 20140222062359) do
     t.datetime "updated_at"
     t.string   "spotrac_url"
     t.string   "full_name"
+    t.integer  "nfl_data_id", limit: 8
+    t.string   "jersey"
+    t.string   "height"
+    t.string   "weight"
+    t.datetime "dob"
+    t.string   "college"
+    t.boolean  "active"
   end
 
+  add_index "nfl_players", ["nfl_data_id"], name: "index_nfl_players_on_nfl_data_id", unique: true, using: :btree
   add_index "nfl_players", ["nfl_team_id"], name: "nfl_player_nfl_team_id", using: :btree
 
   create_table "nfl_players_teams", id: false, force: true do |t|
@@ -79,11 +141,12 @@ ActiveRecord::Schema.define(version: 20140222062359) do
   add_index "nfl_players_teams", ["team_id", "nfl_player_id"], name: "by_team_and_player", unique: true, using: :btree
 
   create_table "nfl_teams", force: true do |t|
-    t.string   "location"
-    t.string   "mascot"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "spotrac_url"
+    t.string   "code"
+    t.string   "full_name"
+    t.string   "short_name"
   end
 
   create_table "owners", force: true do |t|
@@ -116,6 +179,58 @@ ActiveRecord::Schema.define(version: 20140222062359) do
   end
 
   add_index "power_rankings", ["team_id"], name: "power_ranking_team_fk", using: :btree
+
+  create_table "processed_stats", force: true do |t|
+    t.integer  "stat_id"
+    t.integer  "league_id"
+    t.float    "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "processed_stats", ["league_id"], name: "index_processed_stats_on_league_id", using: :btree
+  add_index "processed_stats", ["stat_id"], name: "index_processed_stats_on_stat_id", using: :btree
+
+  create_table "stats", force: true do |t|
+    t.integer "nfl_player_id"
+    t.integer "passing_yards"
+    t.integer "passing_touchdowns"
+    t.integer "interceptions"
+    t.integer "rushing_yards"
+    t.integer "rushing_touchdowns"
+    t.integer "receptions"
+    t.integer "receiving_yards"
+    t.integer "receiving_touchdowns"
+    t.integer "fumbles_lost"
+    t.integer "year"
+    t.integer "week"
+    t.integer "tfl"
+    t.integer "sacks"
+    t.integer "qbhits"
+    t.integer "defensive_interceptions"
+    t.integer "fumbles_recovered"
+    t.integer "safties"
+    t.integer "defensive_tds"
+    t.integer "return_tds"
+    t.integer "points_allowed"
+    t.string  "opponent"
+    t.string  "final_score"
+    t.boolean "played"
+    t.boolean "started"
+    t.integer "passing_completions"
+    t.integer "passing_attempts"
+    t.float   "passing_percentage"
+    t.float   "average_pass_yards"
+    t.float   "qb_rating"
+    t.integer "rushing_attempts"
+    t.float   "rushing_average"
+    t.integer "fumbles"
+    t.integer "long_run"
+    t.float   "receiving_average"
+    t.integer "receiving_long"
+  end
+
+  add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name"
@@ -186,5 +301,16 @@ ActiveRecord::Schema.define(version: 20140222062359) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "versions", force: true do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end

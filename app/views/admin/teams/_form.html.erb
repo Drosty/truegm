@@ -4,7 +4,7 @@
   <%= f.input :name %>
   <%= f.input :tagline %>
 
-  <% if @team.user == nil and can? :edit, @team %>
+  <% if @admin_team.user == nil %>
     <%= f.input :invite_code, label: "Enter Email or Twitter Username" %>
   <% else %>
 
