@@ -1,0 +1,22 @@
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Wk</th>
+      <th>FGM</th>
+      <th>FGA</th>
+      <th>XPM</th>
+      <th>Pts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% stats.each do |stat| %>
+      <tr>
+        <td><%= stat.week %></td>
+        <td><%= stat.rushing_attempts %></td>
+        <td><%= stat.rushing_yards %></td>
+        <td><%= stat.rushing_touchdowns %></td>
+        <td><%= stat.total_points @current_league %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,42 @@
+<ul class="nav nav-pills">
+
+  <% if position == "QB" %>
+  <li class="active">
+    <a href="#passing-stats-<%= year %>" data-toggle="tab">Passing</a>
+  </li>
+  <li>
+    <a href="#rushing-stats-<%= year %>" data-toggle="tab">Rushing</a>
+  </li>
+  <% end %>
+
+  <% if position == "RB" %>
+  <li class="active">
+    <a href="#rushing-stats-<%= year %>" data-toggle="tab">Rushing</a>
+  </li>
+  <li>
+    <a href="#receiving-stats-<%= year %>" data-toggle="tab">Receiving</a>
+  </li>
+  <% end %>
+
+  <% if position == "WR" || position == "TE" %>
+  <li class="active">
+    <a href="#receiving-stats-<%= year %>" data-toggle="tab">Receiving</a>
+  </li>
+  <li>
+    <a href="#rushing-stats-<%= year %>" data-toggle="tab">Rushing</a>
+  </li>
+  <% end %>
+
+  <% if position == "K" %>
+  <li class="active">
+    <a href="#kicking-stats-<%= year %>" data-toggle="tab">Kicking</a>
+  </li>
+  <% end %>
+
+  <% if position == "DEF" %>
+  <li class="active">
+    <a href="#defense-stats-<%= year %>" data-toggle="tab">Defense</a>
+  </li>
+  <% end %>
+
+</ul>
