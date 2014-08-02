@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607132756) do
+ActiveRecord::Schema.define(version: 20140802034819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20140607132756) do
     t.datetime "updated_at"
     t.integer  "forumposts_count", default: 0
     t.integer  "user_id"
+  end
+
+  create_table "invites", force: true do |t|
+    t.string   "email"
+    t.integer  "team_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "leagues", force: true do |t|
