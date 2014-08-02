@@ -18,6 +18,7 @@ EvokeTruegmRails::Application.routes.draw do
   resources :trades
   resources :nflteams, :only => [:index, :show]
   resources :users
+  resources :invites
 
   namespace :admin do
     get "/" => "leagues#index"
