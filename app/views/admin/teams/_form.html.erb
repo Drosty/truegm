@@ -4,13 +4,18 @@
   <%= f.input :name %>
   <%= f.input :tagline %>
 
-  <% if @admin_team.user == nil %>
-    <%= f.input :invite_code, label: "Enter Email or Twitter Username" %>
-  <% else %>
-
-  <% end %>
-
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
+<% end %>
+
+<% if @admin_team.user == nil %>
+  <p>Invite a User to be the Owner of this team</p>
+
+  <%= form_for @invite , :url => invites_path do |f| %>
+    <%= f.hidden_field :team_id, :value => @invite.team_id %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.submit 'Send' %>
+  <% end %>
 <% end %>
