@@ -1,6 +1,7 @@
 EvokeTruegmRails::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-                     controllers: {omniauth_callbacks: "omniauth_callbacks"}, :path_prefix => 'd'
+                     controllers: {omniauth_callbacks: "omniauth_callbacks", :registrations => "users/registrations"},
+                     :path_prefix => 'd'
 
   scope "/users/:user_id" do
     resources :external_link
