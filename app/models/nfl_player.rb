@@ -42,6 +42,14 @@ class NflPlayer < ActiveRecord::Base
     end
   end
 
+  def age
+    if dob
+      ((Time.now - dob)/1.year).round
+    else
+      "NA"
+    end
+  end
+
   def self.search(name)
     if name
       where('lower(first_name) LIKE ?', "%#{name.downcase}%")
