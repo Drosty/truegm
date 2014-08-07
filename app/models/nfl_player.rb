@@ -7,6 +7,7 @@ class NflPlayer < ActiveRecord::Base
 
   delegate :code, :to  => :nfl_team, :prefix => true
   delegate :full_name, :to  => :nfl_team, :prefix => true
+  delegate :bye_week, :to => :nfl_team, :allow_nil => true
 
   has_paper_trail :only => [:salary]
 

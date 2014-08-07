@@ -1,5 +1,5 @@
 class NflTeam < ActiveRecord::Base
-  attr_accessible :code, :short_name, :full_name
+  attr_accessible :code, :short_name, :full_name, :bye_week
 
   has_many :nfl_players
   has_many :home_matchups, :foreign_key => 'home_team_id', :class_name => "NflMatchup"

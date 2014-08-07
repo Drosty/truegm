@@ -7,11 +7,11 @@ module FantasyData
     attr_reader :fantasy_footbal_nerd_party
 
     def initialize(fantasy_football_party = FantasFootballNerdParty.new)
-      @fantasy_footbal_nerd_party = fantasy_football_party
+      @fantasy_football_nerd_party = fantasy_football_party
     end
 
     def import_nfl_team_data
-      teams = @fantasy_footbal_nerd_party.nfl_teams
+      teams = @fantasy_football_nerd_party.nfl_teams
 
       teams.each do |team|
         NflTeam.find_or_create_by(code: team.code,
@@ -20,8 +20,18 @@ module FantasyData
       end
     end
 
+    def import_nfl_bye_weeks
+      bye_weeks = @fantasy_football_nerd_party.bye_weeks
+
+      bye_weeks.each do |bye_week|
+        team = NflTeam.find_by(code: bye_week.team)
+        team.bye_week = bye_week.byeWeek.to_i
+        team.save
+      end
+    end
+
     def import_nfl_player_data position
-      players = @fantasy_footbal_nerd_party.nfl_players position
+      players = @fantasy_football_nerd_party.nfl_players position
       NflPlayer.update_all(active: false)
 
       players.each do |player|
@@ -49,7 +59,7 @@ module FantasyData
     end
 
     def import_nfl_schedule
-      matchups = @fantasy_footbal_nerd_party.nfl_schedule
+      matchups = @fantasy_football_nerd_party.nfl_schedule
 
       matchups.each do |matchup|
         db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId,
