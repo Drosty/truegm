@@ -22,7 +22,7 @@
 <% end %>
 <br />
 
-<p>NFL Team: <%= display_team_name(player) %></p>
+<p>NFL Team: <%= link_to display_team_name(player), league_nfl_team_path(@current_league, player.nfl_team) %></p>
 <p>Bye Week: <%= player.bye_week %></p>
 <p>Height: <%= player.height %></p>
 <p>Weight: <%= player.weight %></p>
