@@ -1,6 +1,6 @@
 module Admin
   class TeamsController < BaseController
-  
+
     before_action :set_admin_team, only: [:show, :edit, :update, :destroy]
 
     # GET /admin/teams
@@ -18,6 +18,8 @@ module Admin
 
     # GET /admin/teams/1/edit
     def edit
+      @invite = Invite.new
+      @invite.team_id = @admin_team.id
     end
 
     # PATCH/PUT /admin/teams/1

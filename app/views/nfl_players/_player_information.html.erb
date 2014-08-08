@@ -1,9 +1,8 @@
-<p><%= display_team_name(player) %></p>
 <% if player.versions.count > 1 %>
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#salary-history" href="#salary-history">
-        <%= format_as_money player.salary %> <span class="pull-right">(click for history)</span>
+        Current Salary: <%= format_as_money player.salary %> <span class="pull-right"><i class="icon-arrow-down"></i> (history)</span>
       </a>
     </div>
     <div id="salary-history" class="accordion-body collapse">
@@ -21,3 +20,11 @@
 <% else %>
   <p>Salary: <%= format_as_money player.salary %></p>
 <% end %>
+<br />
+
+<p>NFL Team: <%= link_to display_team_name(player), league_nfl_team_path(@current_league, player.nfl_team) %></p>
+<p>Bye Week: <%= player.bye_week %></p>
+<p>Height: <%= player.height %></p>
+<p>Weight: <%= player.weight %></p>
+<p>College: <%= player.college %></p>
+<p>Age: <%= player.age %></p>

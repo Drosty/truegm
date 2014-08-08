@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_week
-    Rails.cache.fetch(:current_week) do
+    Rails.cache.fetch(:current_week, expires_in: 4.hours) do
       party = FantasyFootballNerdParty.new(ENV['ffn_api_key'])
       party.current_week
     end

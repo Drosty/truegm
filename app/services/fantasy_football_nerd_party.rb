@@ -14,6 +14,23 @@ class FantasyFootballNerdParty
     end
   end
 
+  def bye_weeks
+    response = self.class.get("/byes/json/#{@key}/")
+
+    bye_week_items = []
+
+    keys = response.parsed_response.keys
+    keys.each do |key|
+      response.parsed_response[key].each do |bye_week|
+        bye_week_items << bye_week
+      end
+    end
+
+    bye_week_items.map do |item|
+      Import::NflBye.new(item)
+    end
+  end
+
   def nfl_players position = nil
     rtn_response = nil
     if position.blank?

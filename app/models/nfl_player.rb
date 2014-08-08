@@ -7,6 +7,7 @@ class NflPlayer < ActiveRecord::Base
 
   delegate :code, :to  => :nfl_team, :prefix => true
   delegate :full_name, :to  => :nfl_team, :prefix => true
+  delegate :bye_week, :to => :nfl_team, :allow_nil => true
 
   has_paper_trail :only => [:salary]
 
@@ -41,9 +42,17 @@ class NflPlayer < ActiveRecord::Base
     end
   end
 
+  def age
+    if dob
+      ((Time.now - dob)/1.year).round
+    else
+      "NA"
+    end
+  end
+
   def self.search(name)
     if name
-      where('lower(first_name) LIKE ?', "%#{name.downcase}%")
+      where('lower(last_name) LIKE ?', "%#{name.downcase}%")
     else
       all
     end

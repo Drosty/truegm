@@ -4,6 +4,8 @@ class Team < ActiveRecord::Base
   belongs_to :league
   belongs_to :user
 
+  has_many :invites
+
   has_many :draft_picks
   has_many :power_rankings
   has_many :trades
