@@ -4,12 +4,6 @@
   <%= f.input :name %>
   <%= f.input :tagline %>
 
-  <% if @team.user == nil %>
-    <%= f.input :invite_code, label: "Enter Email or Twitter Username" %>
-  <% else %>
-
-  <% end %>
-
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
