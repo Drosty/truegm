@@ -53,16 +53,16 @@ module Spotrac
         player.save
       end
 
-      save_all_teams_updating_their_total_salary
+      save_all_teams_updating_their_total_salary()
     end
 
   private
 
-    def save_all_teams_updating_their_total_salary
+    def self.save_all_teams_updating_their_total_salary
       # calling save so that it will update
       # each fantasy teams overal total salary
       # just in case someones salary changed
-      Teams.all.each do |t|
+      Team.all.each do |t|
         t.save
       end
     end

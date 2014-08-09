@@ -24,7 +24,7 @@ class NflPlayer < ActiveRecord::Base
                               when 'all'
                                 all
                               when 'flex'
-                                where(:position => ['RB', 'WR'])
+                                where(:position => ['RB', 'WR', 'TE'])
                               else
                                 where(:position => pos.upcase)
                               end

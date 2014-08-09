@@ -7,7 +7,7 @@ class InvitesController < ApplicationController
     respond_to do |format|
       if @invite.save
         #send the invite data to our mailer to deliver the email
-        UserNotifier.send_invite_email(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
+        UserNotifier.send_invite_email(@invite, new_user_registration_url(:invite_token => @invite.token)).deliver
         format.html { redirect_to edit_admin_team_path(team), notice: "Invite sent to #{@invite.email}." }
       else
         # oh no, creating an new invitation failed
