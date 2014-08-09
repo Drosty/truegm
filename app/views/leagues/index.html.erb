@@ -2,21 +2,25 @@
 <div class="page-header">
   <h1><%= t 'leagues.header' %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:tagline) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @leagues.each do |league| %>
+<% if @leagues.any? %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to league.name, league_path(league) %></td>
-        <td><%= league.description %></td>
-        <td><%= league.tagline %></td>
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:description) %></th>
+        <th><%= model_class.human_attribute_name(:tagline) %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @leagues.each do |league| %>
+        <tr>
+          <td><%= link_to league.name, league_path(league) %></td>
+          <td><%= league.description %></td>
+          <td><%= league.tagline %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h4>You are not in any leagues.  You must be invited to join a league</h4>
+<% end %>
