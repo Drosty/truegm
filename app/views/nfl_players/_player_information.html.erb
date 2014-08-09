@@ -28,3 +28,6 @@
 <p>Weight: <%= player.weight %></p>
 <p>College: <%= player.college %></p>
 <p>Age: <%= player.age %></p>
+<% if player.spotrac_url %>
+  <p><%= link_to "Spotrac", player.spotrac_url %></p>
+<% end %>
