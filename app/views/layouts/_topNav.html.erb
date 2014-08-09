@@ -1,73 +1,41 @@
-<div class="navbar navbar-fixed-top <%= is_admin_page? ? "navbar-inverse" : "navbar-default" %>">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <% if @current_league.present? %>
-        <%= link_to t('truegm'), league_path(@current_league), :class => "brand" %>
-      <% else %>
-        <%= link_to t('truegm'), root_path, :class => "brand" %>
-      <% end %>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <% if is_admin_page? %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Leagues to Edit
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-              <% League.all.each do |league| %>
-                <li><%= link_to league.name, admin_league_path(league) %></li>
-              <% end %>
-              </ul>
-            </li>
-          <% elsif defined? @current_league %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Teams
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-              <% @current_league.teams.each do |t| %>
-                <li><%= link_to t.name, team_path(t) %></li>
-              <% end %>
-              </ul>
-            </li>
-
-            <li><%= link_to "Forum", league_forum_topics_path(@current_league) %></li>
-            <li><%= link_to "Schedules", league_schedule_path(@current_league, current_week) %></li>
-            <li><%= link_to "Players", league_nfl_players_path(@current_league) %></li>
-          <% end %>
-        </ul>
-
-        <ul class="nav pull-right">
-        <% if user_signed_in? %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= current_user.name %>
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-		            <li><%= link_to 'View Leagues', leagues_path %></li>
-                <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-                <% if current_user.is_admin? && !is_admin_page? %>
-                  <li><%= link_to 'Switch to Admin', admin_path %></li>
-                <% end %>
-              </ul>
-            </li>
-          <% else %>
-            <ul class="nav pull-right">
-              <li><%= link_to 'Signup', new_user_registration_path %></li>
-              <li><%= link_to 'Login', new_user_session_path %></li>
-            </ul>
+<%= nav_bar :fixed => :top, :brand => is_admin_page? ? "ADMIN" : "TrueGM", :responsive => true do %>
+  <% if current_user && @current_league && !is_admin_page? %>
+    <%= menu_group do %>
+      <%= menu_item "Home", league_path(@current_league) %>
+      <%= drop_down "Teams" do %>
+        <% @current_league.teams.each do |t| %>
+          <%= menu_item t.name, team_path(t) %>
         <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+      <% end %>
+      <%= menu_item "Forum", league_forum_topics_path(@current_league) %>
+      <%= menu_item "Schedule", league_schedule_path(@current_league, current_week) %>
+      <%= menu_item "Players", league_nfl_players_path(@current_league) %>
+    <% end %>
+  <% end %>
+
+  <% if is_admin_page? %>
+    <%= menu_group do %>
+      <%= drop_down "Leagues to Edit" do %>
+        <% League.all.each do |league| %>
+          <%= menu_item league.name, admin_league_path(league) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= menu_group :pull => :right do %>
+    <% if current_user %>
+      <%= drop_down current_user.name do %>
+        <%= menu_item "View Leagues", leagues_path %>
+        <%= menu_item "Edit Profile", edit_user_registration_path %>
+        <% if current_user.is_admin? && !is_admin_page? %>
+          <%= menu_item 'Switch to Admin', admin_path %>
+        <% end %>
+        <%= menu_item "Log Out", destroy_user_session_path, method: :delete %>
+      <% end %>
+    <% else %>
+      <%= menu_item 'Signup', new_user_registration_path %>
+      <%= menu_item 'Login', new_user_session_path %>
+    <% end %>
+  <% end %>
+<% end %>
