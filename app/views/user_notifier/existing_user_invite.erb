@@ -4,11 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You've been invited to join a TrueGM League!</h1>
+    <h1>You've been added to a TrueGM League!</h1>
     <p>League Name: <%= @invite.team.league.name %></p>
     <p>Invited by: <%= @invite.sender.name %></p>
-    <p>Please visit this <%= link_to "Link", new_user_registration_url(:invite_token => @invite.token) %> to join the league.</p>
-    
+    <p>Please visit the league <%= link_to "here", league_url(@invite.team.league) %><p>
+    <p>Or visit all of your leagues <%= link_to "here", leagues_url %></p>
+
     <hr />
     <p>Do not reply to this email, nobody will get it.  If you have questions email Drost directly</p>
   </body>
