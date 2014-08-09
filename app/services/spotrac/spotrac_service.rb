@@ -77,6 +77,11 @@ module Spotrac
 
     def self.set_spotrac_team_url(href, team_name)
       team = NflTeam.find_by(full_name: team_name)
+      if team.nil?
+        team_name = team_name.delete '.'
+        team = NflTeam.find_by(full_name: team_name)
+      end
+
       return nil if team.nil?
 
       team.spotrac_url = href
