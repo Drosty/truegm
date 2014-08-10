@@ -12,6 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+// Add the following two lines
+//= require angular
+//= require main
+//= require angular-rails-templates
+//= require_tree ../templates
 //= require twitter/bootstrap/bootstrap-transition
 //= require twitter/bootstrap/bootstrap-alert
 //= require twitter/bootstrap/bootstrap-modal

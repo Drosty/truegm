@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="truegm">
 <head>
   <title>TrueGM</title>
   <!--[if lt IE 9]>
@@ -30,7 +30,9 @@
         <%= msg %>
       </div>
     <% end %>
-    <%= yield %>
+    <div ng-view>
+      <%= yield %>
+    </div>
   </div>
 </body>
 </html>
