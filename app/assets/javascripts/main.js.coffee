@@ -19,7 +19,7 @@
         controller: 'LogoutCtrl'
     }).
     otherwise({
-      templateUrl: 'home.html',
-      controller: 'HomeCtrl'
+      templateUrl: 'leagues/index.html'
+      controller: 'LeagueIndexCtrl'
     })
 ])

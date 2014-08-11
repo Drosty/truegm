@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    "#/leagues"
+    "/#/leagues"
   end
 
   def current_week
@@ -49,7 +49,7 @@ private
   def ensure_user_logged_in
     if current_user.nil?
       flash[:error] = "Must be logged in."
-      redirect_to(request.referrer || root_path)
+      redirect_to(request.referrer || new_user_session_path)
     end
   end
 
