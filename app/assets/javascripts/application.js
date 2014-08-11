@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-// Add the following two lines
 //= require angular
+//= require ng-rails-csrf
 //= require main
 //= require angular-rails-templates
 //= require_tree ../templates

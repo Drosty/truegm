@@ -1,5 +1,4 @@
 EvokeTruegmRails::Application.routes.draw do
-  root 'static_pages#index'
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
                      controllers: {omniauth_callbacks: "omniauth_callbacks", :registrations => "users/registrations"},
                      :path_prefix => 'd'
@@ -32,6 +31,6 @@ EvokeTruegmRails::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'welcome#index'
 
 end

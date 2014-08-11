@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
+  layout :layout_by_resource
+
   helper_method :current_week
 
   before_filter :configure_devise_params, if: :devise_controller?
@@ -18,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    leagues_path
+    "#/leagues"
   end
 
   def current_week
@@ -30,8 +32,17 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def layout_by_resource
+    if devise_controller? || controller_name == "welcome"
+      return "nong"
+    else
+      return "application"
+    end
+  end
+
   def user_not_authorized
     flash[:error] = "You are not authorized to perform this."
+    head :unauthorized
     redirect_to(request.referrer || leagues_path)
   end
 

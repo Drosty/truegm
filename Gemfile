@@ -18,6 +18,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # For templates in asset pipeline for AngularJs
 gem 'angular-rails-templates'
 
+# for the CSRF token on Angular calls
+gem 'ng-rails-csrf'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 

@@ -1,12 +1,5 @@
-# This line is related to our Angular app, not to our
-# HomeCtrl specifically. This is basically how we tell
-# Angular about the existence of our application.
-@truegm = angular.module('truegm', ['templates'])
+@truegm = angular.module('truegm', ['templates', 'ng-rails-csrf'])
 
-# This routing directive tells Angular about the default
-# route for our application. The term "otherwise" here
-# might seem somewhat awkward, but it will make more
-# sense as we add more routes to our application.
 @truegm.config(['$routeProvider', ($routeProvider) ->
   $routeProvider.
     when('/leagues', {
@@ -16,6 +9,14 @@
     when('/league/:id', {
       templateUrl: 'leagues/show.html',
       controller: 'LeagueShowCtrl'
+    }).
+    when('/login', {
+        templateUrl: 'authentication/login.html',
+        controller: 'LoginCtrl'
+    }).
+    when('/logout', {
+        templateUrl: 'authentication/logout.html',
+        controller: 'LogoutCtrl'
     }).
     otherwise({
       templateUrl: 'home.html',
