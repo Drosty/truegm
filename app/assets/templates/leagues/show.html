@@ -1,1 +1,28 @@
-<h1>{{league.name}}</h1>
+<div class="page-header">
+  <h3>{{ league.name }}</h3>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Team Name</th>
+      <th>Team Salary</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="team in league.teams">
+        <td>
+          <a ng-click="viewTeam(team.id)">{{ team.name }}</a>
+        </td>
+        <td class="getTeamSalaryCssColor(team)">
+           {{ team.total_salary }}
+        </td>
+        <td>{{ team.user_name }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <a ng-click="viewLeagues()" class="btn">Back</a>
+</div>

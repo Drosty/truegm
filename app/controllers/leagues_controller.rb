@@ -24,7 +24,7 @@ class LeaguesController < ApplicationController
     authorize @current_league
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @league }
+      format.json { render json: @current_league }
     end
   end
 
