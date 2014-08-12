@@ -1,41 +1,31 @@
-<%= nav_bar :fixed => :top, :brand => is_admin_page? ? "ADMIN" : "TrueGM", :responsive => true do %>
-  <% if current_user && @current_league && !is_admin_page? %>
-    <%= menu_group do %>
-      <%= menu_item "Home", league_path(@current_league) %>
-      <%= drop_down "Teams" do %>
-        <% @current_league.teams.each do |t| %>
-          <%= menu_item t.name, team_path(t) %>
-        <% end %>
-      <% end %>
-      <%= menu_item "Forum", league_forum_topics_path(@current_league) %>
-      <%= menu_item "Schedule", league_schedule_path(@current_league, current_week) %>
-      <%= menu_item "Players", league_nfl_players_path(@current_league) %>
-    <% end %>
-  <% end %>
-
-  <% if is_admin_page? %>
-    <%= menu_group do %>
-      <%= drop_down "Leagues to Edit" do %>
-        <% League.all.each do |league| %>
-          <%= menu_item league.name, admin_league_path(league) %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= menu_group :pull => :right do %>
-    <% if current_user %>
-      <%= drop_down current_user.name do %>
-        <%= menu_item "View Leagues", leagues_path %>
-        <%= menu_item "Edit Profile", edit_user_registration_path %>
-        <% if current_user.is_admin? && !is_admin_page? %>
-          <%= menu_item 'Switch to Admin', admin_path %>
-        <% end %>
-        <%= menu_item "Log Out", destroy_user_session_path, method: :delete %>
-      <% end %>
-    <% else %>
-      <%= menu_item 'Signup', new_user_registration_path %>
-      <%= menu_item 'Login', new_user_session_path %>
-    <% end %>
-  <% end %>
-<% end %>
+ <!-- start nav -->
+<div class="navbar navbar-fixed-top" ng-controller="TopNavigationCtrl">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="http://localhost:3000/">{{ leagueName }}</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav pull-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test User <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/leagues">View Leagues</a>
+                </li>
+                <li>
+                  <a href="/d/users/edit">Edit Profile</a>
+                </li>
+                <li>
+                  <a data-method="delete" href="/d/users/logout" rel="nofollow">Log Out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- end nav -->
