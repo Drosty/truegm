@@ -11,15 +11,17 @@
     </tr>
   </thead>
   <tbody>
-      <tr ng-repeat="team in league.teams">
-        <td>
-          <a ng-click="viewTeam(team.id)">{{ team.name }}</a>
-        </td>
-        <td class="getTeamSalaryCssColor(team)">
-           {{ team.total_salary }}
-        </td>
-        <td>{{ team.user_name }}</td>
-      </tr>
+    <tr ng-repeat="team in league.teams">
+      <td>
+        <a ng-click="viewTeam(team.id)">{{ team.name }}</a>
+      </td>
+      <td class="getTeamSalaryCssColor(team)">
+        {{ team.salary }}
+      </td>
+      <td>
+        <a ng-show="!!team.user" ng-click="showUser(team.user.id)">{{ team.user.name }}</a>
+      </td>
+    </tr>
   </tbody>
 </table>
 
