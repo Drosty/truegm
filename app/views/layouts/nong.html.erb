@@ -22,15 +22,22 @@
   <% end %>
 </head>
 <body>
-  <%= render :partial => 'layouts/topNav' %>
-  <div id="main" class="container">
-    <% flash.each do |name, msg| %>
-      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-        <a class="close" data-dismiss="alert">×</a>
-        <%= msg %>
-      </div>
-    <% end %>
-    <%= yield %>
+
+  <div class="canvas">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <h4 class="header-text">TrueGM</h4>
+    </div>
+
+    <div id="main" class="container">
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </div>
+
 </body>
 </html>
