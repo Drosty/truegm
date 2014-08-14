@@ -5,10 +5,12 @@
       $scope.leagueName = league.name
       $scope.leagueId = league.id
       $scope.isLeagueSelected = true
+      $scope.teams = league.teams
     else
       $scope.leagueName = 'TrueGm'
       $scope.leagueId = 0
       $scope.isLeagueSelected = false
+      $scope.teams = null
 
     return
 
@@ -24,4 +26,7 @@
 
   $scope.showSchedule = ->
     $location.path "/league/" + $scope.leagueId + "/schedule"
+
+  $scope.showTeam = (teamId) ->
+    $location.path "team/" + teamId
 ]
