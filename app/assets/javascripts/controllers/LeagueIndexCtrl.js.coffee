@@ -7,5 +7,5 @@
 
   # Add the following lines
   $scope.viewLeague = (id) ->
-    $location.url "/league/#{id}"
+    $location.path "/league/#{id}"
 ]

@@ -7,11 +7,11 @@
 
   # Add the following lines
   $scope.viewLeagues = ->
-    $location.url "/leagues/"
+    $location.path "/leagues/"
 
   $scope.viewTeam = (teamId) ->
-    $location.url "/team/" + teamId
+    $location.path "/team/" + teamId
 
   $scope.viewUser = (userId) ->
-    $location.url "/user/" + userId
+    $location.path "/user/" + userId
 ]

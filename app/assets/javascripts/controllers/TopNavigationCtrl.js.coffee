@@ -14,14 +14,14 @@
 
   # Add the following lines
   $scope.viewLeagues = ->
-    $location.url "/leagues/"
+    $location.path "/leagues/"
 
   $scope.showForum = ->
-    $location.url "/league/" + $scope.leagueId + "/topics"
+    $location.path "/league/" + $scope.leagueId + "/topics"
 
   $scope.showPlayers = ->
-    $location.url "/league/" + $scope.leagueId + "/players"
+    $location.path "/league/" + $scope.leagueId + "/players"
 
   $scope.showSchedule = ->
-    $location.url "/league/" + $scope.leagueId + "/schedule"
+    $location.path "/league/" + $scope.leagueId + "/schedule"
 ]
