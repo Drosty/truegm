@@ -2,7 +2,7 @@
   $scope.leagues = []
   $http.get('./leagues.json').success((data) ->
     LeagueService.clearLeague()
-    $scope.leagues = data
+    $scope.leagues = data.leagues
   )
 
   # Add the following lines
