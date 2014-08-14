@@ -8,4 +8,10 @@
   # Add the following lines
   $scope.viewLeagues = ->
     $location.url "/leagues/"
+
+  $scope.viewTeam = (teamId) ->
+    $location.url "/team/" + teamId
+
+  $scope.viewUser = (userId) ->
+    $location.url "/user/" + userId
 ]
