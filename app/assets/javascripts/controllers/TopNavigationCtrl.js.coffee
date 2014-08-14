@@ -17,5 +17,11 @@
     $location.url "/leagues/"
 
   $scope.showForum = ->
-    $location.url = "/asdf"
+    $location.url "/league/" + $scope.leagueId + "/topics"
+
+  $scope.showPlayers = ->
+    $location.url "/league/" + $scope.leagueId + "/players"
+
+  $scope.showSchedule = ->
+    $location.url "/league/" + $scope.leagueId + "/schedule"
 ]

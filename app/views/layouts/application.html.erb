@@ -22,16 +22,28 @@
   <% end %>
 </head>
 <body>
-  <%= render :partial => 'layouts/topNav' %>
-  <div id="main" class="container">
-    <% flash.each do |name, msg| %>
-      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-        <a class="close" data-dismiss="alert">×</a>
-        <%= msg %>
+  <%= render :partial => "layouts/topNav" %>
+
+  <div class="canvas">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <h4 class="header-text">TrueGM</h4>
+    </div>
+
+    <div id="main" class="container">
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
+      <div ng-view>
+        <%= yield %>
       </div>
-    <% end %>
-    <div ng-view>
-      <%= yield %>
     </div>
   </div>
 </body>

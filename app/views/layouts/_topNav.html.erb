@@ -1,31 +1,22 @@
- <!-- start nav -->
-<div class="navbar navbar-fixed-top" ng-controller="TopNavigationCtrl">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="http://localhost:3000/">{{ leagueName }}</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav pull-right">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test User <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="/leagues">View Leagues</a>
-                </li>
-                <li>
-                  <a href="/d/users/edit">Edit Profile</a>
-                </li>
-                <li>
-                  <a data-method="delete" href="/d/users/logout" rel="nofollow">Log Out</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div><!-- end nav -->
+<div ng-controller="TopNavigationCtrl">
+  <div class="navmenu navmenu-default navmenu-fixed-left">
+    <a class="navmenu-brand" href="javascript:void(0)">{{ leagueName }}</a>
+    <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+        <ul class="dropdown-menu navmenu-nav">
+          <li>
+            <a href="/t/1">Team One</a>
+          </li>
+        </ul>
+      </li>
+
+      <li><a ng-click="showPlayers()">Players</a></li>
+      <li><a ng-click="showForums()">Forums</a></li>
+      <li><a ng-click="showSchedule()">Schedule</a></li>
+
+    </ul>
+  </div>
+</div>
+
+<hr />
