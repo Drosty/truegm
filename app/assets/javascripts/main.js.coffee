@@ -10,14 +10,6 @@
       templateUrl: 'leagues/show.html',
       controller: 'LeagueShowCtrl'
     }).
-    when('/login', {
-        templateUrl: 'authentication/login.html',
-        controller: 'LoginCtrl'
-    }).
-    when('/logout', {
-        templateUrl: 'authentication/logout.html',
-        controller: 'LogoutCtrl'
-    }).
     otherwise({
       templateUrl: 'leagues/index.html'
       controller: 'LeagueIndexCtrl'
