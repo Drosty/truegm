@@ -2,6 +2,7 @@
 
   $http.get("./teams/#{$routeParams.id}.json").success((data) ->
     $scope.team = data
+    LeagueService.setLeague($scope.team.league)
   )
 
 ]
