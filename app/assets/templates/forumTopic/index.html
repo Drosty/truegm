@@ -1,0 +1,26 @@
+<h1>Topics</h1>
+<div class="row">
+  <div class="span12">
+    <a href="#" class="btn btn-primary pull-right">
+      New Topic
+    </a>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Posts</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="topic in topics">
+        <td>
+          <a href="#/league/{{leagueId}}/topics/{{topic.id}}">{{ topic.name }}</a>
+        </td>
+        <td>
+          {{topic.postCount}} - Updated {{ topic.lastUpdate }} ago.
+        </td>
+      </tr>
+  </tbody>
+</table>
