@@ -10,6 +10,10 @@
       templateUrl: 'leagues/show.html',
       controller: 'LeagueShowCtrl'
     }).
+    when('/team/:id', {
+      templateUrl: 'team/show.html',
+      controller: 'TeamShowCtrl'
+    }).
     otherwise({
       templateUrl: 'leagues/index.html'
       controller: 'LeagueIndexCtrl'

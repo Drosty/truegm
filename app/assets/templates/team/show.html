@@ -1,0 +1,34 @@
+
+<h2>{{team.name}}</h2>
+<h4>Owner: <span ng-show="!!team.user">{{team.user.name}}</span></h4>
+<h4>
+  Total Salary: {{ team.salary }}
+  <br />
+  <span ng-show="team.under_cap" class="text-success">under by: {{team.cap_delta}}</span>
+  <span ng-show="!team.under_cap" class="text-danger">over by: {{team.cap_delta}}</span>
+</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Player Info</td>
+      <td>Week {{ team.current_week }}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="player in team.players">
+      <td>
+        <a ng-click="showPlayer(player)">{{ player.full_name }}</a>
+        <br />
+        {{player.position}} - {{player.team_name}}
+        <br />
+        {{ player.salary }}
+      </td>
+      <td>
+        {{player.home_or_away_code}} {{ player.opponent_code }} <br />
+        {{player.matchup_formatted_date}} {{player.matchup_tv_station}} <br />
+        {{player.points}} pts
+      </td>
+    </tr>
+  </tbody>
+</table>
