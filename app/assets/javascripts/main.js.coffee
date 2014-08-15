@@ -14,6 +14,10 @@
       templateUrl: 'team/show.html',
       controller: 'TeamShowCtrl'
     }).
+    when('/league/:leagueId/topics', {
+      templateUrl: 'forum/topics.html',
+      controller: 'TopicShowCtrl'
+    }).
     otherwise({
       templateUrl: 'leagues/index.html'
       controller: 'LeagueIndexCtrl'

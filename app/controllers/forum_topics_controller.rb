@@ -16,24 +16,13 @@ class ForumTopicsController < ApplicationController
   # GET /forum_topics.json
   def index
     @forum_topics = @current_league.forum_topics
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @forum_topics }
-    end
   end
 
   # GET /forum_topics/1
   # GET /forum_topics/1.json
   def show
-    respond_to do |format|
-      if @forum_topic.league_id == @current_league.id
-        format.html # show.html.erb
-        format.json { render json: @forum_topic }
-      else
-        format.html { redirect_to league_forum_topics_path(@current_league), notice: 'Could not find Topic' }
-        format.json { render json: 'Could not find topic', status: :unprocessable_entity }
-      end
+    if @forum_topic.league_id != @current_league.id
+      @forum_topic = nil
     end
   end
 
