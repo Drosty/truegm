@@ -6,9 +6,9 @@
     <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
       <li class="dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
-        <ul class="dropdown-menu navmenu-nav">
+        <ul class="dropdown-menu">
           <li ng-repeat="team in teams">
-            <a ng-click="showTeam(team.id)"  data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+            <a ng-click="showTeam(team.id)" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
               {{ team.name }}
             </a>
           </li>
@@ -19,12 +19,11 @@
         <a ng-click="showPlayers()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Players</a>
       </li>
       <li>
-        <a ng-click="showForums()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Forums</a>
+        <a ng-click="showForum()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Forums</a>
       </li>
       <li>
         <a ng-click="showSchedule()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Schedule</a>
       </li>
-
     </ul>
 
     <hr />

@@ -28,5 +28,7 @@
     $location.path "/league/" + $scope.leagueId + "/schedule"
 
   $scope.showTeam = (teamId) ->
-    $location.path "team/" + teamId
+    $location.path "/team/" + teamId
+
+  return
 ]
