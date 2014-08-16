@@ -8,5 +8,21 @@ json.league_team do
 end
 
 json.stats do
-  nil
+  json.year [2012..2014].each do |year|
+
+    json.year year
+
+    json.headers ["PASS", "TDs", "STAT"].each do |header|
+      json.name header
+    end
+
+    json.stats [0..10].each do |stat|
+
+      json.stat stat
+      json.runn stat
+      json.lerad stat
+
+    end
+
+  end
 end
