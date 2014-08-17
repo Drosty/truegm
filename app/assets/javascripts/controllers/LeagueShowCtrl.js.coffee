@@ -10,7 +10,7 @@
     $location.path "/leagues/"
 
   $scope.viewTeam = (teamId) ->
-    $location.path "/team/" + teamId
+    $location.path "/league/" + $scope.league.id + "/team/" + teamId
 
   $scope.viewUser = (userId) ->
     $location.path "/user/" + userId

@@ -10,7 +10,7 @@
       templateUrl: 'leagues/show.html',
       controller: 'LeagueShowCtrl'
     }).
-    when('/team/:id', {
+    when('/league/:leagueId/team/:id', {
       templateUrl: 'team/show.html',
       controller: 'TeamShowCtrl'
     }).
@@ -22,7 +22,7 @@
       templateUrl: 'forumTopic/show.html',
       controller: 'TopicShowCtrl'
     }).
-    when('./league/:leagueId/player/:id', {
+    when('/league/:leagueId/player/:id', {
       templateUrl: 'player/show.html',
       controller: 'PlayerShowCtrl'
     }).
