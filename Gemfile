@@ -15,6 +15,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
+# include angular files
+gem 'angularjs-rails'
+
 # For templates in asset pipeline for AngularJs
 gem 'angular-rails-templates'
 
