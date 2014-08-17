@@ -18,6 +18,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # include angular files
 gem 'angularjs-rails'
 
+# angular-ui-bootstrap
+gem 'angular-ui-bootstrap-rails'
+
 # For templates in asset pipeline for AngularJs
 gem 'angular-rails-templates'
 

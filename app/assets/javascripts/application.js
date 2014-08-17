@@ -16,6 +16,7 @@
 //= require angular-animate
 //= require angular-resource
 //= require angular-route
+//= require angular-ui-bootstrap-tpls
 //= require ng-rails-csrf
 //= require main
 //= require angular-rails-templates
