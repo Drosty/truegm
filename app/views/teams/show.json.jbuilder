@@ -5,18 +5,6 @@ json.under_cap @team.under_cap?
 json.cap_delta format_as_money(@team.cap_delta)
 json.current_week current_week
 
-json.league do
-  json.(@team.league, :id, :name, :description, :tagline)
-
-  json.teams @team.league.teams do |team|
-    json.(team, :id, :name)
-    json.salary format_as_money(team.total_salary)
-
-    json.user team.user, :id, :name unless team.user.nil?
-    json.user nil if team.user.nil?
-  end
-end
-
 json.players @team.nfl_players do |player|
   json.(player, :id, :full_name, :position)
   json.salary format_as_money(player.salary)
