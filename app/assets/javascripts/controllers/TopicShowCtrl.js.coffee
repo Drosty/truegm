@@ -3,10 +3,10 @@
   $http.get("./leagues/#{$routeParams.leagueId}/topics/#{$routeParams.id}.json").success((data) ->
     $scope.topic = data
     $scope.currentLeagueId = data.league.id
-    LeagueService.setLeague(data.league)
+    LeagueService.setOrUpdateLeagueById($routeParams.leagueId)
   )
 
   $scope.postsAvailable = ->
-    $scope.topic.posts.length > 0
+    $scope.topic.posts.length > 0 if $scope.topic
 
 ]
