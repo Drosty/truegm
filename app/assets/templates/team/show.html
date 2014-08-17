@@ -18,7 +18,7 @@
   <tbody>
     <tr ng-repeat="player in team.players">
       <td>
-        <a ng-click="showPlayer(player)">{{ player.full_name }}</a>
+        <a href="#/league/{{team.league.id}}/player/{{player.id}}">{{ player.full_name }}</a>
         <br />
         {{player.position}} - {{player.team_name}}
         <br />
