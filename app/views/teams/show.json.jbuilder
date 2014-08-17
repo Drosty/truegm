@@ -15,11 +15,10 @@ json.league do
     json.user team.user, :id, :name unless team.user.nil?
     json.user nil if team.user.nil?
   end
-
 end
 
 json.players @team.nfl_players do |player|
-  json.(player, :full_name, :position)
+  json.(player, :id, :full_name, :position)
   json.salary format_as_money(player.salary)
   json.points player.points_in_week(current_week, @current_league)
 
