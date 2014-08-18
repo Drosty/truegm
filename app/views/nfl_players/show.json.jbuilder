@@ -1,5 +1,11 @@
-json.(view_model.player, :id, :full_name, :position, :spotrac_url, :jersey, :height, :weight, :college, :active)
+json.(view_model.player, :id, :full_name, :bye_week, :position, :spotrac_url, :jersey, :height, :weight, :college, :active)
 json.salary format_as_money(@nfl_player.salary)
+json.age @nfl_player.age
+
+json.nfl_team do
+  json.name @nfl_player.nfl_team.full_name unless @nfl_player.nfl_team.nil?
+  json.id @nfl_player.nfl_team.id unless @nfl_player.nfl_team.nil?
+end
 
 json.league_team do
   json.id view_model.player.fantasy_team(@current_league.id).id

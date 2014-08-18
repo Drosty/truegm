@@ -7,13 +7,27 @@
 
 <tabset>
   <tab heading="Info">
-    <p>Here is info</p>
+    <br />
+    <p>Salary: {{player.salary}}</p>
+    <p ng-show="!!player.nfl_team">
+      NFL Team: <a href="#/league/{{currentLeagueId}}/nflteam/{{player.nfl_team.id}}">{{player.nfl_team.name}}</a>
+    </p>
+    <p>Bye Week: {{player.bye_week}}</p>
+    <p>Height: {{player.height}}</p>
+    <p>Weight: {{player.weight}}</p>
+    <p>College: {{player.college}}</p>
+    <p>Age: {{player.age}}</p>
+    <p ng-show="!!player.spotrac_url">
+      <a href="{{player.spotrac_url}}" target="_blank">Spotrac Page</a>
+    </p>
   </tab>
+
   <tab ng-repeat="stat in stats.year" heading="{{stat.year}}">
     <br />
     <div ng-include="'player/statTabContent.html'"></div>
   </tab>
-  <tab>
+
+  <tab heading="Actions">
     <p>Some actions</p>
   </tab>
 </tabset>
