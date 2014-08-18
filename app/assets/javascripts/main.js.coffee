@@ -18,6 +18,10 @@
       templateUrl: 'forumTopic/index.html',
       controller: 'TopicIndexCtrl'
     }).
+    when('/league/:leagueId/topics/new', {
+      templateUrl: 'forumTopic/new.html',
+      controller: 'TopicNewCtrl'
+    }).
     when('/league/:leagueId/topics/:id', {
       templateUrl: 'forumTopic/show.html',
       controller: 'TopicShowCtrl'
