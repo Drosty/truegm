@@ -1,0 +1,18 @@
+
+<div>
+  <h3>Make New Post</h3>
+</div>
+
+<form>
+
+  <p ng-show="errorMessage" class="text-danger">
+    {{errorMessage}}
+  </p>
+
+  <input type="text" name="postBody" ng-required ng-model="form.postBody" />
+
+  <button ng-click="formSubmit()">
+    Create
+  </button>
+
+</form>

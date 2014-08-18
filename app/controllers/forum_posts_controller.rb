@@ -31,19 +31,12 @@ class ForumPostsController < ApplicationController
   # POST /forum_posts
   # POST /forum_posts.json
   def create
-    @forum_post = ForumPost.new(params[:forum_post])
+    @forum_post = ForumPost.new
     @forum_post.forum_topic = @current_topic
     @forum_post.user = current_user
+    @forum_post.post_body = params[:forum_post]
 
-    respond_to do |format|
-      if @forum_post.save
-        format.html { redirect_to league_forum_topic_path(@current_league, @current_topic), notice: 'Forum post was successfully created.' }
-        format.json { render json: @forum_post, status: :created, location: @forum_post }
-      else
-        format.html { render "new" }
-        format.json { render json: @forum_post.errors, status: :unprocessable_entity }
-      end
-    end
+    @success = @forum_post.save
   end
 
 end

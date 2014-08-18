@@ -26,6 +26,10 @@
       templateUrl: 'forumTopic/show.html',
       controller: 'TopicShowCtrl'
     }).
+    when('/league/:leagueId/topics/:topicId/post/new', {
+      templateUrl: 'forumPost/new.html',
+      controller: 'TopicPostNewCtrl'
+    }).
     when('/league/:leagueId/player/:id', {
       templateUrl: 'player/show.html',
       controller: 'PlayerShowCtrl'
