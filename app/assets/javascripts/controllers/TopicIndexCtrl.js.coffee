@@ -2,7 +2,7 @@
 
   $http.get("./leagues/#{$routeParams.leagueId}/topics.json").success((data) ->
     $scope.topics = data.topics
-    $scope.leagueId = data.league.id
+    $scope.leagueId = $routeParams.leagueId
     LeagueService.setOrUpdateLeagueById($routeParams.leagueId)
   )
 
