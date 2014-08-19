@@ -2,7 +2,6 @@ truegm.factory "LeagueService", ['$http', ($http) ->
   currentLeague = null
 
   setLeague: (league) ->
-    console.log("setting league to " + league.name)
     currentLeague = league
 
   setOrUpdateLeagueById: (leagueId) ->
@@ -13,7 +12,6 @@ truegm.factory "LeagueService", ['$http', ($http) ->
     return
 
   clearLeague: ->
-    console.log("clearing league")
     currentLeague = undefined
 
   currentLeague: ->
