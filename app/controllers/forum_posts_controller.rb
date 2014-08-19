@@ -2,7 +2,6 @@ class ForumPostsController < ApplicationController
   before_filter :ensure_user_logged_in
   before_filter :set_current_league
   before_filter :set_current_topic
-  before_filter :set_recent_posts
 
   def set_current_league
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
@@ -10,11 +9,6 @@ class ForumPostsController < ApplicationController
 
   def set_current_topic
     @current_topic = ForumTopic.find(params[:forum_topic_id]) if params[:forum_topic_id].present?
-  end
-
-  def set_recent_posts
-    @recent_posts = @current_topic.forum_posts.order(created_at: :desc).limit(3)
-    @recent_posts.reverse!
   end
 
   # GET /forum_posts/new
