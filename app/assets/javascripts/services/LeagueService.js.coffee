@@ -6,7 +6,6 @@ truegm.factory "LeagueService", ['$http', ($http) ->
     currentLeague = league
 
   setOrUpdateLeagueById: (leagueId) ->
-    console.log("ENTER setting by id : " + leagueId)
     if(!currentLeague || currentLeague.id != leagueId)
       $http.get("./leagues/" + leagueId + ".json").success((data) ->
         currentLeague = data
