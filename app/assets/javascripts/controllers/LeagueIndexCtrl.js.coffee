@@ -1,7 +1,8 @@
 @truegm.controller 'LeagueIndexCtrl', ['$scope', '$location', '$http', 'LeagueService', ($scope, $location, $http, LeagueService) ->
   $scope.leagues = []
+  LeagueService.clearLeague()
+
   $http.get('./leagues.json').success((data) ->
-    LeagueService.clearLeague()
     $scope.leagues = data.leagues
   )
 
