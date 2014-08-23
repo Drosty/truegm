@@ -8,8 +8,8 @@ json.nfl_team do
 end
 
 json.league_team do
-  json.id view_model.player.fantasy_team(@current_league.id).id
-  json.name view_model.player.fantasy_team(@current_league.id).name
+  json.id view_model.player.fantasy_team(@current_league.id).id if view_model.player.fantasy_team(@current_league.id)
+  json.name view_model.player.fantasy_team_name(@current_league.id)
 end
 
 json.stats do

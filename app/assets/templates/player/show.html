@@ -1,8 +1,11 @@
 <h3>{{player.position}}&nbsp;{{player.full_name}}</h3>
 <p>Owned by:
-  <a href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
+  <a ng-show="player.league_team.name != 'FA'" href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
     {{player.league_team.name}}
   </a>
+  <span ng-show="player.league_team.name == 'FA'">
+    FA
+  </span>
 </p>
 
 <tabset>
