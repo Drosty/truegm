@@ -10,7 +10,7 @@ EvokeTruegmRails::Application.routes.draw do
   resources :leagues, :only => [:show, :index]  do
     resources :nfl_players, :only => [:index, :show], :path => 'player'
     resources :nfl_teams, :only => [:show]
-    
+
     resources :forum_topics, :path => "topics" do
       resources :forum_posts, only: [:new, :create, :destroy]
     end
@@ -31,6 +31,6 @@ EvokeTruegmRails::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'app#index'
 
 end

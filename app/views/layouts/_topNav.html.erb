@@ -1,41 +1,42 @@
-<%= nav_bar :fixed => :top, :brand => is_admin_page? ? "ADMIN" : "TrueGM", :responsive => true do %>
-  <% if current_user && @current_league && !is_admin_page? %>
-    <%= menu_group do %>
-      <%= menu_item "Home", league_path(@current_league) %>
-      <%= drop_down "Teams" do %>
-        <% @current_league.teams.each do |t| %>
-          <%= menu_item t.name, team_path(t) %>
-        <% end %>
-      <% end %>
-      <%= menu_item "Forum", league_forum_topics_path(@current_league) %>
-      <%= menu_item "Schedule", league_schedule_path(@current_league, current_week) %>
-      <%= menu_item "Players", league_nfl_players_path(@current_league) %>
-    <% end %>
-  <% end %>
+<div ng-controller="TopNavigationCtrl">
+  <div class="navmenu navmenu-default navmenu-fixed-left">
+    <a class="navmenu-brand" href="#/league/{{ leagueId }}" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+      {{ leagueName }}
+    </a>
+    <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="team in teams">
+            <a ng-click="showTeam(team.id)" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+              {{ team.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
 
-  <% if is_admin_page? %>
-    <%= menu_group do %>
-      <%= drop_down "Leagues to Edit" do %>
-        <% League.all.each do |league| %>
-          <%= menu_item league.name, admin_league_path(league) %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
+      <li>
+        <a ng-click="showPlayers()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Players</a>
+      </li>
+      <li>
+        <a ng-click="showForum()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Forums</a>
+      </li>
+      <li>
+        <a ng-click="showSchedule()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">Schedule</a>
+      </li>
+    </ul>
 
-  <%= menu_group :pull => :right do %>
-    <% if current_user %>
-      <%= drop_down current_user.name do %>
-        <%= menu_item "View Leagues", leagues_path %>
-        <%= menu_item "Edit Profile", edit_user_registration_path %>
-        <% if current_user.is_admin? && !is_admin_page? %>
-          <%= menu_item 'Switch to Admin', admin_path %>
-        <% end %>
-        <%= menu_item "Log Out", destroy_user_session_path, method: :delete %>
-      <% end %>
-    <% else %>
-      <%= menu_item 'Signup', new_user_registration_path %>
-      <%= menu_item 'Login', new_user_session_path %>
-    <% end %>
-  <% end %>
-<% end %>
+    <hr />
+
+    <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+      <li>
+        <a href="#/leagues" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+          Show All Leagues
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<hr />

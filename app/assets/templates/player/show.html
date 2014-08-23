@@ -1,0 +1,36 @@
+<h3>{{player.position}}&nbsp;{{player.full_name}}</h3>
+<p>Owned by:
+  <a ng-show="player.league_team.name != 'FA'" href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
+    {{player.league_team.name}}
+  </a>
+  <span ng-show="player.league_team.name == 'FA'">
+    FA
+  </span>
+</p>
+
+<tabset>
+  <tab heading="Info">
+    <br />
+    <p>Salary: {{player.salary}}</p>
+    <p ng-show="!!player.nfl_team">
+      NFL Team: {{player.nfl_team.name}}
+    </p>
+    <p>Bye Week: {{player.bye_week}}</p>
+    <p>Height: {{player.height}}</p>
+    <p>Weight: {{player.weight}}</p>
+    <p>College: {{player.college}}</p>
+    <p>Age: {{player.age}}</p>
+    <p ng-show="!!player.spotrac_url">
+      <a href="{{player.spotrac_url}}" target="_blank">Spotrac Page</a>
+    </p>
+  </tab>
+
+  <tab ng-repeat="stat in stats.year" heading="{{stat.year}}">
+    <br />
+    <div ng-include="'player/statTabContent.html'"></div>
+  </tab>
+
+  <tab heading="Actions">
+    <p>Some actions - coming soon hopefully</p>
+  </tab>
+</tabset>

@@ -7,17 +7,25 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    position = params[:position]
-    position = "all" if position.blank?
+    @position = params[:position]
+    @position = "all" if @position.blank?
+    @position = @position.downcase
 
-    status = params[:own_status]
-    status = "fa" if status.blank?
+    @status = params[:own_status]
+    @status = "Free Agent" if @status.blank?
 
-    @nfl_players = NflPlayer.search(params[:player_name])
-                            .positions(position)
-                            .by_status(status, @current_league)
+    @searchString = params[:player_name]
+
+    @page = params[:page]
+    @perPage = NflPlayer.per_page
+
+    @nfl_players = NflPlayer.search(@searchString)
+                            .positions(@position)
+                            .by_status(@status, @current_league)
                             .order(sort_column + " " + sort_direction)
-                            .paginate(:page => params[:page])
+                            .paginate(:page => @page)
+
+    @total_players = @nfl_players.count
   end
 
   # GET /nfl_players/1
@@ -25,7 +33,7 @@ class NflPlayersController < ApplicationController
   def show
     stats = Stat.eager_load(:processed_stats)
                 .where(nfl_player_id: @nfl_player.id)
-                .where("year > ?", Time.now.year - 3)
+                .where("year > ?", Time.now.year - 2)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
 
     render :locals => { :view_model => view_model }

@@ -1,0 +1,26 @@
+
+<div>
+  <h3>Create a new Topic Here</h3>
+</div>
+<form>
+
+  <p ng-show="errorMessage" class="text-danger">
+    {{errorMessage}}
+  </p>
+
+  <p>
+    <span>Topic Name</span>
+    <br />
+    <input type="text" name="name" ng-required ng-model="form.name" />
+  </p>
+  <p>
+    <span>Topic Description</span>
+    <br />
+    <input type="text" name="description" ng-required ng-model="form.description" />
+  </p>
+
+  <button ng-click="formSubmit()">
+    Create
+  </button>
+
+</form>
