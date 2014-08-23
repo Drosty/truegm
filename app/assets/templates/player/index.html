@@ -30,7 +30,7 @@
       </div>
 
       <div class="clearfix">
-        <button class="btn btn-default" ng-click="formSubmit()">
+        <button class="btn btn-default" ng-click="refreshData()">
           Search
         </button>
 
@@ -73,4 +73,5 @@
         </tr>
     </tbody>
   </table>
+  <pagination ng-change="refreshData()" items-per-page="form.perPage" total-items="form.totalPlayersCount" ng-model="form.page" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination>
 </div>

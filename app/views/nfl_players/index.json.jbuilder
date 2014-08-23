@@ -3,6 +3,7 @@ json.availabilitySearch @status
 json.page @page
 json.perPage @perPage
 json.searchString @searchString
+json.totalPlayers @total_players
 
 json.players @nfl_players do |player|
   json.(player, :id, :full_name, :position)

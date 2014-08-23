@@ -7,6 +7,7 @@
   $scope.form.perPage = ""
   $scope.form.searchString = ""
   $scope.form.isOpen = false
+  $scope.form.totalPlayersCount = "0"
 
   $scope.playerStatuses = ["Free Agent", "Owned", "All"]
   $scope.positions = ["ALL", "QB", "RB", "WR", "TE", "RB/WR/TE", "PK", "D"]
@@ -25,9 +26,10 @@
     $scope.form.availabilitySearch = data.availabilitySearch
     $scope.form.page = data.page
     $scope.form.perPage = data.perPage
+    $scope.form.totalPlayersCount = data.totalPlayers
     return
 
-  $scope.formSubmit = ->
+  $scope.refreshData = ->
     dataObj = {
       page: this.form.page
       position: this.form.positionSearch
@@ -37,7 +39,16 @@
 
     $http.get("./leagues/#{$routeParams.leagueId}/player.json", params: dataObj).success((data) ->
       $scope.updateInformation(data)
-      this.form.isOpen = false
+      $scope.form.isOpen = false
     )
     return
+
+  $scope.formClear = ->
+    this.form.page = 1
+    this.form.positionSearch = "All"
+    this.form.availabilitySearch = "Free Agent"
+    this.form.searchString = ""
+    $scope.refreshData()
+    return
+
 ]

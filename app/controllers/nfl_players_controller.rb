@@ -24,6 +24,8 @@ class NflPlayersController < ApplicationController
                             .by_status(@status, @current_league)
                             .order(sort_column + " " + sort_direction)
                             .paginate(:page => @page)
+
+    @total_players = @nfl_players.count
   end
 
   # GET /nfl_players/1
