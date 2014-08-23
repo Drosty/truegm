@@ -25,6 +25,8 @@ class NflPlayer < ActiveRecord::Base
                                 all
                               when 'flex'
                                 where(:position => ['RB', 'WR', 'TE'])
+                              when 'rb/wr/te'
+                                where(:position => ['RB', 'WR', 'TE'])
                               else
                                 where(:position => pos.upcase)
                               end
@@ -32,7 +34,7 @@ class NflPlayer < ActiveRecord::Base
 
   def self.by_status(status, league)
     case status.downcase
-    when 'fa'
+    when 'free agent'
       includes(:teams).where("teams.id is null or teams.id not in (?)", league.teams.map(&:id)).references(:teams)
     when 'owned'
       includes(:teams).where({:teams => {:id => league.teams.map(&:id)}})

@@ -1,0 +1,20 @@
+<tabset>
+  <tab heading="{{category.name}}" ng-repeat="category in stat.categories">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th ng-repeat="header in category.stat_table_headers">{{header}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="statline in category.stats">
+          <td>{{statline.col1}}</td>
+          <td>{{statline.col2}}</td>
+          <td>{{statline.col3}}</td>
+          <td>{{statline.col4}}</td>
+          <td>{{statline.col5}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </tab>
+</tabset>

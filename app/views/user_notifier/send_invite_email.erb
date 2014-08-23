@@ -8,5 +8,8 @@
     <p>League Name: <%= @invite.team.league.name %></p>
     <p>Invited by: <%= @invite.sender.name %></p>
     <p>Please visit this <%= link_to "Link", new_user_registration_url(:invite_token => @invite.token) %> to join the league.</p>
+    
+    <hr />
+    <p>Do not reply to this email, nobody will get it.  If you have questions email Drost directly</p>
   </body>
 </html>

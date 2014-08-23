@@ -1,7 +1,0 @@
-<div class="bs-component">
-  <%= render :partial => "stat_header_by_position_and_year", :locals => {:year => year, :position => position } %>
-
-  <div id="<%= year %>-stat-data" class="tab-content">
-    <%= render :partial => "stat_data_for_#{position.downcase}_by_year", :locals => {:year => year, :stats => stats } %>
-  </div>
-</div>

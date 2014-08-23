@@ -1,0 +1,26 @@
+
+  <div class="span8">
+    <h1>{{ topic.name }}</h1>
+    <h5>{{ topic.description }}</h5>
+  </div>
+  <div class="span4">
+    <a href="#/league/{{currentLeagueId}}/topics/{{topic.id}}/post/new" class="btn btn-primary">
+      Create new Post
+    </a>
+    <a href="#/league/{{ currentLeagueId }}/topics" class="btn">
+      Back to Topics
+    </a>
+  </div>
+
+<hr />
+
+  <div ng-show="!postsAvailable()">
+    <p>There are no posts yet.  Click above to create a post!</p>
+  </div>
+
+  <div ng-show="postsAvailable()" ng-repeat="post in topic.posts">
+    <blockquote>
+      <p>{{post.post_body}}</p>
+      <small>{{post.user.name}} <cite title="Source Title">{{ post.timeAgo }} ago</cite></small>
+    </blockquote>
+  </div>

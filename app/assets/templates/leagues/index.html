@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h1>Your Leagues</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Tagline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="league in leagues">
+      <td>
+        <a ng-click="viewLeague(league.id)">{{ league.name }}</a>
+      </td>
+      <td>{{ league.description }}</td>
+      <td>{{ league.tagline }}</td>
+    </tr>
+  </tbody>
+</table>

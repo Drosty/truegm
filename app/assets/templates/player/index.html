@@ -1,0 +1,77 @@
+<div>
+  <accordion close-others="oneAtATime">
+    <accordion-group heading="Search Criteria" is-open="form.isOpen">
+
+      <p>
+        Last Name:<br />
+        <input type="text" name="player_name" placeholder="Search by last name" ng-model="form.searchString" />
+      </p>
+      <p>
+        Filter by
+      </p>
+      <div class="pull-left search-box">
+        <span>Position</span>
+        <div class="radio" ng-repeat="position in positions">
+          <label>
+            <input type="radio" name="position" ng-model="form.positionSearch" value="{{position}}" />
+            {{position}}
+          </label>
+        </div>
+      </div>
+
+      <div class="pull-left search-box">
+        <span>Status</span>
+        <div class="radio" ng-repeat="status in playerStatuses">
+          <label>
+            <input type="radio" name="availabilitySearch" ng-model="form.availabilitySearch" value="{{status}}" />
+            {{status}}
+          </label>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <button class="btn btn-default" ng-click="refreshData()">
+          Search
+        </button>
+
+        <button class="btn btn-default" ng-click="formClear()">
+          Clear Form
+        </button>
+      </div>
+
+    </accordion-group>
+  </accordian>
+</div>
+
+<div>
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="player in players">
+          <td>
+            <a href="#/league/{{currentLeagueId}}/player/{{player.id}}">
+              {{player.full_name}}
+            </a>
+            <br />
+              {{player.position}} - {{player.nfl_team_code}}
+            <br />
+            <!-- potentially make this a link to owner page -->
+              On Team:
+              <a ng-show="player.league_team.name != 'FA'" href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
+                {{player.league_team.name}}
+              </a>
+              <span ng-show="player.league_team.name == 'FA'">
+                {{player.league_team.name}}
+              </span>
+          </td>
+          <td>{{player.salary}}</td>
+        </tr>
+    </tbody>
+  </table>
+  <pagination ng-change="refreshData()" items-per-page="form.perPage" total-items="form.totalPlayersCount" ng-model="form.page" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination>
+</div>

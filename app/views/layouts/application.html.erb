@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="truegm">
 <head>
   <title>TrueGM</title>
   <!--[if lt IE 9]>
@@ -8,7 +8,6 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= javascript_include_tag "application" %>
   <% if Rails.env.production? %>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -22,15 +21,30 @@
   <% end %>
 </head>
 <body>
-  <%= render :partial => 'layouts/topNav' %>
-  <div id="main" class="container">
-    <% flash.each do |name, msg| %>
-      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-        <a class="close" data-dismiss="alert">×</a>
-        <%= msg %>
+  <%= render :partial => "layouts/topNav" %>
+
+  <div class="canvas">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <h4 class="header-text">TrueGM</h4>
+    </div>
+
+    <div id="main" class="container">
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
+      <div ng-view>
+        <%= yield %>
       </div>
-    <% end %>
-    <%= yield %>
+    </div>
   </div>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

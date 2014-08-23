@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '~> 4.1'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -14,6 +14,18 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
+# include angular files
+gem 'angularjs-rails'
+
+# angular-ui-bootstrap
+gem 'angular-ui-bootstrap-rails'
+
+# For templates in asset pipeline for AngularJs
+gem 'angular-rails-templates'
+
+# for the CSRF token on Angular calls
+gem 'ng-rails-csrf'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -48,8 +60,8 @@ gem "less-rails"
 # Rails Best Practices gem
 gem 'rails_best_practices'
 
-# For Twitter Bootstrap
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 # for HTML/XML parsing
 gem 'nokogiri'

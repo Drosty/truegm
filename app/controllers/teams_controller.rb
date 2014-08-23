@@ -13,10 +13,6 @@ class TeamsController < ApplicationController
 
   def show
     authorize @team
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @team }
-    end
   end
 
   def edit
