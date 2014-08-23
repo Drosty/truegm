@@ -25,7 +25,7 @@ class NflPlayersController < ApplicationController
   def show
     stats = Stat.eager_load(:processed_stats)
                 .where(nfl_player_id: @nfl_player.id)
-                .where("year > ?", Time.now.year - 3)
+                .where("year > ?", Time.now.year - 2)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
 
     render :locals => { :view_model => view_model }
