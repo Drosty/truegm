@@ -9,8 +9,12 @@
     {{errorMessage}}
   </p>
 
-  <input type="text" name="postBody" ng-required ng-model="form.postBody" />
-
+  <p>
+    <span>New Message</spn>
+    <br />
+    <textarea type="text" name="postBody" ng-required ng-model="form.postBody" />
+  </p>
+  
   <button ng-click="formSubmit()">
     Create
   </button>
