@@ -1,28 +1,29 @@
 <div>
   <accordion close-others="oneAtATime">
-    <accordion-group heading="Search Criteria">
+    <accordion-group heading="Search Criteria" is-open="form.isOpen">
 
       <p>
         Last Name:<br />
-        <input type="text" name="player_name" placeholder="Search by last name" />
+        <input type="text" name="player_name" placeholder="Search by last name" ng-model="form.searchString" />
       </p>
       <p>
         Filter by
       </p>
       <div class="pull-left search-box">
         <span>Position</span>
-        <div class="radio" data-ng-repeat="position in positions">
+        <div class="radio" ng-repeat="position in positions">
           <label>
-            <input type="radio" name="position" data-ng-model="form.positionSearch" ng-value="true" />
+            <input type="radio" name="position" ng-model="form.positionSearch" value="{{position}}" />
             {{position}}
           </label>
         </div>
       </div>
+
       <div class="pull-left search-box">
         <span>Status</span>
-        <div class="radio" data-ng-repeat="status in playerStatuses">
+        <div class="radio" ng-repeat="status in playerStatuses">
           <label>
-            <input type="radio" name="playerStatus" data-ng-model="form.playerStatus" ng-value="true" />
+            <input type="radio" name="availabilitySearch" ng-model="form.availabilitySearch" value="{{status}}" />
             {{status}}
           </label>
         </div>
@@ -33,7 +34,7 @@
           Search
         </button>
 
-        <button class="btn btn-default" ng-click="formSubmit()">
+        <button class="btn btn-default" ng-click="formClear()">
           Clear Form
         </button>
       </div>

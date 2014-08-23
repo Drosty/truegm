@@ -1,3 +1,9 @@
+json.positionSearch @position.upcase
+json.availabilitySearch @status
+json.page @page
+json.perPage @perPage
+json.searchString @searchString
+
 json.players @nfl_players do |player|
   json.(player, :id, :full_name, :position)
   json.salary format_as_money(player.salary)
