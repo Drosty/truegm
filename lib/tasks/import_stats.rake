@@ -2,7 +2,9 @@ namespace :import do
   desc "Import Data from Fantasy Football Nerd API"
 
   task :stats => :environment do
-    get_import_service().import_stats
+    service = get_import_service()
+    service.import_offense_files
+    service.import_defense_files
   end
 
   task :nfl_teams => :environment do
