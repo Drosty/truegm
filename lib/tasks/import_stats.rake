@@ -22,7 +22,8 @@ namespace :import do
   end
 
   def get_import_service
-    FantasyData::ImportService.new(FantasyFootballNerdParty.new)
+    puts "API KEY: #{ENV["ffn_api_key"]}"
+    FantasyData::ImportService.new(FantasyFootballNerdParty.new(ENV["ffn_api_key"]))
   end
 
 end
