@@ -57,7 +57,7 @@ class NflPlayerViewModel
     elsif header_category == "Kicking"
       val = stat.field_goal_attempted
     elsif
-      val = stat.defensive_forced_fumbles
+      val = stat.fumbles_recovered
     end
     val = 0 if val.nil?
     val
@@ -74,7 +74,7 @@ class NflPlayerViewModel
     elsif header_category == "Kicking"
       val = stat.field_goal_made
     elsif
-      val = stat.defensive_forced_fumbles
+      val = stat.fumbles_recovered
     end
     val = 0 if val.nil?
     val
@@ -91,7 +91,7 @@ class NflPlayerViewModel
     elsif header_category == "Kicking"
       val = stat.field_goal_made
     elsif
-      val = stat.defensive_forced_fumbles
+      val = stat.fumbles_recovered
     end
     val = 0 if val.nil?
     val
