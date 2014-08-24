@@ -4,7 +4,7 @@ namespace :import do
   task :stats => :environment do
     service = get_import_service()
     service.import_offense_files
-    service.import_defense_files
+    service.import_defensive_files
   end
 
   task :nfl_teams => :environment do
