@@ -16,7 +16,7 @@ module Admin
 
       team.nfl_players << player
       team.save
-      (edit_admin_team_path(team))
+      redirect_to(edit_admin_team_path(team))
     end
 
     # PUT /admin/team/:team_id/remove/:player_id
@@ -27,7 +27,7 @@ module Admin
 
       team.nfl_players.delete(player)
       team.save
-      (edit_admin_team_path(team))
+      redirect_to(edit_admin_team_path(team))
     end
 
     # GET /admin/teams
