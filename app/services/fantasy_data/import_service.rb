@@ -106,10 +106,17 @@ module FantasyData
 
     end
 
+    # this imports from Fantasy Football Nerd.
+    # I don't have an API key for this but code is
+    # written with the test API key.  IF I ever
+    # purchase this I can use this endpoint.
+    # For now commenting out because I DON'T want
+    # this to run if it is accidentally called
     def import_stats
-      NflPlayer.all.each do |nfl_player|
-        process_stats_for_player nfl_player.nfl_data_id
-      end
+      puts "Shouldn't be calling this."
+      # NflPlayer.all.each do |nfl_player|
+      #  process_stats_for_player nfl_player.nfl_data_id
+      # end
     end
 
   end
