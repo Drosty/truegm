@@ -1,7 +1,52 @@
 <h1>Editing <%= @admin_team.name %></h1>
 <h3>League Name : <%= @admin_team.league.name %></h3>
 
-<%= render 'form' %>
+<div class="bs-component">
+  <ul class="nav nav-pills">
+    <li class="active">
+      <a href="#info" data-toggle="tab">Info</a>
+    </li>
+    <li>
+      <a href="#players" data-toggle="tab">NFL Players</a>
+    </li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+      <%= render 'form' %>
+    </div>
+    <div class="tab-pane fade in" id="players">
+      <% if @admin_team.nfl_players.any? %>
+        <h3>Players on Team</h3>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @admin_team.nfl_players.each do |player| %>
+              <tr>
+                <td><%= player.full_name %></td>
+                <td><%= player.position %></td>
+                <td><%= link_to "REMOVE", admin_team_player_remove_path(@admin_team, player.id), method: :delete %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      <%= form_tag admin_team_player_add_path(@admin_team) do %>
+        <%= collection_select(:player, :player_id, NflPlayer.with_salary.order(:full_name), :id, :full_name_with_nfl_team) %>
+        <%= submit_tag "Add Player To Team" %>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
 
 <%= link_to 'Show', admin_team_path(@admin_team) %> |
 <%= link_to 'Back', admin_league_path(@admin_team.league_id) %>
