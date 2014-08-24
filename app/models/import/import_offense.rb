@@ -8,17 +8,15 @@ module Import
                   :FantasyPoints, :year, :week, :TD
 
     def create_or_update_and_return_player_model
-      player = NflPlayer.find_or_create_by(nfl_data_id: nfl_player_import_id)
-      player.first_name = first_name
-      player.last_name = last_name
-      player.full_name = self.Player
-      player.position = self.Pos.downcase
-      player.nfl_team = get_nfl_team
+      player = find_or_create_player()
+      return nil if player.nil?
+
+      player.fantasy_data_id = self.ID
       player
     end
 
     def create_or_update_and_return_stats_model player_id
-      stat = Stat.find_or_create_by(week: self.week, year: self.year, nfl_player_id: player_id)
+      stat = ::Stat.find_or_create_by(week: self.week, year: self.year, nfl_player_id: player_id)
       stat.passing_yards = self.PassYds
       stat.passing_touchdowns = self.PassTDs
       stat.interceptions = self.Int
@@ -33,8 +31,17 @@ module Import
 
 private
 
-    def nfl_player_import_id
-      NflPlayer.generate_hash self.Player, self.Pos, self.Team
+    def find_or_create_player
+      player = ::NflPlayer.find_by(fantasy_data_id: self.ID)
+      if player.nil?
+        nfl_team = get_nfl_team
+        player = ::NflPlayer.fuzzy_find_by_spotrac(self.Player, self.Pos, nfl_team)
+        player = ::NflPlayer.fuzzy_find_no_team(self.Player, self.Pos) if player.nil?
+      end
+
+      puts "COULD NOT FIND PLAYER: #{first_name} #{last_name} #{self.Team}" if player.nil?
+
+      player
     end
 
     def first_name
@@ -49,7 +56,7 @@ private
     end
 
     def get_nfl_team
-      NflTeam.find_or_create_by(abbreviation: self.Team)
+      ::NflTeam.find_or_create_by(code: self.Team)
     end
 
   end

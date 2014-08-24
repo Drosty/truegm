@@ -119,6 +119,59 @@ module FantasyData
       # end
     end
 
+    def import_offense_files
+      files = get_files("offense")
+      binding.pry
+      for filename in files
+        week = get_week_from_file filename
+        year = get_year_from_file filename
+
+        CSV.foreach(filename, :headers => true) do |row|
+          object = Import::ImportOffense.new(row.to_hash)
+          object.PassTDs = row[6]
+          object.RushTds = row[9]
+          object.RecTds = row[12]
+          object.week = week
+          object.year = year
+          object.process_player_stats
+        end
+      end
+    end
+
+    def import_defensive_files
+      files = get_files("defense")
+      for filename in files
+        week = get_week_from_file filename
+        year = get_year_from_file filename
+
+        CSV.foreach(filename, :headers => true) do |row|
+          object = Import::ImportDefense.new(row.to_hash)
+          object.week = week
+          object.year = year
+          # object.process_player_stats
+        end
+      end
+    end
+
+  private
+
+    def get_files type
+      file_path = Rails.root.join('lib', 'import_data', type)
+      Dir["#{file_path}/**/*"]
+    end
+
+    def get_week_from_file filename
+      filename = File.basename(filename)
+      filename = filename.split('_')[1]
+      filename
+    end
+
+    def get_year_from_file filename
+      filename = File.basename(filename)
+      filename = filename.split('_')[0]
+      filename
+    end
+
   end
 
 end
