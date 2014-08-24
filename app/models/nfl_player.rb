@@ -32,6 +32,10 @@ class NflPlayer < ActiveRecord::Base
                               end
                             }
 
+  def self.with_salary
+    where("salary IS NOT NULL and salary != 0")
+  end
+
   def self.by_status(status, league)
     case status.downcase
     when 'free agent'
@@ -63,6 +67,10 @@ class NflPlayer < ActiveRecord::Base
   def full_name
     return read_attribute(:full_name) unless read_attribute(:full_name).nil?
     return "#{first_name} #{last_name}"
+  end
+
+  def full_name_with_nfl_team
+    "#{full_name} - #{nfl_team.code}"
   end
 
   def week_nfl_matchup week

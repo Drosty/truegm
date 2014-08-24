@@ -3,6 +3,33 @@ module Admin
 
     before_action :set_admin_team, only: [:show, :edit, :update, :destroy]
 
+    # PUT /admin/team/:team_id/add/:player_id
+    def player_add
+      team = Team.find(params[:team_id])
+      player = NflPlayer.find(params[:player][:player_id])
+      league = team.league
+
+      unless player.free_agent?(league.id)
+        current_team = player.fantasy_team(league.id)
+        current_team.nfl_players.delete(player)
+      end
+
+      team.nfl_players << player
+      team.save
+      (edit_admin_team_path(team))
+    end
+
+    # PUT /admin/team/:team_id/remove/:player_id
+    def player_remove
+      team = Team.find(params[:team_id])
+      player = NflPlayer.find(params[:player_id])
+      league = team.league
+
+      team.nfl_players.delete(player)
+      team.save
+      (edit_admin_team_path(team))
+    end
+
     # GET /admin/teams
     # GET /admin/teams.json
     def index

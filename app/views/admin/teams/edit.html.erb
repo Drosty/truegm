@@ -1,7 +1,6 @@
 <h1>Editing <%= @admin_team.name %></h1>
 <h3>League Name : <%= @admin_team.league.name %></h3>
 
-
 <div class="bs-component">
   <ul class="nav nav-pills">
     <li class="active">
@@ -32,11 +31,16 @@
               <tr>
                 <td><%= player.full_name %></td>
                 <td><%= player.position %></td>
-                <td>fill</td>
+                <td><%= link_to "REMOVE", admin_team_player_remove_path(@admin_team, player.id), method: :delete %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
+      <% end %>
+
+      <%= form_tag admin_team_player_add_path(@admin_team) do %>
+        <%= collection_select(:player, :player_id, NflPlayer.with_salary.order(:full_name), :id, :full_name_with_nfl_team) %>
+        <%= submit_tag "Add Player To Team" %>
       <% end %>
     </div>
 
