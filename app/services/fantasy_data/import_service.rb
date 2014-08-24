@@ -121,7 +121,7 @@ module FantasyData
 
     def import_offense_files
       files = get_files("offense")
-      binding.pry
+
       for filename in files
         week = get_week_from_file filename
         year = get_year_from_file filename
