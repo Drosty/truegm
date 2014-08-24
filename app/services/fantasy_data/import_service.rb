@@ -27,6 +27,7 @@ module FantasyData
         team = NflTeam.find_by(code: bye_week.team)
         team.bye_week = bye_week.byeWeek.to_i
         team.save
+        puts "Set #{team.code} to #{bye_week.byeWeek}"
       end
     end
 
