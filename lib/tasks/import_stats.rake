@@ -3,7 +3,7 @@ namespace :import do
 
   task :stats => :environment do
     service = get_import_service()
-    service.import_offense_files
+    # service.import_offense_files
     service.import_defensive_files
   end
 
