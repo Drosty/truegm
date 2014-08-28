@@ -1,19 +1,24 @@
-truegm.factory "LeagueService", ['$http', ($http) ->
+truegm.service "LeagueService",  ['$http', ($http) ->
   currentLeague = null
 
-  setLeague: (league) ->
+  @setLeague = (league) ->
     currentLeague = league
+    return
 
-  setOrUpdateLeagueById: (leagueId) ->
-    if(!currentLeague || currentLeague.id != leagueId)
+  @setOrUpdateLeagueById = (leagueId) ->
+    if(!currentLeague || parseInt(currentLeague.id) != parseInt(leagueId))
       $http.get("./leagues/" + leagueId + ".json").success((data) ->
         currentLeague = data
+        return
       )
     return
 
-  clearLeague: ->
+  @clearLeague = ->
     currentLeague = undefined
+    return
 
-  currentLeague: ->
+  @currentLeague = ->
     currentLeague
+
+  return
 ]
