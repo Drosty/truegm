@@ -17,6 +17,10 @@ class Team < ActiveRecord::Base
 
   delegate :name, :to => :user, :prefix => true
 
+  def ordered_nfl_players
+    nfl_players.sort { |a,b| NflPlayer.available_positions_for_filter.index(a.position.downcase) <=> NflPlayer.available_positions_for_filter.index(b.position.downcase) }
+  end
+
   def add_player player
     team = player.fantasy_team self.league_id
 
