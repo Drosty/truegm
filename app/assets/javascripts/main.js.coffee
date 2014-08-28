@@ -1,4 +1,4 @@
-@truegm = angular.module('truegm', ['templates', 'ngAnimate', 'ng-rails-csrf', 'ngRoute', 'ui.bootstrap'])
+@truegm = angular.module('truegm', ['templates', 'ngAnimate', 'ng-rails-csrf', 'ngRoute', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics'])
 
 @truegm.config(['$routeProvider', ($routeProvider) ->
   $routeProvider.
