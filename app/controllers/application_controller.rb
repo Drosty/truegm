@@ -53,7 +53,7 @@ private
   def ensure_user_logged_in
     if current_user.nil?
       flash[:error] = "Must be logged in."
-      redirect_to(request.referrer || new_user_session_path)
+      redirect_to(new_user_session_path)
     end
   end
 
