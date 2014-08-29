@@ -31,6 +31,7 @@ class ForumPostsController < ApplicationController
     @forum_post.post_body = params[:forum_post]
 
     @success = @forum_post.save
+    NewForumPostWorker.perform_async(@forum_post.id) if @success
   end
 
 end

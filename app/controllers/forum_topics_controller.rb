@@ -33,6 +33,7 @@ class ForumTopicsController < ApplicationController
     @forum_topic.league = @current_league
 
     @success = @forum_topic.save
+    NewForumTopicWorker.perform_async(@forum_topic.id) if @success
   end
 
 end

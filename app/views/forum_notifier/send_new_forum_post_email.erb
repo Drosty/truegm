@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>There is a new Forum Post in a Topic you've posted in</h1>
+    <p>League Name: <%= @topic.league.name %></p>
+    <p>Topic Name: <%= link_to @topic.name, @topic_url %></p>
+
+    <p>Please visit the league: <%= link_to "here", @league_url %><p>
+    <p>Or visit all of your leagues: <%= link_to "here", @leagues_url %></p>
+
+    <hr />
+    <p>Do not reply to this email, nobody will get it.  If you have questions email Drost directly</p>
+  </body>
+</html>

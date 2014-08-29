@@ -17,6 +17,11 @@ module EvokeTruegmRails
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    # config.autoload_paths += %W(#{config.root}/app/workers)
+
+    # For Sidekiq.  From here (https://github.com/mperham/sidekiq/wiki/FAQ)
+    config.autoload_paths += %W(#{config.root}/app/workers)
+    config.eager_load_paths += %W(#{config.root}/app/workers)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -69,5 +74,5 @@ module EvokeTruegmRails
     end
 
   end
-  
+
 end
