@@ -4,6 +4,10 @@
       {{ leagueName }}
     </a>
     <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+      <li>
+        <a ng-click="showMyTeam()" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">My Team</a>
+      </li>
+
       <li class="dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -32,6 +36,16 @@
       <li>
         <a href="#/leagues" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
           Show All Leagues
+        </a>
+      </li>
+    </ul>
+
+    <hr />
+
+    <ul class="nav navmenu-nav">
+      <li>
+        <a data-method="delete" href="/d/users/logout" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+          Logout
         </a>
       </li>
     </ul>

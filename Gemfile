@@ -57,6 +57,9 @@ gem 'will_paginate', '~> 3.0'
 # For LESS Rails
 gem "less-rails"
 
+# for background tasks (email)
+gem 'sidekiq'
+
 # Rails Best Practices gem
 gem 'rails_best_practices'
 

@@ -6,13 +6,18 @@
       $scope.leagueId = league.id
       $scope.isLeagueSelected = true
       $scope.teams = league.teams
+      $scope.currentTeamId = league.currentTeamId
     else
       $scope.leagueName = 'TrueGm'
       $scope.leagueId = 0
       $scope.isLeagueSelected = false
       $scope.teams = null
+      $scope.currentTeamId = null
 
     return
+
+  $scope.showMyTeam = ->
+    $location.path "/league/" + $scope.leagueId + "/team/" + $scope.currentTeamId
 
   # Add the following lines
   $scope.viewLeagues = ->

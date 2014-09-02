@@ -1,5 +1,7 @@
 json.(@current_league, :id, :name, :description, :tagline)
 
+json.currentTeamId current_user.team_in_league(@current_league.id).id
+
 json.teams @current_league.teams do |team|
   json.(team, :id, :name)
   json.salary format_as_money(team.total_salary)

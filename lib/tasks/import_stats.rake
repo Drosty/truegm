@@ -2,7 +2,9 @@ namespace :import do
   desc "Import Data from Fantasy Football Nerd API"
 
   task :stats => :environment do
-    get_import_service().import_stats
+    service = get_import_service()
+    # service.import_offense_files
+    service.import_defensive_files
   end
 
   task :nfl_teams => :environment do
@@ -22,7 +24,8 @@ namespace :import do
   end
 
   def get_import_service
-    FantasyData::ImportService.new(FantasyFootballNerdParty.new)
+    puts "API KEY: #{ENV["ffn_api_key"]}"
+    FantasyData::ImportService.new(FantasyFootballNerdParty.new(ENV["ffn_api_key"]))
   end
 
 end

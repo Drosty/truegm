@@ -27,6 +27,7 @@ module FantasyData
         team = NflTeam.find_by(code: bye_week.team)
         team.bye_week = bye_week.byeWeek.to_i
         team.save
+        puts "Set #{team.code} to #{bye_week.byeWeek}"
       end
     end
 
@@ -105,10 +106,70 @@ module FantasyData
 
     end
 
+    # this imports from Fantasy Football Nerd.
+    # I don't have an API key for this but code is
+    # written with the test API key.  IF I ever
+    # purchase this I can use this endpoint.
+    # For now commenting out because I DON'T want
+    # this to run if it is accidentally called
     def import_stats
-      NflPlayer.all.each do |nfl_player|
-        process_stats_for_player nfl_player.nfl_data_id
+      puts "Shouldn't be calling this."
+      # NflPlayer.all.each do |nfl_player|
+      #  process_stats_for_player nfl_player.nfl_data_id
+      # end
+    end
+
+    def import_offense_files
+      files = get_files("offense")
+
+      for filename in files
+        week = get_week_from_file filename
+        year = get_year_from_file filename
+
+        CSV.foreach(filename, :headers => true) do |row|
+          object = Import::ImportOffense.new(row.to_hash)
+          object.PassTDs = row[6]
+          object.RushTds = row[9]
+          object.RecTds = row[12]
+          object.week = week
+          object.year = year
+          object.process_player_stats
+        end
       end
+    end
+
+    def import_defensive_files
+      files = get_files("defense")
+      for filename in files
+        week = get_week_from_file filename
+        year = get_year_from_file filename
+
+        CSV.foreach(filename, :headers => true) do |row|
+          object = Import::ImportDefense.new(row.to_hash)
+          object.week = week
+          object.year = year
+          # object.process_player_stats
+        end
+      end
+    end
+
+  private
+
+    def get_files type
+      file_path = Rails.root.join('lib', 'import_data', type)
+      Dir["#{file_path}/**/*"]
+    end
+
+    def get_week_from_file filename
+      filename = File.basename(filename)
+      filename = filename.split('_')[1]
+      filename
+    end
+
+    def get_year_from_file filename
+      filename = File.basename(filename)
+      filename = filename.split('_')[0]
+      filename
     end
 
   end

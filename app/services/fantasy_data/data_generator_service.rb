@@ -21,7 +21,6 @@ module FantasyData
       end
     end
 
-
 private
 
     def generate_stats_for_player player, year
