@@ -23,16 +23,6 @@ EvokeTruegmRails::Application.routes.draw do
   resources :users
   resources :invites
 
-  namespace :admin do
-    get "/" => "leagues#index"
-
-    resources :leagues
-    resources :teams, :only => [:index, :show, :edit, :update] do
-      post "/add" => "teams#player_add", as: 'player_add'
-      delete "/remove/:player_id" => "teams#player_remove", as: 'player_remove'
-    end
-  end
-
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'app#index'
