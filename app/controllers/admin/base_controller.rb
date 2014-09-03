@@ -4,10 +4,6 @@ module Admin
 
   private
 
-    def verify_admin
-      redirect_to root_path, :alert => 'Unauthorized' unless current_user && current_user.is_admin?
-    end
-
   end
 
 end
