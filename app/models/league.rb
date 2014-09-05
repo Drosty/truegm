@@ -2,6 +2,8 @@ class League < ActiveRecord::Base
   attr_accessible :description, :name, :tagline, :salary_cap
 
   has_many :teams
+  accepts_nested_attributes_for :teams, :allow_destroy => true
+
   has_many :forum_topics
 
   validates_presence_of :tagline
