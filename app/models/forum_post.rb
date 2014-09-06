@@ -1,5 +1,5 @@
 class ForumPost < ActiveRecord::Base
-  attr_accessible :post_body
+  attr_accessible :post_body, :user_id, :forum_topic_id
 
   # These are here for updating the Topic's updated date
   before_create :update_topic
