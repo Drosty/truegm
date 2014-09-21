@@ -33,15 +33,11 @@ class ApplicationController < ActionController::Base
 private
 
   def layout_by_resource
-    if devise_controller? || controller_name == "welcome" || is_admin_namespace?
+    if devise_controller? || controller_name == "welcome"
       return "nong"
     else
       return "application"
     end
-  end
-
-  def is_admin_namespace?
-    self.class.parent == Admin
   end
 
   def user_not_authorized
