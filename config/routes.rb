@@ -12,7 +12,9 @@ EvokeTruegmRails::Application.routes.draw do
   end
 
   resources :leagues, :only => [:show, :index]  do
-    resources :nfl_players, :only => [:index, :show], :path => 'player'
+    resources :nfl_players, :only => [:index, :show], :path => 'player' do
+      post :add_player, on: :member
+    end
     resources :nfl_teams, :only => [:show]
 
     resources :forum_topics, :path => "topics" do

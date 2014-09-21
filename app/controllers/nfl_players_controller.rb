@@ -28,6 +28,10 @@ class NflPlayersController < ApplicationController
     @total_players = @nfl_players.count
   end
 
+  def add_player team_id
+
+  end
+
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
