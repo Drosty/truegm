@@ -15,9 +15,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# Admin Side of things
-gem 'activeadmin', github: 'activeadmin'
-
 # include angular files
 gem 'angularjs-rails'
 
