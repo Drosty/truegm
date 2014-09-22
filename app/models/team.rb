@@ -29,6 +29,16 @@ class Team < ActiveRecord::Base
     end
 
     self.nfl_players << player
+    self.save
+  end
+
+  def remove_player player
+    team = player.fantasy_team self.league_id
+
+    if team && team.id == self.id
+      team.nfl_players.delete(player.id)
+    end
+    self.save
   end
 
   def quarterbacks

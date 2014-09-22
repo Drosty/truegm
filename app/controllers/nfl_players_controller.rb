@@ -1,8 +1,8 @@
 class NflPlayersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  before_filter :set_current_league, only: [:show, :index]
-  before_action :set_nfl_player, only: [:show, :edit, :update, :destroy]
+  before_filter :set_current_league, only: [:show, :index, :add_player, :remove_player]
+  before_action :set_nfl_player, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
 
   # GET /nfl_players
   # GET /nfl_players.json
@@ -28,8 +28,26 @@ class NflPlayersController < ApplicationController
     @total_players = @nfl_players.count
   end
 
-  def add_player team_id
+  def add_player
+    user_team = @current_league.teams.select { |t| t.user_id == current_user.id }.first
 
+    @success = false
+
+    if user_team && @nfl_player
+      user_team.add_player @nfl_player
+      @success = true
+    end
+  end
+
+  def remove_player
+    user_team = @current_league.teams.select { |t| t.user_id == current_user.id }.first
+
+    @success = false
+
+    if user_team && @nfl_player
+      user_team.remove_player @nfl_player
+      @success = true
+    end
   end
 
   # GET /nfl_players/1
