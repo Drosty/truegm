@@ -31,7 +31,11 @@ class ForumPostsController < ApplicationController
     @forum_post.post_body = params[:forum_post]
 
     @success = @forum_post.save
-    NewForumPostWorker.perform_async(@forum_post.id) if @success
+
+    if @success
+      NewForumPostWorker.perform_async(@forum_post.id)
+      @forum_post.create_activity :create, owner: current_user
+    end
   end
 
 end

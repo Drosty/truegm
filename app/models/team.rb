@@ -1,4 +1,6 @@
 class Team < ActiveRecord::Base
+  include PublicActivity::Common
+
   attr_accessible :name, :tagline, :total_salary, :invite_code
 
   belongs_to :league
@@ -29,7 +31,9 @@ class Team < ActiveRecord::Base
     end
 
     self.nfl_players << player
-    self.save
+    if self.save
+      self.create_activity action: 'add_player', owner: self.user, recipient: player
+    end
   end
 
   def remove_player player
@@ -37,8 +41,13 @@ class Team < ActiveRecord::Base
 
     if team && team.id == self.id
       team.nfl_players.delete(player.id)
+
+
+      if self.save
+        self.create_activity action: 'remove_player', owner: self.user, recipient: player
+      end
     end
-    self.save
+
   end
 
   def quarterbacks
