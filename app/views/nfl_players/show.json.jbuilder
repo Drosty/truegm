@@ -7,9 +7,20 @@ json.nfl_team do
   json.id @nfl_player.nfl_team.id unless @nfl_player.nfl_team.nil?
 end
 
-json.league_team do
-  json.id view_model.player.fantasy_team(@current_league.id).id if view_model.player.fantasy_team(@current_league.id)
-  json.name view_model.player.fantasy_team_name(@current_league.id)
+json.is_on_team (current_user.teams & @nfl_player.teams).count > 0
+
+if view_model.player.fantasy_team(@current_league.id)
+  json.is_free_agent false
+  json.league_team do
+    json.id view_model.player.fantasy_team(@current_league.id).id
+    json.name view_model.player.fantasy_team_name(@current_league.id)
+  end
+else
+  json.is_free_agent true
+  json.league_team do
+    json.id nil
+    json.name "FA"
+  end
 end
 
 json.stats do

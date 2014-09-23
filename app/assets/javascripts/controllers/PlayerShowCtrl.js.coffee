@@ -8,4 +8,19 @@
     $scope.stats = data.stats
   )
 
+  $scope.addPlayer = ()->
+    dataObj = { }
+
+    $http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" + $scope.player.id + "/add_player", params: dataObj).success((data) ->
+      $location.path "/league/" + LeagueService.currentLeague().id
+    )
+    return
+
+  $scope.removePlayer = () ->
+    dataObj = { }
+
+    $http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" + $scope.player.id + "/remove_player", params: dataObj).success((data) ->
+      $location.path "/league/" + LeagueService.currentLeague().id
+    )
+    return
 ]

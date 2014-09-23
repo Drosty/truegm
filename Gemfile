@@ -96,3 +96,9 @@ gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 
 gem 'capistrano-rvm', github: "capistrano/rvm"
+
+# admin portal
+gem 'upmin-admin'
+
+#public activity
+gem 'public_activity'

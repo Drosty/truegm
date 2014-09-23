@@ -33,15 +33,11 @@ class ApplicationController < ActionController::Base
 private
 
   def layout_by_resource
-    if devise_controller? || controller_name == "welcome" || is_admin_namespace?
+    if devise_controller? || controller_name == "welcome"
       return "nong"
     else
       return "application"
     end
-  end
-
-  def is_admin_namespace?
-    self.class.parent == Admin
   end
 
   def user_not_authorized
@@ -55,6 +51,10 @@ private
       flash[:error] = "Must be logged in."
       redirect_to(new_user_session_path)
     end
+  end
+
+  def verify_admin
+    redirect_to root_path, :alert => 'Unauthorized' unless current_user && current_user.is_admin?
   end
 
 end

@@ -38,6 +38,10 @@
       templateUrl: 'player/show.html',
       controller: 'PlayerShowCtrl'
     }).
+    when('/league/:leagueId/activity', {
+      templateUrl: 'activity/index.html',
+      controller: 'ActivityIndexCtrl'
+    }).
     otherwise({
       templateUrl: 'leagues/index.html'
       controller: 'LeagueIndexCtrl'

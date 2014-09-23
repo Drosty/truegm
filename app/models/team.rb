@@ -1,4 +1,6 @@
 class Team < ActiveRecord::Base
+  include PublicActivity::Common
+
   attr_accessible :name, :tagline, :total_salary, :invite_code
 
   belongs_to :league
@@ -8,9 +10,7 @@ class Team < ActiveRecord::Base
 
   has_many :draft_picks
   has_many :power_rankings
-  has_many :trades
-  has_many :trade_votes
-
+  
   has_and_belongs_to_many :nfl_players
 
   before_save :update_total_salary
@@ -29,6 +29,23 @@ class Team < ActiveRecord::Base
     end
 
     self.nfl_players << player
+    if self.save
+      self.create_activity action: 'add_player', owner: self.user, recipient: player
+    end
+  end
+
+  def remove_player player
+    team = player.fantasy_team self.league_id
+
+    if team && team.id == self.id
+      team.nfl_players.delete(player.id)
+
+
+      if self.save
+        self.create_activity action: 'remove_player', owner: self.user, recipient: player
+      end
+    end
+
   end
 
   def quarterbacks
