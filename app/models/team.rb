@@ -10,9 +10,7 @@ class Team < ActiveRecord::Base
 
   has_many :draft_picks
   has_many :power_rankings
-  has_many :trades
-  has_many :trade_votes
-
+  
   has_and_belongs_to_many :nfl_players
 
   before_save :update_total_salary
