@@ -23,3 +23,12 @@ en:
 
   will_paginate:
     previous_label: "&#8592; Back"
+
+  activity:
+    forum_topic:
+      create: 'Forum Topic was created'
+    forum_post:
+      create: 'Forum Post was created'
+    team:
+      remove_player: 'Player was removed from team'
+      add_player: 'Player was added to team'

@@ -17,6 +17,7 @@ EvokeTruegmRails::Application.routes.draw do
       post :remove_player, on: :member
     end
     resources :nfl_teams, :only => [:show]
+    get 'activity', as: 'activity', :only => [:index]
 
     resources :forum_topics, :path => "topics" do
       resources :forum_posts, only: [:new, :create, :destroy]
