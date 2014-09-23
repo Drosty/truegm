@@ -32,4 +32,13 @@ class League < ActiveRecord::Base
     team.name
   end
 
+  def get_user_ids
+    teams = self.teams
+    user_ids = []
+    teams.each do |team|
+      user_ids << team.user_id if team.user_id
+    end
+    user_ids
+  end
+
 end

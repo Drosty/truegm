@@ -99,3 +99,6 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 
 # admin portal
 gem 'upmin-admin'
+
+#public activity
+gem 'public_activity'
