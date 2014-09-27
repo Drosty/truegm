@@ -12,13 +12,12 @@ class League < ActiveRecord::Base
                   :defensive_points_allowed_under_21_points,
                   :defensive_points_allowed_under_28_points,
                   :defensive_points_allowed_under_35_points,
-                  :defensive_points_allowed_equal_or_over_35_points,
-                  :teams_attributes
+                  :defensive_points_allowed_equal_or_over_35_points
 
-  has_many :teams
+  has_many :teams, dependent: :destroy
   accepts_nested_attributes_for :teams, :allow_destroy => true
 
-  has_many :forum_topics
+  has_many :forum_topics, dependent: :destroy
 
   validates_presence_of :tagline
   validates_length_of :name, :minimum => 5, :maximum => 20, :allow_blank => false

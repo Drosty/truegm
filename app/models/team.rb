@@ -6,11 +6,11 @@ class Team < ActiveRecord::Base
   belongs_to :league
   belongs_to :user
 
-  has_many :invites
+  has_many :invites, dependent: :destroy
 
-  has_many :draft_picks
-  has_many :power_rankings
-  
+  has_many :draft_picks, dependent: :destroy
+  has_many :power_rankings, dependent: :destroy
+
   has_and_belongs_to_many :nfl_players
 
   before_save :update_total_salary

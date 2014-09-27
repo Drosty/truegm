@@ -1,0 +1,33 @@
+<h3>Here are the Current Leagues</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Tagline</th>
+      <th>Salary</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_leagues.each do |admin_league| %>
+      <tr>
+        <td><%= admin_league.name %></td>
+        <td><%= admin_league.description %></td>
+        <td><%= admin_league.tagline %></td>
+        <td><%= admin_league.salary_cap %></td>
+        <td><%= link_to 'View Teams', [:admin, admin_league] %></td>
+        <td><%= link_to 'Edit', edit_admin_league_path(admin_league) %></td>
+        <td><%= link_to 'Destroy', admin_league_path(admin_league), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New League', new_admin_league_path %>
