@@ -1,6 +1,8 @@
 json.(@current_league, :id, :name, :description, :tagline)
 
-json.currentTeamId current_user.team_in_league(@current_league.id).id
+if current_user.team_in_league(@current_league.id)
+  json.currentTeamId current_user.team_in_league(@current_league.id).id
+end
 
 json.teams @current_league.teams do |team|
   json.(team, :id, :name)
