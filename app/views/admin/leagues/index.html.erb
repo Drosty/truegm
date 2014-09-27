@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Tagline</th>
+      <th>Salary</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,6 +19,7 @@
         <td><%= admin_league.name %></td>
         <td><%= admin_league.description %></td>
         <td><%= admin_league.tagline %></td>
+        <td><%= admin_league.salary_cap %></td>
         <td><%= link_to 'View Teams', [:admin, admin_league] %></td>
         <td><%= link_to 'Edit', edit_admin_league_path(admin_league) %></td>
         <td><%= link_to 'Destroy', admin_league_path(admin_league), method: :delete, data: { confirm: 'Are you sure?' } %></td>
