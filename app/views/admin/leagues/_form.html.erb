@@ -4,6 +4,9 @@
   <%= f.input :description %>
   <%= f.input :tagline %>
 
+  <%= label_tag 'number of teams' %>
+  <%= number_field_tag :number_of_teams, 10, in: 4...16 %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

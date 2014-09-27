@@ -26,9 +26,11 @@ module Admin
     # POST /admin/leagues
     # POST /admin/leagues.json
     def create
+      number_of_teams = params[:number_of_teams].to_i
       @admin_league = League.new(admin_league_params)
-      # Create 10 teams for the league
-      10.times do |n|
+
+      # Create teams for the league
+      number_of_teams.times do |n|
         team = Team.new
         team.name = "Team " + (n+1).to_s
 
