@@ -1,6 +1,6 @@
 class ForumTopic < ActiveRecord::Base
   include PublicActivity::Common
-  
+
   default_scope { order('updated_at desc') }
   attr_accessible :description, :name, :user_id, :league_id
 
