@@ -10,7 +10,7 @@
   $scope.form.totalPlayersCount = "0"
 
   $scope.playerStatuses = ["Free Agent", "Owned", "All"]
-  $scope.positions = ["ALL", "QB", "RB", "WR", "TE", "RB/WR/TE", "K", "D"]
+  $scope.positions = ["ALL", "QB", "RB", "WR", "TE", "RB/WR/TE", "K", "DEF"]
   $scope.currentLeagueId = $routeParams.leagueId
   LeagueService.setOrUpdateLeagueById($routeParams.leagueId)
 
