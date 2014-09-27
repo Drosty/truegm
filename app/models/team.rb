@@ -7,7 +7,6 @@ class Team < ActiveRecord::Base
   belongs_to :user
 
   has_many :invites, dependent: :destroy
-
   has_many :draft_picks, dependent: :destroy
   has_many :power_rankings, dependent: :destroy
 
@@ -30,7 +29,7 @@ class Team < ActiveRecord::Base
 
     self.nfl_players << player
     if self.save
-      self.create_activity action: 'add_player', owner: self.user, recipient: player
+      self.create_activity action: 'add_player', owner: self.user.team_in_league(self.league.id), recipient: player
     end
   end
 
@@ -40,12 +39,10 @@ class Team < ActiveRecord::Base
     if team && team.id == self.id
       team.nfl_players.delete(player.id)
 
-
       if self.save
-        self.create_activity action: 'remove_player', owner: self.user, recipient: player
+        self.create_activity action: 'remove_player', owner: self.user.team_in_league(self.league.id), recipient: player
       end
     end
-
   end
 
   def quarterbacks

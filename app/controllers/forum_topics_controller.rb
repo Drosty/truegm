@@ -34,7 +34,7 @@ class ForumTopicsController < ApplicationController
 
     @success = @forum_topic.save
     if @success
-      @forum_topic.create_activity :create, owner: current_user
+      @forum_topic.create_activity :create, owner: current_user.team_in_league(@current_league.id)
       NewForumTopicWorker.perform_async(@forum_topic.id)
     end
   end
