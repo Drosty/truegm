@@ -34,7 +34,7 @@ class ForumPostsController < ApplicationController
 
     if @success
       NewForumPostWorker.perform_async(@forum_post.id)
-      @forum_post.create_activity :create, owner: current_user
+      @forum_post.create_activity :create, owner: current_user.team_in_league(@current_league.id)
     end
   end
 

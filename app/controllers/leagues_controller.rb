@@ -20,9 +20,9 @@ class LeaguesController < ApplicationController
     @perpage = 10
     @current_league = League.find(params[:league_id]) if params[:league_id].present?
 
-    users = @current_league.get_user_ids
+    team_ids = @current_league.get_team_ids
     @activities = PublicActivity::Activity.order("created_at desc")
-                                          .where("owner_id in (?)", users)
+                                          .where("owner_id in (?) and owner_type ='Team'", team_ids)
                                           .paginate(:page => @page)
   end
 
