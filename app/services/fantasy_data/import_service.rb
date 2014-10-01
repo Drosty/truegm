@@ -118,7 +118,7 @@ module FantasyData
       #  process_stats_for_player nfl_player.nfl_data_id
       # end
     end
-
+    
     def import_offense_files
       files = get_files("offense")
 
