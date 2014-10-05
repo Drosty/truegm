@@ -40,7 +40,7 @@ module Admin
     def process_salaries
       week = PlayerSalaryInformation.select(&:week).map(&:week).max
       ol_service = OptimalLineup::OptimalLineupService.new(week)
-      lineup = ol_service.get_best_lineup
+      @lineup = ol_service.get_best_lineup
     end
 
     def optimal_lineup

@@ -13,41 +13,62 @@ module OptimalLineup
       k = LineupOptimize::PlayerSalaryInformation.new("K", @week)
       dst = LineupOptimize::PlayerSalaryInformation.new("DST", @week)
 
+      qb.set_players_to_keep([])
+      qb.set_players_to_remove([])
+
+      rbs.set_players_to_keep([])
+      rbs.set_players_to_remove([])
+
+      wrs.set_players_to_keep([])
+      wrs.set_players_to_remove([3567, 3584, 3566, 3583])
+
+      te.set_players_to_keep([])
+      te.set_players_to_remove([])
+
+      k.set_players_to_keep([])
+      k.set_players_to_remove([])
+
+      dst.set_players_to_keep([])
+      dst.set_players_to_remove([])
+
       filtered_qbs = qb.filter_down_data
-      filtered_rbs = qb.filter_down_data
-      filtered_wrs = qb.filter_down_data
-      filtered_tes = qb.filter_down_data
-      filtered_ds = qb.filter_down_data
-      filtered_ks = qb.filter_down_data
+      filtered_rbs = rbs.filter_down_data
+      filtered_wrs = wrs.filter_down_data
+      filtered_tes = te.filter_down_data
+      filtered_ds = dst.filter_down_data
+      filtered_ks = k.filter_down_data
 
-      top_10 = []
-      lowest_projection = 0
+      max_salary = 60000
+      top = { projection: 0, player_ids: [] }
 
-      binding.pry
-=begin
-      # 75MM total combinations combinations (much much better than thousands of trillions)
       filtered_qbs.each do |qb|
+        qb_salary = qb[0]
+
         filtered_rbs.each do |rb|
+          rb_salary = qb_salary + rb[0]
+          next if rb_salary > max_salary
+
           filtered_wrs.each do |wr|
+            wr_salary = rb_salary + wr[0]
+            next if wr_salary > max_salary
+
             filtered_tes.each do |te|
+              te_salary = wr_salary + te[0]
+              next if te_salary > max_salary
+
               filtered_ds.each do |d|
+                d_salary = te_salary + d[0]
+                next if d_salary > max_salary
+
                 filtered_ks.each do |k|
-                  salary = qb[0] + rb[0] + wr[0] + te[0] + d[0] + k[0]
-                  next if salary > 60000
+                  salary = d_salary + k[0]
+                  next if salary > max_salary
 
                   projection = qb[1] + rb[1] + wr[1] + te[1] + d[1] + k[1]
 
-                  if projection > lowest_projection
+                  if projection > top[:projection]
                     ids = [qb[2], rb[2], rb[3], wr[2], wr[3], wr[4], te[2], d[2], k[2]]
-                    top_10 << { projection: projection, player_ids: ids }
-
-                    top_10 = top_10.sort_by { |hash| hash[:projection] }
-
-                    if top_10.length > 25
-                      top_10.shift
-                    end
-
-                    lowest_projection = top_10[0][:projection]
+                    top = { projection: projection, player_ids: ids }
                   end
                 end
               end
@@ -55,8 +76,8 @@ module OptimalLineup
           end
         end
       end
-=end
 
+      top
     end
 
   end

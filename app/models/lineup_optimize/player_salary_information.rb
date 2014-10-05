@@ -22,6 +22,10 @@ module LineupOptimize
 
     def filter_down_data
       player_data = player_combination_array
+
+      player_data = filter_players_to_keep player_data
+      player_data = filter_out_players_to_remove player_data
+
       last_player_record_processed = [0,0]
 
       filtered_down_players = []
@@ -42,10 +46,71 @@ module LineupOptimize
 
       def filter_threshold
         return 2.0 if @position == "QB"
-        return 0.9 if @position == "QB"
-        return 0.8 if @position == "QB"
-        return 0.75 if @position == "QB"
+        return 0.9 if @position == "RB"
+        return 0.8 if @position == "WR"
+        return 0.75 if @position == "TE"
         1.0
+      end
+
+      def filter_players_to_keep players
+        rtn_players = players
+        if @players_to_keep && @players_to_keep.length > 0
+          if number_of_combinations == 2
+
+            if @players_to_keep.length == 2
+              rtn_players = players.select { |player| @players_to_keep.include?(player[2]) &&
+                                                      @players_to_keep.include?(player[3]) }
+            else
+              rtn_players = players.select { |player| @players_to_keep.include?(player[2]) ||
+                                                      @players_to_keep.include?(player[3]) }
+            end
+          elsif number_of_combinations == 3
+
+            if @players_to_keep.length == 2
+
+              rtn_players = players.select { |player| (@players_to_keep.include?(player[2]) &&
+                                                       @players_to_keep.include?(player[3])) ||
+
+                                                      (@players_to_keep.include?(player[2]) &&
+                                                       @players_to_keep.include?(player[4])) ||
+
+                                                      (@players_to_keep.include?(player[3]) &&
+                                                       @players_to_keep.include?(player[4]))}
+            elsif @players_to_keep.length == 3
+              rtn_players = players.select { |player| @players_to_keep.include?(player[2]) &&
+                                                      @players_to_keep.include?(player[3]) &&
+                                                      @players_to_keep.include?(player[4]) }
+            else
+              rtn_players = players.select { |player| @players_to_keep.include?(player[2]) ||
+                                                      @players_to_keep.include?(player[3]) ||
+                                                      @players_to_keep.include?(player[4]) }
+            end
+
+          else
+            rtn_players = players.select { |player| @players_to_keep.include?(player[2]) }
+          end
+        end
+
+        rtn_players
+      end
+
+      def filter_out_players_to_remove players
+        rtn_players = players
+
+        if @players_to_remove && @players_to_remove.length > 0
+          if number_of_combinations == 2
+            rtn_players = players.select { |player| !@players_to_remove.include?(player[2]) &&
+                                                    !@players_to_remove.include?(player[3]) }
+          elsif number_of_combinations == 3
+            rtn_players = players.select { |player| !@players_to_remove.include?(player[2]) &&
+                                                    !@players_to_remove.include?(player[3]) &&
+                                                    !@players_to_remove.include?(player[4]) }
+          else
+            rtn_players = players.select { |player| !@players_to_remove.include?(player[2]) }
+          end
+        end
+
+        rtn_players
       end
 
       def player_combination_array
@@ -56,7 +121,7 @@ module LineupOptimize
         else
           players = @mapped_players.to_a
         end
-        
+
         if do_combinations?
           players.each do |comb|
             salary = get_salary_from_player_combination(comb)
