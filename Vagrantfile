@@ -18,12 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box_url  = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
     override.vm.hostname = "truegm"
-    override.vm.network :forwarded_port, guest: 5000, host: 5000
-    override.vm.network :forwarded_port, guest: 80, host: 8080
+    override.vm.network :forwarded_port, guest: 3000, host: 3000
     override.ssh.forward_agent = true
   end
 
-  
+
 
   # Setup librarian-puppet
   # uses default puppet module path of /etc/puppet
