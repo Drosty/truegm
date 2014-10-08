@@ -37,7 +37,6 @@ module LineupOptimize
         end
       end
 
-      filtered_down_players = filtered_down_players.select { |l| (l[1]*1000)/l[0] > filter_threshold }
       filtered_down_players = filtered_down_players.reverse
       filtered_down_players
     end
@@ -89,6 +88,8 @@ module LineupOptimize
           else
             rtn_players = players.select { |player| @players_to_keep.include?(player[2]) }
           end
+        else
+          rtn_players = players.select { |l| (l[1]*1000)/l[0] > filter_threshold }
         end
 
         rtn_players
