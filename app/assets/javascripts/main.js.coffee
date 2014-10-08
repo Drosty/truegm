@@ -47,3 +47,13 @@
       controller: 'LeagueIndexCtrl'
     })
 ])
+
+@daily = angular.module('daily', ['templates', 'ngAnimate', 'ng-rails-csrf', 'ngRoute', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics'])
+
+@daily.config(['$routeProvider', ($routeProvider) ->
+  $routeProvider.
+    otherwise({
+      templateUrl: 'daily/index.html'
+      controller: 'DailyGamesIndexCtrl'
+    })
+])

@@ -5,7 +5,7 @@ module OptimalLineup
       @week = week
     end
 
-    def get_best_lineup
+    def get_best_lineup qb_keep, qb_reject, rb_keep, rb_reject, wr_keep, wr_reject, te_keep, te_reject, k_keep, k_reject, d_keep, d_reject
       qb = LineupOptimize::PlayerSalaryInformation.new("QB", @week)
       rbs = LineupOptimize::PlayerSalaryInformation.new("RB", @week)
       wrs = LineupOptimize::PlayerSalaryInformation.new("WR", @week)
@@ -13,23 +13,23 @@ module OptimalLineup
       k = LineupOptimize::PlayerSalaryInformation.new("K", @week)
       dst = LineupOptimize::PlayerSalaryInformation.new("DST", @week)
 
-      qb.set_players_to_keep([])
-      qb.set_players_to_remove([])
+      qb.set_players_to_keep(qb_keep)
+      qb.set_players_to_remove(qb_reject)
 
-      rbs.set_players_to_keep([])
-      rbs.set_players_to_remove([])
+      rbs.set_players_to_keep(rb_keep)
+      rbs.set_players_to_remove(rb_reject)
 
-      wrs.set_players_to_keep([])
-      wrs.set_players_to_remove([3567, 3584, 3566, 3583])
+      wrs.set_players_to_keep(wr_keep)
+      wrs.set_players_to_remove(wr_reject)
 
-      te.set_players_to_keep([])
-      te.set_players_to_remove([])
+      te.set_players_to_keep(te_keep)
+      te.set_players_to_remove(te_reject)
 
-      k.set_players_to_keep([])
-      k.set_players_to_remove([])
+      k.set_players_to_keep(k_keep)
+      k.set_players_to_remove(k_reject)
 
-      dst.set_players_to_keep([])
-      dst.set_players_to_remove([])
+      dst.set_players_to_keep(d_keep)
+      dst.set_players_to_remove(d_reject)
 
       filtered_qbs = qb.filter_down_data
       filtered_rbs = rbs.filter_down_data

@@ -27,6 +27,10 @@ EvokeTruegmRails::Application.routes.draw do
   resources :users
   resources :invites
 
+  get "/daily" => "daily_games#index"
+  get "/dailyinfo" => "daily_games#daily_info"
+  post "/daily" => "daily_games#optimize"
+
   authenticate :user, lambda { |u| u.is_admin? } do
     namespace :admin do
       get "/" => "leagues#index"

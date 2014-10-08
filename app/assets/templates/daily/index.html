@@ -1,0 +1,60 @@
+<h3>Quarterbacks</h3>
+<button ng-repeat="qb in qbs" ng-click="qbClicked(qb.id)" type="button" ng-class="playerClass(qb.status)">
+  {{qb.player_name}} ({{qb.projection}} - ${{qb.salary}})
+</button>
+
+<hr />
+
+<h3>Running Backs</h3>
+<button ng-repeat="rb in rbs" ng-click="rbClicked(rb.id)" type="button" ng-class="playerClass(rb.status)">
+  {{rb.player_name}} ({{rb.projection}} - ${{rb.salary}})
+</button>
+
+<hr />
+
+<h3>Wide Receivers</h3>
+<button ng-repeat="wr in wrs" ng-click="wrClicked(wr.id)" type="button" ng-class="playerClass(wr.status)">
+  {{wr.player_name}} ({{wr.projection}} - ${{wr.salary}})
+</button>
+
+<hr />
+
+<h3>Tight Ends</h3>
+<button ng-repeat="te in tes" ng-click="teClicked(te.id)" type="button" ng-class="playerClass(te.status)">
+  {{te.player_name}} ({{te.projection}} - ${{te.salary}})
+</button>
+
+<hr />
+
+<h3>Kickers</h3>
+<button ng-repeat="k in ks" ng-click="kClicked(k.id)" type="button" ng-class="playerClass(k.status)">
+  {{k.player_name}} ({{k.projection}} - ${{k.salary}})
+</button>
+
+<hr />
+
+<h3>Defense/Special Teams</h3>
+<button ng-repeat="d in dsts" ng-click="dClicked(d.id)" type="button" ng-class="playerClass(d.status)">
+  {{d.player_name}} ({{d.projection}} - ${{d.salary}})
+</button>
+
+<hr />
+<button ng-click="getOptimizedLineup()" class="btn btn-primary btn-large">PROCESS</button>
+
+<hr />
+
+<h3>Optimized Lineup</h3>
+<p>{{optimized_lineup_message}}<p>
+
+<div class="well">
+  <p>Projection :: {{optimized_projection}}</p>
+  <p>{{optimized_qb.player_name}} ${{optimized_qb.salary}} {{optimized_qb.projection}}</p>
+  <p>{{optimized_rb_1.player_name}} ${{optimized_rb_1.salary}} {{optimized_rb_1.projection}}</p>
+  <p>{{optimized_rb_2.player_name}} ${{optimized_rb_2.salary}} {{optimized_rb_2.projection}}</p>
+  <p>{{optimized_wr_1.player_name}} ${{optimized_wr_1.salary}} {{optimized_wr_1.projection}}</p>
+  <p>{{optimized_wr_2.player_name}} ${{optimized_wr_2.salary}} {{optimized_wr_2.projection}}</p>
+  <p>{{optimized_wr_3.player_name}} ${{optimized_wr_3.salary}} {{optimized_wr_3.projection}}</p>
+  <p>{{optimized_te.player_name}} ${{optimized_te.salary}} {{optimized_te.projection}}</p>
+  <p>{{optimized_k.player_name}} ${{optimized_k.salary}} {{optimized_k.projection}}</p>
+  <p>{{optimized_d.player_name}} ${{optimized_d.salary}} {{optimized_d.projection}}</p>
+</div>
