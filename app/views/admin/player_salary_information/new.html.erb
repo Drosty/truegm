@@ -1,0 +1,5 @@
+<%= form_tag({:action => :create}, :multipart => true) do %>
+  <%= file_field_tag 'salary_file' %>
+  <span>Week: </span><%= text_field_tag 'week' %>
+  <%= submit_tag "Upload" %>
+<% end %>

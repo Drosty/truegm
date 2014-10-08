@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922013442) do
+ActiveRecord::Schema.define(version: 20140930220849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,18 @@ ActiveRecord::Schema.define(version: 20140922013442) do
 
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
+
+  create_table "player_salary_informations", force: true do |t|
+    t.integer  "fantasy_data_id"
+    t.string   "player_name"
+    t.string   "position"
+    t.string   "team"
+    t.integer  "salary"
+    t.float    "projection"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "week"
+  end
 
   create_table "power_rankings", force: true do |t|
     t.integer  "team_id"
