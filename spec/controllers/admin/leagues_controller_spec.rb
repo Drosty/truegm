@@ -34,26 +34,12 @@ describe LeaguesController do
       end
 
       it "creates 10 teams for the league" do
-        page.driver.post admin_leagues_path, :league => valid_attributes
-        League.last.teams.length.should == 10 
+        page.driver.post admin_leagues_path, {:league => valid_attributes, :number_of_teams => 10}
+        League.last.teams.length.should == 10
       end
 
     end
 
   end
 
-  describe "POST create as Regular User" do
-    before(:each) do
-      @one_team_user = create(:user_with_one_team)
-      login(@one_team_user)
-    end
-
-    describe "with valid params" do
-      it "cannot create a new League" do
-        expect {
-          page.driver.post admin_leagues_path, :league => valid_attributes
-        }.to change(League, :count).by(0)
-      end
-    end
-  end
 end
