@@ -37,20 +37,6 @@ module Admin
       redirect_to admin_salaries_path, alert: "File Import Processed"
     end
 
-    def process_salaries
-      week = PlayerSalaryInformation.select(&:week).map(&:week).max
-      ol_service = OptimalLineup::OptimalLineupService.new(week)
-      @lineup = ol_service.get_best_lineup(params["qbs_allowed"], params["qbs_reject"],
-                                           params["rbs_allowed"], params["rbs_reject"],
-                                           params["wrs_allowed"], params["wrs_reject"],
-                                           params["tes_allowed"], params["tes_reject"],
-                                           params["ks_allowed"], params["ks_reject"],
-                                           params["dsts_allowed"], params["dsts_reject"])
-    end
-
-    def optimal_lineup
-    end
-
   end
 
 end
