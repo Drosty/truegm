@@ -7,7 +7,7 @@ class DailyGamesController < ApplicationController
 
   # post /daily
   def optimize
-    week = "5"
+    week = "6"
     ol_service = OptimalLineup::OptimalLineupService.new(week)
     lineup = ol_service.get_best_lineup(params["qbs_allowed"], params["qbs_reject"],
                                          params["rbs_allowed"], params["rbs_reject"],
@@ -31,7 +31,7 @@ class DailyGamesController < ApplicationController
   end
 
   def daily_info
-    @week = "5"
+    @week = "6"
     @qbs  = PlayerSalaryInformation.where("position = 'QB'  AND week = #{@week}")
     @rbs  = PlayerSalaryInformation.where("position = 'RB'  AND week = #{@week}")
     @wrs  = PlayerSalaryInformation.where("position = 'WR'  AND week = #{@week}")
