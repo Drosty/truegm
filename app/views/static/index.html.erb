@@ -6,12 +6,12 @@
   <script src="assets/carousel.js"></script>
 </head>
 <body>
-  <div ng-controller="CarouselDemoCtrl" class="inner" style="z-index: 1;">
+  <div ng-controller="CarouselDemoCtrl" class="inner" style="z-index: -100;">
     <div style="height: 305px; width: 100%;">
       <%= render :partial => "devise/sessions/login", :locals => {:id => "home-login"} %>
       <carousel interval="myInterval">
         <slide ng-repeat="slide in slides" active="slide.active" style="height: 75vh;">
-          <img ng-src="{{slide.image}}" style="margin:auto; max-width: none;">
+          <img ng-src="{{slide.image}}" style="margin:auto; max-width: none;" >
           <div class="carousel-caption">
             <p>{{slide.text}}</p>
           </div>
