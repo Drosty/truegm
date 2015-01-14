@@ -1,0 +1,57 @@
+// Place all the styles related to the Static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootswatch/sandstone/variables";
+@import "bootstrap";
+body { padding-top: 60px; }
+@import "bootswatch/sandstone/bootswatch";
+
+.inner {
+  position: absolute;
+}
+
+.picture_banner {
+  max-height: 75vh !important;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-dialog {
+  width: 400px;
+}
+.modal-footer {
+  height: 150px;
+}
+.modal-footer .btn {
+  font-weight: bold;
+}
+.modal-footer .progress {
+  display: none;
+  height: 32px;
+}
+.input-group-addon {
+  color: #fff;
+  background: #3276B1;
+}
+.login-inputs {
+  width: 80%;
+}
+img.displayed {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#home-login {
+  position: absolute;
+  z-index: 2;
+  left: 67%;
+  top: 40%;
+}
