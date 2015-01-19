@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930220849) do
+ActiveRecord::Schema.define(version: 20150119223154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,37 +176,6 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.string   "full_name"
     t.string   "short_name"
     t.integer  "bye_week"
-  end
-
-  create_table "owners", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-  end
-
-  add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
-  add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
-
-  create_table "player_salary_informations", force: true do |t|
-    t.integer  "fantasy_data_id"
-    t.string   "player_name"
-    t.string   "position"
-    t.string   "team"
-    t.integer  "salary"
-    t.float    "projection"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "week"
   end
 
   create_table "power_rankings", force: true do |t|
