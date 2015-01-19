@@ -8,7 +8,6 @@ class Stat < ActiveRecord::Base
 
   validates_presence_of :week, :year, :nfl_player_id
 
-
   def total_points league
     return calculate_stat(league)
   end
@@ -30,7 +29,7 @@ class Stat < ActiveRecord::Base
 
   def position_specific_stats
     stats = []
-    case nfl_player.position
+    case nfl_player.position.upcase
     when "QB"
       stats = get_stats_for_qb
     when "RB"
