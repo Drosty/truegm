@@ -5,14 +5,12 @@ class Stat < ActiveRecord::Base
                   :year, :week, :nfl_player_id
 
   belongs_to :nfl_player
-  has_many :processed_stats
 
   validates_presence_of :week, :year, :nfl_player_id
 
+
   def total_points league
-    stat = self.processed_stats.where(league_id: league.id).first
-    return 0 if stat.nil?
-    return stat.value
+    return calculate_stat(league)
   end
 
   def summary
