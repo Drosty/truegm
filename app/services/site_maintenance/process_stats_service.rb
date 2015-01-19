@@ -2,7 +2,7 @@ module SiteMaintenance
   class ProcessStatsService
 
     def initialize(league_id = nil)
-      @leagues = League.find(league_id) unless league_id.nil?
+      @leagues = [League.find(league_id)] unless league_id.nil?
       @leagues = League.all if @leagues.nil?
     end
 
