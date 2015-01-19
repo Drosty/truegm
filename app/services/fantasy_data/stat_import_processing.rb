@@ -7,7 +7,6 @@ module FantasyData
       process_multiple_years_of_stats stats_data_by_year
     end
 
-
     def process_multiple_years_of_stats year_of_stats_data
       year_of_stats_data.each do |year_of_stats|
         process_individual_year_of_stats year_of_stats

@@ -1,5 +1,11 @@
 require 'csv'
 
+##
+# This is the service that will make the calls to fantasy
+# data and then process the data that is returned.  After
+# making the call if will model the data and save it to
+# the database correctly.
+##
 module FantasyData
   class ImportService
     include FantasyData::StatImportProcessing
@@ -118,7 +124,7 @@ module FantasyData
       #  process_stats_for_player nfl_player.nfl_data_id
       # end
     end
-    
+
     def import_offense_files
       files = get_files("offense")
 
