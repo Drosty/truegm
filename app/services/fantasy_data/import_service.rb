@@ -1,5 +1,3 @@
-require 'csv'
-
 ##
 # This is the service that will make the calls to fantasy
 # data and then process the data that is returned.  After
@@ -10,63 +8,62 @@ module FantasyData
   class ImportService
     include FantasyData::StatImportProcessing
 
-    attr_reader :fantasy_footbal_nerd_party
+    attr_reader :fantasy_data_party
 
-    def initialize(fantasy_football_party = FantasFootballNerdParty.new)
-      @fantasy_football_nerd_party = fantasy_football_party
+    def initialize(fantasy_data_party = FantasyDataParty.new)
+      @fantasy_data_party = fantasy_data_party
     end
 
     def import_nfl_team_data
-      teams = @fantasy_football_nerd_party.nfl_teams
+      teams = @fantasy_data_party.nfl_teams
 
       teams.each do |team|
-        NflTeam.find_or_create_by(code: team.code,
-                                  full_name: team.fullName,
-                                  short_name: team.shortName)
-      end
-    end
+        in_team = NflTeam.find_or_create_by(code: team["Key"],
+                                  full_name: team["FullName"],
+                                  short_name: team["Name"])
 
-    def import_nfl_bye_weeks
-      bye_weeks = @fantasy_football_nerd_party.bye_weeks
-
-      bye_weeks.each do |bye_week|
-        team = NflTeam.find_by(code: bye_week.team)
-        team.bye_week = bye_week.byeWeek.to_i
-        team.save
-        puts "Set #{team.code} to #{bye_week.byeWeek}"
+        in_team.bye_week = team["ByeWeek"]
+        in_team.save
       end
     end
 
     def import_nfl_player_data position
-      players = @fantasy_football_nerd_party.nfl_players position
       NflPlayer.update_all(active: false)
 
-      players.each do |player|
-        p_to_save = NflPlayer.find_or_create_by(nfl_data_id: player.playerId)
+      NflTeam.all.each do |nfl_team|
+        puts "processing #{nfl_team.code}"
+        players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
+        players.each do |player|
+          p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
 
-        p_to_save.active = player.active == "1"
-        p_to_save.jersey = player.jersey
-        p_to_save.last_name = player.lname
-        p_to_save.first_name = player.fname
-        p_to_save.full_name = player.displayName
-        p_to_save.nfl_team = NflTeam.find_by(code: player.team)
-        p_to_save.position = player.position
-        p_to_save.height = player.height
-        p_to_save.weight = player.weight
-        p_to_save.college = player.college
+          p_to_save.active = player["Active"] == "true"
+          p_to_save.jersey = player["Number"].to_i
+          p_to_save.last_name = player["LastName"]
+          p_to_save.first_name = player["FirstName"]
+          p_to_save.full_name = player["Name"]
+          p_to_save.nfl_team = nfl_team
+          p_to_save.position = player["FantasyPosition"]
+          p_to_save.height = player["Height"]
+          p_to_save.weight = player["Weight"]
+          p_to_save.college = player["College"]
+          p_to_save.current_status = player["CurrentStatus"]
+          p_to_save.depth_order = player["DepthOrder"].to_i
+          p_to_save.experience = player["Experience"].to_i
+          p_to_save.photo_url = player["PhotoUrl"]
 
-        begin
-          p_to_save.dob = player.dob.to_datetime
-        rescue => e
-          p_to_save.dob = nil
+          begin
+            p_to_save.dob = player["BirthDate"].to_datetime
+          rescue => e
+            p_to_save.dob = nil
+          end
+
+          p_to_save.save
         end
-
-        p_to_save.save
       end
     end
 
     def import_nfl_schedule
-      matchups = @fantasy_football_nerd_party.nfl_schedule
+      matchups = @fantasy_data_party.nfl_schedule
 
       matchups.each do |matchup|
         db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId,
@@ -124,60 +121,5 @@ module FantasyData
       #  process_stats_for_player nfl_player.nfl_data_id
       # end
     end
-
-    def import_offense_files
-      files = get_files("offense")
-
-      for filename in files
-        week = get_week_from_file filename
-        year = get_year_from_file filename
-
-        CSV.foreach(filename, :headers => true) do |row|
-          object = Import::ImportOffense.new(row.to_hash)
-          object.PassTDs = row[6]
-          object.RushTds = row[9]
-          object.RecTds = row[12]
-          object.week = week
-          object.year = year
-          object.process_player_stats
-        end
-      end
-    end
-
-    def import_defensive_files
-      files = get_files("defense")
-      for filename in files
-        week = get_week_from_file filename
-        year = get_year_from_file filename
-
-        CSV.foreach(filename, :headers => true) do |row|
-          object = Import::ImportDefense.new(row.to_hash)
-          object.week = week
-          object.year = year
-          # object.process_player_stats
-        end
-      end
-    end
-
-  private
-
-    def get_files type
-      file_path = Rails.root.join('lib', 'import_data', type)
-      Dir["#{file_path}/**/*"]
-    end
-
-    def get_week_from_file filename
-      filename = File.basename(filename)
-      filename = filename.split('_')[1]
-      filename
-    end
-
-    def get_year_from_file filename
-      filename = File.basename(filename)
-      filename = filename.split('_')[0]
-      filename
-    end
-
   end
-
 end
