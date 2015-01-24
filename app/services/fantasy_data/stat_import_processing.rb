@@ -1,27 +1,27 @@
 module FantasyData
   module StatImportProcessing
 
-    def process_stats_for_player id
-      stats_data_by_year = @fantasy_footbal_nerd_party.stats id
+    def process_box_score stat_data
+      week = stat_data["Score"]["Week"]
+      season = stat_data["Score"]["Season"]
 
-      process_multiple_years_of_stats stats_data_by_year
-    end
+      process_defense_stat stat_data["AwayFantasyDefense"], week, season
+      process_defense_stat stat_data["HomeFantasyDefense"], week, season
 
-    def process_multiple_years_of_stats year_of_stats_data
-      year_of_stats_data.each do |year_of_stats|
-        process_individual_year_of_stats year_of_stats
+      stat_data["HomePassing"].each do |stat_line|
+        process_offense_stat stat_line, week, season
+      end
+
+      stat_data["AwayPassing"].each do |stat_line|
+        process_offense_stat stat_line, week, season
       end
     end
 
-    def process_individual_year_of_stats year_of_data
-      year_of_data[1].each do |actual_stat|
-        process_stat actual_stat
-      end
+    def process_defense_stat stat_info, week, season
+      # TODO
     end
 
-    def process_stat stat_data
-      stat_info = Import::Stat.new(stat_data[1])
-
+    def process_offense_stat stat_info, week, season
       player = NflPlayer.find_by(nfl_data_id: stat_info.playerId)
       return if player.nil?
 

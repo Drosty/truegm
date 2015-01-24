@@ -113,17 +113,21 @@ module FantasyData
 
     end
 
-    # this imports from Fantasy Football Nerd.
-    # I don't have an API key for this but code is
-    # written with the test API key.  IF I ever
-    # purchase this I can use this endpoint.
-    # For now commenting out because I DON'T want
-    # this to run if it is accidentally called
-    def import_stats
-      puts "Shouldn't be calling this."
-      # NflPlayer.all.each do |nfl_player|
-      #  process_stats_for_player nfl_player.nfl_data_id
-      # end
+    # this is going to be called for updates to errors etc,
+    # as well as loading in the historical stats
+    #
+    # year in the format of 2014REG 2014POST, 2014PRE etc.
+    # regular week is 1 based : 1 - 17
+    # preseason week is 0 based : 0 - 4
+    # postseason is 1 based : 1 - 4
+    def import_weekly_stats year, week
+        stats = @fantasy_data_party.weekly_stats(year, week)
     end
+
+    # this will be what is called for Real-Time stat importing
+    def import_active_stats
+
+    end
+
   end
 end
