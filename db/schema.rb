@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124033843) do
+ActiveRecord::Schema.define(version: 20150124120921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 20150124033843) do
     t.string   "tv_station"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "point_spread"
+    t.float    "over_under"
   end
 
   create_table "nfl_players", force: true do |t|

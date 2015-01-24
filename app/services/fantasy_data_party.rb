@@ -20,4 +20,9 @@ class FantasyDataParty
     response.parsed_response
   end
 
+  def nfl_schedule year_string
+    response = self.class.get("/Schedules/#{year_string}?subscription-key=#{@subscription_key}")
+    response.parsed_response
+  end
+
 end

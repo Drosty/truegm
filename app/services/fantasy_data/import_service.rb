@@ -63,19 +63,23 @@ module FantasyData
     end
 
     def import_nfl_schedule
-      matchups = @fantasy_data_party.nfl_schedule
+      matchups = @fantasy_data_party.nfl_schedule "2014REG"
 
       matchups.each do |matchup|
-        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.gameId,
-                                                  week: matchup.gameWeek,
-                                                  year: ENV['current_year'])
+        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup["GameKey"].to_i,
+                                                  week: matchup["Week"].to_i,
+                                                  year: matchup["Season"].to_i)
 
-        db_matchup.home_team = NflTeam.find_by(code: matchup.homeTeam)
-        db_matchup.away_team = NflTeam.find_by(code: matchup.awayTeam)
-        db_matchup.tv_station = matchup.tvStation
+        db_matchup.home_team = NflTeam.find_by(code: matchup["HomeTeam"])
+        db_matchup.away_team = NflTeam.find_by(code: matchup["AwayTeam"])
+        db_matchup.over_under = matchup["OverUnder"].to_f
+        db_matchup.point_spread = matchup["PointSpread"].to_f
 
-        Time.zone = 'Eastern Time (US & Canada)'
-        db_matchup.game_date = Time.zone.parse(matchup.gameDate + " " + matchup.gameTimeET).utc
+        # date is null on bye weeks in the schedule - so check this
+        if matchup["Date"]
+          Time.zone = 'Eastern Time (US & Canada)'
+          db_matchup.game_date = Time.zone.parse(matchup["Date"]).utc
+        end
 
         db_matchup.save
       end
