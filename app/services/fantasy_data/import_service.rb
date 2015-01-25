@@ -6,8 +6,6 @@
 ##
 module FantasyData
   class ImportService
-    include FantasyData::StatImportProcessing
-
     attr_reader :fantasy_data_party
 
     def initialize(fantasy_data_party = FantasyDataParty.new)
@@ -31,8 +29,8 @@ module FantasyData
       NflPlayer.update_all(active: false)
 
       NflTeam.all.each do |nfl_team|
-        puts "processing #{nfl_team.code}"
         players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
+
         players.each do |player|
           p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
 
@@ -122,9 +120,10 @@ module FantasyData
     # postseason is 1 based : 1 - 4
     def import_weekly_stats year, week
       box_scores = @fantasy_data_party.weekly_stats(year, week)
+      stat_processor = FantasyData::StatImportProcessing.new
 
       box_scores.each do |box_score|
-        FantasyData::StatImportProcessing.process_box_score(box_score)
+        stat_processor.process_box_score(box_score)
       end
     end
 
@@ -132,6 +131,5 @@ module FantasyData
     def import_active_stats
 
     end
-
   end
 end
