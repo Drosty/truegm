@@ -121,7 +121,11 @@ module FantasyData
     # preseason week is 0 based : 0 - 4
     # postseason is 1 based : 1 - 4
     def import_weekly_stats year, week
-        stats = @fantasy_data_party.weekly_stats(year, week)
+      box_scores = @fantasy_data_party.weekly_stats(year, week)
+
+      box_scores.each do |box_score|
+        FantasyData::StatImportProcessing.process_box_score(box_score)
+      end
     end
 
     # this will be what is called for Real-Time stat importing
