@@ -53,8 +53,7 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
-    stats = Stat.eager_load(:processed_stats)
-                .where(nfl_player_id: @nfl_player.id)
+    stats = Stat.where(nfl_player_id: @nfl_player.id)
                 .where("year > ?", Time.now.year - 2)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
 

@@ -1,5 +1,5 @@
 class Stat < ActiveRecord::Base
-  attr_accessible :passing_yards, :passing_touchdowns, :interceptions,
+  attr_accessible :passing_yards, :passing_touchdowns, :passing_interceptions,
                   :rushing_yards, :rushing_touchdowns, :receptions,
                   :receiving_yards, :receiving_touchdowns, :fumbles_lost,
                   :year, :week, :nfl_player_id
@@ -15,7 +15,7 @@ class Stat < ActiveRecord::Base
   def summary
     case nfl_player.position
     when "QB"
-      summary = "#{passing_yards} yards / #{passing_touchdowns} TDs / #{interceptions} INTs"
+      summary = "#{passing_yards} yards / #{passing_touchdowns} TDs / #{passing_interceptions} INTs"
     when "RB"
       summary = "#{rushing_yards} yards / #{rushing_touchdowns} TDs"
     when "WR", "TE"
@@ -49,7 +49,7 @@ class Stat < ActiveRecord::Base
     [
       (passing_yards.to_f * league.passing_yard_points).round(2),
       passing_touchdowns.to_i * league.passing_touchdown_points,
-      interceptions.to_i * league.passing_interception_points,
+      passing_interceptions.to_i * league.passing_interception_points,
       fumbles_lost.to_i * league.fumbles_lost_points,
       rushing_yards.to_f * league.rushing_yards_points,
       rushing_touchdowns.to_i * league.rushing_touchdown_points,
@@ -59,7 +59,7 @@ class Stat < ActiveRecord::Base
 
       defensive_interceptions.to_i * league.defensive_interception_points,
       fumbles_recovered.to_i * league.defensive_fumble_recovered_points,
-      sacks.to_i * league.defensive_sack_points,
+      defensive_sacks.to_i * league.defensive_sack_points,
       safties.to_i * league.defensive_saftey_points,
       defensive_tds.to_i * league.defensive_touchdown_points,
       defensive_points_allowed_points(league)
@@ -72,7 +72,7 @@ class Stat < ActiveRecord::Base
       {
         :passing_yards => self.passing_yards,
         :passing_touchdowns => self.passing_touchdowns,
-        :interceptions => self.interceptions,
+        :interceptions => self.passing_interceptions,
         :rushing_yards => self.rushing_yards,
         :rushing_touchdown => self.rushing_touchdowns,
         :fumbles_lost => self.fumbles_lost
@@ -104,7 +104,7 @@ class Stat < ActiveRecord::Base
     def get_stats_for_def
       {
         :points_allowed => self.points_allowed,
-        :sacks => self.sacks,
+        :sacks => self.defensive_sacks,
         :interceptions => self.defensive_interceptions,
         :fumbles_recovered => self.fumbles_recovered,
         :defensive_touchdowns => self.defensive_tds,
