@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124120921) do
+ActiveRecord::Schema.define(version: 20150125164143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(version: 20150124120921) do
     t.integer "nfl_player_id"
     t.integer "passing_yards"
     t.integer "passing_touchdowns"
-    t.integer "interceptions"
     t.integer "rushing_yards"
     t.integer "rushing_touchdowns"
     t.integer "receptions"
@@ -208,7 +207,6 @@ ActiveRecord::Schema.define(version: 20150124120921) do
     t.integer "year"
     t.integer "week"
     t.integer "tfl"
-    t.integer "sacks"
     t.integer "qbhits"
     t.integer "defensive_interceptions"
     t.integer "fumbles_recovered"
@@ -223,14 +221,17 @@ ActiveRecord::Schema.define(version: 20150124120921) do
     t.integer "passing_completions"
     t.integer "passing_attempts"
     t.float   "passing_percentage"
-    t.float   "average_pass_yards"
     t.float   "qb_rating"
     t.integer "rushing_attempts"
     t.float   "rushing_average"
-    t.integer "fumbles"
     t.integer "long_run"
-    t.float   "receiving_average"
     t.integer "receiving_long"
+    t.integer "passing_sacks"
+    t.integer "defensive_sacks"
+    t.integer "passing_interceptions"
+    t.integer "receiving_targets"
+    t.integer "two_point_conversion_receptions"
+    t.integer "two_point_conversion_runs"
   end
 
   add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree
