@@ -32,6 +32,7 @@ module FantasyData
         players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
 
         players.each do |player|
+          next unless ["QB", "RB", "WR", "TE", "K"].include?player["FantasyPosition"]
           p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
 
           p_to_save.active = player["Active"] == "true"
