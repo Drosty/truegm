@@ -54,7 +54,7 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players/1.json
   def show
     stats = Stat.where(nfl_player_id: @nfl_player.id)
-                .where("year > ?", Time.now.year - 2)
+                .where("year >= ?", 2013)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
 
     render :locals => { :view_model => view_model }
