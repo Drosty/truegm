@@ -1,6 +1,15 @@
 namespace :import do
   desc "Import Data from Fantasy Football Nerd API"
 
+  task :yearly_stats, [:year] => :environment do |t, args|
+    args.with_defaults(:year => 2014)
+
+    (1..17).each do |week|
+      puts "processing week: #{week}"
+      get_import_service().import_weekly_stats(args[:year], week)
+    end
+  end
+
   task :weekly_stats, [:week, :year] => :environment do |t, args|
     args.with_defaults(:week => 1, :year => 2014)
     puts "#{args[:year]} - #{args[:week]}"

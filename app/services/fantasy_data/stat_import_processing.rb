@@ -2,8 +2,8 @@ module FantasyData
   class StatImportProcessing
 
     def process_box_score stat_data
-      week = stat_data["Score"]["Week"]
-      season = stat_data["Score"]["Season"]
+      week = stat_data["Score"]["Week"].to_i
+      season = stat_data["Score"]["Season"].to_i
 
       # process_defense_stat stat_data["AwayFantasyDefense"], week, season
       # process_defense_stat stat_data["HomeFantasyDefense"], week, season
