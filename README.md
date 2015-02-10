@@ -1,6 +1,6 @@
 # TrueGM
 
-[![Build Status](https://travis-ci.org/Drosty/truegm.svg?branch=develop)](https://travis-ci.org/Drosty/truegm) [![Coverage Status](https://coveralls.io/repos/Drosty/truegm/badge.png?branch=master)](https://coveralls.io/r/Drosty/truegm?branch=master) [![Code Climate](https://codeclimate.com/github/Drosty/truegm.png)](https://codeclimate.com/github/Drosty/truegm) [ ![Codeship Status for Drosty/truegm](https://codeship.io/projects/3e8ac760-2c5b-0132-64c8-1a021f7da059/status)](https://codeship.io/projects/38818)
+[ ![Codeship Status for Drosty/truegm](https://codeship.io/projects/3e8ac760-2c5b-0132-64c8-1a021f7da059/status)](https://codeship.io/projects/38818) [![Code Climate](https://codeclimate.com/github/Drosty/truegm.png)](https://codeclimate.com/github/Drosty/truegm)
 
 This is a Fantasy Football tracking Site for my Fantasy Football league.
 

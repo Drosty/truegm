@@ -83,9 +83,9 @@ class NflPlayerViewModel
   def col4_for_header stat, header_category
     val = 0
     if header_category == "Passing"
-      val = stat.interceptions
+      val = stat.passing_interceptions
     elsif header_category == "Rushing"
-      val = stat.fumbles
+      val = stat.fumbles_recovered
     elsif header_category == "Receiving"
       val = stat.receiving_touchdowns
     elsif header_category == "Kicking"

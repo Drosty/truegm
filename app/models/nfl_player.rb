@@ -1,7 +1,8 @@
 class NflPlayer < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :position, :salary, :nfl_data_id,
-                  :nfl_team_id, :spotrac_url, :full_name, :jersey, 
-                  :height, :weight, :dob, :college, :active
+  attr_accessible :first_name, :last_name, :position, :salary,
+                  :nfl_team_id, :spotrac_url, :full_name, :jersey,
+                  :height, :weight, :dob, :college, :active, :current_status,
+                  :depth_order, :experience, :photo_url, :fantasy_data_id
 
   belongs_to :nfl_team
   has_and_belongs_to_many :teams

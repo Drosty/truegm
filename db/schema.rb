@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930220849) do
+ActiveRecord::Schema.define(version: 20150125164143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.string   "tv_station"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "point_spread"
+    t.float    "over_under"
   end
 
   create_table "nfl_players", force: true do |t|
@@ -148,17 +150,19 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.datetime "updated_at"
     t.string   "spotrac_url"
     t.string   "full_name"
-    t.integer  "nfl_data_id",     limit: 8
     t.string   "jersey"
     t.string   "height"
     t.string   "weight"
     t.datetime "dob"
     t.string   "college"
     t.boolean  "active"
-    t.string   "fantasy_data_id"
+    t.string   "current_status"
+    t.integer  "depth_order"
+    t.integer  "experience"
+    t.string   "photo_url"
+    t.integer  "fantasy_data_id"
   end
 
-  add_index "nfl_players", ["nfl_data_id"], name: "index_nfl_players_on_nfl_data_id", unique: true, using: :btree
   add_index "nfl_players", ["nfl_team_id"], name: "nfl_player_nfl_team_id", using: :btree
 
   create_table "nfl_players_teams", id: false, force: true do |t|
@@ -178,37 +182,6 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.integer  "bye_week"
   end
 
-  create_table "owners", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-  end
-
-  add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
-  add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
-
-  create_table "player_salary_informations", force: true do |t|
-    t.integer  "fantasy_data_id"
-    t.string   "player_name"
-    t.string   "position"
-    t.string   "team"
-    t.integer  "salary"
-    t.float    "projection"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "week"
-  end
-
   create_table "power_rankings", force: true do |t|
     t.integer  "team_id"
     t.text     "description"
@@ -221,22 +194,10 @@ ActiveRecord::Schema.define(version: 20140930220849) do
 
   add_index "power_rankings", ["team_id"], name: "power_ranking_team_fk", using: :btree
 
-  create_table "processed_stats", force: true do |t|
-    t.integer  "stat_id"
-    t.integer  "league_id"
-    t.float    "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "processed_stats", ["league_id"], name: "index_processed_stats_on_league_id", using: :btree
-  add_index "processed_stats", ["stat_id"], name: "index_processed_stats_on_stat_id", using: :btree
-
   create_table "stats", force: true do |t|
     t.integer "nfl_player_id"
     t.integer "passing_yards"
     t.integer "passing_touchdowns"
-    t.integer "interceptions"
     t.integer "rushing_yards"
     t.integer "rushing_touchdowns"
     t.integer "receptions"
@@ -246,7 +207,6 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.integer "year"
     t.integer "week"
     t.integer "tfl"
-    t.integer "sacks"
     t.integer "qbhits"
     t.integer "defensive_interceptions"
     t.integer "fumbles_recovered"
@@ -261,14 +221,17 @@ ActiveRecord::Schema.define(version: 20140930220849) do
     t.integer "passing_completions"
     t.integer "passing_attempts"
     t.float   "passing_percentage"
-    t.float   "average_pass_yards"
     t.float   "qb_rating"
     t.integer "rushing_attempts"
     t.float   "rushing_average"
-    t.integer "fumbles"
     t.integer "long_run"
-    t.float   "receiving_average"
     t.integer "receiving_long"
+    t.integer "passing_sacks"
+    t.integer "defensive_sacks"
+    t.integer "passing_interceptions"
+    t.integer "receiving_targets"
+    t.integer "two_point_conversion_receptions"
+    t.integer "two_point_conversion_runs"
   end
 
   add_index "stats", ["nfl_player_id"], name: "index_stats_on_nfl_player_id", using: :btree

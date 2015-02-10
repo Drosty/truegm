@@ -76,8 +76,8 @@ gem 'database_cleaner', group: [:development, :test]
 
 gem 'factory_girl_rails', group: [:development, :test]
 
-# For the Coveralls integration
-gem 'coveralls', require: false
+# For Code Climate
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 gem 'pry'
 

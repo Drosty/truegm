@@ -43,7 +43,7 @@ private
       if position == "QB"
           stat.passing_yards = rand(150..400)
           stat.passing_touchdowns = rand(1..4)
-          stat.interceptions = rand(0..3)
+          stat.passing_interceptions = rand(0..3)
           stat.rushing_yards = rand(-15..25)
           stat.rushing_touchdowns = 0
           stat.fumbles_lost = rand(0..1)
@@ -76,7 +76,7 @@ private
 
       elsif position == "DEF"
           stat.tfl = rand(0..7)
-          stat.sacks = rand(0..4)
+          stat.defensive_sacks = rand(0..4)
           stat.qbhits = rand(0..5)
           stat.defensive_interceptions = rand(0..1)
           stat.fumbles_recovered = rand(0..2)

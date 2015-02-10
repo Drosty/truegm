@@ -6,7 +6,7 @@ FactoryGirl.define do
     factory :stat_qb_good do
       passing_yards 300
       passing_touchdowns 3
-      interceptions 0
+      passing_interceptions 0
       rushing_yards 0
       rushing_touchdowns 0
       receptions 0
@@ -18,7 +18,7 @@ FactoryGirl.define do
     factory :stat_qb_bad do
       passing_yards 150
       passing_touchdowns 1
-      interceptions 2
+      passing_interceptions 2
       rushing_yards -10
       rushing_touchdowns 0
       receptions 0
@@ -30,7 +30,7 @@ FactoryGirl.define do
     factory :stat_rb_good do
       passing_yards 0
       passing_touchdowns 0
-      interceptions 0
+      passing_interceptions 0
       rushing_yards 130
       rushing_touchdowns 2
       receptions 4
@@ -42,7 +42,7 @@ FactoryGirl.define do
     factory :stat_rb_bad do
       passing_yards 0
       passing_touchdowns 0
-      interceptions 0
+      passing_interceptions 0
       rushing_yards 35
       rushing_touchdowns 0
       receptions 1
@@ -54,7 +54,7 @@ FactoryGirl.define do
     factory :stat_wr_good do
       passing_yards 0
       passing_touchdowns 0
-      interceptions 0
+      passing_interceptions 0
       rushing_yards 18
       rushing_touchdowns 0
       receptions 12
@@ -66,7 +66,7 @@ FactoryGirl.define do
     factory :stat_wr_bad do
       passing_yards 0
       passing_touchdowns 0
-      interceptions 0
+      passing_interceptions 0
       rushing_yards -4
       rushing_touchdowns 0
       receptions 2
