@@ -7,15 +7,10 @@ module Admin
     def player_add
       team = Team.find(params[:team_id])
       player = NflPlayer.find(params[:player][:player_id])
-      league = team.league
 
-      unless player.free_agent?(league.id)
-        current_team = player.fantasy_team(league.id)
-        current_team.nfl_players.delete(player)
+      if team && player
+        team.add_player player
       end
-
-      team.nfl_players << player
-      team.save
       redirect_to(edit_admin_team_path(team))
     end
 
