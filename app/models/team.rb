@@ -24,7 +24,7 @@ class Team < ActiveRecord::Base
     team = player.fantasy_team self.league_id
 
     unless team.nil?
-      team.nfl_players.delete(player.id)
+      team.nfl_players.delete(player)
     end
 
     self.nfl_players << player
