@@ -1,9 +1,6 @@
 class FantasyDataParty
   include HTTParty
 
-  # f = FantasyDataParty.new(ENV["fantasy_data_api_key"])
-
-  # This is not right - change it to right one
   base_uri "http://api.nfldata.apiphany.com/enterprise/JSON"
   #debug_output $stdout
 
