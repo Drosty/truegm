@@ -30,6 +30,7 @@ private
     end
 
     def generate_stat_for_player player, year, week
+      return if player.bye_week == week
       stat = Stat.find_or_create_by(nfl_player_id: player.id, year: year, week: week)
       update_stat_with_data_by_position(stat, player.position)
     end
@@ -51,8 +52,8 @@ private
           stat.passing_attempts = rand(stat.passing_completions..stat.passing_completions+20)
           stat.qb_rating = 100
           stat.rushing_attempts = rand(1..8)
-          stat.fumbles = rand(0..2)
           stat.long_run = 0
+          stat.passing_sacks = rand(0..3)
 
       elsif position == "RB"
           stat.rushing_yards = rand(-10..180)
@@ -64,15 +65,20 @@ private
           stat.receiving_touchdowns = 0 if stat.receptions == 0
           stat.fumbles_lost = rand(0..1)
           stat.rushing_attempts = rand(5..25)
-          stat.fumbles = rand(0..2)
+          stat.long_run = rand(5..12)
           stat.receiving_long = 0
+          stat.two_point_conversion_runs = rand(0..1)
+          stat.two_point_conversion_receptions = 0
 
       elsif position == "WR" || position == "TE"
           stat.receptions = rand(0..14)
           stat.receiving_yards = rand(-1..184)
           stat.receiving_touchdowns = rand(0..2)
           stat.fumbles_lost = rand(0..1)
+          stat.receiving_targets = stat.receptions + rand(0..2)
           stat.receiving_long = 0
+          stat.two_point_conversion_receptions = rand(0..1)
+          stat.two_point_conversion_runs = 0
 
       elsif position == "DEF"
           stat.tfl = rand(0..7)
@@ -87,8 +93,6 @@ private
       end
 
       stat.passing_percentage  = stat.passing_completions / stat.passing_attempts if !stat.passing_attempts.nil? && stat.passing_attempts > 0
-      stat.average_pass_yards = stat.passing_yards / stat.passing_attempts if !stat.passing_attempts.nil? && stat.passing_attempts > 0
-      stat.receiving_average = stat.receiving_yards / stat.receptions if !stat.receptions.nil? && stat.receptions > 0
       stat.rushing_average = stat.rushing_yards / stat.rushing_attempts if !stat.rushing_attempts.nil? && stat.rushing_attempts > 0
 
       stat.save
