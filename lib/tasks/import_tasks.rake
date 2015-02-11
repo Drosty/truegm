@@ -1,5 +1,5 @@
 namespace :import do
-  desc "Import Data from Fantasy Football Nerd API"
+  desc "Import Data from Fantasy Data Live data Stream"
 
   task :yearly_stats, [:year] => :environment do |t, args|
     args.with_defaults(:year => 2014)

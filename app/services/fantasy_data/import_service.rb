@@ -15,6 +15,11 @@ module FantasyData
     def import_nfl_team_data
       teams = @fantasy_data_party.nfl_teams
 
+      if was_unsuccessful_call(teams)
+        print_error_message
+        return
+      end
+
       teams.each do |team|
         in_team = NflTeam.find_or_create_by(code: team["Key"],
                                   full_name: team["FullName"],
@@ -30,6 +35,11 @@ module FantasyData
 
       NflTeam.all.each do |nfl_team|
         players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
+
+        if was_unsuccessful_call(players)
+          print_error_message
+          return
+        end
 
         players.each do |player|
           next unless ["QB", "RB", "WR", "TE", "K"].include?player["FantasyPosition"]
@@ -63,6 +73,11 @@ module FantasyData
 
     def import_nfl_schedule
       matchups = @fantasy_data_party.nfl_schedule "2014REG"
+
+      if was_unsuccessful_call(matchups)
+        print_error_message
+        return
+      end
 
       matchups.each do |matchup|
         db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup["GameKey"].to_i,
@@ -121,6 +136,12 @@ module FantasyData
     # postseason is 1 based : 1 - 4
     def import_weekly_stats year, week
       box_scores = @fantasy_data_party.weekly_stats(year, week)
+
+      if was_unsuccessful_call(box_scores)
+        print_error_message
+        return
+      end
+
       stat_processor = FantasyData::StatImportProcessing.new
 
       box_scores.each do |box_score|
@@ -132,5 +153,16 @@ module FantasyData
     def import_active_stats
 
     end
+
+    private
+
+      def was_unsuccessful_call obj
+        obj.is_a?(Hash) && obj.has_key?("statusCode") && obj["statusCode"] != 200
+      end
+
+      def print_error_message
+        puts "Status Code was not 200 when calling the FantasyDataParty"
+      end
+
   end
 end
