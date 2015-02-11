@@ -99,3 +99,6 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 
 #public activity
 gem 'public_activity'
+
+# printing all awesome like
+gem 'awesome_print'
