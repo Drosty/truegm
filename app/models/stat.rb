@@ -43,8 +43,7 @@ class Stat < ActiveRecord::Base
     stats
   end
 
-  # This will calculate the stats value based on the
-  # leagues settings- used in the Stat Precombilation Rake Task
+  # This will calculate the stats value based on the leagues settings
   def calculate_stat league
     [
       (passing_yards.to_f * league.passing_yard_points).round(2),
@@ -115,7 +114,7 @@ class Stat < ActiveRecord::Base
 
     def defensive_points_allowed_points league
       return 0 if nfl_player.nil?
-      return 0 unless nfl_player.position == "DEF"
+      return 0 unless nfl_player.position.upcase == "DEF"
 
       if self.points_allowed.to_i < 7
         return league.defensive_points_allowed_under_7_points
