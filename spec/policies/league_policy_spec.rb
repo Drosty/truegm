@@ -47,7 +47,26 @@ describe LeaguePolicy do
 
     it "can not access the show page" do
       league = build(:league)
-      assert !LeaguePolicy.new(nil, nil).index?
+      assert !LeaguePolicy.new(nil, nil).show?
+    end
+  end
+
+  describe "pundit policy" do
+    before(:each) do
+      @team1 = create(:team)
+      @team2 = create(:team)
+    end
+
+    it "user should only see their own league" do
+      LeaguePolicy::Scope.new(@team1.user, League.all).resolve.should == [@team1.league]
+    end
+
+    it "user should only see their own league" do
+      LeaguePolicy::Scope.new(@team2.user, League.all).resolve.should == [@team2.league]
+    end
+
+    it "admin user can see all leagues" do
+      LeaguePolicy::Scope.new(build(:user, :admin), League.all).resolve.should == League.all
     end
   end
 

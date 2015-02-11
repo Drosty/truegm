@@ -62,15 +62,27 @@ describe Team do
 
   describe "NFL Players on Team" do
     before(:each) do
-      # create a valid team
-      @team.nfl_players << build(:nfl_player, :qb)
-      @team.nfl_players << build(:nfl_player, :rb)
-      @team.nfl_players << build(:nfl_player, :rb)
-      @team.nfl_players << build(:nfl_player, :wr)
-      @team.nfl_players << build(:nfl_player, :wr)
+      # create a valid team (unorderd for other tests)
       @team.nfl_players << build(:nfl_player, :te)
+      @team.nfl_players << build(:nfl_player, :rb)
+      @team.nfl_players << build(:nfl_player, :wr)
+      @team.nfl_players << build(:nfl_player, :rb)
+      @team.nfl_players << build(:nfl_player, :wr)
+      @team.nfl_players << build(:nfl_player, :qb)
       @team.nfl_players << build(:nfl_player, :pk)
       @team.nfl_players << build(:nfl_player, :def)
+    end
+
+    it "should order the nfl players correctly" do
+      ordered = @team.ordered_nfl_players
+      ordered[0].position.should == "qb"
+      ordered[1].position.should == "rb"
+      ordered[2].position.should == "rb"
+      ordered[3].position.should == "wr"
+      ordered[4].position.should == "wr"
+      ordered[5].position.should == "te"
+      ordered[6].position.should == "d"
+      ordered[7].position.should == "k"
     end
 
     it "should return the correct num of QBs" do
@@ -124,11 +136,28 @@ describe Team do
   end
 
   describe "Salary Cap rules" do
-
     it "will return true when under the cap" do
       @team.league.salary_cap = 1000
       @team.total_salary = 100
       @team.under_cap?.should == true
+    end
+
+    it "will return the correct amount of cap delta when under" do
+      @team.league.salary_cap = 1000
+      @team.total_salary = 900
+      @team.cap_delta.should == 100
+    end
+
+    it "will return the correct amount of cap delta when over" do
+      @team.league.salary_cap = 1000
+      @team.total_salary = 1200
+      @team.cap_delta.should == 200
+    end
+
+    it "will return cap delta of total salary if league not set" do
+      @team.league = nil
+      @team.total_salary = 1200
+      @team.cap_delta.should == 1200
     end
 
     it "will return false when over the cap" do

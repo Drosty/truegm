@@ -31,4 +31,16 @@ describe League do
     end
   end
 
+  describe "methods that require teams set" do
+    before(:each) do
+      teams = [create(:team), create(:team), create(:team)]
+      teams.each_with_index {|team, index| team.id = index+1 }
+      @league.teams << teams
+    end
+
+    it "will return correct team ids" do
+      @league.get_team_ids.should == [1,2,3]
+    end
+  end
+
 end

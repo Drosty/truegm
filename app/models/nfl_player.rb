@@ -15,7 +15,7 @@ class NflPlayer < ActiveRecord::Base
   has_paper_trail :only => [:salary]
 
   def self.available_positions_for_filter
-    ['all', 'qb', 'rb', 'wr', 'te', 'def', 'k', 'flex']
+    ['all', 'qb', 'rb', 'wr', 'te', 'd', 'k', 'flex']
   end
 
   # This is for pagination
