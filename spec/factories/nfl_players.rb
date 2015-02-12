@@ -36,7 +36,7 @@ FactoryGirl.define do
   end
 
   trait :def do
-    position "d"
+    position "def"
   end
 
   trait :pk do

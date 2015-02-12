@@ -81,7 +81,7 @@ describe Team do
       ordered[3].position.should == "wr"
       ordered[4].position.should == "wr"
       ordered[5].position.should == "te"
-      ordered[6].position.should == "d"
+      ordered[6].position.should == "def"
       ordered[7].position.should == "k"
     end
 

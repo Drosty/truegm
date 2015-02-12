@@ -66,7 +66,7 @@ class Team < ActiveRecord::Base
   end
 
   def defenses
-    get_players_by_position "D"
+    get_players_by_position "DEF"
   end
 
   def under_cap?
