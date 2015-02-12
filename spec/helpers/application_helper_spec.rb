@@ -18,4 +18,18 @@ describe ApplicationHelper do
 
   end
 
+  describe "position_team_display_for_player" do
+
+    it "returns the correct team code" do
+      p = build(:nfl_player, :rb)
+      code = p.nfl_team.code.upcase
+      position_team_display_for_player(p).should == "RB - #{code}"
+    end
+
+    it "returns FA for a player with no TEAM" do
+      p = build(:nfl_player, :qb, :fa)
+      position_team_display_for_player(p).should == "QB - FA"
+    end
+  end
+
 end
