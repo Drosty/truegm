@@ -75,6 +75,18 @@ FactoryGirl.define do
       fumbles_lost 1
     end
 
+    factory :kicking_stat do
+    end
+
+    factory :defense_stat do
+      tfl 8
+      defensive_interceptions 4
+      fumbles_recovered 3
+      safties 2
+      defensive_tds 1
+      points_allowed 11
+    end
+
   end
 
 end
