@@ -51,7 +51,7 @@ module FantasyData
           p_to_save.first_name = player["FirstName"]
           p_to_save.full_name = player["Name"]
           p_to_save.nfl_team = nfl_team
-          p_to_save.position = player["FantasyPosition"]
+          p_to_save.position = player["FantasyPosition"].downcase
           p_to_save.height = player["Height"]
           p_to_save.weight = player["Weight"]
           p_to_save.college = player["College"]

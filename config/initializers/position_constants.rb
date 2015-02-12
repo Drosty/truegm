@@ -1,3 +1,11 @@
+#########################################################################
+#                                                                       #
+# Do Not change the positions to upper case.  Leave them as lowercase.  #
+# The Import process does a downcase on the position to make sure that  #
+# the positions are stored lowercase.  If these change then we won't be #
+# able to retreive any players by position from the database.           #
+#                                                                       #
+#########################################################################
 module Position
   QUARTERBACK = "qb"
   RUNNINGBACK = "rb"
