@@ -9,9 +9,9 @@ module NflPlayersHelper
 
   def display_team_name player
     display = ""
-    if player.position != "def" && player.nfl_team != nil
+    if player.position != Position::DEFENSE && player.nfl_team != nil
       display = "#{player.nfl_team_full_name}"
-    elsif player.position != "def"
+    elsif player.position != Position::DEFENSE
       display = "Free Agent"
     end
     display

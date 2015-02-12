@@ -75,14 +75,14 @@ describe Team do
 
     it "should order the nfl players correctly" do
       ordered = @team.ordered_nfl_players
-      ordered[0].position.should == "qb"
-      ordered[1].position.should == "rb"
-      ordered[2].position.should == "rb"
-      ordered[3].position.should == "wr"
-      ordered[4].position.should == "wr"
-      ordered[5].position.should == "te"
-      ordered[6].position.should == "d"
-      ordered[7].position.should == "k"
+      ordered[0].position.should == Position::QUARTERBACK
+      ordered[1].position.should == Position::RUNNINGBACK
+      ordered[2].position.should == Position::RUNNINGBACK
+      ordered[3].position.should == Position::WIDERECEIVER
+      ordered[4].position.should == Position::WIDERECEIVER
+      ordered[5].position.should == Position::TIGHTEND
+      ordered[6].position.should == Position::DEFENSE
+      ordered[7].position.should == Position::KICKER
     end
 
     it "should return the correct num of QBs" do

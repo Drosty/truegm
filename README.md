@@ -15,15 +15,18 @@ The roadmap of this application includes importing stats, a forum, projections, 
 ### Database Project Setup
 In order to get the database setup and running run the following commands in this order:
 
+*Note: .env file needs to have the API Key for Fantasy Data set*
+
 ``` ruby
 bundle exec rake db:create
 bundle exec rake db:schema:load
 bundle exec rake import:nfl_teams
 bundle exec rake import:nfl_players
 bundle exec rake import:nfl_schedule
-bundle exec rake import:nfl_bye_weeks
+
+# If you want fake data generated
 bundle exec rake generate:fake_salaries
 bundle exec rake generate:year_of_fake_stats
-bundle exec rake site:process_stats
+
 bundle exec rake db:seed
 ```

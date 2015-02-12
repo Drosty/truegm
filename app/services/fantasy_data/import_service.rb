@@ -42,7 +42,7 @@ module FantasyData
         end
 
         players.each do |player|
-          next unless ["QB", "RB", "WR", "TE", "K"].include?player["FantasyPosition"]
+          next unless Position::ALL_POSITIONS.include?(player["FantasyPosition"].downcase)
           p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
 
           p_to_save.active = player["Active"] == "true"

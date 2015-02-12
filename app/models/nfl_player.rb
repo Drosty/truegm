@@ -15,7 +15,7 @@ class NflPlayer < ActiveRecord::Base
   has_paper_trail :only => [:salary]
 
   def self.available_positions_for_filter
-    ['all', 'qb', 'rb', 'wr', 'te', 'd', 'k', 'flex']
+    Position::ALL_POSITION_INCLUDING_FLEX_AND_ALL
   end
 
   # This is for pagination
@@ -24,14 +24,14 @@ class NflPlayer < ActiveRecord::Base
   # Named_Scopes
   scope :positions, ->(pos) {
                               case pos.downcase
-                              when 'all'
+                              when Position::ALL
                                 all
                               when 'flex'
-                                where(:position => ['RB', 'WR', 'TE'])
+                                where(:position => Position::SKILL_POSITIONS)
                               when 'rb/wr/te'
-                                where(:position => ['RB', 'WR', 'TE'])
+                                where(:position => Position::SKILL_POSITIONS)
                               else
-                                where(:position => pos.upcase)
+                                where(:position => pos.downcase)
                               end
                             }
 

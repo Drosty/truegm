@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
   delegate :name, :to => :user, :prefix => true
 
   def ordered_nfl_players
-    nfl_players.sort_by { |a| NflPlayer.available_positions_for_filter.index(a.position.downcase) }
+    nfl_players.sort_by { |a| NflPlayer.available_positions_for_filter.index(a.position) }
   end
 
   def add_player player
@@ -46,27 +46,27 @@ class Team < ActiveRecord::Base
   end
 
   def quarterbacks
-    get_players_by_position "QB"
+    get_players_by_position Position::QUARTERBACK
   end
 
   def runningbacks
-    get_players_by_position "RB"
+    get_players_by_position Position::RUNNINGBACK
   end
 
   def receivers
-    get_players_by_position "WR"
+    get_players_by_position Position::WIDERECEIVER
   end
 
   def tightends
-    get_players_by_position "TE"
+    get_players_by_position Position::TIGHTEND
   end
 
   def kickers
-    get_players_by_position "K"
+    get_players_by_position Position::KICKER
   end
 
   def defenses
-    get_players_by_position "D"
+    get_players_by_position Position::DEFENSE
   end
 
   def under_cap?
@@ -88,7 +88,7 @@ private
   end
 
   def get_players_by_position position
-    nfl_players.select { |p| p.position == position.upcase || p.position == position.downcase }
+    nfl_players.select { |p| p.position == position }
   end
 
 end

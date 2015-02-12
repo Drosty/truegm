@@ -14,13 +14,13 @@ class Stat < ActiveRecord::Base
 
   def summary
     case nfl_player.position
-    when "QB"
+    when Position::QUARTERBACK
       summary = "#{passing_yards} yards / #{passing_touchdowns} TDs / #{passing_interceptions} INTs"
-    when "RB"
+    when Position::RUNNINGBACK
       summary = "#{rushing_yards} yards / #{rushing_touchdowns} TDs"
-    when "WR", "TE"
+    when Position::WIDERECEIVER, Position::TIGHTEND
       summary = "#{receptions} rec / #{receiving_yards} yards / #{receiving_touchdowns} TDs"
-    when "DEF"
+    when Position::DEFENSE
       summary = "defensive stats"
     end
 
@@ -30,13 +30,13 @@ class Stat < ActiveRecord::Base
   def position_specific_stats
     stats = []
     case nfl_player.position.upcase
-    when "QB"
+    when Position::QUARTERBACK
       stats = get_stats_for_qb
-    when "RB"
+    when Position::RUNNINGBACK
       stats = get_stats_for_rb
-    when "WR", "TE"
+    when Position::WIDERECEIVER, Position::TIGHTEND
       stats = get_stats_for_wr_or_te
-    when "DEF"
+    when Position::DEFENSE
       stats = get_stats_for_def
     end
 

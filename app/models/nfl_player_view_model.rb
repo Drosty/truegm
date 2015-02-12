@@ -12,17 +12,17 @@ class NflPlayerViewModel
   end
 
   def stat_catagories_headers
-    if @player.position == "QB"
+    if @player.position == Position::QUARTERBACK
       ["Passing", "Rushing"]
 
-    elsif @player.position == "RB"
+    elsif @player.position == Position::RUNNINGBACK
       ["Rushing", "Receiving"]
 
-    elsif @player.position == "WR" ||
-            @player.position == "TE"
+    elsif @player.position == Position::WIDERECEIVER ||
+            @player.position == Position::TIGHTEND
       ["Receiving", "Rushing"]
 
-    elsif @player.position == "K"
+    elsif @player.position == Position::KICKER
       ["Kicking"]
 
     else

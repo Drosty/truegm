@@ -15,28 +15,32 @@ FactoryGirl.define do
     salary 100000
   end
 
+  trait :fa do
+    nfl_team nil
+  end
+
   trait :qb do
-    position "qb"
+    position Position::QUARTERBACK
   end
 
   trait :rb do
-    position "rb"
+    position Position::RUNNINGBACK
   end
 
   trait :wr do
-    position "wr"
+    position Position::WIDERECEIVER
   end
 
   trait :te do
-    position "te"
+    position Position::TIGHTEND
   end
 
   trait :def do
-    position "d"
+    position Position::DEFENSE
   end
 
   trait :pk do
-    position "k"
+    position Position::KICKER
   end
 
 end

@@ -31,7 +31,7 @@ module Spotrac
           next if name_node.nil?
           next if position_node.nil?
           next if name_node.children[1].attributes["href"].nil?
-          next unless ["qb", "rb", "wr", "te", "k"].include? position_node.text.downcase
+          next unless Position::ALL_POSITIONS.include? position_node.text.downcase
 
           href = name_node.children[1].attributes["href"].text
           set_nfl_player_spotrac_url(name_node.children[1].text, position_node.text, href, nfl_team)

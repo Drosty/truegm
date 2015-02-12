@@ -51,39 +51,39 @@ k_idx = 0
   team.nfl_players = []
   idx += 1
 
-  team.nfl_players << NflPlayer.positions('QB')[qb_idx]
+  team.nfl_players << NflPlayer.positions(Position::QUARTERBACK)[qb_idx]
   qb_idx += 1
-  team.nfl_players << NflPlayer.positions('QB')[qb_idx]
+  team.nfl_players << NflPlayer.positions(Position::QUARTERBACK)[qb_idx]
   qb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
+  team.nfl_players << NflPlayer.positions(Position::RUNNINGBACK)[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
+  team.nfl_players << NflPlayer.positions(Position::RUNNINGBACK)[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
+  team.nfl_players << NflPlayer.positions(Position::RUNNINGBACK)[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
+  team.nfl_players << NflPlayer.positions(Position::RUNNINGBACK)[rb_idx]
   rb_idx += 1
-  team.nfl_players << NflPlayer.positions('RB')[rb_idx]
+  team.nfl_players << NflPlayer.positions(Position::RUNNINGBACK)[rb_idx]
   rb_idx += 1
 
-  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
+  team.nfl_players << NflPlayer.positions(Position::WIDERECEIVER)[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
+  team.nfl_players << NflPlayer.positions(Position::WIDERECEIVER)[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
+  team.nfl_players << NflPlayer.positions(Position::WIDERECEIVER)[wr_idx]
   wr_idx += 1
-  team.nfl_players << NflPlayer.positions('WR')[wr_idx]
+  team.nfl_players << NflPlayer.positions(Position::WIDERECEIVER)[wr_idx]
   wr_idx += 1
 
-  team.nfl_players << NflPlayer.positions('TE')[te_idx]
+  team.nfl_players << NflPlayer.positions(Position::TIGHTEND)[te_idx]
   te_idx += 1
-  team.nfl_players << NflPlayer.positions('TE')[te_idx]
+  team.nfl_players << NflPlayer.positions(Position::TIGHTEND)[te_idx]
   te_idx += 1
 
-  team.nfl_players << NflPlayer.positions('D')[d_idx] if NflPlayer.positions('D').count > 0
+  team.nfl_players << NflPlayer.positions(Position::DEFENSE)[d_idx] if NflPlayer.positions('D').count > 0
   d_idx += 1
 
-  team.nfl_players << NflPlayer.positions('PK')[k_idx] if NflPlayer.positions('PK').count > 0
+  team.nfl_players << NflPlayer.positions(Position::KICKER)[k_idx] if NflPlayer.positions('PK').count > 0
   k_idx += 1
 end

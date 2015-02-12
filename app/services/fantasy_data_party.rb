@@ -29,4 +29,9 @@ class FantasyDataParty
     response.parsed_response
   end
 
+  def get_current_week
+    response = self.class.get("/CurrentWeek?subscription-key=#{@subscription_key}")
+    response.parsed_response
+  end
+
 end
