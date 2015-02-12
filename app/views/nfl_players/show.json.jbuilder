@@ -32,11 +32,11 @@ json.stats do
       json.stat_table_headers view_model.stat_table_headers(header)
 
       json.stats stat_by_year[1].each do |stat|
-        json.col1 view_model.col1_for_header(stat, header)
+        json.col1 view_model.col1_for_header(stat)
         json.col2 view_model.col2_for_header(stat, header)
         json.col3 view_model.col3_for_header(stat, header)
         json.col4 view_model.col4_for_header(stat, header)
-        json.col5 view_model.col5_for_header(stat, header, @current_league)
+        json.col5 view_model.col5_for_header(stat, @current_league)
       end
     end
   end
