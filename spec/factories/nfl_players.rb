@@ -20,27 +20,27 @@ FactoryGirl.define do
   end
 
   trait :qb do
-    position "qb"
+    position Position::QUARTERBACK
   end
 
   trait :rb do
-    position "rb"
+    position Position::RUNNINGBACK
   end
 
   trait :wr do
-    position "wr"
+    position Position::WIDERECEIVER
   end
 
   trait :te do
-    position "te"
+    position Position::TIGHTEND
   end
 
   trait :def do
-    position "def"
+    position Position::DEFENSE
   end
 
   trait :pk do
-    position "k"
+    position Position::KICKER
   end
 
 end

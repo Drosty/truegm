@@ -46,27 +46,27 @@ class Team < ActiveRecord::Base
   end
 
   def quarterbacks
-    get_players_by_position "QB"
+    get_players_by_position Position::QUARTERBACK
   end
 
   def runningbacks
-    get_players_by_position "RB"
+    get_players_by_position Position::RUNNINGBACK
   end
 
   def receivers
-    get_players_by_position "WR"
+    get_players_by_position Position::WIDERECEIVER
   end
 
   def tightends
-    get_players_by_position "TE"
+    get_players_by_position Position::TIGHTEND
   end
 
   def kickers
-    get_players_by_position "K"
+    get_players_by_position Position::KICKER
   end
 
   def defenses
-    get_players_by_position "DEF"
+    get_players_by_position Position::DEFENSE
   end
 
   def under_cap?

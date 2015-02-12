@@ -41,7 +41,7 @@ private
       stat.played = rand(0..1)
       stat.started = rand(0..1)
 
-      if position == "QB"
+      if position == Position::QUARTERBACK
           stat.passing_yards = rand(150..400)
           stat.passing_touchdowns = rand(1..4)
           stat.passing_interceptions = rand(0..3)
@@ -55,7 +55,7 @@ private
           stat.long_run = 0
           stat.passing_sacks = rand(0..3)
 
-      elsif position == "RB"
+      elsif position == Position::RUNNINGBACK
           stat.rushing_yards = rand(-10..180)
           stat.rushing_touchdowns = rand(0..3)
           stat.receptions = rand(0..8)
@@ -70,7 +70,7 @@ private
           stat.two_point_conversion_runs = rand(0..1)
           stat.two_point_conversion_receptions = 0
 
-      elsif position == "WR" || position == "TE"
+      elsif position == Position::WIDERECEIVER || position == Position::TIGHTEND
           stat.receptions = rand(0..14)
           stat.receiving_yards = rand(-1..184)
           stat.receiving_touchdowns = rand(0..2)
@@ -80,7 +80,7 @@ private
           stat.two_point_conversion_receptions = rand(0..1)
           stat.two_point_conversion_runs = 0
 
-      elsif position == "DEF"
+      elsif position == Position::DEFENSE
           stat.tfl = rand(0..7)
           stat.defensive_sacks = rand(0..4)
           stat.qbhits = rand(0..5)
