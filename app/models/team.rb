@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
   delegate :name, :to => :user, :prefix => true
 
   def ordered_nfl_players
-    nfl_players.sort_by { |a| NflPlayer.available_positions_for_filter.index(a.position.downcase) }
+    nfl_players.sort_by { |a| NflPlayer.available_positions_for_filter.index(a.position) }
   end
 
   def add_player player
@@ -88,7 +88,7 @@ private
   end
 
   def get_players_by_position position
-    nfl_players.select { |p| p.position == position.upcase || p.position == position.downcase }
+    nfl_players.select { |p| p.position == position }
   end
 
 end
