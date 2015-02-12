@@ -24,7 +24,7 @@ class NflPlayer < ActiveRecord::Base
   # Named_Scopes
   scope :positions, ->(pos) {
                               case pos.downcase
-                              when Position::ALL
+                              when Position::ALL_STRING
                                 all
                               when 'flex'
                                 where(:position => Position::SKILL_POSITIONS)
