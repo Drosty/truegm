@@ -15,6 +15,10 @@ FactoryGirl.define do
     salary 100000
   end
 
+  trait :fa do
+    nfl_team nil
+  end
+
   trait :qb do
     position "qb"
   end
