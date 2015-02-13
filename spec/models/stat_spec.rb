@@ -51,4 +51,27 @@ describe Stat do
     end
   end
 
+  describe "Position Specific Stats" do
+    it "returns quarterback stats" do
+      build(:stat_qb_good).position_specific_stats.should == {:passing_yards=>300, :passing_touchdowns=>3, :interceptions=>0, :rushing_yards=>0, :rushing_touchdown=>0, :fumbles_lost=>0}
+    end
+
+    it "returns runningback stats" do
+      build(:stat_rb_good).position_specific_stats.should == {:rushing_yards=>130, :rushing_touchdown=>2, :receptions=>4, :receiving_yards=>40, :receiving_touchdowns=>1, :fumbles_lost=>0}
+    end
+
+    it "returns wide receiver stats" do
+      build(:stat_wr_good).position_specific_stats.should == {:receptions=>12, :receiving_yards=>137, :receiving_touchdowns=>2, :rushing_yards=>18, :rushing_touchdown=>0, :fumbles_lost=>0}
+    end
+
+    it "returns tight end stats" do
+      build(:stat_te_bad).position_specific_stats.should == {:receptions=>2, :receiving_yards=>7, :receiving_touchdowns=>0, :rushing_yards=>-4, :rushing_touchdown=>0, :fumbles_lost=>1}
+    end
+
+    it "returns defensive stats" do
+      build(:defense_stat).position_specific_stats.should == {:points_allowed=>11, :sacks=>nil, :interceptions=>4, :fumbles_recovered=>3, :defensive_touchdowns=>1, :returned_touchdowns=>nil, :safties=>2}
+    end
+
+  end
+
 end

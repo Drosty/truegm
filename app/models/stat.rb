@@ -46,7 +46,7 @@ class Stat < ActiveRecord::Base
 
   def position_specific_stats
     stats = []
-    case nfl_player.position.upcase
+    case nfl_player.position
     when Position::QUARTERBACK
       stats = get_stats_for_qb
     when Position::RUNNINGBACK
