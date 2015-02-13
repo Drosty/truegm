@@ -58,16 +58,26 @@ describe NflPlayer do
 
   describe "position scope" do
     before(:each) do
-      create(:nfl_player, :qb, salary: 0)
-      create(:nfl_player, :rb, salary: 123)
+      team = create(:team)
+      @league = team.league
+      teams = [team]
+
+      create(:nfl_player, :qb, teams: teams, salary: 0)
+      create(:nfl_player, :rb, teams: teams, salary: 123)
       create(:nfl_player, :rb, salary: nil)
       create(:nfl_player, :wr, salary: nil)
       create(:nfl_player, :wr, salary: 123123)
       create(:nfl_player, :wr, salary: nil)
-      create(:nfl_player, :te, salary: nil)
+      create(:nfl_player, :te, teams: teams, salary: nil)
       create(:nfl_player, :te, salary: 93938)
       create(:nfl_player, :te, salary: 0)
       create(:nfl_player, :te, salary: 1234)
+    end
+
+    it "will get free agents by status call" do
+      NflPlayer.by_status("free agent", @league).count.should == 7
+      NflPlayer.by_status("owned", @league).count.should == 3
+      NflPlayer.by_status("all", @league).count.should == 10
     end
 
     it "with_salary returns correctly" do
