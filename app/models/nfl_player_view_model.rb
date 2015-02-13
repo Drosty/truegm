@@ -49,7 +49,7 @@ class NflPlayerViewModel
     end
   end
 
-  def col1_for_header stat, header_category
+  def col1_for_header stat
     val = stat.week
     val = 0 if val.nil?
     val
@@ -66,7 +66,7 @@ class NflPlayerViewModel
     elsif is_receiving_header?(header_category)
       val = stat.receptions
 
-    elsif is_kicking_header(header_category)
+    elsif is_kicking_header?(header_category)
       val = stat.field_goal_attempted
 
     elsif
@@ -89,7 +89,7 @@ class NflPlayerViewModel
     elsif is_receiving_header?(header_category)
       val = stat.receiving_yards
 
-    elsif is_kicking_header(header_category)
+    elsif is_kicking_header?(header_category)
       val = stat.field_goal_made
 
     elsif
@@ -107,12 +107,12 @@ class NflPlayerViewModel
       val = stat.passing_interceptions
 
     elsif is_rushing_header?(header_category)
-      val = stat.fumbles_recovered
+      val = stat.fumbles_lost
 
     elsif is_receiving_header?(header_category)
       val = stat.receiving_touchdowns
 
-    elsif is_kicking_header(header_category)
+    elsif is_kicking_header?(header_category)
       val = stat.field_goal_made
 
     elsif
@@ -124,7 +124,8 @@ class NflPlayerViewModel
     val
   end
 
-  def col5_for_header stat, header_category, league
+  def col5_for_header stat, league
+    return 0 if stat.nil? || league.nil?
     val = stat.total_points(league)
     val = 0 if val.nil?
     val

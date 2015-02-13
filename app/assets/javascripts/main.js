@@ -42,17 +42,3 @@ this.truegm.config([
 		});
 	}
 ]);
-
-this.daily = angular.module('daily', ['templates', 'ngAnimate', 'ng-rails-csrf',
-	'ngRoute', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics'
-]);
-
-this.daily.config([
-	'$routeProvider',
-	function($routeProvider) {
-		return $routeProvider.otherwise({
-			templateUrl: 'daily/index.html',
-			controller: 'DailyGamesIndexCtrl'
-		});
-	}
-]);

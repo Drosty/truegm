@@ -9,7 +9,24 @@ class Stat < ActiveRecord::Base
   validates_presence_of :week, :year, :nfl_player_id
 
   def total_points league
-    return calculate_stat(league)
+    [
+      (passing_yards.to_f * league.passing_yard_points).round(2),
+      passing_touchdowns.to_i * league.passing_touchdown_points,
+      passing_interceptions.to_i * league.passing_interception_points,
+      fumbles_lost.to_i * league.fumbles_lost_points,
+      rushing_yards.to_f * league.rushing_yards_points,
+      rushing_touchdowns.to_i * league.rushing_touchdown_points,
+      receiving_yards.to_f * league.receiving_yards_points,
+      receiving_touchdowns.to_i * league.receiving_touchdown_points,
+      receptions.to_i * league.points_per_reception_points,
+
+      defensive_interceptions.to_i * league.defensive_interception_points,
+      fumbles_recovered.to_i * league.defensive_fumble_recovered_points,
+      defensive_sacks.to_i * league.defensive_sack_points,
+      safties.to_i * league.defensive_saftey_points,
+      defensive_tds.to_i * league.defensive_touchdown_points,
+      defensive_points_allowed_points(league)
+    ].sum.round(2)
   end
 
   def summary
@@ -29,7 +46,7 @@ class Stat < ActiveRecord::Base
 
   def position_specific_stats
     stats = []
-    case nfl_player.position.upcase
+    case nfl_player.position
     when Position::QUARTERBACK
       stats = get_stats_for_qb
     when Position::RUNNINGBACK
@@ -41,28 +58,6 @@ class Stat < ActiveRecord::Base
     end
 
     stats
-  end
-
-  # This will calculate the stats value based on the leagues settings
-  def calculate_stat league
-    [
-      (passing_yards.to_f * league.passing_yard_points).round(2),
-      passing_touchdowns.to_i * league.passing_touchdown_points,
-      passing_interceptions.to_i * league.passing_interception_points,
-      fumbles_lost.to_i * league.fumbles_lost_points,
-      rushing_yards.to_f * league.rushing_yards_points,
-      rushing_touchdowns.to_i * league.rushing_touchdown_points,
-      receiving_yards.to_f * league.receiving_yards_points,
-      receiving_touchdowns.to_i * league.receiving_touchdown_points,
-      receptions.to_i * league.points_per_reception_points,
-
-      defensive_interceptions.to_i * league.defensive_interception_points,
-      fumbles_recovered.to_i * league.defensive_fumble_recovered_points,
-      defensive_sacks.to_i * league.defensive_sack_points,
-      safties.to_i * league.defensive_saftey_points,
-      defensive_tds.to_i * league.defensive_touchdown_points,
-      defensive_points_allowed_points(league)
-    ].sum.round(2)
   end
 
   private
