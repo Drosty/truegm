@@ -4,7 +4,6 @@ FactoryGirl.define do
     description "MyString"
     tagline "MyString"
 
-
     factory :league_with_stats do
       passing_yard_points 0.04
       passing_touchdown_points 5

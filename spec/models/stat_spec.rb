@@ -7,51 +7,70 @@ describe Stat do
     it "will calculate QB stats" do
       league = build(:league_with_stats)
       stat = build(:stat_qb_good)
-      stat.calculate_stat(league).should eq(27)
+      stat.total_points(league).should eq(27)
 
       stat = build(:stat_qb_bad)
-      stat.calculate_stat(league).should eq(4)
+      stat.total_points(league).should eq(4)
     end
 
     it "will calculate RB stats" do
       league = build(:league_with_stats)
       stat = build(:stat_rb_good)
-      stat.calculate_stat(league).should eq(39)
+      stat.total_points(league).should eq(39)
 
       stat = build(:stat_rb_bad)
-      stat.calculate_stat(league).should eq(3.2)
+      stat.total_points(league).should eq(3.2)
     end
 
     it "will calculate WR stats" do
       league = build(:league_with_stats)
       stat = build(:stat_wr_good)
-      stat.calculate_stat(league).should eq(39.5)
+      stat.total_points(league).should eq(39.5)
 
       stat = build(:stat_wr_bad)
-      stat.calculate_stat(league).should eq(0.3)
+      stat.total_points(league).should eq(0.3)
     end
 
   end
 
   describe "summary" do
+    # Going to leave these - but need to update Stat Factory First
+    it "creates QB summary correctly" do
+      stat = build(:stat_qb_good)
+      stat.summary.should eq("300 yards / 3 TDs / 0 INTs")
+    end
 
-  # Going to leave these - but need to update Stat Factory First
-  #
-  #  it "creates QB summary correctly" do
-  #    stat = build(:stat_qb_good)
-  #    stat.summary.should eq("Week 1 - 27.0 pts - 300 / 3 / 0")
-  #  end
+    it "creates RB summary correctly" do
+      stat = build(:stat_rb_good)
+      stat.summary.should eq("130 yards / 2 TDs")
+    end
 
-  #  it "creates RB summary correctly" do
-  #    stat = build(:stat_rb_good)
-  #    stat.summary.should eq("Week 1 - 39.5 pts - 130 yds / 2 td")
-  #  end
+    it "creates WR summary correctly" do
+      stat = build(:stat_wr_good)
+      stat.summary.should eq("12 rec / 137 yards / 2 TDs")
+    end
+  end
 
-  #  it "creates WR summary correctly" do
-  #    stat = build(:stat_wr_good)
-  #    stat.summary.should eq("Week 1 - 39.5 pts - 12rec / 137 yds")
-  #  end
+  describe "Position Specific Stats" do
+    it "returns quarterback stats" do
+      build(:stat_qb_good).position_specific_stats.should == {:passing_yards=>300, :passing_touchdowns=>3, :interceptions=>0, :rushing_yards=>0, :rushing_touchdown=>0, :fumbles_lost=>0}
+    end
 
+    it "returns runningback stats" do
+      build(:stat_rb_good).position_specific_stats.should == {:rushing_yards=>130, :rushing_touchdown=>2, :receptions=>4, :receiving_yards=>40, :receiving_touchdowns=>1, :fumbles_lost=>0}
+    end
+
+    it "returns wide receiver stats" do
+      build(:stat_wr_good).position_specific_stats.should == {:receptions=>12, :receiving_yards=>137, :receiving_touchdowns=>2, :rushing_yards=>18, :rushing_touchdown=>0, :fumbles_lost=>0}
+    end
+
+    it "returns tight end stats" do
+      build(:stat_te_bad).position_specific_stats.should == {:receptions=>2, :receiving_yards=>7, :receiving_touchdowns=>0, :rushing_yards=>-4, :rushing_touchdown=>0, :fumbles_lost=>1}
+    end
+
+    it "returns defensive stats" do
+      build(:defense_stat).position_specific_stats.should == {:points_allowed=>11, :sacks=>nil, :interceptions=>4, :fumbles_recovered=>3, :defensive_touchdowns=>1, :returned_touchdowns=>nil, :safties=>2}
+    end
   end
 
 end
