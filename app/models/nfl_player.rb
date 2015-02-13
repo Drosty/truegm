@@ -53,7 +53,7 @@ class NflPlayer < ActiveRecord::Base
 
   def self.search(name)
     if name
-      where('lower(last_name) LIKE ?', "%#{name.downcase}%")
+      where('lower(last_name) LIKE ?', "%#{name.downcase.strip}%")
     else
       all
     end

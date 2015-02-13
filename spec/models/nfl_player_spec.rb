@@ -62,16 +62,22 @@ describe NflPlayer do
       @league = team.league
       teams = [team]
 
-      create(:nfl_player, :qb, teams: teams, salary: 0)
+      create(:nfl_player, :qb, teams: teams, salary: 0, last_name: "test")
       create(:nfl_player, :rb, teams: teams, salary: 123)
       create(:nfl_player, :rb, salary: nil)
-      create(:nfl_player, :wr, salary: nil)
+      create(:nfl_player, :wr, salary: nil, last_name: "testing")
       create(:nfl_player, :wr, salary: 123123)
-      create(:nfl_player, :wr, salary: nil)
+      create(:nfl_player, :wr, salary: nil, last_name: "frtesting")
       create(:nfl_player, :te, teams: teams, salary: nil)
       create(:nfl_player, :te, salary: 93938)
-      create(:nfl_player, :te, salary: 0)
+      create(:nfl_player, :te, salary: 0, last_name: "nothing")
       create(:nfl_player, :te, salary: 1234)
+    end
+
+    it "will return last name search correctly" do
+      NflPlayer.search("test").count.should == 3
+      NflPlayer.search("  fRt").count.should == 1
+      NflPlayer.search(nil).count.should == 10
     end
 
     it "will get free agents by status call" do
