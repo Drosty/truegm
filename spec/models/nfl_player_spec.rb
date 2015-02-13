@@ -58,16 +58,20 @@ describe NflPlayer do
 
   describe "position scope" do
     before(:each) do
-      create(:nfl_player, :qb)
-      create(:nfl_player, :rb)
-      create(:nfl_player, :rb)
-      create(:nfl_player, :wr)
-      create(:nfl_player, :wr)
-      create(:nfl_player, :wr)
-      create(:nfl_player, :te)
-      create(:nfl_player, :te)
-      create(:nfl_player, :te)
-      create(:nfl_player, :te)
+      create(:nfl_player, :qb, salary: 0)
+      create(:nfl_player, :rb, salary: 123)
+      create(:nfl_player, :rb, salary: nil)
+      create(:nfl_player, :wr, salary: nil)
+      create(:nfl_player, :wr, salary: 123123)
+      create(:nfl_player, :wr, salary: nil)
+      create(:nfl_player, :te, salary: nil)
+      create(:nfl_player, :te, salary: 93938)
+      create(:nfl_player, :te, salary: 0)
+      create(:nfl_player, :te, salary: 1234)
+    end
+
+    it "with_salary returns correctly" do
+      NflPlayer.with_salary.count.should == 4
     end
 
     it "returns all for all" do
