@@ -56,4 +56,44 @@ describe NflPlayer do
     end
   end
 
+  describe "position scope" do
+    before(:each) do
+      create(:nfl_player, :qb)
+      create(:nfl_player, :rb)
+      create(:nfl_player, :rb)
+      create(:nfl_player, :wr)
+      create(:nfl_player, :wr)
+      create(:nfl_player, :wr)
+      create(:nfl_player, :te)
+      create(:nfl_player, :te)
+      create(:nfl_player, :te)
+      create(:nfl_player, :te)
+    end
+
+    it "returns all for all" do
+      NflPlayer.positions(Position::ALL_STRING).count.should == 10
+    end
+
+    it "return only qbs" do
+      NflPlayer.positions(Position::QUARTERBACK).count.should == 1
+    end
+
+    it "return only rbs" do
+      NflPlayer.positions(Position::RUNNINGBACK).count.should == 2
+    end
+
+    it "return only wrs" do
+      NflPlayer.positions(Position::WIDERECEIVER).count.should == 3
+    end
+
+    it "return only tes" do
+      NflPlayer.positions(Position::TIGHTEND).count.should == 4
+    end
+
+    it "return flex players" do
+      NflPlayer.positions("flex").count.should == 9
+      NflPlayer.positions("rb/wr/te").count.should == 9
+    end
+  end
+
 end
