@@ -71,7 +71,6 @@ describe Stat do
     it "returns defensive stats" do
       build(:defense_stat).position_specific_stats.should == {:points_allowed=>11, :sacks=>nil, :interceptions=>4, :fumbles_recovered=>3, :defensive_touchdowns=>1, :returned_touchdowns=>nil, :safties=>2}
     end
-
   end
 
 end
