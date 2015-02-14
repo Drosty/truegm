@@ -6,19 +6,43 @@ describe NflPlayersController do
 
   before (:each) do
     Warden.test_mode!
+
+    @user = create(:user)
+    login(@user)
+
+    @league = create(:league)
+    @league.teams << create(:team)
   end
 
   after (:each) do
     Warden.test_reset!
   end
 
-  describe "GET index" do
+  describe "index action to search players" do
     before(:each) do
-      @user = create(:user)
-      login(@user)
+      create(:nfl_player, :last_name => "Smith")
+      create(:nfl_player, :last_name => "DesMither")
+    end
 
-      @league = create(:league)
-      @league.teams << create(:team)
+    it "will return the right players by search term" do
+      request.accept = "application/json"
+      get :index, { :league_id => @league.id, :player_name => "smith" }
+
+      assigns(:nfl_players).length.should == 2
+      assigns(:total_players).should == 2
+    end
+
+    it "will return the right players by search term" do
+      request.accept = "application/json"
+      get :index, { :league_id => @league.id, :player_name => "DesMith" }
+
+      assigns(:nfl_players).length.should == 1
+      assigns(:total_players).should == 1
+    end
+  end
+
+  describe "index action to retrieve players and counts" do
+    before(:each) do
       create_list(:nfl_player, 4, :qb, teams: [])
       create_list(:nfl_player, 6, :rb, teams: [])
       create_list(:nfl_player, 8, :wr, teams: [])
