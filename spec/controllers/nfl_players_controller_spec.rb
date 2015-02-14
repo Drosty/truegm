@@ -30,6 +30,10 @@ describe NflPlayersController do
       request.accept = "application/json"
       get :index, { :league_id => 1 }
       assigns(:nfl_players).length.should == NflPlayer.per_page
+      assigns(:status).should == "Free Agent"
+      assigns(:position).should == Position::ALL_STRING
+      assigns(:searchString).should == nil
+      assigns(:page).should == nil
       assigns(:current_league).should == @league
     end
 
@@ -37,21 +41,33 @@ describe NflPlayersController do
       request.accept = "application/json"
       get :index, { :league_id => 1, :position => Position::QUARTERBACK }
       assigns(:nfl_players).length.should == 4
+      assigns(:total_players).should == 4
+      assigns(:position).should == Position::QUARTERBACK
 
       get :index, { :league_id => 1, :position => Position::RUNNINGBACK }
       assigns(:nfl_players).length.should == 6
+      assigns(:total_players).should == 6
+      assigns(:position).should == Position::RUNNINGBACK
 
       get :index, { :league_id => 1, :position => Position::WIDERECEIVER }
       assigns(:nfl_players).length.should == 8
+      assigns(:total_players).should == 8
+      assigns(:position).should == Position::WIDERECEIVER
 
       get :index, { :league_id => 1, :position => Position::TIGHTEND }
       assigns(:nfl_players).length.should == 7
+      assigns(:total_players).should == 7
+      assigns(:position).should == Position::TIGHTEND
 
       get :index, { :league_id => 1, :position => Position::KICKER }
       assigns(:nfl_players).length.should == 5
+      assigns(:total_players).should == 5
+      assigns(:position).should == Position::KICKER
 
       get :index, { :league_id => 1, :position => Position::DEFENSE }
       assigns(:nfl_players).length.should == 3
+      assigns(:total_players).should == 3
+      assigns(:position).should == Position::DEFENSE
     end
 
   end
