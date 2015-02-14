@@ -17,19 +17,21 @@ describe NflPlayersController do
       @user = create(:user)
       login(@user)
 
-      @league = create(:league, id: 1)
-      create_list(:nfl_player, 4, :qb)
-      create_list(:nfl_player, 6, :rb)
-      create_list(:nfl_player, 8, :wr)
-      create_list(:nfl_player, 7, :te)
-      create_list(:nfl_player, 5, :pk)
-      create_list(:nfl_player, 3, :def)
+      @league = create(:league)
+      @league.teams << create(:team)
+      create_list(:nfl_player, 4, :qb, teams: [])
+      create_list(:nfl_player, 6, :rb, teams: [])
+      create_list(:nfl_player, 8, :wr, teams: [])
+      create_list(:nfl_player, 7, :te, teams: [])
+      create_list(:nfl_player, 5, :pk, teams: [])
+      create_list(:nfl_player, 3, :def, teams: [])
     end
 
     it "it will return the number of players per page and the league" do
       request.accept = "application/json"
-      get :index, { :league_id => 1 }
+      get :index, { :league_id => @league.id }
       assigns(:nfl_players).length.should == NflPlayer.per_page
+      assigns(:total_players).should == 33
       assigns(:status).should == "Free Agent"
       assigns(:position).should == Position::ALL_STRING
       assigns(:searchString).should == nil
@@ -39,35 +41,58 @@ describe NflPlayersController do
 
     it "will return the correct number of players by position" do
       request.accept = "application/json"
-      get :index, { :league_id => 1, :position => Position::QUARTERBACK }
+      get :index, { :league_id => @league.id, :position => Position::QUARTERBACK }
       assigns(:nfl_players).length.should == 4
       assigns(:total_players).should == 4
       assigns(:position).should == Position::QUARTERBACK
 
-      get :index, { :league_id => 1, :position => Position::RUNNINGBACK }
+      get :index, { :league_id => @league.id, :position => Position::RUNNINGBACK }
       assigns(:nfl_players).length.should == 6
       assigns(:total_players).should == 6
       assigns(:position).should == Position::RUNNINGBACK
 
-      get :index, { :league_id => 1, :position => Position::WIDERECEIVER }
+      get :index, { :league_id => @league.id, :position => Position::WIDERECEIVER }
       assigns(:nfl_players).length.should == 8
       assigns(:total_players).should == 8
       assigns(:position).should == Position::WIDERECEIVER
 
-      get :index, { :league_id => 1, :position => Position::TIGHTEND }
+      get :index, { :league_id => @league.id, :position => Position::TIGHTEND }
       assigns(:nfl_players).length.should == 7
       assigns(:total_players).should == 7
       assigns(:position).should == Position::TIGHTEND
 
-      get :index, { :league_id => 1, :position => Position::KICKER }
+      get :index, { :league_id => @league.id, :position => Position::KICKER }
       assigns(:nfl_players).length.should == 5
       assigns(:total_players).should == 5
       assigns(:position).should == Position::KICKER
 
-      get :index, { :league_id => 1, :position => Position::DEFENSE }
+      get :index, { :league_id => @league.id, :position => Position::DEFENSE }
       assigns(:nfl_players).length.should == 3
       assigns(:total_players).should == 3
       assigns(:position).should == Position::DEFENSE
+    end
+
+    it "will return correct number players by status" do
+      request.accept = "application/json"
+
+      team = @league.teams.first
+      create_list(:nfl_player, 6, teams: [team])
+
+      get :index, { :league_id => @league.id, :own_status => "owned" }
+      assigns(:nfl_players).length.should == 6
+      assigns(:total_players).should == 6
+
+      get :index, { :league_id => @league.id, :own_status => "free agent" }
+      assigns(:nfl_players).length.should == NflPlayer.per_page
+      assigns(:total_players).should == 33
+
+      get :index, { :league_id => @league.id, :own_status => nil }
+      assigns(:nfl_players).length.should == NflPlayer.per_page
+      assigns(:total_players).should == 33
+
+      get :index, { :league_id => @league.id, :own_status => "all" }
+      assigns(:nfl_players).length.should == NflPlayer.per_page
+      assigns(:total_players).should == 39
     end
 
   end
