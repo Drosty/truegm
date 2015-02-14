@@ -37,9 +37,7 @@ describe LeaguesController do
         page.driver.post admin_leagues_path, {:league => valid_attributes, :number_of_teams => 10}
         League.last.teams.length.should == 10
       end
-
     end
-
   end
-
+  
 end

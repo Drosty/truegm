@@ -35,7 +35,6 @@ EvokeTruegmRails::Application.routes.draw do
       resources :player_salary_information, :only => [:index, :new, :create], as: 'salaries', path: "salaries"
       post "/salaries/process" => "player_salary_information#process_salaries"
 
-
       resources :teams, :only => [:index, :show, :edit, :update] do
         post "/add" => "teams#player_add", as: 'player_add'
         delete "/remove/:player_id" => "teams#player_remove", as: 'player_remove'

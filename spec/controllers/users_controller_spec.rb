@@ -7,7 +7,7 @@ describe UsersController do
     Warden.test_mode!
   end
 
-  after (:each) do
+  after(:each) do
    Warden.test_reset!
   end
 
@@ -29,5 +29,5 @@ describe UsersController do
       end
     end
   end
-  
+
 end
