@@ -59,8 +59,32 @@ describe NflPlayersController do
       assigns(:status).should == "Free Agent"
       assigns(:position).should == Position::ALL_STRING
       assigns(:searchString).should == nil
-      assigns(:page).should == nil
+      assigns(:page).should == 1
       assigns(:current_league).should == @league
+    end
+
+    it "successfully paginates results" do
+      request.accept = "application/json"
+      get :index, { :league_id => @league.id, :page => -1 }
+      first_call = assigns
+      assigns(:nfl_players).length.should == NflPlayer.per_page
+
+      get :index, { :league_id => @league.id, :page => 0 }
+      assigns.should == first_call
+
+      get :index, { :league_id => @league.id, :page => 1 }
+      assigns.should == first_call
+
+      get :index, { :league_id => @league.id, :page => 2 }
+      assigns.should_not == first_call
+      assigns(:nfl_players).length.should == NflPlayer.per_page
+
+      get :index, { :league_id => @league.id, :page => 3 }
+      assigns.should_not == first_call
+      assigns(:nfl_players).length.should == 3
+
+      get :index, { :league_id => @league.id, :page => 4 }
+      assigns(:nfl_players).length.should == 0
     end
 
     it "will return the correct number of players by position" do
@@ -118,7 +142,6 @@ describe NflPlayersController do
       assigns(:nfl_players).length.should == NflPlayer.per_page
       assigns(:total_players).should == 39
     end
-
   end
 
   describe "GET show" do
