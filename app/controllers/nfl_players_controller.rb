@@ -1,4 +1,5 @@
 class NflPlayersController < ApplicationController
+  before_filter :ensure_user_logged_in
   helper_method :sort_column, :sort_direction
 
   before_filter :set_current_league, only: [:show, :index, :add_player, :remove_player]
@@ -50,7 +51,6 @@ class NflPlayersController < ApplicationController
     stats = Stat.where(nfl_player_id: @nfl_player.id)
                 .where("year >= ?", 2013)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
-
     render :locals => { :view_model => view_model }
   end
 
