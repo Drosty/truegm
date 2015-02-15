@@ -7,7 +7,7 @@ json.nfl_team do
   json.id @nfl_player.nfl_team.id unless @nfl_player.nfl_team.nil?
 end
 
-json.is_on_team current_user.team_in_league(@current_league.id) && @nfl_player.teams.include?(current_user.team_in_league(@current_league.id))
+json.is_on_team current_user.team_in_league(@current_league.id) && @nfl_player.teams && @nfl_player.teams.include?(current_user.team_in_league(@current_league.id))
 
 if view_model.player.fantasy_team(@current_league.id)
   json.is_free_agent false
