@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-# Only actions to test are the Index and the Show
 describe NflPlayersController do
   include Warden::Test::Helpers
+  render_views
 
   before (:each) do
     Warden.test_mode!
 
-    @user = create(:user)
-    login(@user)
+    @user = create(:user_with_one_team)
+    sign_in(@user)
 
-    @league = create(:league)
-    @league.teams << create(:team)
+    @league = @user.teams[0].league
   end
 
   after (:each) do
@@ -145,7 +144,20 @@ describe NflPlayersController do
   end
 
   describe "GET show" do
-    it "assigns the requested nfl_player as @nfl_player" do
+    before(:each) do
+      @nfl_player = create(:nfl_player, :qb)
+      create(:stat_qb_good, nfl_player: @nfl_player, week: 1, year: 2013)
+      create(:stat_qb_bad, nfl_player: @nfl_player, week: 2, year: 2013)
+      create(:stat_qb_bad, nfl_player: @nfl_player, week: 8, year: 2014)
+      create(:stat_qb_good, nfl_player: @nfl_player, week: 9, year: 2014)
     end
+
+    it "will return correct stats" do
+      request.accept = "application/json"
+      get :show, { :league_id => @league.id, :id => @nfl_player.id }
+      # binding.pry
+      # JSON.parse(response.body) - will get the json
+    end
+
   end
 end

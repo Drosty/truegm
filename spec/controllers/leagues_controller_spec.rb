@@ -18,7 +18,7 @@ describe LeaguesController do
   describe "User with no team" do
     before(:each) do
       user = create(:user)
-      login(user)
+      sign_in(user)
     end
   end
 
