@@ -24,32 +24,29 @@ module NflPlayersHelper
     link_to player_fantasy_team.name, team_path(player_fantasy_team)
   end
 
-  def home_or_away_code player, current_week
-    nfl_matchup = player.week_nfl_matchup(current_week)
+  def home_or_away_code player, current_week, current_year
+    nfl_matchup = player.week_nfl_matchup(current_week, current_year)
 
     return "BYE" if nfl_matchup.nil? || player.nfl_team.nil?
     return nfl_matchup.home_or_away(player.nfl_team)
   end
 
-  def opponent_code player, current_week
-    nfl_matchup = player.week_nfl_matchup(current_week)
+  def opponent_code player, current_week, current_year
+    nfl_matchup = player.week_nfl_matchup(current_week, current_year)
 
     return "" if nfl_matchup.nil?
     return nfl_matchup.opponent_code(player.nfl_team)
   end
 
-  def matchup_formatted_date player, current_week
-    nfl_matchup = player.week_nfl_matchup(current_week)
+  def matchup_formatted_date player, current_week, current_year
+    nfl_matchup = player.week_nfl_matchup(current_week, current_year)
 
     return "" if nfl_matchup.nil?
     return nfl_matchup.game_date.in_time_zone("Central Time (US & Canada)").strftime("%a, %l:%M%P")
   end
 
-  def matchup_tv_station player, current_week
-    nfl_matchup = player.week_nfl_matchup(current_week)
-
-    return "" if nfl_matchup.nil?
-    return nfl_matchup.tv_station
+  def matchup_tv_station player, current_week, current_year
+    ""
   end
 
 end
