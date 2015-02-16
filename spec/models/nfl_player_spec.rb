@@ -148,7 +148,24 @@ describe NflPlayer do
       player = create(:nfl_player, :qb, full_name: "Foswhitt Smith", nfl_team: team)
       NflPlayer.fuzzy_find_by_spotrac("Fozzy Smith", "qb", team).should == player
     end
+  end
 
+  describe "team matchup" do
+    it "will return the correct matchup" do
+      team = @player.nfl_team
+      matchup = create(:nfl_matchup, week: 1, year: 2014)
+      team.home_matchups << matchup
+
+      @player.week_nfl_matchup(1, 2014).should == matchup
+    end
+
+    it "will return nil if not found" do
+      team = @player.nfl_team
+      matchup = create(:nfl_matchup, week: 1, year: 2014)
+      team.home_matchups << matchup
+
+      @player.week_nfl_matchup(12, 2014).should == nil
+    end
   end
 
 end
