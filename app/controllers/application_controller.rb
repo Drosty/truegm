@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_year
+    2014
+  end
+
 private
 
   def layout_by_resource
