@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  helper_method :current_week
+  helper_method :current_week, :current_year
 
   before_filter :configure_devise_params, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
