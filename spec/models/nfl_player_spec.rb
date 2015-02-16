@@ -116,4 +116,39 @@ describe NflPlayer do
     end
   end
 
+  describe "fuzzy name matching for spotrac" do
+    let(:team) { create(:nfl_team) }
+
+    it "will find a perfect match" do
+      player = create(:nfl_player, :qb, full_name: "Ryan Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Ryan Smith", "qb", team).should == player
+    end
+
+    it "will match with a jr in the name" do
+      player = create(:nfl_player, :qb, full_name: "Ryan Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Ryan Smith JR", "qb", team).should == player
+    end
+
+    it "will match with a iii in the name" do
+      player = create(:nfl_player, :qb, full_name: "Ryan Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Ryan Smith III", "qb", team).should == player
+    end
+
+    it "will match with Rob vs Robert" do
+      player = create(:nfl_player, :qb, full_name: "Robert Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Rob Smith", "qb", team).should == player
+    end
+
+    it "will match with Joshua vs Josh" do
+      player = create(:nfl_player, :qb, full_name: "Josh Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Joshua Smith", "qb", team).should == player
+    end
+
+    it "will match with Fozzy vs Foswhitt" do
+      player = create(:nfl_player, :qb, full_name: "Foswhitt Smith", nfl_team: team)
+      NflPlayer.fuzzy_find_by_spotrac("Fozzy Smith", "qb", team).should == player
+    end
+
+  end
+
 end
