@@ -8,4 +8,3 @@ describe InvitesController do
   end
 
 end
-    

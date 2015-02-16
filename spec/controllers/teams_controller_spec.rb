@@ -14,7 +14,7 @@ describe TeamsController do
   describe "Regular user - Visit Team Page" do
     before(:each) do
       @one_team_user = create(:user_with_one_team)
-      login(@one_team_user)
+      sign_in(@one_team_user)
     end
 
   end

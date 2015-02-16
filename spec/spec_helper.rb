@@ -19,6 +19,8 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+  config.include Devise::TestHelpers, :type => :controller
+  config.include ControllerHelpers, :type => :controller
 
   # This lets me just use build or create in the specs
   config.include FactoryGirl::Syntax::Methods
@@ -63,10 +65,4 @@ RSpec.configure do |config|
 
   config.before(:all) { DeferredGarbageCollection.start }
   config.after(:all) { DeferredGarbageCollection.reconsider }
-end
-
-
-def login(user)
-  @request.env["devise.mapping"] = :user
-  login_as(user, :scope => :user, :run_callbacks => false)
 end

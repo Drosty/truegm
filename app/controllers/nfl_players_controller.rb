@@ -1,22 +1,17 @@
 class NflPlayersController < ApplicationController
+  before_filter :ensure_user_logged_in
   helper_method :sort_column, :sort_direction
 
   before_filter :set_current_league, only: [:show, :index, :add_player, :remove_player]
   before_action :set_nfl_player, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
+  before_action :set_position, only: [:index]
+  before_action :set_status, only: [:index]
+  before_action :set_page, only: [:index]
 
   # GET /nfl_players
   # GET /nfl_players.json
   def index
-    @position = params[:position]
-    @position = "all" if @position.blank?
-    @position = @position.downcase
-
-    @status = params[:own_status]
-    @status = "Free Agent" if @status.blank?
-
     @searchString = params[:player_name]
-
-    @page = params[:page]
     @perPage = NflPlayer.per_page
 
     @nfl_players = NflPlayer.search(@searchString)
@@ -56,7 +51,6 @@ class NflPlayersController < ApplicationController
     stats = Stat.where(nfl_player_id: @nfl_player.id)
                 .where("year >= ?", 2013)
     view_model = NflPlayerViewModel.new(@nfl_player, stats)
-
     render :locals => { :view_model => view_model }
   end
 
@@ -87,4 +81,22 @@ class NflPlayersController < ApplicationController
     def nfl_player_params
       params[:nfl_player]
     end
+
+    def set_position
+      @position = params[:position]
+      @position = "all" if @position.blank?
+      @position = @position.downcase
+    end
+
+    def set_status
+      @status = params[:own_status]
+      @status = "Free Agent" if @status.blank?
+    end
+
+    def set_page
+      @page = params[:page].to_i
+      @page = 1 unless @page
+      @page = 1 if @page < 1
+    end
+
 end

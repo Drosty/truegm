@@ -7,8 +7,8 @@ describe UsersController do
     Warden.test_mode!
   end
 
-  after (:each) do
-   Warden.test_reset!
+  after(:each) do
+    Warden.test_reset!
   end
 
   def valid_attributes
@@ -18,7 +18,7 @@ describe UsersController do
   describe "POST create as admin user" do
     before(:each) do
       @user_admin = create(:user, :admin)
-      login(@user_admin)
+      sign_in(@user_admin)
     end
 
     describe "with valid params" do
@@ -29,5 +29,5 @@ describe UsersController do
       end
     end
   end
-  
+
 end

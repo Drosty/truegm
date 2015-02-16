@@ -6,17 +6,17 @@ FactoryGirl.define do
   factory :user do
     email
     password 'qwerty1234!!!'
-    name 'Ryan Drost' 
+    name 'Ryan Drost'
 
     factory :user_with_one_team do
       after(:build) { |user|
-        user.teams << FactoryGirl.build(:team, :user => user) 
+        user.teams << FactoryGirl.build(:team, :user => user)
       }
 
-      after(:creae) { |user|
-        user.teams << FactoryGirl.create(:team, :user => user) 
+      after(:create) { |user|
+        user.teams << FactoryGirl.create(:team, :user => user)
       }
-    end 
+    end
 
     factory :user_with_two_teams do
       after(:build) { |user|
@@ -24,7 +24,7 @@ FactoryGirl.define do
       }
 
       after(:create) { |user|
-        user.teams << FactoryGirl.create_list(:team, 2, :user => user) 
+        user.teams << FactoryGirl.create_list(:team, 2, :user => user)
       }
     end
   end
