@@ -145,18 +145,39 @@ describe NflPlayersController do
 
   describe "GET show" do
     before(:each) do
-      @nfl_player = create(:nfl_player, :qb)
+      @nfl_player = create(:nfl_player, :qb,
+                  full_name: "player one",
+                  spotrac_url: "spotrac.com",
+                  jersey: 12,
+                  height: "6' 7\"",
+                  weight: 230,
+                  college: "Notre Dame",
+                  active: true,
+                  salary: 1250000,
+                  nfl_team: create(:nfl_team, bye_week: 8))
+
       create(:stat_qb_good, nfl_player: @nfl_player, week: 1, year: 2013)
-      create(:stat_qb_bad, nfl_player: @nfl_player, week: 2, year: 2013)
-      create(:stat_qb_bad, nfl_player: @nfl_player, week: 8, year: 2014)
-      create(:stat_qb_good, nfl_player: @nfl_player, week: 9, year: 2014)
+      create(:stat_qb_bad, nfl_player: @nfl_player, week: 2, year: 2014)
     end
 
     it "will return correct stats" do
       request.accept = "application/json"
       get :show, { :league_id => @league.id, :id => @nfl_player.id }
-      # binding.pry
-      # JSON.parse(response.body) - will get the json
+
+      data = JSON.parse(response.body)
+      data["full_name"].should == "player one"
+      data["bye_week"].should == @nfl_player.nfl_team.bye_week
+      data["spotrac_url"].should == "spotrac.com"
+      data["jersey"].should == "12"
+      data["height"].should == "6' 7\""
+      data["weight"].should == "230"
+      data["salary"].should == "$1,250,000"
+      data["college"].should == "Notre Dame"
+      data["nfl_team"]["name"].should == "Full Football Team Name"
+      data["is_on_team"].should == false
+      data["is_free_agent"].should == true
+      data["league_team"]["name"].should == "FA"
+      data["stats"].should == {"year"=>[{"year"=>2013,"categories"=>[{"name"=>"Passing","stat_table_headers"=>["Wk", "Yds", "TD", "INT", "Pts"],"stats"=>[{"col1"=>1, "col2"=>300, "col3"=>3, "col4"=>0, "col5"=>27.0}]},{"name"=>"Rushing","stat_table_headers"=>["Wk", "Yds", "TD", "Fumbles", "Pts"],"stats"=>[{"col1"=>1, "col2"=>0, "col3"=>0, "col4"=>0, "col5"=>27.0}]}]},{"year"=>2014,"categories"=>[{"name"=>"Passing","stat_table_headers"=>["Wk", "Yds", "TD", "INT", "Pts"],"stats"=>[{"col1"=>2, "col2"=>150, "col3"=>1, "col4"=>2, "col5"=>4.0}]},{"name"=>"Rushing","stat_table_headers"=>["Wk", "Yds", "TD", "Fumbles", "Pts"],"stats"=>[{"col1"=>2, "col2"=>-10, "col3"=>0, "col4"=>1, "col5"=>4.0}]}]}]}
     end
 
   end
