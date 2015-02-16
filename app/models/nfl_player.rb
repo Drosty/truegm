@@ -71,8 +71,8 @@ class NflPlayer < ActiveRecord::Base
     "#{full_name} - #{nfl_team.code}"
   end
 
-  def week_nfl_matchup week
-    self.nfl_team.week_nfl_matchup(week)
+  def week_nfl_matchup week, year
+    self.nfl_team.week_nfl_matchup(week, year)
   end
 
   def points_in_week week, league

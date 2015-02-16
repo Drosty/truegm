@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  helper_method :current_week
+  helper_method :current_week, :current_year
 
   before_filter :configure_devise_params, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
       party = FantasyDataParty.new(ENV['fantasy_data_api_key'])
       party.get_current_week
     end
+  end
+
+  def current_year
+    2014
   end
 
 private

@@ -5,16 +5,18 @@ class NflTeam < ActiveRecord::Base
   has_many :home_matchups, :foreign_key => 'home_team_id', :class_name => "NflMatchup"
   has_many :away_matchups, :foreign_key => 'away_team_id', :class_name => "NflMatchup"
 
-  def matchups
-    NflMatchup.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
+  def matchups year
+    raise "year must be passed in to get NFL Team Matchups" if year.nil?
+    NflMatchup.where("(home_team_id = ? OR away_team_id = ?) and year = ?", self.id, self.id, year)
   end
 
   # this will return the NFL Team that this NFL Team is player and then
   # if it 'vs' or 'at' as a string
-  def week_nfl_matchup week
-    year = ENV["current_year"]
+  def week_nfl_matchup week, year
+    raise "year must be passed in to get NFL Weekly Matchup" if year.nil?
+    raise "week must be passed in to get NFL Weekly Matchup" if week.nil?
 
-    matchup = matchups.where(year: year, week: week).first
+    matchup = matchups(year).where(year: year, week: week).first
     return matchup
   end
 

@@ -6,8 +6,8 @@ FactoryGirl.define do
     week 1
     year 1
     game_date "2014-05-30 15:25:11"
-    away_team_id 1
-    home_team_id 1
+    away_team { FactoryGirl.create(:nfl_team, code: "AWAY") }
+    home_team { FactoryGirl.create(:nfl_team, code: "HOME") }
     tv_station "MyString"
   end
 end

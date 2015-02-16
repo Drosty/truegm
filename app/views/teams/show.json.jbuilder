@@ -14,8 +14,8 @@ json.players @team.ordered_nfl_players do |player|
   json.team_name player.nfl_team.code unless player.nfl_team.nil?
   json.team_name nil if player.nfl_team.nil?
 
-  json.home_or_away_code home_or_away_code(player, current_week)
-  json.opponent_code opponent_code(player, current_week)
-  json.matchup_formatted_date matchup_formatted_date(player, current_week)
-  json.matchup_tv_station matchup_tv_station(player, current_week)
+  json.home_or_away_code home_or_away_code(player, current_week, current_year)
+  json.opponent_code opponent_code(player, current_week, current_year)
+  json.matchup_formatted_date matchup_formatted_date(player, current_week, current_year)
+  json.matchup_tv_station matchup_tv_station(player, current_week, current_year)
 end
