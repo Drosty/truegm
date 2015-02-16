@@ -41,6 +41,20 @@ describe League do
     it "will return correct team ids" do
       @league.get_team_ids.should == [1,2,3]
     end
+
+    it "will return the correct team for a player" do
+      team = @league.teams.first
+      player = create(:nfl_player, :wr)
+      team.nfl_players << player
+      team.save
+      @league.get_team_name_for_player(player).should == team.name
+    end
+
+    it "will return FA if player is not on a team in the league" do
+      player = create(:nfl_player, :rb)
+      @league.get_team_name_for_player(player).should == "FA"
+    end
+
   end
 
 end
