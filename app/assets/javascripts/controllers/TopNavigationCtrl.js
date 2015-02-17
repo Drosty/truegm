@@ -1,48 +1,77 @@
 this.truegm.controller('TopNavigationCtrl', [
-	'$scope', '$location', 'LeagueService',
-	function($scope, $location, LeagueService) {
-		$scope.$watch(LeagueService.currentLeague, function(league) {
-			if (!!league) {
-				$scope.leagueName = league.name;
-				$scope.leagueId = league.id;
-				$scope.isLeagueSelected = true;
-				$scope.teams = league.teams;
-				$scope.currentTeamId = league.currentTeamId;
-			} else {
-				$scope.leagueName = 'TrueGm';
-				$scope.leagueId = 0;
-				$scope.isLeagueSelected = false;
-				$scope.teams = null;
-				$scope.currentTeamId = null;
-			}
-		});
+	'$scope', '$location', 'LeagueService', '$aside',
+	function($scope, $location, LeagueService, $aside) {
 
-		$scope.showMyTeam = function() {
-			return $location.path("/league/" + $scope.leagueId + "/team/" + $scope.currentTeamId);
-		};
+		$scope.openAside = function(){
+			$aside.open({
+				templateUrl: 'navigation/menu.html',
+				placement: 'left',
+				size: 'sm',
+				backdrop: true,
+				controller: function($scope, $modalInstance, LeagueService) {
+					$scope.isCollapsed = true;
+					$scope.$watch(LeagueService.currentLeague, function(league) {
+						if (!!league) {
+							$scope.leagueName = league.name;
+							$scope.leagueId = league.id;
+							$scope.isLeagueSelected = true;
+							$scope.teams = league.teams;
+							$scope.currentTeamId = league.currentTeamId;
+						} else {
+							$scope.leagueName = 'TrueGm';
+							$scope.leagueId = 0;
+							$scope.isLeagueSelected = false;
+							$scope.teams = null;
+							$scope.currentTeamId = null;
+						}
+					});
 
-		$scope.viewLeagues = function() {
-			return $location.path("/leagues/");
-		};
+					$scope.close = function(e) {
+						$modalInstance.close();
+						e.stopPropagation();
+					};
 
-		$scope.showForum = function() {
-			return $location.path("/league/" + $scope.leagueId + "/topics");
-		};
+					$scope.showMyTeam = function() {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/team/" + $scope.currentTeamId);
+					};
 
-		$scope.showPlayers = function() {
-			return $location.path("/league/" + $scope.leagueId + "/players");
-		};
+					$scope.viewLeagues = function() {
+						$modalInstance.close();
+						return $location.path("/leagues/");
+					};
 
-		$scope.showSchedule = function() {
-			return $location.path("/league/" + $scope.leagueId + "/schedule");
-		};
+					$scope.showForum = function() {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/topics");
+					};
 
-		$scope.showTeam = function(teamId) {
-			return $location.path("/league/" + $scope.leagueId + "/team/" + teamId);
-		};
+					$scope.showPlayers = function() {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/players");
+					};
 
-		$scope.showActivity = function() {
-			return $location.path("/league/" + $scope.leagueId + "/activity");
+					$scope.showSchedule = function() {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/schedule");
+					};
+
+					$scope.showTeam = function(teamId) {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/team/" + teamId);
+					};
+
+					$scope.showActivity = function() {
+						$modalInstance.close();
+						return $location.path("/league/" + $scope.leagueId + "/activity");
+					};
+
+					$scope.showAllLeagues = function() {
+						$modalInstance.close();
+						return $location.path("/leagues");
+					}
+				}
+			});
 		};
 	}
 ]);

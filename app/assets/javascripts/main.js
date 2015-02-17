@@ -1,7 +1,6 @@
 this.truegm = angular.module('truegm', ['templates', 'ngAnimate',
 	'ng-rails-csrf', 'ngRoute', 'ui.bootstrap', 'angulartics',
-	'angulartics.google.analytics'
-]);
+	'angulartics.google.analytics', 'ngAside']);
 
 this.truegm.config([
 	'$routeProvider',
