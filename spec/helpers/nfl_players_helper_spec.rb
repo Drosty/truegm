@@ -3,7 +3,6 @@ require 'spec_helper'
 describe NflPlayersHelper do
 
   describe "display team name" do
-
     it "is correct for a free agent player" do
       p = build(:nfl_player, :rb, :fa)
       display_team_name(p).should == "Free Agent"
@@ -95,5 +94,4 @@ describe NflPlayersHelper do
       matchup_tv_station(123, 1, 2014).should == ""
     end
   end
-
 end
