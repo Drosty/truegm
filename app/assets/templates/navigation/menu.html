@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h3 class="modal-title">TrueGM</h3>
+    <p ng-show="leagueName != 'TrueGm'">Current League: {{leagueName}}</p>
+</div>
+<div class="modal-body">
+  <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+    <li>
+      <a ng-click="showMyTeam()">
+        <span class="glyphicon glyphicon-tower"></span> My Team
+      </a>
+    </li>
+
+    <li>
+      <a ng-click="isCollapsed = !isCollapsed">
+        <span ng-show="isCollapsed" class="glyphicon glyphicon-arrow-down"></span>
+        <span ng-show="!isCollapsed" class="glyphicon glyphicon-arrow-up"></span> League Teams
+      </a>
+      <div collapse="isCollapsed">
+        <ol class="nav">
+          <li ng-repeat="team in teams">
+            <a ng-click="showTeam(team.id)">
+              <i>{{ team.name }}</i>
+            </a>
+          </li>
+        </ol>
+        <hr/>
+      </div>
+    </li>
+
+    <li>
+      <a ng-click="showPlayers()">
+        <span class="glyphicon glyphicon-user"></span> Free Agents
+      </a>
+    </li>
+
+    <li>
+      <a ng-click="showForum()">
+        <span class="glyphicon glyphicon-comment"></span> Forums
+      </a>
+    </li>
+
+    <li>
+      <a ng-click="showSchedule()">
+        <span class="glyphicon glyphicon-calendar"></span> Schedule
+      </a>
+    </li>
+
+    <li>
+      <a ng-click="showActivity()">
+        <span class="glyphicon glyphicon-stats"></span> League Activity
+      </a>
+    </li>
+  </ul>
+
+  <ul ng-show="isLeagueSelected" class="nav navmenu-nav">
+    <li>
+      <a ng-click="showAllLeagues()">
+        <span class="glyphicon glyphicon-home"></span> Show All Leagues
+      </a>
+    </li>
+  </ul>
+
+  <p ng-show="!isLeagueSelected">Close this Menu and select a league</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="close($event)">Close</button>
+  <a class="btn btn-danger" data-method="delete" href="/d/users/logout">
+    Logout
+  </a>
+</div>
