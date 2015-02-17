@@ -9,6 +9,18 @@ describe Team do
     @team.should be_valid
   end
 
+  describe "removing players from a team" do
+    it "will remove a player" do
+      player = create(:nfl_player, :wr)
+      @team.nfl_players << player
+      @team.save
+
+      player.free_agent?(@team.league).should == false
+      @team.remove_player player
+      player.free_agent?(@team.league).should == true
+    end
+  end
+
   describe "Adding players to Team" do
     it "will add player to team" do
       @team.add_player build(:nfl_player)
