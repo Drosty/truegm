@@ -14,7 +14,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb, override|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
 
-    override.vm.box = "truegm"
+    # override.vm.box = "drost/truegm"
+    # override.vm.box_url  = "https://www.dropbox.com/s/v0rz7dcy16t62la/package.box?dl=0"
+
+    override.vm.box = "dropbox/truegm"
     override.vm.box_url  = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
     override.vm.hostname = "truegm"
@@ -25,11 +28,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   # Setup librarian-puppet
-  # uses default puppet module path of /etc/puppet
-  config.vm.provision :shell, path: "puppet/shell/main.sh"
+  # uses default puppet module path of /etc/puppet\
+  # config.vm.provision :shell, path: "puppet/shell/main.sh"
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.module_path = "puppet/modules"
-  end
+  # config.vm.provision :puppet do |puppet|
+  #   puppet.manifests_path = "puppet/manifests"
+  #   puppet.module_path = "puppet/modules"
+  # end
 end
