@@ -1,32 +1,19 @@
-development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: TrueGM_development
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  host: <%= ENV['TRUEGM_DB_1_PORT_5432_TCP_ADDR'] %>
+  port: <%= ENV['TRUEGM_DB_1_PORT_5432_TCP_PORT'] %>
   pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test: &test
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: TrueGM_test
-  pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+development:
+  <<: *default
+  database: truegm_dev
+
+test:
+  <<: *default
+  database: truegm_test
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: TrueGM_production
-  pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+  <<: *default
+  database: truegm_prod
