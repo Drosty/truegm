@@ -2,7 +2,7 @@ FROM ruby:2.2.0
 
 RUN apt-get update -qq && apt-get install -y build-essential
 
-RUN apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
+RUN apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
 
 # for postgres
 RUN apt-get install -y libpq-dev
