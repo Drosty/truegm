@@ -6,14 +6,6 @@ development:
   password: abcd1234
   pool: 5
 
-assets:
-  adapter: postgresql
-  encoding: unicode
-  database: truegm_dev
-  username: vagrant
-  password: abcd1234
-  pool: 5
-
 test:
   adapter: postgresql
   encoding: unicode
