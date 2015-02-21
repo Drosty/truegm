@@ -15,6 +15,7 @@ The roadmap of this application includes importing stats, a forum, projections, 
 ### Database Project Setup
 In order to get the database setup and running run the following commands in this order:
 
+
 *Note: .env file needs to have the API Key for Fantasy Data set*
 
 ``` ruby
