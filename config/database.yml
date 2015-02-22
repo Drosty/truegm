@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  host: <%= ENV['TRUEGM_DB_1_HOST'] %>
+  pool: 5
+
+development:
+  <<: *default
+  database: truegm_dev
+
+test:
+  <<: *default
+  database: truegm_test
+
+production:
+  <<: *default
+  database: truegm_prod

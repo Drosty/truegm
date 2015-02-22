@@ -19,7 +19,7 @@
 *.swp
 
 # ignore database yml
-config/database.yml
+# config/database.yml
 
 coverage/*
 
