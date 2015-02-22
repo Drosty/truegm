@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
+  username: <%= ENV['TRUEGM_DB_1_USERNAME'] %> # postgres
   host: <%= ENV['TRUEGM_DB_1_HOST'] %>
   pool: 5
 
@@ -16,3 +16,4 @@ test:
 production:
   <<: *default
   database: truegm_prod
+  password: <%= ENV['TRUEGM_DB_1_PASSWORD'] %>
