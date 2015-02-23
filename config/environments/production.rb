@@ -17,7 +17,7 @@ EvokeTruegmRails::Application.configure do
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
 
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(mangle: false)
   config.assets.css_compressor = :sass
 
   # Generate digests for assets URLs
