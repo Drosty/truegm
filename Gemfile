@@ -94,4 +94,4 @@ gem 'newrelic_rpm'
 gem 'public_activity'
 
 # printing all awesome like
-gem 'awesome_print'
+gem 'awesome_print', group: [:development, :test]
