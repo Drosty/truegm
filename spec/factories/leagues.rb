@@ -3,6 +3,7 @@ FactoryGirl.define do
     name "MyString"
     description "MyString"
     tagline "MyString"
+    salary_cap 36000000
 
     player_salary_type "real"
     min_team_players 14
