@@ -180,5 +180,15 @@ describe NflPlayersController do
       data["stats"].should == {"year"=>[{"year"=>2013,"categories"=>[{"name"=>"Passing","stat_table_headers"=>["Wk", "Yds", "TD", "INT", "Pts"],"stats"=>[{"col1"=>1, "col2"=>300, "col3"=>3, "col4"=>0, "col5"=>27.0}]},{"name"=>"Rushing","stat_table_headers"=>["Wk", "Yds", "TD", "Fumbles", "Pts"],"stats"=>[{"col1"=>1, "col2"=>0, "col3"=>0, "col4"=>0, "col5"=>27.0}]}]},{"year"=>2014,"categories"=>[{"name"=>"Passing","stat_table_headers"=>["Wk", "Yds", "TD", "INT", "Pts"],"stats"=>[{"col1"=>2, "col2"=>150, "col3"=>1, "col4"=>2, "col5"=>4.0}]},{"name"=>"Rushing","stat_table_headers"=>["Wk", "Yds", "TD", "Fumbles", "Pts"],"stats"=>[{"col1"=>2, "col2"=>-10, "col3"=>0, "col4"=>1, "col5"=>4.0}]}]}]}
     end
 
+    it "will return correct booleans around on team/free agent" do
+      request.accept = "application/json"
+      @nfl_player.teams = [@league.teams.first]
+      get :show, { :league_id => @league.id, :id => @nfl_player.id }
+
+      data = JSON.parse(response.body)
+      data["is_on_team"].should == true
+      data["is_free_agent"].should == false
+    end
+
   end
 end
