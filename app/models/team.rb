@@ -33,6 +33,16 @@ class Team < ActiveRecord::Base
     end
   end
 
+  def how_much_over_cap_by_adding_player player
+    total_with_player = self.total_salary + player.salary
+
+    if total_with_player > league.salary_cap
+      return total_with_player - league.salary_cap
+    else
+      return 0
+    end
+  end
+
   def remove_player player
     team = player.fantasy_team self.league_id
 
