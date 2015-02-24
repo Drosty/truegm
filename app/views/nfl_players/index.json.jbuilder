@@ -6,7 +6,8 @@ json.searchString @searchString
 json.totalPlayers @total_players
 
 json.players @nfl_players do |player|
-  json.(player, :id, :full_name, :position)
+  json.(player, :id, :full_name)
+  json.position player.position.upcase
   json.salary format_as_money(player.salary)
 
   json.nfl_team_code player.nfl_team.code.upcase if player.nfl_team

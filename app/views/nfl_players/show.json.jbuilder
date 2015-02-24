@@ -1,4 +1,5 @@
-json.(view_model.player, :id, :full_name, :bye_week, :position, :spotrac_url, :jersey, :height, :weight, :college, :active)
+json.(view_model.player, :id, :full_name, :bye_week, :spotrac_url, :jersey, :height, :weight, :college, :active)
+json.position @nfl_player.position.upcase
 json.salary format_as_money(@nfl_player.salary)
 json.age @nfl_player.age
 json.photo_url @nfl_player.photo_url
