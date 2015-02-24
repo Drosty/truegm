@@ -1,6 +1,7 @@
 json.(view_model.player, :id, :full_name, :bye_week, :position, :spotrac_url, :jersey, :height, :weight, :college, :active)
 json.salary format_as_money(@nfl_player.salary)
 json.age @nfl_player.age
+json.photo_url @nfl_player.photo_url
 
 json.nfl_team do
   json.name @nfl_player.nfl_team.full_name unless @nfl_player.nfl_team.nil?
