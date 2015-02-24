@@ -21,18 +21,6 @@ describe Team do
     end
   end
 
-  describe "testing state if adding player to team" do
-    it "will return 0 if won't go over the cap" do
-      player = create(:nfl_player, :wr, salary: 1000)
-      @team.how_much_over_cap_by_adding_player(player).should == 0
-    end
-
-    it "will return value if going over the cap" do
-      player = create(:nfl_player, :wr, salary: @team.league.salary_cap + 1234)
-      @team.how_much_over_cap_by_adding_player(player).should == 1234
-    end
-  end
-
   describe "Adding players to Team" do
     it "will add player to team" do
       @team.add_player build(:nfl_player)
