@@ -59,6 +59,10 @@ class NflPlayer < ActiveRecord::Base
     end
   end
 
+  def is_on_fantasy_team team
+    team && self.teams && self.teams.include?(team)
+  end
+
   def age
     if dob
       ((Time.now - dob)/1.year).round
