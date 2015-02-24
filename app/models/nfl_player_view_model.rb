@@ -1,10 +1,11 @@
 class NflPlayerViewModel
 
-  def initialize(player = nil, stats = [], league = nil)
+  def initialize(player = nil, stats = [], league = nil, user_team = nil)
     @stat_lines = stats
     @player = player
     @league = league
-    @fantasy_team = @player.fantasy_team(@league.id) if @player && @league
+    @user_fantasy_team = user_team
+    @player_fantasy_team = @player.fantasy_team(@league.id) if @player && @league
   end
 
   def stats_by_year
@@ -141,8 +142,12 @@ class NflPlayerViewModel
     @player.position
   end
 
-  def fantasy_team
-    @fantasy_team
+  def player_fantasy_team
+    @player_fantasy_team
+  end
+
+  def user_fantasy_team
+    @user_fantasy_team
   end
 
   def league

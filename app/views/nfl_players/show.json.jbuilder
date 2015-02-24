@@ -9,13 +9,36 @@ json.nfl_team do
   json.id view_model.player.nfl_team.id unless view_model.player.nfl_team.nil?
 end
 
-json.is_on_team view_model.player.is_on_fantasy_team(view_model.fantasy_team)
+json.is_on_team view_model.player.is_on_fantasy_team(view_model.user_fantasy_team)
 
-if view_model.fantasy_team
+json.user_team_salary view_model.user_fantasy_team.total_salary
+json.display_user_team_salary format_as_money(view_model.user_fantasy_team.total_salary)
+
+json.adding_player do
+  json.have_room_for_new_player view_model.user_fantasy_team.have_roster_space_for_new_player?
+
+  json.would_be_over_maximum_roster_size view_model.user_fantasy_team.would_be_over_maximum_roster_size_if_player_added?
+  json.new_salary view_model.user_fantasy_team.team_salary_if_player_added(view_model.player)
+  json.display_new_salary format_as_money(view_model.user_fantasy_team.team_salary_if_player_added(view_model.player))
+
+  json.players_to_release view_model.user_fantasy_team.ordered_nfl_players do |player_here|
+    json.(player_here, :id, :full_name, :photo_url, :bye_week)
+    json.position player_here.position.upcase
+    json.salary format_as_money(player_here.salary)
+    json.new_salary format_as_money(view_model.user_fantasy_team.team_salary_if_player_released_and_other_added(view_model.player, player_here))
+  end
+end if view_model.player.free_agent?(view_model.league) || !view_model.player.is_on_fantasy_team(view_model.user_fantasy_team)
+
+json.releasing_player do
+  json.would_be_under_minimum view_model.user_fantasy_team.would_be_under_minimum_roster_size_if_player_released?
+  json.new_salary view_model.user_fantasy_team.team_salary_if_player_released(view_model.player)
+end if view_model.player.is_on_fantasy_team(view_model.user_fantasy_team)
+
+if view_model.player_fantasy_team
   json.is_free_agent false
   json.league_team do
-    json.id view_model.fantasy_team.id
-    json.name view_model.fantasy_team.name
+    json.id view_model.player_fantasy_team.id
+    json.name view_model.player_fantasy_team.name
   end
 else
   json.is_free_agent true
