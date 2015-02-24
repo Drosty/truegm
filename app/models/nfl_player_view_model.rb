@@ -4,7 +4,7 @@ class NflPlayerViewModel
     @stat_lines = stats
     @player = player
     @league = league
-    @fantasy_team = @player.fantasy_team(@league.id)
+    @fantasy_team = @player.fantasy_team(@league.id) if @player && @league
   end
 
   def stats_by_year
