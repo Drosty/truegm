@@ -60,7 +60,7 @@ class NflPlayer < ActiveRecord::Base
   end
 
   def is_on_fantasy_team team
-    team && self.teams && self.teams.include?(team)
+    self.teams && self.teams.include?(team)
   end
 
   def age

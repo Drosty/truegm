@@ -1,21 +1,21 @@
 json.(view_model.player, :id, :full_name, :bye_week, :spotrac_url, :jersey, :height, :weight, :college, :active)
-json.position @nfl_player.position.upcase
-json.salary format_as_money(@nfl_player.salary)
-json.age @nfl_player.age
-json.photo_url @nfl_player.photo_url
+json.position view_model.player.position.upcase
+json.salary format_as_money(view_model.player.salary)
+json.age view_model.player.age
+json.photo_url view_model.player.photo_url
 
 json.nfl_team do
-  json.name @nfl_player.nfl_team.full_name unless @nfl_player.nfl_team.nil?
-  json.id @nfl_player.nfl_team.id unless @nfl_player.nfl_team.nil?
+  json.name view_model.player.nfl_team.full_name unless view_model.player.nfl_team.nil?
+  json.id view_model.player.nfl_team.id unless view_model.player.nfl_team.nil?
 end
 
-json.is_on_team view_model.player.is_on_fantasy_team(current_user.team_in_league(@current_league.id))
+json.is_on_team view_model.player.is_on_fantasy_team(view_model.fantasy_team)
 
-if view_model.player.fantasy_team(@current_league.id)
+if view_model.fantasy_team
   json.is_free_agent false
   json.league_team do
-    json.id view_model.player.fantasy_team(@current_league.id).id
-    json.name view_model.player.fantasy_team_name(@current_league.id)
+    json.id view_model.fantasy_team.id
+    json.name view_model.fantasy_team.name
   end
 else
   json.is_free_agent true
@@ -38,7 +38,7 @@ json.stats do
         json.col2 view_model.col2_for_header(stat, header)
         json.col3 view_model.col3_for_header(stat, header)
         json.col4 view_model.col4_for_header(stat, header)
-        json.col5 view_model.col5_for_header(stat, @current_league)
+        json.col5 view_model.col5_for_header(stat, view_model.league)
       end
     end
   end

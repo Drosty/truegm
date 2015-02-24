@@ -50,7 +50,7 @@ class NflPlayersController < ApplicationController
   def show
     stats = Stat.where(nfl_player_id: @nfl_player.id)
                 .where("year >= ?", 2013)
-    view_model = NflPlayerViewModel.new(@nfl_player, stats)
+    view_model = NflPlayerViewModel.new(@nfl_player, stats, @current_league)
     render :locals => { :view_model => view_model }
   end
 
