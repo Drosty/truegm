@@ -188,6 +188,7 @@ describe NflPlayersController do
       data = JSON.parse(response.body)
       data["is_on_team"].should == true
       data["is_free_agent"].should == false
+      data["league_team"]["name"].should == @league.teams.first.name
     end
 
   end
