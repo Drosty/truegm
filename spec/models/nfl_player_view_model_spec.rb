@@ -19,7 +19,7 @@ describe NflPlayerViewModel do
   describe "with one stats in View Model" do
     before(:each) do
       @stat = build(:stat_qb_good, year: 2014)
-      @player_stat_vm = NflPlayerViewModel.new(nil, [@stat])
+      @player_stat_vm = NflPlayerViewModel.new(nil, [@stat], nil)
     end
 
     it "will return array with stat in it" do
