@@ -41,7 +41,12 @@ this.truegm.controller('PlayerShowCtrl', [
 					};
 
 					$scope.replacePlayer = function(removePlayerId){
-						console.log("Will add playerID: " + $scope.playerToAdd.id + " remove: " + removePlayerId);
+						dataObj = {remove_player_id: removePlayerId};
+						$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" + $scope.playerToAdd.id + "/replace_players", {
+							params: dataObj
+						}).success(function(data) {
+							return $location.path("/league/" + LeagueService.currentLeague().id);
+						});
 						$modalInstance.close();
 					};
 				}
