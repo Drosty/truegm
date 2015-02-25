@@ -31,7 +31,7 @@ end if view_model.player.free_agent?(view_model.league) || !view_model.player.is
 
 json.releasing_player do
   json.would_be_under_minimum view_model.user_fantasy_team.would_be_under_minimum_roster_size_if_player_released?
-  json.new_salary view_model.user_fantasy_team.team_salary_if_player_released(view_model.player)
+  json.new_salary format_as_money(view_model.user_fantasy_team.team_salary_if_player_released(view_model.player))
 end if view_model.player.is_on_fantasy_team(view_model.user_fantasy_team)
 
 if view_model.player_fantasy_team

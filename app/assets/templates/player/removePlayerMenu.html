@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h3 class="modal-title">Remove {{playerToAdd.full_name}}</h3>
+  <p>Current Salary: {{playerToAdd.display_user_team_salary}} <br />
+  Salary After Removing: {{playerToAdd.releasing_player.new_salary}}</p>
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+    <p>Want to remove this player?</p>
+    <a confirmed-click="removePlayer()"
+       class="btn btn-info"
+       ng-confirm-click="Are you sure you want to release {{playerToAdd.full_name}}?">
+       Release</a>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="close($event)">Close</button>
+</div>

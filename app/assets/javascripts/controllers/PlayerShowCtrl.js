@@ -48,15 +48,39 @@ this.truegm.controller('PlayerShowCtrl', [
 			})
 		};
 
-		$scope.removePlayer = function() {
-			var dataObj;
-			dataObj = {};
-			$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" +
-				$scope.player.id + "/remove_player", {
-					params: dataObj
-				}).success(function(data) {
-				return $location.path("/league/" + LeagueService.currentLeague().id);
-			});
+		$scope.openRemovePlayerAside = function(){
+			$aside.open({
+				templateUrl: 'player/removePlayerMenu.html',
+				placement: 'bottom',
+				size: 'sm',
+				backdrop: true,
+				resolve: {
+					player: function () {
+						return $scope.player;
+					}
+				},
+				controller: function($scope, $modalInstance, player, LeagueService) {
+					$scope.playerToRemove = player;
+
+					$scope.close = function(e) {
+						$modalInstance.close();
+						e.stopPropagation();
+					};
+
+					$scope.removePlayer = function() {
+						var dataObj;
+						dataObj = {};
+						$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" +
+							$scope.playerToRemove.id + "/remove_player", {
+								params: dataObj
+							}).success(function(data) {
+							return $location.path("/league/" + LeagueService.currentLeague().id);
+						});
+
+						$modalInstance.close();
+					};
+				}
+			})
 		};
 	}
 ]);
