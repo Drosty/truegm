@@ -6,67 +6,45 @@
 ##
 module FantasyData
   class ImportService
-    attr_reader :fantasy_data_party
-
-    def initialize(fantasy_data_party = FantasyDataParty.new)
-      @fantasy_data_party = fantasy_data_party
-    end
 
     def import_nfl_team_data
-      teams = @fantasy_data_party.nfl_teams
+      Fantasydata.teams_active.each do |team|
+        in_team = NflTeam.find_or_create_by(code: team.key,
+                                  full_name: team.full_name,
+                                  short_name: team.name) do |team|
 
-      if was_unsuccessful_call(teams)
-        print_error_message
-        return
-      end
-
-      teams.each do |team|
-        in_team = NflTeam.find_or_create_by(code: team["Key"],
-                                  full_name: team["FullName"],
-                                  short_name: team["Name"])
-
-        in_team.bye_week = team["ByeWeek"]
-        in_team.save
+          team.bye_week = team.bye_week
+        end
       end
     end
 
-    def import_nfl_player_data position
+    def import_nfl_player_data
       NflPlayer.update_all(active: false)
+      teams = NflTeam.all
 
-      NflTeam.all.each do |nfl_team|
-        players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
-
-        if was_unsuccessful_call(players)
-          print_error_message
-          return
-        end
-
-        players.each do |player|
-          next unless Position::ALL_POSITIONS.include?(player["FantasyPosition"].downcase)
-          p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
-
-          p_to_save.active = player["Active"] == "true"
-          p_to_save.jersey = player["Number"].to_i
-          p_to_save.last_name = player["LastName"]
-          p_to_save.first_name = player["FirstName"]
-          p_to_save.full_name = player["Name"]
-          p_to_save.nfl_team = nfl_team
-          p_to_save.position = player["FantasyPosition"].downcase
-          p_to_save.height = player["Height"]
-          p_to_save.weight = player["Weight"]
-          p_to_save.college = player["College"]
-          p_to_save.current_status = player["CurrentStatus"]
-          p_to_save.depth_order = player["DepthOrder"].to_i
-          p_to_save.experience = player["Experience"].to_i
-          p_to_save.photo_url = player["PhotoUrl"]
+      Fantasydata.player_details_available.each do |player|
+        next unless Position::ALL_POSITIONS.include?(player.fantasy_position.downcase)
+        NflPlayer.find_or_create_by(fantasy_data_id: player.player_id) do |p|
+          p.active = player.active
+          p.jersey = player.number
+          p.last_name = player.last_name
+          p.first_name = player.first_name
+          p.full_name = player.name
+          p.nfl_team = teams.select { |team| team.code == player.current_team }.first
+          p.position = player.fantasy_position
+          p.height = player.height
+          p.weight = player.weight
+          p.college = player.college
+          p.current_status = player.current_status
+          p.depth_order = player.depth_order
+          p.experience = player.experience
+          p.photo_url = player.photo_url
 
           begin
-            p_to_save.dob = player["BirthDate"].to_datetime
+            p.dob = player.birth_date.to_datetime
           rescue => e
-            p_to_save.dob = nil
+            p.dob = nil
           end
-
-          p_to_save.save
         end
       end
     end
