@@ -2,6 +2,26 @@ this.truegm.controller('TopNavigationCtrl', [
 	'$scope', '$location', 'LeagueService',
 	function($scope, $location, LeagueService) {
 
+		$scope.$watch(LeagueService.currentLeague, function(league) {
+										if (!!league) {
+											$scope.leagueName = league.name;
+											$scope.leagueId = league.id;
+											$scope.isLeagueSelected = true;
+											$scope.teams = league.teams;
+											$scope.currentTeamId = league.currentTeamId;
+										} else {
+											$scope.leagueName = 'TrueGm';
+											$scope.leagueId = 0;
+											$scope.isLeagueSelected = false;
+											$scope.teams = null;
+											$scope.currentTeamId = null;
+										}
+									});
+					
+		$scope.currentLeagueName = function(){
+			return LeagueService.currentLeague() ? LeagueService.currentLeague().name : "None";
+		};
+
 		$scope.showMyTeam = function() {
 			return $location.path("/league/" + $scope.leagueId + "/team/" + $scope.currentTeamId);
 		};
