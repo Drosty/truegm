@@ -22,6 +22,19 @@
 //= require main
 //= require angular-rails-templates
 //= require_tree ../templates
-//= require bootstrap
-//= require bootstrap-sprockets
 //= require_tree .
+
+$( document ).ready(function(){
+  $('.slider').slider({full_width: true});
+  
+  $('.button-collapse').sideNav({
+      menuWidth: 240,
+      closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    }
+  );
+  
+  $('.modal-trigger').leanModal();
+  $('.scrollspy').scrollSpy();
+  $('.datepicker').pickadate({selectYears: 20});
+  $('select').not('.disabled').material_select();
+})

@@ -22,12 +22,7 @@
   <% end %>
 </head>
 <body>
-
   <div class="canvas">
-    <div class="navbar navbar-default navbar-fixed-top">
-      <h4 class="header-text">TrueGM</h4>
-    </div>
-
     <div id="main" class="container">
       <% flash.each do |name, msg| %>
       <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
