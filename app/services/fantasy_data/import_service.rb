@@ -11,9 +11,9 @@ module FantasyData
       Fantasydata.teams_active.each do |team|
         in_team = NflTeam.find_or_create_by(code: team.key,
                                   full_name: team.full_name,
-                                  short_name: team.name) do |team|
+                                  short_name: team.name) do |t|
 
-          team.bye_week = team.bye_week
+          t.bye_week = team.bye_week
         end
       end
     end
