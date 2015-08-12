@@ -63,7 +63,6 @@ gem 'sidekiq'
 # Rails Best Practices gem
 gem 'rails_best_practices'
 
-gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
 # for HTML/XML parsing

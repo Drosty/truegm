@@ -1,7 +1,61 @@
 <div ng-controller="TopNavigationCtrl">
-  <div class="navmenu navmenu-default navmenu-fixed-left">
-      <button type="button" class="btn btn-default btn-lg" ng-click="openAside()">
-        <span class="glyphicon glyphicon-align-justify"></span> Menu
-      </button>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a class="page-title">TrueGM</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
+      <i class="mdi-navigation-menu"></i>
+    </a>
   </div>
+  <ul class="side-nav fixed" ng-show="!isLeagueSelected">
+    <li class="bold">
+      <span>
+        Select a league to continue
+      </a>
+    </li>
+  </ul>
+  
+  <ul id="nav-mobile" class="side-nav fixed" ng-show="isLeagueSelected">
+    
+    <li class="bold">
+      <a ng-click="showMyTeam()" class="waves-effect waves-teal">
+        My Team
+      </a>
+    </li>
+    
+    <li class="bold">
+      <a ng-click="showPlayers()" class="waves-effect waves-teal">
+        Free Agents
+      </a>
+    </li>
+    
+    <li class="bold">
+      <a ng-click="showForum()" class="waves-effect waves-teal">
+        Forums
+      </a>
+    </li>
+    
+    <li class="bold">
+      <a ng-click="showSchedule()" class="waves-effect waves-teal">
+        Schedule
+      </a>
+    </li>
+    
+    <li class="bold">
+      <a ng-click="showActivity()" class="waves-effect waves-teal">
+        League Activity
+      </a>
+    </li>
+    
+    <li class="bold">
+      <a ng-click="showAllLeagues()" class="waves-effect waves-teal">
+        All Leagues
+      </a>
+    </li>
+    
+  </ul>
 </div>
