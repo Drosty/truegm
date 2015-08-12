@@ -81,6 +81,8 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 gem 'pry'
 
+gem 'fantasydata'
+
 gem 'httparty'
 
 gem 'dotenv-rails'
