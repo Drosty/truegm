@@ -34,13 +34,14 @@ module NflPlayersHelper
   def opponent_code player, current_week, current_year
     nfl_matchup = player.week_nfl_matchup(current_week, current_year)
 
-    return "" if nfl_matchup.nil?
+    return "" if nfl_matchup.nil? || player.nfl_team.nil?
     return nfl_matchup.opponent_code(player.nfl_team)
   end
 
   def matchup_formatted_date player, current_week, current_year
     nfl_matchup = player.week_nfl_matchup(current_week, current_year)
 
+    return "" unless nfl_matchup.is_a?(Matchup)
     return "" if nfl_matchup.nil?
     return nfl_matchup.game_date.in_time_zone("Central Time (US & Canada)").strftime("%a, %l:%M%P")
   end

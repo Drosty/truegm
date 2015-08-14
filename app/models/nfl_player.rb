@@ -76,6 +76,7 @@ class NflPlayer < ActiveRecord::Base
   end
 
   def week_nfl_matchup week, year
+    return "" if self.nfl_team.nil?
     self.nfl_team.week_nfl_matchup(week, year)
   end
 
