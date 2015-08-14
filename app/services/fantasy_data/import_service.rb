@@ -31,7 +31,7 @@ module FantasyData
           p.first_name = player.first_name
           p.full_name = player.name
           p.nfl_team = teams.select { |team| team.code == player.current_team }.first
-          p.position = player.fantasy_position
+          p.position = player.fantasy_position.downcase
           p.height = player.height
           p.weight = player.weight
           p.college = player.college
@@ -125,16 +125,6 @@ module FantasyData
     def import_active_stats
 
     end
-
-    private
-
-      def was_unsuccessful_call obj
-        obj.is_a?(Hash) && obj.has_key?("statusCode") && obj["statusCode"] != 200
-      end
-
-      def print_error_message
-        puts "Status Code was not 200 when calling the FantasyDataParty"
-      end
 
   end
 end
