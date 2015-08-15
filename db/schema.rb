@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815034237) do
+ActiveRecord::Schema.define(version: 20150815040325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,37 @@ ActiveRecord::Schema.define(version: 20150815034237) do
     t.float    "point_spread"
     t.float    "over_under"
     t.string   "game_key"
+    t.integer  "away_score"
+    t.integer  "home_score"
+    t.integer  "quarter"
+    t.string   "time_remaining",         default: "0:00"
+    t.string   "possession"
+    t.integer  "down"
+    t.integer  "distance"
+    t.integer  "yard_line"
+    t.string   "yard_line_territory"
+    t.boolean  "red_zone",               default: false
+    t.integer  "away_score_quarter1"
+    t.integer  "away_score_quarter2"
+    t.integer  "away_score_quarter3"
+    t.integer  "away_score_quarter4"
+    t.integer  "away_score_overtime"
+    t.integer  "home_score_quarter1"
+    t.integer  "home_score_quarter2"
+    t.integer  "home_score_quarter3"
+    t.integer  "home_score_quarter4"
+    t.integer  "home_score_overtime"
+    t.boolean  "has_started",            default: false
+    t.boolean  "is_in_progress",         default: false
+    t.boolean  "is_over",                default: false
+    t.boolean  "has1st_quarter_started", default: false
+    t.boolean  "has2nd_quarter_started", default: false
+    t.boolean  "has3rd_quarter_started", default: false
+    t.boolean  "has4th_quarter_started", default: false
+    t.boolean  "is_overtime",            default: false
+    t.string   "down_and_distance",      default: "1st and 10"
+    t.string   "quarter_description"
+    t.datetime "last_updated"
   end
 
   create_table "nfl_players", force: :cascade do |t|
@@ -223,6 +254,35 @@ ActiveRecord::Schema.define(version: 20150815034237) do
     t.integer  "bye_week"
   end
 
+  create_table "passing_stats", force: :cascade do |t|
+    t.integer  "nfl_matchup_id"
+    t.integer  "nfl_player_id"
+    t.integer  "nfl_team_id"
+    t.integer  "number"
+    t.string   "position"
+    t.string   "fantasy_position"
+    t.float    "fantasy_points"
+    t.integer  "passing_attempts"
+    t.float    "passing_completion_percentage"
+    t.integer  "passing_completions"
+    t.integer  "passing_interceptions"
+    t.integer  "passing_long"
+    t.float    "passing_rating"
+    t.integer  "passing_sack_yards"
+    t.integer  "passing_sacks"
+    t.integer  "passing_touchdowns"
+    t.integer  "passing_yards"
+    t.float    "passing_yards_per_attempt"
+    t.float    "passing_yards_per_completion"
+    t.integer  "two_point_conversion_passes"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "passing_stats", ["nfl_matchup_id"], name: "index_passing_stats_on_nfl_matchup_id", using: :btree
+  add_index "passing_stats", ["nfl_player_id"], name: "index_passing_stats_on_nfl_player_id", using: :btree
+  add_index "passing_stats", ["nfl_team_id"], name: "index_passing_stats_on_nfl_team_id", using: :btree
+
   create_table "power_rankings", force: :cascade do |t|
     t.integer  "team_id"
     t.text     "description"
@@ -234,6 +294,102 @@ ActiveRecord::Schema.define(version: 20150815034237) do
   end
 
   add_index "power_rankings", ["team_id"], name: "power_ranking_team_fk", using: :btree
+
+  create_table "punting_stats", force: :cascade do |t|
+    t.integer  "nfl_matchup_id"
+    t.integer  "nfl_player_id"
+    t.integer  "nfl_team_id"
+    t.integer  "number"
+    t.string   "position"
+    t.string   "fantasy_position"
+    t.float    "fantasy_points"
+    t.float    "punt_average"
+    t.integer  "punt_inside20"
+    t.integer  "punt_touchbacks"
+    t.integer  "punt_yards"
+    t.integer  "punts"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "punting_stats", ["nfl_matchup_id"], name: "index_punting_stats_on_nfl_matchup_id", using: :btree
+  add_index "punting_stats", ["nfl_player_id"], name: "index_punting_stats_on_nfl_player_id", using: :btree
+  add_index "punting_stats", ["nfl_team_id"], name: "index_punting_stats_on_nfl_team_id", using: :btree
+
+  create_table "receiving_stats", force: :cascade do |t|
+    t.integer  "nfl_matchup_id"
+    t.integer  "nfl_player_id"
+    t.integer  "nfl_team_id"
+    t.integer  "number"
+    t.string   "position"
+    t.string   "fantasy_position"
+    t.float    "fantasy_points"
+    t.integer  "fumbles_lost"
+    t.integer  "receiving_long"
+    t.integer  "receiving_targets"
+    t.integer  "receiving_touchdowns"
+    t.integer  "receiving_yards"
+    t.float    "receiving_yards_per_reception"
+    t.float    "receiving_yards_per_target"
+    t.float    "reception_percentage"
+    t.integer  "receptions"
+    t.integer  "two_point_conversion_receptions"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "receiving_stats", ["nfl_matchup_id"], name: "index_receiving_stats_on_nfl_matchup_id", using: :btree
+  add_index "receiving_stats", ["nfl_player_id"], name: "index_receiving_stats_on_nfl_player_id", using: :btree
+  add_index "receiving_stats", ["nfl_team_id"], name: "index_receiving_stats_on_nfl_team_id", using: :btree
+
+  create_table "return_stats", force: :cascade do |t|
+    t.integer  "nfl_matchup_id"
+    t.integer  "nfl_player_id"
+    t.integer  "nfl_team_id"
+    t.integer  "number"
+    t.string   "position"
+    t.string   "fantasy_position"
+    t.float    "fantasy_points"
+    t.integer  "kick_return_long"
+    t.integer  "kick_return_touchdowns"
+    t.integer  "kick_return_yards"
+    t.float    "kick_return_yards_per_attempt"
+    t.integer  "kick_returns"
+    t.integer  "punt_return_long"
+    t.integer  "punt_return_touchdowns"
+    t.integer  "punt_return_yards"
+    t.float    "punt_return_yards_per_attempt"
+    t.integer  "punt_returns"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "return_stats", ["nfl_matchup_id"], name: "index_return_stats_on_nfl_matchup_id", using: :btree
+  add_index "return_stats", ["nfl_player_id"], name: "index_return_stats_on_nfl_player_id", using: :btree
+  add_index "return_stats", ["nfl_team_id"], name: "index_return_stats_on_nfl_team_id", using: :btree
+
+  create_table "rushing_stats", force: :cascade do |t|
+    t.integer  "nfl_matchup_id"
+    t.integer  "nfl_player_id"
+    t.integer  "nfl_team_id"
+    t.integer  "number"
+    t.string   "position"
+    t.string   "fantasy_position"
+    t.float    "fantasy_points"
+    t.integer  "fumbles_lost"
+    t.integer  "rushing_attempts"
+    t.integer  "rushing_long"
+    t.integer  "rushing_touchdowns"
+    t.integer  "rushing_yards"
+    t.float    "rushing_yards_per_attempt"
+    t.integer  "two_point_conversion_runs"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "rushing_stats", ["nfl_matchup_id"], name: "index_rushing_stats_on_nfl_matchup_id", using: :btree
+  add_index "rushing_stats", ["nfl_player_id"], name: "index_rushing_stats_on_nfl_player_id", using: :btree
+  add_index "rushing_stats", ["nfl_team_id"], name: "index_rushing_stats_on_nfl_team_id", using: :btree
 
   create_table "stats", force: :cascade do |t|
     t.integer "nfl_player_id"
@@ -361,4 +517,19 @@ ActiveRecord::Schema.define(version: 20150815034237) do
   add_foreign_key "kicking_stats", "nfl_matchups"
   add_foreign_key "kicking_stats", "nfl_players"
   add_foreign_key "kicking_stats", "nfl_teams"
+  add_foreign_key "passing_stats", "nfl_matchups"
+  add_foreign_key "passing_stats", "nfl_players"
+  add_foreign_key "passing_stats", "nfl_teams"
+  add_foreign_key "punting_stats", "nfl_matchups"
+  add_foreign_key "punting_stats", "nfl_players"
+  add_foreign_key "punting_stats", "nfl_teams"
+  add_foreign_key "receiving_stats", "nfl_matchups"
+  add_foreign_key "receiving_stats", "nfl_players"
+  add_foreign_key "receiving_stats", "nfl_teams"
+  add_foreign_key "return_stats", "nfl_matchups"
+  add_foreign_key "return_stats", "nfl_players"
+  add_foreign_key "return_stats", "nfl_teams"
+  add_foreign_key "rushing_stats", "nfl_matchups"
+  add_foreign_key "rushing_stats", "nfl_players"
+  add_foreign_key "rushing_stats", "nfl_teams"
 end

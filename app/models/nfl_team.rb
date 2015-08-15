@@ -6,7 +6,11 @@ class NflTeam < ActiveRecord::Base
   has_many :away_matchups, :foreign_key => 'away_team_id', :class_name => "NflMatchup"
 
   has_many :kicking_stats
-  
+  has_many :passing_stats
+  has_many :punting_stats
+  has_many :receiving_stats
+  has_many :return_stats
+  has_many :rushing_stats
 
   def matchups year
     raise "year must be passed in to get NFL Team Matchups" if year.nil?
