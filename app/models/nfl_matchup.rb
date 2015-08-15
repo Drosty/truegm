@@ -6,6 +6,7 @@ class NflMatchup < ActiveRecord::Base
   belongs_to :away_team, :foreign_key => 'away_team_id', :class_name => "NflTeam"
   belongs_to :home_team, :foreign_key => 'home_team_id', :class_name => "NflTeam"
 
+  has_many :kicking_stats
 
   def home_or_away team
     return "at" if team == self.away_team

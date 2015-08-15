@@ -5,6 +5,9 @@ class NflTeam < ActiveRecord::Base
   has_many :home_matchups, :foreign_key => 'home_team_id', :class_name => "NflMatchup"
   has_many :away_matchups, :foreign_key => 'away_team_id', :class_name => "NflMatchup"
 
+  has_many :kicking_stats
+  
+
   def matchups year
     raise "year must be passed in to get NFL Team Matchups" if year.nil?
     NflMatchup.where("(home_team_id = ? OR away_team_id = ?) and year = ?", self.id, self.id, year)

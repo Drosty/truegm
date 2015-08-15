@@ -6,7 +6,8 @@ class NflPlayer < ActiveRecord::Base
 
   belongs_to :nfl_team
   has_and_belongs_to_many :teams
-  has_many :stats
+  
+  has_many :kicking_stats
 
   delegate :code, :to  => :nfl_team, :prefix => true
   delegate :full_name, :to  => :nfl_team, :prefix => true

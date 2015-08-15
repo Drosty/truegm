@@ -107,10 +107,6 @@ FactoryGirl.define do
       fumbles_lost 1
     end
 
-    factory :kicking_stat do
-      nfl_player { FactoryGirl.create(:nfl_player, :pk) }
-
-    end
 
     factory :defense_stat do
       nfl_player { FactoryGirl.create(:nfl_player, :def) }
