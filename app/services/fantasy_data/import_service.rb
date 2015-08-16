@@ -107,16 +107,17 @@ module FantasyData
     # preseason week is 0 based : 0 - 4
     # postseason is 1 based : 1 - 4
     def import_weekly_stats year, week
-      box_scores = @fantasy_data_party.weekly_stats(year, week)
-
-      if was_unsuccessful_call(box_scores)
-        print_error_message
-        return
-      end
-
       stat_processor = FantasyData::StatImportProcessing.new
 
-      box_scores.each do |box_score|
+      Fantasydata.box_scores_by_week(year, week).each do |box_score|
+        stat_processor.process_box_score(box_score)
+      end
+    end
+
+    def import_active_box_scores
+      stat_processor = FantasyData::StatImportProcessing.new
+
+      Fantasydata.box_scores_active.each do |box_score|
         stat_processor.process_box_score(box_score)
       end
     end

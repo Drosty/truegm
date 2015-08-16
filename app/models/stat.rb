@@ -1,3 +1,4 @@
+# GOING TO DELETE AND USE THE SEPARATE STATS TABLES CREATED
 class Stat < ActiveRecord::Base
   attr_accessible :passing_yards, :passing_touchdowns, :passing_interceptions,
                   :rushing_yards, :rushing_touchdowns, :receptions,
