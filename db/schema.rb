@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815040325) do
+ActiveRecord::Schema.define(version: 20150816193415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "field_goals_made"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "kicking_stats", ["nfl_matchup_id"], name: "index_kicking_stats_on_nfl_matchup_id", using: :btree
@@ -277,6 +279,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "two_point_conversion_passes"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "passing_stats", ["nfl_matchup_id"], name: "index_passing_stats_on_nfl_matchup_id", using: :btree
@@ -310,6 +314,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "punts"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "punting_stats", ["nfl_matchup_id"], name: "index_punting_stats_on_nfl_matchup_id", using: :btree
@@ -336,6 +342,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "two_point_conversion_receptions"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "receiving_stats", ["nfl_matchup_id"], name: "index_receiving_stats_on_nfl_matchup_id", using: :btree
@@ -362,6 +370,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "punt_returns"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "return_stats", ["nfl_matchup_id"], name: "index_return_stats_on_nfl_matchup_id", using: :btree
@@ -385,6 +395,8 @@ ActiveRecord::Schema.define(version: 20150815040325) do
     t.integer  "two_point_conversion_runs"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "week"
+    t.integer  "season"
   end
 
   add_index "rushing_stats", ["nfl_matchup_id"], name: "index_rushing_stats_on_nfl_matchup_id", using: :btree
