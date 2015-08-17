@@ -75,6 +75,8 @@ gem 'database_cleaner', group: [:development, :test]
 
 gem 'factory_girl_rails', group: [:development, :test]
 
+gem 'annotate', group: [:development]
+
 # For Code Climate
 gem "codeclimate-test-reporter", group: :test, require: nil
 
