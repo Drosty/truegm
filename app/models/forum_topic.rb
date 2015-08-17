@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: forum_topics
+#
+#  id               :integer          not null, primary key
+#  league_id        :integer
+#  name             :string
+#  description      :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  forumposts_count :integer          default(0)
+#  user_id          :integer
+#
+
 class ForumTopic < ActiveRecord::Base
   include PublicActivity::Common
 

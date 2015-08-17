@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: nfl_teams
+#
+#  id          :integer          not null, primary key
+#  created_at  :datetime
+#  updated_at  :datetime
+#  spotrac_url :string
+#  code        :string
+#  full_name   :string
+#  short_name  :string
+#  bye_week    :integer
+#
+
 class NflTeam < ActiveRecord::Base
   attr_accessible :code, :short_name, :full_name, :bye_week, :spotrac_url
 

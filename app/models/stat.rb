@@ -1,3 +1,47 @@
+# == Schema Information
+#
+# Table name: stats
+#
+#  id                              :integer          not null, primary key
+#  nfl_player_id                   :integer
+#  passing_yards                   :integer
+#  passing_touchdowns              :integer
+#  rushing_yards                   :integer
+#  rushing_touchdowns              :integer
+#  receptions                      :integer
+#  receiving_yards                 :integer
+#  receiving_touchdowns            :integer
+#  fumbles_lost                    :integer
+#  year                            :integer
+#  week                            :integer
+#  tfl                             :integer
+#  qbhits                          :integer
+#  defensive_interceptions         :integer
+#  fumbles_recovered               :integer
+#  safties                         :integer
+#  defensive_tds                   :integer
+#  return_tds                      :integer
+#  points_allowed                  :integer
+#  opponent                        :string
+#  final_score                     :string
+#  played                          :boolean
+#  started                         :boolean
+#  passing_completions             :integer
+#  passing_attempts                :integer
+#  passing_percentage              :float
+#  qb_rating                       :float
+#  rushing_attempts                :integer
+#  rushing_average                 :float
+#  long_run                        :integer
+#  receiving_long                  :integer
+#  passing_sacks                   :integer
+#  defensive_sacks                 :integer
+#  passing_interceptions           :integer
+#  receiving_targets               :integer
+#  two_point_conversion_receptions :integer
+#  two_point_conversion_runs       :integer
+#
+
 # GOING TO DELETE AND USE THE SEPARATE STATS TABLES CREATED
 class Stat < ActiveRecord::Base
   attr_accessible :passing_yards, :passing_touchdowns, :passing_interceptions,

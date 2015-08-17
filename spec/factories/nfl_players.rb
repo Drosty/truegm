@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: nfl_players
+#
+#  id              :integer          not null, primary key
+#  nfl_team_id     :integer
+#  first_name      :string
+#  last_name       :string
+#  position        :string
+#  salary          :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  spotrac_url     :string
+#  full_name       :string
+#  jersey          :string
+#  height          :string
+#  weight          :string
+#  dob             :datetime
+#  college         :string
+#  active          :boolean
+#  current_status  :string
+#  depth_order     :integer
+#  experience      :integer
+#  photo_url       :string
+#  fantasy_data_id :integer
+#
+
 FactoryGirl.define do
   sequence :first_name do |n|
     "First#{n}"

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: trade_votes
+#
+#  id         :integer          not null, primary key
+#  trade_id   :integer
+#  team_id    :integer
+#  vote       :string
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe TradeVote do

@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: passing_stats
+#
+#  id                            :integer          not null, primary key
+#  nfl_matchup_id                :integer
+#  nfl_player_id                 :integer
+#  nfl_team_id                   :integer
+#  number                        :integer
+#  position                      :string
+#  fantasy_position              :string
+#  fantasy_points                :float
+#  passing_attempts              :integer
+#  passing_completion_percentage :float
+#  passing_completions           :integer
+#  passing_interceptions         :integer
+#  passing_long                  :integer
+#  passing_rating                :float
+#  passing_sack_yards            :integer
+#  passing_sacks                 :integer
+#  passing_touchdowns            :integer
+#  passing_yards                 :integer
+#  passing_yards_per_attempt     :float
+#  passing_yards_per_completion  :float
+#  two_point_conversion_passes   :integer
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  week                          :integer
+#  season                        :integer
+#
+
 FactoryGirl.define do
   factory :passing_stat do
     nfl_matchup nil

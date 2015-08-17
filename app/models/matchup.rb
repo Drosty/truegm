@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: matchups
+#
+#  id           :integer          not null, primary key
+#  year         :integer
+#  week         :integer
+#  home_team_id :integer
+#  away_team_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Matchup < ActiveRecord::Base
   attr_accessible :week, :year
 
