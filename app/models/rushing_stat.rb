@@ -22,7 +22,6 @@
 #  week                      :integer
 #  season                    :integer
 #
-
 class RushingStat < ActiveRecord::Base
   include FantasyDataMapper
 
@@ -31,5 +30,13 @@ class RushingStat < ActiveRecord::Base
   belongs_to :nfl_matchup
   belongs_to :nfl_player
   belongs_to :nfl_team
+
+  def total_points league
+    [
+      fumbles_lost.to_i * league.fumbles_lost_points,
+      rushing_yards.to_f * league.rushing_yards_points,
+      rushing_touchdowns.to_i * league.rushing_touchdown_points
+    ].sum.round(2)
+  end
 
 end

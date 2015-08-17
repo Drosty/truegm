@@ -55,16 +55,6 @@ class Stat < ActiveRecord::Base
 
   def total_points league
     [
-      (passing_yards.to_f * league.passing_yard_points).round(2),
-      passing_touchdowns.to_i * league.passing_touchdown_points,
-      passing_interceptions.to_i * league.passing_interception_points,
-      fumbles_lost.to_i * league.fumbles_lost_points,
-      rushing_yards.to_f * league.rushing_yards_points,
-      rushing_touchdowns.to_i * league.rushing_touchdown_points,
-      receiving_yards.to_f * league.receiving_yards_points,
-      receiving_touchdowns.to_i * league.receiving_touchdown_points,
-      receptions.to_i * league.points_per_reception_points,
-
       defensive_interceptions.to_i * league.defensive_interception_points,
       fumbles_recovered.to_i * league.defensive_fumble_recovered_points,
       defensive_sacks.to_i * league.defensive_sack_points,

@@ -34,4 +34,10 @@ class ReturnStat < ActiveRecord::Base
   belongs_to :nfl_matchup
   belongs_to :nfl_player
   belongs_to :nfl_team
+
+  def total_points league
+    # TODO
+    0
+  end
+
 end

@@ -37,4 +37,12 @@ class PassingStat < ActiveRecord::Base
   belongs_to :nfl_matchup 
   belongs_to :nfl_player
   belongs_to :nfl_team
+
+  def total_points league
+    [
+      passing_interceptions.to_i * league.passing_interception_points,
+      passing_touchdowns.to_i * league.passing_touchdown_points
+      passing_yards.to_i * league.passing_yard_points
+    ].sum.round(2)
+  end
 end

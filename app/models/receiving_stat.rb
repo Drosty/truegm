@@ -34,4 +34,12 @@ class ReceivingStat < ActiveRecord::Base
   belongs_to :nfl_matchup
   belongs_to :nfl_player
   belongs_to :nfl_team
+
+  def total_points league
+    [
+      receiving_touchdowns.to_i * league.receiving_touchdown_points,
+      receiving_yards.to_f * league.receiving_yards_points,
+      receptions.to_i * league.points_per_reception_points
+    ].sum.round(2)
+  end
 end

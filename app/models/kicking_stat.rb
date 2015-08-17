@@ -31,4 +31,11 @@ class KickingStat < ActiveRecord::Base
   belongs_to :nfl_player
   belongs_to :nfl_team
   
+  def total_points league
+    0
+    #[
+    #  extra_points_made.to_i * league.passing_interception_points,
+    #  field_goals_made.to_i * league.passing_touchdown_points
+    #].sum.round(2)
+  end
 end
