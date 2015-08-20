@@ -1,21 +1,25 @@
 <div>
   <h3>Create a new Forum Topic</h3>
 </div>
-<form>
-  <p ng-show="errorMessage" class="text-danger">
-    {{errorMessage}}
-  </p>
+<div class="row">
+  <form>
+    <p ng-show="errorMessage" class="text-danger">
+      {{errorMessage}}
+    </p>
 
-  <div class="form-group">
-    <label for="formName">Topic Name</label>
-    <input type="text" name="name" id="formName" class="form-control" ng-required ng-model="form.name" />
-  </div>
-  <div class="form-group">
-    <label for="formDescription">Topic Description</label>
-    <summernote config="options" id="formDescription" ng-required ng-model="form.description"></summernote>
-  </div>
 
-  <button ng-click="formSubmit()">
-    Create
-  </button>
-</form>
+    <div class="input-field col s12">
+      <input value="I am not editable" type="text" class="validate" name="name" id="formName" ng-required ng-model="form.name" />
+      <label for="formName">Topic Name</label>
+    </div>
+
+    <div class="input-field col s12">
+      <textarea id="textarea1" class="materialize-textarea" ng-required ng-model="form.description"></textarea>
+      <label for="textarea1">Topic Description</label>
+    </div>
+
+    <button ng-click="formSubmit()">
+      Create
+    </button>
+  </form>
+</div>
