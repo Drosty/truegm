@@ -1,19 +1,20 @@
 <h2>League Activity</h2>
 
-<div>
-  <div class="well" ng-repeat="activity in activities">
-    <p>
-      {{activity.header_text}}
-    </p>
-    <p ng-show="activity.subtitle != ''">
-      <a href="#/league/{{currentLeagueId}}/{{activity.sub_title_url}}/{{activity.sub_title_id}}">
-        {{activity.sub_title}}
-      </a>
-    </p>
-    <p>By: {{activity.user_name}}<p>
-    <a href="#/league/{{currentLeagueId}}/{{activity.item_url}}/{{activity.item_id}}">
-      <p>{{activity.item_text}}</p>
-    </a>
-    <p>{{activity.date}}</p>
+<div ng-repeat="activity in activities">
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card blue-grey">
+      <div class="card-content white-text">
+        <span class="card-title">{{activity.header_text}}</span>
+        <p>{{activity.item_text}}</p>
+        <p>By: {{activity.user_name}}</p>
+      </div>
+      <div class="card-action">
+        <a href="#/league/{{currentLeagueId}}/{{activity.sub_title_url}}/{{activity.sub_title_id}}">
+          {{activity.sub_title}}
+        </a>
+      </div>
+    </div>
   </div>
+</div>
 </div>
