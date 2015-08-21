@@ -1,45 +1,49 @@
 <div>
-  <accordion close-others="oneAtATime">
-    <accordion-group heading="Search Criteria" is-open="form.isOpen">
-      <p>
-        Last Name:<br />
-        <input type="text" name="player_name" placeholder="Search by last name" ng-model="form.searchString" />
-      </p>
-      <p>
-        Filter by
-      </p>
-      <div class="pull-left search-box">
-        <span>Position</span>
-        <div class="radio" ng-repeat="position in positions">
-          <label>
-            <input type="radio" name="position" ng-model="form.positionSearch" value="{{position}}" />
-            {{position}}
-          </label>
+  <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">filter_drama</i>Player Search
+      </div>
+      <div class="collapsible-body">
+        <p>
+          Last Name:<br />
+          <input type="text" name="player_name" placeholder="Search by last name" ng-model="form.searchString" />
+        </p>
+        <p>
+          Filter by
+        </p>
+        <div class="pull-left search-box">
+          <span>Position</span>
+          <div class="radio" ng-repeat="position in positions">
+            <label>
+              <input type="radio" name="position" ng-model="form.positionSearch" value="{{position}}" />
+              {{position}}
+            </label>
+          </div>
+        </div>
+
+        <div class="pull-left search-box">
+          <span>Status</span>
+          <div class="radio" ng-repeat="status in playerStatuses">
+            <label>
+              <input type="radio" name="availabilitySearch" ng-model="form.availabilitySearch" value="{{status}}" />
+              {{status}}
+            </label>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <button class="btn btn-default" ng-click="refreshData()">
+            Search
+          </button>
+
+          <button class="btn btn-default" ng-click="formClear()">
+            Clear Form
+          </button>
         </div>
       </div>
-
-      <div class="pull-left search-box">
-        <span>Status</span>
-        <div class="radio" ng-repeat="status in playerStatuses">
-          <label>
-            <input type="radio" name="availabilitySearch" ng-model="form.availabilitySearch" value="{{status}}" />
-            {{status}}
-          </label>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <button class="btn btn-default" ng-click="refreshData()">
-          Search
-        </button>
-
-        <button class="btn btn-default" ng-click="formClear()">
-          Clear Form
-        </button>
-      </div>
-
-    </accordion-group>
-  </accordian>
+    </li>
+  </ul>
 </div>
 
 <div>
