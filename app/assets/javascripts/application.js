@@ -22,16 +22,6 @@
 //= require main
 //= require angular-rails-templates
 //= require_tree ../templates
+//= require bootstrap
+//= require bootstrap-sprockets
 //= require_tree .
-
-$( document ).ready(function(){
-  $('.button-collapse').sideNav({
-      menuWidth: 240,
-      closeOnClick: false
-    }
-  );
-
-  $('.collapsible').collapsible({
-    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  });
-})

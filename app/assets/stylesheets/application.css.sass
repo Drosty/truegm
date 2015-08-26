@@ -9,16 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require summernote
  *= require_tree .
  */
+@import "bootstrap-sprockets"
+@import "bootstrap"
 
-header, main, footer {
-    padding-left: 240px;
-}
+.header-text
+  padding-top: 6px
 
-@media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-}
+.dropdown-menu > li > a
+  line-height: 1.928571429
