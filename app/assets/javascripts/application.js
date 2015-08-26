@@ -22,12 +22,6 @@
 //= require main
 //= require angular-rails-templates
 //= require_tree ../templates
+//= require bootstrap
+//= require bootstrap-sprockets
 //= require_tree .
-
-$( document ).ready(function(){
-  $('.button-collapse').sideNav({
-      menuWidth: 240,
-      closeOnClick: false
-    }
-  );
-})
