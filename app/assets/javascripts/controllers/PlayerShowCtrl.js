@@ -1,6 +1,6 @@
 this.truegm.controller('PlayerShowCtrl', [
-	'$scope', '$location', '$http', '$routeParams', 'LeagueService',
-	function($scope, $location, $http, $routeParams, LeagueService) {
+	'$scope', '$location', '$http', '$routeParams', 'LeagueService', '$aside',
+	function($scope, $location, $http, $routeParams, LeagueService, $aside) {
 		$scope.currentLeagueId = $routeParams.leagueId;
 		LeagueService.setOrUpdateLeagueById($routeParams.leagueId);
 		$http.get("./leagues/" + $routeParams.leagueId + "/player/" + $routeParams.id +
@@ -9,26 +9,83 @@ this.truegm.controller('PlayerShowCtrl', [
 			return $scope.stats = data.stats;
 		});
 
-		$scope.addPlayer = function() {
-			var dataObj;
-			dataObj = {};
-			$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" +
-				$scope.player.id + "/add_player", {
-					params: dataObj
-				}).success(function(data) {
-				return $location.path("/league/" + LeagueService.currentLeague().id);
-			});
+		$scope.openAddPlayerAside = function(){
+			$aside.open({
+				templateUrl: 'player/addPlayerMenu.html',
+				placement: 'bottom',
+				size: 'sm',
+				backdrop: true,
+				resolve: {
+					player: function () {
+						return $scope.player;
+					}
+				},
+				controller: function($scope, $modalInstance, player, LeagueService) {
+					$scope.playerToAdd = player;
+
+					$scope.close = function(e) {
+						$modalInstance.close();
+						e.stopPropagation();
+					};
+
+					$scope.addPlayer = function() {
+						var dataObj;
+						dataObj = {};
+						$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" + $scope.playerToAdd.id + "/add_player", {
+							params: dataObj
+						}).success(function(data) {
+							return $location.path("/league/" + LeagueService.currentLeague().id);
+						});
+
+						$modalInstance.close();
+					};
+
+					$scope.replacePlayer = function(removePlayerId){
+						dataObj = {remove_player_id: removePlayerId};
+						$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" + $scope.playerToAdd.id + "/replace_players", {
+							params: dataObj
+						}).success(function(data) {
+							return $location.path("/league/" + LeagueService.currentLeague().id);
+						});
+						$modalInstance.close();
+					};
+				}
+			})
 		};
 
-		$scope.removePlayer = function() {
-			var dataObj;
-			dataObj = {};
-			$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" +
-				$scope.player.id + "/remove_player", {
-					params: dataObj
-				}).success(function(data) {
-				return $location.path("/league/" + LeagueService.currentLeague().id);
-			});
+		$scope.openRemovePlayerAside = function(){
+			$aside.open({
+				templateUrl: 'player/removePlayerMenu.html',
+				placement: 'bottom',
+				size: 'sm',
+				backdrop: true,
+				resolve: {
+					player: function () {
+						return $scope.player;
+					}
+				},
+				controller: function($scope, $modalInstance, player, LeagueService) {
+					$scope.playerToRemove = player;
+
+					$scope.close = function(e) {
+						$modalInstance.close();
+						e.stopPropagation();
+					};
+
+					$scope.removePlayer = function() {
+						var dataObj;
+						dataObj = {};
+						$http.post("./leagues/" + LeagueService.currentLeague().id + "/player/" +
+							$scope.playerToRemove.id + "/remove_player", {
+								params: dataObj
+							}).success(function(data) {
+							return $location.path("/league/" + LeagueService.currentLeague().id);
+						});
+
+						$modalInstance.close();
+					};
+				}
+			})
 		};
 	}
 ]);

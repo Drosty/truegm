@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: draft_picks
+#
+#  id               :integer          not null, primary key
+#  team_id          :integer
+#  year             :integer
+#  round            :integer
+#  position         :integer
+#  original_team_id :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 require 'spec_helper'
 
 describe DraftPick do

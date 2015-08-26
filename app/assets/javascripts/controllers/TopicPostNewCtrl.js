@@ -9,6 +9,13 @@ this.truegm.controller('TopicPostNewCtrl', [
 
 		LeagueService.setOrUpdateLeagueById($routeParams.leagueId);
 
+		$scope.options = {
+			height: 250,
+			focus: true,
+			airMode: false,
+			toolbar: []
+		};
+
 		$scope.formSubmit = function() {
 			var dataObj;
 			$scope.errorMessage = "";
@@ -21,8 +28,7 @@ this.truegm.controller('TopicPostNewCtrl', [
 					return $location.path("/league/" + $scope.leagueId + "/topics/" +
 						$scope.topicId);
 				} else {
-					return $scope.errorMessage =
-						"There was a problem saving post.  Try again.";
+					return $scope.errorMessage = "There was a problem saving post.  Try again.";
 				}
 			});
 		};

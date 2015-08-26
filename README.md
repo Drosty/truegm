@@ -22,8 +22,8 @@ In order to get the database setup and running run the following commands in thi
 bundle exec rake db:create
 bundle exec rake db:schema:load
 bundle exec rake import:nfl_teams
-bundle exec rake import:nfl_players
 bundle exec rake import:nfl_schedule
+bundle exec rake import:nfl_players
 
 # If you want fake data generated
 bundle exec rake generate:fake_salaries

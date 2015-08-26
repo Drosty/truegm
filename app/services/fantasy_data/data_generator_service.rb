@@ -36,8 +36,6 @@ private
     end
 
     def update_stat_with_data_by_position stat, position
-      position = position.upcase
-
       stat.played = rand(0..1)
       stat.started = rand(0..1)
 

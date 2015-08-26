@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: nfl_players
+#
+#  id              :integer          not null, primary key
+#  nfl_team_id     :integer
+#  first_name      :string
+#  last_name       :string
+#  position        :string
+#  salary          :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  spotrac_url     :string
+#  full_name       :string
+#  jersey          :string
+#  height          :string
+#  weight          :string
+#  dob             :datetime
+#  college         :string
+#  active          :boolean
+#  current_status  :string
+#  depth_order     :integer
+#  experience      :integer
+#  photo_url       :string
+#  fantasy_data_id :integer
+#
+
 class NflPlayer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :salary,
                   :nfl_team_id, :spotrac_url, :full_name, :jersey,
@@ -6,7 +33,13 @@ class NflPlayer < ActiveRecord::Base
 
   belongs_to :nfl_team
   has_and_belongs_to_many :teams
-  has_many :stats
+
+  has_many :kicking_stats
+  has_many :passing_stats
+  has_many :punting_stats
+  has_many :receiving_stats
+  has_many :return_stats
+  has_many :rushing_stats
 
   delegate :code, :to  => :nfl_team, :prefix => true
   delegate :full_name, :to  => :nfl_team, :prefix => true
@@ -59,6 +92,10 @@ class NflPlayer < ActiveRecord::Base
     end
   end
 
+  def is_on_fantasy_team team
+    self.teams && self.teams.include?(team)
+  end
+
   def age
     if dob
       ((Time.now - dob)/1.year).round
@@ -72,6 +109,7 @@ class NflPlayer < ActiveRecord::Base
   end
 
   def week_nfl_matchup week, year
+    return "" if self.nfl_team.nil?
     self.nfl_team.week_nfl_matchup(week, year)
   end
 

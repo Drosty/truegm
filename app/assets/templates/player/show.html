@@ -1,13 +1,20 @@
-<h3>{{player.position}}&nbsp;{{player.full_name}}</h3>
-<p>Owned by:
-  <a ng-show="player.league_team.name != 'FA'" href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
-    {{player.league_team.name}}
-  </a>
-  <span ng-show="player.league_team.name == 'FA'">
-    FA
-  </span>
-</p>
-
+<div class="row">
+  <div class="col-xs-3">
+    <img src="{{player.photo_url}}" />
+  </div>
+  <div class="col-xs-9">
+    <h3>{{player.position}}&nbsp;{{player.full_name}}</h3>
+    <p>Owned by:
+      <a ng-show="player.league_team.name != 'FA'" href="#/league/{{currentLeagueId}}/team/{{player.league_team.id}}">
+        {{player.league_team.name}}
+      </a>
+      <span ng-show="player.league_team.name == 'FA'">
+        FA
+      </span>
+    </p>
+  </div>
+</div>
+<br/>
 <tabset>
   <tab heading="Info">
     <br />

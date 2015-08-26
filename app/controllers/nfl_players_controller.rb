@@ -2,8 +2,8 @@ class NflPlayersController < ApplicationController
   before_filter :ensure_user_logged_in
   helper_method :sort_column, :sort_direction
 
-  before_filter :set_current_league, only: [:show, :index, :add_player, :remove_player]
-  before_action :set_nfl_player, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
+  before_filter :set_current_league, only: [:show, :index, :add_player, :remove_player, :replace_players]
+  before_action :set_nfl_player, only: [:show, :edit, :update, :destroy, :add_player, :remove_player, :replace_players]
   before_action :set_position, only: [:index]
   before_action :set_status, only: [:index]
   before_action :set_page, only: [:index]
@@ -45,12 +45,26 @@ class NflPlayersController < ApplicationController
     end
   end
 
+  # The NFL Player in the route is the player that will be added to the team
+  # Then a NFL Player param passed in will be the player to be removed
+  def replace_players
+    user_team = @current_league.teams.select { |t| t.user_id == current_user.id }.first
+    remove_player = NflPlayer.includes(:stats).find(params[:params][:remove_player_id])
+    binding.pry
+
+    if user_team && @nfl_player && remove_player
+      user_team.remove_player remove_player
+      user_team.add_player @nfl_player
+      @success = true
+    end
+  end
+
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
     stats = Stat.where(nfl_player_id: @nfl_player.id)
                 .where("year >= ?", 2013)
-    view_model = NflPlayerViewModel.new(@nfl_player, stats)
+    view_model = NflPlayerViewModel.new(@nfl_player, stats, @current_league, current_user.team_in_league(@current_league))
     render :locals => { :view_model => view_model }
   end
 

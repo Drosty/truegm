@@ -21,7 +21,7 @@ namespace :import do
   end
 
   task :nfl_players => :environment do
-    get_import_service().import_nfl_player_data nil
+    get_import_service().import_nfl_player_data
   end
 
   task :nfl_schedule => :environment do
@@ -29,7 +29,10 @@ namespace :import do
   end
 
   def get_import_service
-    FantasyData::ImportService.new(FantasyDataParty.new(ENV["fantasy_data_api_key"]))
+    Fantasydata.configure do |config|
+      config.api_key = ENV['fantasy_data_api_key']
+    end
+    FantasyData::ImportService.new
   end
 
 end

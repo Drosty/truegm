@@ -1,3 +1,48 @@
+# == Schema Information
+#
+# Table name: stats
+#
+#  id                              :integer          not null, primary key
+#  nfl_player_id                   :integer
+#  passing_yards                   :integer
+#  passing_touchdowns              :integer
+#  rushing_yards                   :integer
+#  rushing_touchdowns              :integer
+#  receptions                      :integer
+#  receiving_yards                 :integer
+#  receiving_touchdowns            :integer
+#  fumbles_lost                    :integer
+#  year                            :integer
+#  week                            :integer
+#  tfl                             :integer
+#  qbhits                          :integer
+#  defensive_interceptions         :integer
+#  fumbles_recovered               :integer
+#  safties                         :integer
+#  defensive_tds                   :integer
+#  return_tds                      :integer
+#  points_allowed                  :integer
+#  opponent                        :string
+#  final_score                     :string
+#  played                          :boolean
+#  started                         :boolean
+#  passing_completions             :integer
+#  passing_attempts                :integer
+#  passing_percentage              :float
+#  qb_rating                       :float
+#  rushing_attempts                :integer
+#  rushing_average                 :float
+#  long_run                        :integer
+#  receiving_long                  :integer
+#  passing_sacks                   :integer
+#  defensive_sacks                 :integer
+#  passing_interceptions           :integer
+#  receiving_targets               :integer
+#  two_point_conversion_receptions :integer
+#  two_point_conversion_runs       :integer
+#
+
+# GOING TO DELETE AND USE THE SEPARATE STATS TABLES CREATED
 class Stat < ActiveRecord::Base
   attr_accessible :passing_yards, :passing_touchdowns, :passing_interceptions,
                   :rushing_yards, :rushing_touchdowns, :receptions,
@@ -10,16 +55,6 @@ class Stat < ActiveRecord::Base
 
   def total_points league
     [
-      (passing_yards.to_f * league.passing_yard_points).round(2),
-      passing_touchdowns.to_i * league.passing_touchdown_points,
-      passing_interceptions.to_i * league.passing_interception_points,
-      fumbles_lost.to_i * league.fumbles_lost_points,
-      rushing_yards.to_f * league.rushing_yards_points,
-      rushing_touchdowns.to_i * league.rushing_touchdown_points,
-      receiving_yards.to_f * league.receiving_yards_points,
-      receiving_touchdowns.to_i * league.receiving_touchdown_points,
-      receptions.to_i * league.points_per_reception_points,
-
       defensive_interceptions.to_i * league.defensive_interception_points,
       fumbles_recovered.to_i * league.defensive_fumble_recovered_points,
       defensive_sacks.to_i * league.defensive_sack_points,

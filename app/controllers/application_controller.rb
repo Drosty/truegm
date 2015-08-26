@@ -25,8 +25,7 @@ class ApplicationController < ActionController::Base
 
   def current_week
     Rails.cache.fetch(:current_week, expires_in: 4.hours) do
-      party = FantasyDataParty.new(ENV['fantasy_data_api_key'])
-      party.get_current_week
+      Fantasydata.current_week
     end
   end
 

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  tagline      :string
+#  league_id    :integer
+#  user_id      :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  total_salary :integer          default(0)
+#  invite_code  :string
+#
+
 class Team < ActiveRecord::Base
   include PublicActivity::Common
 
@@ -18,6 +33,30 @@ class Team < ActiveRecord::Base
 
   def ordered_nfl_players
     nfl_players.sort_by { |a| NflPlayer.available_positions_for_filter.index(a.position) }
+  end
+
+  def have_roster_space_for_new_player?
+    nfl_players.count < league.max_team_players
+  end
+
+  def would_be_under_minimum_roster_size_if_player_released?
+    nfl_players.count-1 < league.min_team_players
+  end
+
+  def would_be_over_maximum_roster_size_if_player_added?
+    nfl_players.count + 1 > league.max_team_players
+  end
+
+  def team_salary_if_player_released player
+    self.total_salary - player.salary
+  end
+
+  def team_salary_if_player_added player
+    self.total_salary + player.salary
+  end
+
+  def team_salary_if_player_released_and_other_added added_player, released_player
+    self.total_salary + added_player.salary - released_player.salary
   end
 
   def add_player player
@@ -80,12 +119,12 @@ class Team < ActiveRecord::Base
     return (self.total_salary - cap).abs
   end
 
-private
-
   def update_total_salary
     self.total_salary = nfl_players.sum(:salary)
     self.total_salary = 0 if total_salary.nil? || total_salary < 0
   end
+
+private
 
   def get_players_by_position position
     nfl_players.select { |p| p.position == position }

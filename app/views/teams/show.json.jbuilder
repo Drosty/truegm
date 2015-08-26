@@ -6,7 +6,8 @@ json.cap_delta format_as_money(@team.cap_delta)
 json.current_week current_week
 
 json.players @team.ordered_nfl_players do |player|
-  json.(player, :id, :full_name, :position)
+  json.(player, :id, :full_name)
+  json.position player.position.upcase
   json.salary format_as_money(player.salary)
   json.points player.points_in_week(current_week, @current_league)
   json.bye_week player.bye_week

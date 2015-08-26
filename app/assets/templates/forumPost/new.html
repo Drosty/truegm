@@ -1,22 +1,18 @@
-
 <div>
   <h3>Make New Post</h3>
 </div>
 
 <form>
-
   <p ng-show="errorMessage" class="text-danger">
     {{errorMessage}}
   </p>
 
-  <p>
-    <span>New Message</spn>
-    <br />
-    <textarea type="text" name="postBody" ng-required ng-model="form.postBody" />
-  </p>
-  
+  <div class="form-group">
+    <label for="postBody">Post</label>
+    <summernote config="options" id="postBody" ng-required ng-model="form.postBody"></summernote>
+  </div>
+
   <button ng-click="formSubmit()">
     Create
   </button>
-
 </form>

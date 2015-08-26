@@ -1,15 +1,11 @@
 <div class="well" ng-show="player.is_free_agent">
-  <p>Adding this player would make your cap:</p>
-
-  <button class="btn btn-success" ng-click="addPlayer()">
+  <button class="btn btn-success" ng-click="openAddPlayerAside()">
     Add Player to Team
   </button>
 </div>
 
 <div class="well" ng-show="player.is_on_team">
-  <p>Removing this player will make your cap:</p>
-
-  <button class="btn btn-success" ng-click="removePlayer()">
+  <button class="btn btn-success" ng-click="openRemovePlayerAside()">
     Remove Player from Team
   </button>
 </div>

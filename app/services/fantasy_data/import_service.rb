@@ -6,99 +6,71 @@
 ##
 module FantasyData
   class ImportService
-    attr_reader :fantasy_data_party
-
-    def initialize(fantasy_data_party = FantasyDataParty.new)
-      @fantasy_data_party = fantasy_data_party
-    end
 
     def import_nfl_team_data
-      teams = @fantasy_data_party.nfl_teams
+      Fantasydata.teams_active.each do |team|
+        in_team = NflTeam.find_or_create_by(code: team.key,
+                                  full_name: team.full_name,
+                                  short_name: team.name) do |t|
 
-      if was_unsuccessful_call(teams)
-        print_error_message
-        return
-      end
-
-      teams.each do |team|
-        in_team = NflTeam.find_or_create_by(code: team["Key"],
-                                  full_name: team["FullName"],
-                                  short_name: team["Name"])
-
-        in_team.bye_week = team["ByeWeek"]
-        in_team.save
+          t.bye_week = team.bye_week
+        end
       end
     end
 
-    def import_nfl_player_data position
+    def import_nfl_player_data
       NflPlayer.update_all(active: false)
+      teams = NflTeam.all
 
-      NflTeam.all.each do |nfl_team|
-        players = @fantasy_data_party.get_roster_players_for_team nfl_team.code
-
-        if was_unsuccessful_call(players)
-          print_error_message
-          return
-        end
-
-        players.each do |player|
-          next unless Position::ALL_POSITIONS.include?(player["FantasyPosition"].downcase)
-          p_to_save = NflPlayer.find_or_create_by(fantasy_data_id: player["PlayerID"].to_i)
-
-          p_to_save.active = player["Active"] == "true"
-          p_to_save.jersey = player["Number"].to_i
-          p_to_save.last_name = player["LastName"]
-          p_to_save.first_name = player["FirstName"]
-          p_to_save.full_name = player["Name"]
-          p_to_save.nfl_team = nfl_team
-          p_to_save.position = player["FantasyPosition"].downcase
-          p_to_save.height = player["Height"]
-          p_to_save.weight = player["Weight"]
-          p_to_save.college = player["College"]
-          p_to_save.current_status = player["CurrentStatus"]
-          p_to_save.depth_order = player["DepthOrder"].to_i
-          p_to_save.experience = player["Experience"].to_i
-          p_to_save.photo_url = player["PhotoUrl"]
+      Fantasydata.player_details_available.each do |player|
+        next unless Position::ALL_POSITIONS.include?(player.fantasy_position.downcase)
+        NflPlayer.find_or_create_by(fantasy_data_id: player.player_id) do |p|
+          p.active = player.active
+          p.jersey = player.number
+          p.last_name = player.last_name
+          p.first_name = player.first_name
+          p.full_name = player.name
+          p.nfl_team = teams.select { |team| team.code == player.current_team }.first
+          p.position = player.fantasy_position.downcase
+          p.height = player.height
+          p.weight = player.weight
+          p.college = player.college
+          p.current_status = player.current_status
+          p.depth_order = player.depth_order
+          p.experience = player.experience
+          p.photo_url = player.photo_url
 
           begin
-            p_to_save.dob = player["BirthDate"].to_datetime
+            p.dob = player.birth_date.to_datetime
           rescue => e
-            p_to_save.dob = nil
+            p.dob = nil
           end
-
-          p_to_save.save
         end
       end
     end
 
     def import_nfl_schedule
-      matchups = @fantasy_data_party.nfl_schedule "2014REG"
+      current_year = Fantasydata.current_season
+      Fantasydata.schedule_by_year(current_year).each do |matchup|
+        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup.game_key,
+                                                  week: matchup.week,
+                                                  year: matchup.season)
 
-      if was_unsuccessful_call(matchups)
-        print_error_message
-        return
-      end
-
-      matchups.each do |matchup|
-        db_matchup = NflMatchup.find_or_create_by(import_game_id: matchup["GameKey"].to_i,
-                                                  week: matchup["Week"].to_i,
-                                                  year: matchup["Season"].to_i)
-
-        db_matchup.home_team = NflTeam.find_by(code: matchup["HomeTeam"])
-        db_matchup.away_team = NflTeam.find_by(code: matchup["AwayTeam"])
-        db_matchup.over_under = matchup["OverUnder"].to_f
-        db_matchup.point_spread = matchup["PointSpread"].to_f
+        db_matchup.home_team = NflTeam.find_by(code: matchup.home_team)
+        db_matchup.away_team = NflTeam.find_by(code: matchup.away_team)
+        db_matchup.over_under = matchup.over_under
+        db_matchup.point_spread = matchup.point_spread
 
         # date is null on bye weeks in the schedule - so check this
-        if matchup["Date"]
+        if matchup.date
           Time.zone = 'Eastern Time (US & Canada)'
-          db_matchup.game_date = Time.zone.parse(matchup["Date"]).utc
+          db_matchup.game_date = Time.zone.parse(matchup.date).utc
         end
 
         db_matchup.save
       end
     end
-
+     
     def import_injury_status
 
     end
@@ -135,16 +107,17 @@ module FantasyData
     # preseason week is 0 based : 0 - 4
     # postseason is 1 based : 1 - 4
     def import_weekly_stats year, week
-      box_scores = @fantasy_data_party.weekly_stats(year, week)
-
-      if was_unsuccessful_call(box_scores)
-        print_error_message
-        return
-      end
-
       stat_processor = FantasyData::StatImportProcessing.new
 
-      box_scores.each do |box_score|
+      Fantasydata.box_scores_by_week(year, week).each do |box_score|
+        stat_processor.process_box_score(box_score)
+      end
+    end
+
+    def import_active_box_scores
+      stat_processor = FantasyData::StatImportProcessing.new
+
+      Fantasydata.box_scores_active.each do |box_score|
         stat_processor.process_box_score(box_score)
       end
     end
@@ -153,16 +126,6 @@ module FantasyData
     def import_active_stats
 
     end
-
-    private
-
-      def was_unsuccessful_call obj
-        obj.is_a?(Hash) && obj.has_key?("statusCode") && obj["statusCode"] != 200
-      end
-
-      def print_error_message
-        puts "Status Code was not 200 when calling the FantasyDataParty"
-      end
 
   end
 end

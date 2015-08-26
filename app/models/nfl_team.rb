@@ -1,9 +1,30 @@
+# == Schema Information
+#
+# Table name: nfl_teams
+#
+#  id          :integer          not null, primary key
+#  created_at  :datetime
+#  updated_at  :datetime
+#  spotrac_url :string
+#  code        :string
+#  full_name   :string
+#  short_name  :string
+#  bye_week    :integer
+#
+
 class NflTeam < ActiveRecord::Base
   attr_accessible :code, :short_name, :full_name, :bye_week, :spotrac_url
 
   has_many :nfl_players
   has_many :home_matchups, :foreign_key => 'home_team_id', :class_name => "NflMatchup"
   has_many :away_matchups, :foreign_key => 'away_team_id', :class_name => "NflMatchup"
+
+  has_many :kicking_stats
+  has_many :passing_stats
+  has_many :punting_stats
+  has_many :receiving_stats
+  has_many :return_stats
+  has_many :rushing_stats
 
   def matchups year
     raise "year must be passed in to get NFL Team Matchups" if year.nil?

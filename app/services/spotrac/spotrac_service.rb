@@ -24,7 +24,7 @@ module Spotrac
         puts "processing: " + nfl_team.full_name + " " + nfl_team.spotrac_url
 
         nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
-        nfl_page.css("table#teamTable").css("tr").each do |player|
+        nfl_page.css("table.responsive").css("tr").each do |player|
           position_node = player.css("td")[1]
           name_node = player.css("td")[0]
 
@@ -45,15 +45,17 @@ module Spotrac
         puts "processing: " + player.full_name
 
         player_page = Nokogiri::HTML(open(player.spotrac_url))
-        salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.bold")[0]
+        salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.info")[0]
 
-        next if salary_node.nil?
+        if salary_node.nil?
+          puts "#{player.full_name} :: Salary not found on table"
+        end
 
         player.salary = salary_node.text.delete(',').strip
         player.save
       end
 
-      save_all_teams_updating_their_total_salary()
+      save_all_teams_updating_their_total_salary
     end
 
   private

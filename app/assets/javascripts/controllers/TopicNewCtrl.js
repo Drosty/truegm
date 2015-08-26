@@ -8,6 +8,13 @@ this.truegm.controller('TopicNewCtrl', [
 		LeagueService.setOrUpdateLeagueById($routeParams.leagueId);
 		$scope.errorMessage = "";
 
+		$scope.options = {
+			height: 250,
+			focus: true,
+			airMode: false,
+			toolbar: []
+		};
+
 		$scope.formSubmit = function() {
 			var dataObj;
 			$scope.errorMessage = "";
