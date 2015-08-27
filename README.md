@@ -29,5 +29,8 @@ bundle exec rake import:nfl_players
 bundle exec rake generate:fake_salaries
 bundle exec rake generate:year_of_fake_stats
 
+# to get real data (this will take a while)
+bundle exec rake spotrac:scrape
+
 bundle exec rake db:seed
 ```
