@@ -164,7 +164,7 @@
 }
 .note-popover .popover .popover-content .btn-group .note-table .note-dimension-picker .note-dimension-picker-unhighlighted,.note-toolbar .btn-group .note-table .note-dimension-picker .note-dimension-picker-unhighlighted
 {
-  background: url('data:image/png;')
+  background: url('data:image/png;');
   height: 5em;
   position: relative!important;
   width: 5em;
@@ -172,7 +172,7 @@
 }
 .note-popover .popover .popover-content .btn-group .note-table .note-dimension-picker .note-dimension-picker-highlighted,.note-toolbar .btn-group .note-table .note-dimension-picker .note-dimension-picker-highlighted
 {
-  background: url('data:image/png;')
+  background: url('data:image/png;');
   height: 1em;
   position: absolute!important;
   width: 1em;
