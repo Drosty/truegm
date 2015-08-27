@@ -40,7 +40,7 @@ module Spotrac
     end
 
     def self.process_spotrac_salary_data
-      NflPlayer.all.find_each do |player|
+      NflPlayer.find_each do |player|
         next if player.spotrac_url.nil?
         puts "processing: " + player.full_name
 
@@ -51,7 +51,7 @@ module Spotrac
           puts "#{player.full_name} :: Salary not found on table"
         end
 
-        player.salary = salary_node.text.delete(',').strip
+        player.salary = salary_node.text.gsub(/[^\d]/, '').strip
         player.save
       end
 
