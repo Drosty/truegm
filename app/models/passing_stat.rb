@@ -41,7 +41,7 @@ class PassingStat < ActiveRecord::Base
   def total_points league
     [
       passing_interceptions.to_i * league.passing_interception_points,
-      passing_touchdowns.to_i * league.passing_touchdown_points
+      passing_touchdowns.to_i * league.passing_touchdown_points,
       passing_yards.to_i * league.passing_yard_points
     ].sum.round(2)
   end
