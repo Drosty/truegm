@@ -17,7 +17,7 @@ class NflPlayersController < ApplicationController
     @nfl_players = NflPlayer.search(@searchString)
                             .positions(@position)
                             .by_status(@status, @current_league)
-                            .order(sort_column + " " + sort_direction)
+                            .order(sort_column + " " + sort_direction + " NULLS LAST")
                             .paginate(:page => @page)
 
     @total_players = @nfl_players.count
