@@ -63,7 +63,7 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players/1.json
   def show
     stats = Stat.where(nfl_player_id: @nfl_player.id)
-                .where("year >= ?", 2013)
+                .where("year >= ?", current_week - 2)
     view_model = NflPlayerViewModel.new(@nfl_player, stats, @current_league, current_user.team_in_league(@current_league))
     render :locals => { :view_model => view_model }
   end
@@ -84,7 +84,7 @@ class NflPlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nfl_player
-      @nfl_player = NflPlayer.includes(:stats).find(params[:id])
+      @nfl_player = NflPlayer.find(params[:id])
     end
 
     def set_current_league
