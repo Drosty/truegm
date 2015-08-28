@@ -58,14 +58,6 @@ EvokeTruegmRails::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = { :host => 'truegm.heroku.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              ENV['MAILGUN_SMTP_SERVER'],
-    port:                 ENV['MAILGUN_SMTP_PORT'],
-    domain:               'truegm.heroku.com',
-    user_name:            ENV['MAILGUN_SMTP_LOGIN'],
-    password:             ENV['MAILGUN_SMTP_PASSWORD'],
-    authentication:       'plain'}
 
   # Enable threaded mode
   # config.threadsafe!
