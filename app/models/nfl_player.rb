@@ -114,11 +114,33 @@ class NflPlayer < ActiveRecord::Base
     self.nfl_team.week_nfl_matchup(week, year)
   end
 
-  def points_in_week week, league
-    year = ENV["current_year"]
-    stat = self.stats.where(year: year, week: week).first
-    return stat.total_points(league) unless stat.nil?
-    return 0
+  def years_with_stats
+    years = []
+    years << kicking_stats.pluck('distinct season')
+    years << passing_stats.pluck('distinct season')
+    years << punting_stats.pluck('distinct season')
+    years << receiving_stats.pluck('distinct season')
+    years << return_stats.pluck('distinct season')
+    years << rushing_stats.pluck('distinct season')
+
+    years.flatten.uniq
+  end
+
+  def all_stat_lines week, season
+    stat_lines = []
+    stat_lines << kicking_stats.where(season: season, week: week).first
+    stat_lines << passing_stats.where(season: season, week: week).first
+    stat_lines << punting_stats.where(season: season, week: week).first
+    stat_lines << receiving_stats.where(season: season, week: week).first
+    stat_lines << return_stats.where(season: season, week: week).first
+    stat_lines << rushing_stats.where(season: season, week: week).first
+
+    stat_lines
+  end
+
+  def points_in_week week, year, league
+    stat_lines = all_stat_lines(week, year)
+    stat_lines.sum { |stat_line| stat_line.nil? ? 0 : stat_line.total_points(league) }
   end
 
   def free_agent? league_id

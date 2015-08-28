@@ -49,19 +49,19 @@ else
 end
 
 json.stats do
-  json.year view_model.stats_by_year.each do |stat_by_year|
-    json.year stat_by_year[0]
+  json.year view_model.years_with_stats.each do |year|
+    json.year year
 
     json.categories view_model.stat_catagories_headers.each do |header|
       json.name header
       json.stat_table_headers view_model.stat_table_headers(header)
 
-      json.stats stat_by_year[1].each do |stat|
-        json.col1 view_model.col1_for_header(stat)
-        json.col2 view_model.col2_for_header(stat, header)
-        json.col3 view_model.col3_for_header(stat, header)
-        json.col4 view_model.col4_for_header(stat, header)
-        json.col5 view_model.col5_for_header(stat, view_model.league)
+      json.stats view_model.weeks.each do |week|
+        json.col1 week
+        json.col2 view_model.col2_for_header(header, year, week)
+        json.col3 view_model.col3_for_header(header, year, week)
+        json.col4 view_model.col4_for_header(header, year, week)
+        json.col5 view_model.col5_for_header(year, week)
       end
     end
   end

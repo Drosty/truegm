@@ -9,7 +9,7 @@ json.players @team.ordered_nfl_players do |player|
   json.(player, :id, :full_name)
   json.position player.position.upcase
   json.salary format_as_money(player.salary)
-  json.points player.points_in_week(current_week, @current_league)
+  json.points player.points_in_week(current_week, current_year, @current_league)
   json.bye_week player.bye_week
 
   json.team_name player.nfl_team.code unless player.nfl_team.nil?
