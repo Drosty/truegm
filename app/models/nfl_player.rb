@@ -24,6 +24,7 @@
 #  photo_url       :string
 #  fantasy_data_id :integer
 #
+require 'open-uri'
 
 class NflPlayer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :salary,
@@ -149,11 +150,25 @@ class NflPlayer < ActiveRecord::Base
       NflPlayer.generate_hash(in_name, position, team.code)
     end
 
-    match = NflPlayer.all.find do |player|
-      next if player.nfl_team.nil?
-      names.include?(NflPlayer.generate_hash(player.full_name, player.position, player.nfl_team.code))
+    match = NflPlayer.all.find do |player_loop|
+      next if player_loop.nfl_team.nil?
+      names.include?(NflPlayer.generate_hash(player_loop.full_name, player_loop.position, player_loop.nfl_team.code))
     end
     match
+  end
+
+  def update_spotrac_salary
+    return if spotrac_url.nil? || spotrac_url.empty?
+
+    player_page = Nokogiri::HTML(open(spotrac_url))
+    salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.info")[0]
+
+    if salary_node.nil?
+      puts "#{full_name} :: Salary not found on table"
+    end
+
+    self.salary = salary_node.text.gsub(/[^\d]/, '').strip
+    save
   end
 
 private
