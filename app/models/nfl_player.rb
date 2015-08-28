@@ -161,7 +161,7 @@ class NflPlayer < ActiveRecord::Base
     return if spotrac_url.nil? || spotrac_url.empty?
 
     player_page = Nokogiri::HTML(open(spotrac_url))
-    salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.info")[0]
+    salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt.current-year").css("span.info")[0]
 
     if salary_node.nil?
       puts "#{full_name} :: Salary not found on table"
