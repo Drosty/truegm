@@ -99,7 +99,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    fantasydata (0.2.0)
+    fantasydata (0.2.1)
       faraday (~> 0.9)
       multi_json (~> 1.0)
     faraday (0.9.1)
