@@ -106,12 +106,11 @@ module FantasyData
     # regular week is 1 based : 1 - 17
     # preseason week is 0 based : 0 - 4
     # postseason is 1 based : 1 - 4
-    def import_weekly_stats year, week
+    def import_weekly_stats year, week, team
       stat_processor = FantasyData::StatImportProcessing.new
 
-      Fantasydata.box_scores_by_week(year, week).each do |box_score|
-        stat_processor.process_box_score(box_score)
-      end
+      box_score = Fantasydata.box_score_by_team(year, week, team)
+      stat_processor.process_box_score(box_score)
     end
 
     def import_active_box_scores

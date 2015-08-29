@@ -4,9 +4,16 @@ namespace :import do
   task :yearly_stats, [:year] => :environment do |t, args|
     args.with_defaults(:year => 2014)
 
+    matchups = Fantasydata.schedule_by_year args[:year]
+
     (1..17).each do |week|
       puts "processing week: #{week}"
-      get_import_service().import_weekly_stats(args[:year], week)
+      home_teams = matchups.select { |s| s.season  == args[:year].to_i && s.week == week }.map(&:home_team)
+
+      home_teams.each do |team|
+        puts "processing week: #{week} Home Team: #{team}"
+        get_import_service().import_weekly_stats(args[:year], week, team)
+      end
     end
   end
 
