@@ -26,16 +26,16 @@ class KickingStat < ActiveRecord::Base
   include FantasyDataMapper
 
   attr_accessible :week, :season, :nfl_player_id
-  
+
   belongs_to :nfl_matchup
   belongs_to :nfl_player
   belongs_to :nfl_team
-  
+
   def total_points league
-    0
-    #[
-    #  extra_points_made.to_i * league.passing_interception_points,
-    #  field_goals_made.to_i * league.passing_touchdown_points
-    #].sum.round(2)
+    # TODO - have these be on the league configuration for scoring
+    [
+      extra_points_made.to_i * 1,
+      field_goals_made.to_i * 3
+    ].sum.round(0)
   end
 end

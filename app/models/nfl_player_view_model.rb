@@ -69,7 +69,7 @@ class NflPlayerViewModel
 
     elsif is_kicking_header?(header_category)
       stat = @player.kicking_stats.where({season: year, week: week}).first
-      val = stat.field_goal_attempted if stat
+      val = stat.field_goals_attempted if stat
 
     else
       # val = stat.fumbles_recovered
@@ -96,7 +96,7 @@ class NflPlayerViewModel
 
     elsif is_kicking_header?(header_category)
       stat = @player.kicking_stats.where({season: year, week: week}).first
-      val = stat.field_goal_made if stat
+      val = stat.field_goals_made if stat
 
     else
       # val = stat.fumbles_recovered
