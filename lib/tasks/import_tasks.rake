@@ -20,7 +20,13 @@ namespace :import do
   task :weekly_stats, [:week, :year] => :environment do |t, args|
     args.with_defaults(:week => 1, :year => 2014)
 
-    get_import_service().import_weekly_stats(args[:year], args[:week])
+    matchups = Fantasydata.schedule_by_year args[:year]
+    home_teams = matchups.select { |s| s.season  == args[:year].to_i && s.week == args[:week].to_i }.map(&:home_team)
+
+    home_teams.each do |team|
+      puts "processing week: #{args[:week].to_i} Home Team: #{team}"
+      get_import_service().import_weekly_stats(args[:year].to_i, args[:week].to_i, team)
+    end
   end
 
   task :nfl_teams => :environment do
