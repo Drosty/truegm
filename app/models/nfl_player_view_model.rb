@@ -1,17 +1,18 @@
 class NflPlayerViewModel
 
-  def initialize(player = nil, stats = [], league = nil, user_team = nil)
-    @stat_lines = stats
+  def initialize(player = nil, league = nil, user_team = nil)
     @player = player
     @league = league
     @user_fantasy_team = user_team
     @player_fantasy_team = @player.fantasy_team(@league.id) if @player && @league
   end
 
-  def stats_by_year
-    @stats_by_year ||= begin
-      @stat_lines.sort_by{ |stat| stat.week }.group_by { |stat| stat.year }
-    end
+  def years_with_stats
+    [2015, 2014, 2013]
+  end
+
+  def weeks
+    (1..17)
   end
 
   def stat_catagories_headers
@@ -52,28 +53,54 @@ class NflPlayerViewModel
     end
   end
 
-  def col1_for_header stat
-    val = stat.week
+  def col2_for_header header_category, year, week
+    val = 0
+    if is_passing_header?(header_category)
+      stat = @player.passing_stats.where({season: year, week: week}).first
+      val = stat.passing_yards if stat
+
+    elsif is_rushing_header?(header_category)
+      stat = @player.rushing_stats.where({season: year, week: week}).first
+      val = stat.rushing_yards if stat
+
+    elsif is_receiving_header?(header_category)
+      stat = @player.receiving_stats.where({season: year, week: week}).first
+      val = stat.receptions if stat
+
+    elsif is_kicking_header?(header_category)
+      stat = @player.kicking_stats.where({season: year, week: week}).first
+      val = stat.field_goals_attempted if stat
+
+    else
+      # val = stat.fumbles_recovered
+      val = 0
+    end
+
     val = 0 if val.nil?
     val
   end
 
-  def col2_for_header stat, header_category
+  def col3_for_header header_category, year, week
     val = 0
     if is_passing_header?(header_category)
-      val = stat.passing_yards
+      stat = @player.passing_stats.where({season: year, week: week}).first
+      val = stat.passing_touchdowns if stat
 
     elsif is_rushing_header?(header_category)
-      val = stat.rushing_yards
+      stat = @player.rushing_stats.where({season: year, week: week}).first
+      val = stat.rushing_touchdowns if stat
 
     elsif is_receiving_header?(header_category)
-      val = stat.receptions
+      stat = @player.receiving_stats.where({season: year, week: week}).first
+      val = stat.receiving_yards if stat
 
     elsif is_kicking_header?(header_category)
-      val = stat.field_goal_attempted
+      stat = @player.kicking_stats.where({season: year, week: week}).first
+      val = stat.field_goals_made if stat
 
-    elsif
-      val = stat.fumbles_recovered
+    else
+      # val = stat.fumbles_recovered
+      val = 0
 
     end
 
@@ -81,22 +108,27 @@ class NflPlayerViewModel
     val
   end
 
-  def col3_for_header stat, header_category
+  def col4_for_header header_category, year, week
     val = 0
     if is_passing_header?(header_category)
-      val = stat.passing_touchdowns
+      stat = @player.passing_stats.where({season: year, week: week}).first
+      val = stat.passing_interceptions if stat
 
     elsif is_rushing_header?(header_category)
-      val = stat.rushing_touchdowns
+      stat = @player.rushing_stats.where({season: year, week: week}).first
+      val = stat.fumbles_lost if stat
 
     elsif is_receiving_header?(header_category)
-      val = stat.receiving_yards
+      stat = @player.receiving_stats.where({season: year, week: week}).first
+      val = stat.receiving_touchdowns if stat
 
     elsif is_kicking_header?(header_category)
-      val = stat.field_goal_made
+      stat = @player.kicking_stats.where({season: year, week: week}).first
+      val = stat.extra_points_made if stat
 
-    elsif
-      val = stat.fumbles_recovered
+    else
+      # val = stat.fumbles_recovered
+      val = 0
 
     end
 
@@ -104,34 +136,8 @@ class NflPlayerViewModel
     val
   end
 
-  def col4_for_header stat, header_category
-    val = 0
-    if is_passing_header?(header_category)
-      val = stat.passing_interceptions
-
-    elsif is_rushing_header?(header_category)
-      val = stat.fumbles_lost
-
-    elsif is_receiving_header?(header_category)
-      val = stat.receiving_touchdowns
-
-    elsif is_kicking_header?(header_category)
-      val = stat.field_goal_made
-
-    elsif
-      val = stat.fumbles_recovered
-
-    end
-
-    val = 0 if val.nil?
-    val
-  end
-
-  def col5_for_header stat, league
-    return 0 if stat.nil? || league.nil?
-    val = stat.total_points(league)
-    val = 0 if val.nil?
-    val
+  def col5_for_header year, week
+    player.points_in_week(week, year, @league)
   end
 
   def player

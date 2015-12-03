@@ -33,11 +33,11 @@ module FantasyData
       end
 
       stat_data.away_kicking.each do |stat_line|
-        process_rushing_stat stat_line, week, season
+        process_kicking_stat stat_line, week, season
       end
 
       stat_data.home_kicking.each do |stat_line|
-        process_rushing_stat stat_line, week, season
+        process_kicking_stat stat_line, week, season
       end
     end
 
@@ -52,6 +52,7 @@ module FantasyData
 
     def process_passing_stat stat_info, week, season
       player = NflPlayer.find_by(fantasy_data_id: stat_info.player_id)
+      return if player.nil?
       db_stat = PassingStat.find_or_create_by({nfl_player_id: player.id, week: week, season: season})
 
       db_stat.init_from_import_model(stat_info)
@@ -60,6 +61,7 @@ module FantasyData
 
     def process_rushing_stat stat_info, week, season
       player = NflPlayer.find_by(fantasy_data_id: stat_info.player_id)
+      return if player.nil?
       db_stat = RushingStat.find_or_create_by({nfl_player_id: player.id, week: week, season: season})
 
       db_stat.init_from_import_model(stat_info)
@@ -68,6 +70,7 @@ module FantasyData
 
     def process_receiving_stat stat_info, week, season
       player = NflPlayer.find_by(fantasy_data_id: stat_info.player_id)
+      return if player.nil?
       db_stat = ReceivingStat.find_or_create_by({nfl_player_id: player.id, week: week, season: season})
 
       db_stat.init_from_import_model(stat_info)
@@ -76,6 +79,7 @@ module FantasyData
 
     def process_kicking_stat stat_info, week, season
       player = NflPlayer.find_by(fantasy_data_id: stat_info.player_id)
+      return if player.nil?
       db_stat = KickingStat.find_or_create_by({nfl_player_id: player.id, week: week, season: season})
 
       db_stat.init_from_import_model(stat_info)

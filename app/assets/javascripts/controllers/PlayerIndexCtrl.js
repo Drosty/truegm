@@ -12,6 +12,7 @@ this.truegm.controller('PlayerIndexCtrl', [
 		$scope.playerStatuses = ["Free Agent", "Owned", "All"];
 		$scope.positions = ["ALL", "QB", "RB", "WR", "TE", "RB/WR/TE", "K", "DEF"];
 		$scope.currentLeagueId = $routeParams.leagueId;
+		$scope.maxSize = 6;
 
 		LeagueService.setOrUpdateLeagueById($routeParams.leagueId);
 		$http.get("./leagues/" + $routeParams.leagueId + "/player.json").success(

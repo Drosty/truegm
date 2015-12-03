@@ -24,6 +24,7 @@
 #  photo_url       :string
 #  fantasy_data_id :integer
 #
+require 'open-uri'
 
 class NflPlayer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :salary,
@@ -113,11 +114,33 @@ class NflPlayer < ActiveRecord::Base
     self.nfl_team.week_nfl_matchup(week, year)
   end
 
-  def points_in_week week, league
-    year = ENV["current_year"]
-    stat = self.stats.where(year: year, week: week).first
-    return stat.total_points(league) unless stat.nil?
-    return 0
+  def years_with_stats
+    years = []
+    years << kicking_stats.pluck('distinct season')
+    years << passing_stats.pluck('distinct season')
+    years << punting_stats.pluck('distinct season')
+    years << receiving_stats.pluck('distinct season')
+    years << return_stats.pluck('distinct season')
+    years << rushing_stats.pluck('distinct season')
+
+    years.flatten.uniq
+  end
+
+  def all_stat_lines week, season
+    stat_lines = []
+    stat_lines << kicking_stats.where(season: season, week: week).first
+    stat_lines << passing_stats.where(season: season, week: week).first
+    stat_lines << punting_stats.where(season: season, week: week).first
+    stat_lines << receiving_stats.where(season: season, week: week).first
+    stat_lines << return_stats.where(season: season, week: week).first
+    stat_lines << rushing_stats.where(season: season, week: week).first
+
+    stat_lines
+  end
+
+  def points_in_week week, year, league
+    stat_lines = all_stat_lines(week, year)
+    stat_lines.sum { |stat_line| stat_line.nil? ? 0 : stat_line.total_points(league) }
   end
 
   def free_agent? league_id
@@ -149,11 +172,25 @@ class NflPlayer < ActiveRecord::Base
       NflPlayer.generate_hash(in_name, position, team.code)
     end
 
-    match = NflPlayer.all.find do |player|
-      next if player.nfl_team.nil?
-      names.include?(NflPlayer.generate_hash(player.full_name, player.position, player.nfl_team.code))
+    match = NflPlayer.all.find do |player_loop|
+      next if player_loop.nfl_team.nil?
+      names.include?(NflPlayer.generate_hash(player_loop.full_name, player_loop.position, player_loop.nfl_team.code))
     end
     match
+  end
+
+  def update_spotrac_salary
+    return if spotrac_url.nil? || spotrac_url.empty?
+
+    player_page = Nokogiri::HTML(open(spotrac_url))
+    salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt.current-year").css("span.info")[0]
+
+    if salary_node.nil?
+      puts "#{full_name} :: Salary not found on table"
+    end
+
+    self.salary = salary_node.text.gsub(/[^\d]/, '').strip
+    save
   end
 
 private

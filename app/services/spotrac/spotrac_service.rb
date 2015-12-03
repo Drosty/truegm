@@ -40,19 +40,9 @@ module Spotrac
     end
 
     def self.process_spotrac_salary_data
-      NflPlayer.all.find_each do |player|
-        next if player.spotrac_url.nil?
+      NflPlayer.find_each do |player|
         puts "processing: " + player.full_name
-
-        player_page = Nokogiri::HTML(open(player.spotrac_url))
-        salary_node = player_page.css("table.salaryTable").css("tr.salaryRow").css("td.salaryAmt").css("span.info")[0]
-
-        if salary_node.nil?
-          puts "#{player.full_name} :: Salary not found on table"
-        end
-
-        player.salary = salary_node.text.delete(',').strip
-        player.save
+        player.update_spotrac_salary
       end
 
       save_all_teams_updating_their_total_salary

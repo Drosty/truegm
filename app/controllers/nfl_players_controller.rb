@@ -17,7 +17,7 @@ class NflPlayersController < ApplicationController
     @nfl_players = NflPlayer.search(@searchString)
                             .positions(@position)
                             .by_status(@status, @current_league)
-                            .order(sort_column + " " + sort_direction)
+                            .order("#{sort_column} #{sort_direction} NULLS LAST")
                             .paginate(:page => @page)
 
     @total_players = @nfl_players.count
@@ -49,8 +49,7 @@ class NflPlayersController < ApplicationController
   # Then a NFL Player param passed in will be the player to be removed
   def replace_players
     user_team = @current_league.teams.select { |t| t.user_id == current_user.id }.first
-    remove_player = NflPlayer.includes(:stats).find(params[:params][:remove_player_id])
-    binding.pry
+    remove_player = NflPlayer.find(params[:params][:remove_player_id])
 
     if user_team && @nfl_player && remove_player
       user_team.remove_player remove_player
@@ -62,9 +61,7 @@ class NflPlayersController < ApplicationController
   # GET /nfl_players/1
   # GET /nfl_players/1.json
   def show
-    stats = Stat.where(nfl_player_id: @nfl_player.id)
-                .where("year >= ?", 2013)
-    view_model = NflPlayerViewModel.new(@nfl_player, stats, @current_league, current_user.team_in_league(@current_league))
+    view_model = NflPlayerViewModel.new(@nfl_player, @current_league, current_user.team_in_league(@current_league))
     render :locals => { :view_model => view_model }
   end
 
@@ -84,7 +81,11 @@ class NflPlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nfl_player
-      @nfl_player = NflPlayer.includes(:stats).find(params[:id])
+      @nfl_player = NflPlayer.includes(:passing_stats)
+                             .includes(:rushing_stats)
+                             .includes(:receiving_stats)
+                             .includes(:kicking_stats)
+                             .find(params[:id])
     end
 
     def set_current_league

@@ -9,7 +9,7 @@ module FantasyData
 
     def import_nfl_team_data
       Fantasydata.teams_active.each do |team|
-        in_team = NflTeam.find_or_create_by(code: team.key,
+         NflTeam.find_or_create_by(code: team.key,
                                   full_name: team.full_name,
                                   short_name: team.name) do |t|
 
@@ -42,7 +42,7 @@ module FantasyData
 
           begin
             p.dob = player.birth_date.to_datetime
-          rescue => e
+          rescue
             p.dob = nil
           end
         end
@@ -70,7 +70,7 @@ module FantasyData
         db_matchup.save
       end
     end
-     
+
     def import_injury_status
 
     end
@@ -106,12 +106,11 @@ module FantasyData
     # regular week is 1 based : 1 - 17
     # preseason week is 0 based : 0 - 4
     # postseason is 1 based : 1 - 4
-    def import_weekly_stats year, week
+    def import_weekly_stats year, week, team
       stat_processor = FantasyData::StatImportProcessing.new
 
-      Fantasydata.box_scores_by_week(year, week).each do |box_score|
-        stat_processor.process_box_score(box_score)
-      end
+      box_score = Fantasydata.box_score_by_team(year, week, team)
+      stat_processor.process_box_score(box_score)
     end
 
     def import_active_box_scores
