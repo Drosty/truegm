@@ -24,7 +24,7 @@ module Spotrac
         puts "processing: " + nfl_team.full_name + " " + nfl_team.spotrac_url
 
         nfl_page = Nokogiri::HTML(open(nfl_team.spotrac_url))
-        nfl_page.css("table.responsive").css("tr").each do |player|
+        nfl_page.css("table.datatable").css("tr").each do |player|
           position_node = player.css("td")[1]
           name_node = player.css("td")[0]
 
@@ -40,7 +40,9 @@ module Spotrac
     end
 
     def self.process_spotrac_salary_data
-      NflPlayer.find_each do |player|
+      NflPlayer.where(salary: 0).find_each do |player|
+        next if player.full_name == "Kevin Norwood"
+
         puts "processing: " + player.full_name
         player.update_spotrac_salary
       end
