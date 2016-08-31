@@ -53,9 +53,6 @@ class NflPlayer < ActiveRecord::Base
     Position::ALL_POSITION_INCLUDING_FLEX_AND_ALL
   end
 
-  # This is for pagination
-  self.per_page = 15
-
   # Named_Scopes
   scope :positions, ->(pos) {
                               case pos.downcase

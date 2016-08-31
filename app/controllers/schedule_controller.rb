@@ -7,7 +7,6 @@ class ScheduleController < ApplicationController
   end
 
   def index
-    raise Pundit::NotAuthorizedError.new("not authorized") unless LeaguePolicy.new(current_user, @current_league).show?
 
     week = params[:week].to_i
     week = current_week if week.nil? || week < 0 || week > 17

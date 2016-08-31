@@ -1,9 +1,6 @@
-  <div class="row">
-  <div class="field">
-    <h3 id="js-total-salary">$0</h3>
-  </div>
-  </div>
+
 <div class="row">
+  <div class="col-sm-9">
 <%= form_for(@roster) do |f| %>
   <% if @roster.errors.any? %>
     <div id="error_explanation">
@@ -23,71 +20,75 @@
   </div>
   <div class="field">
     <%= f.label :qb1 %><br>
-    <%= f.select :qb1, NflPlayer.positions("qb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :qb1, NflPlayer.positions("qb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :rb1 %><br>
-    <%= f.select :rb1, NflPlayer.positions("rb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :rb1, NflPlayer.positions("rb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :rb2 %><br>
-    <%= f.select :rb2, NflPlayer.positions("rb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :rb2, NflPlayer.positions("rb").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :wr1 %><br>
-    <%= f.select :wr1, NflPlayer.positions("wr").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :wr1, NflPlayer.positions("wr").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :wr2 %><br>
-    <%= f.select :wr2, NflPlayer.positions("wr").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :wr2, NflPlayer.positions("wr").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :te %><br>
-    <%= f.select :te, NflPlayer.positions("te").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :te, NflPlayer.positions("te").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :flex %><br>
-    <%= f.select :flex, NflPlayer.positions("flex").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :flex, NflPlayer.positions("flex").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :utility %><br>
-    <%= f.select :utility, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :utility, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :pk %><br>
-    <%= f.select :pk, NflPlayer.positions("k").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :pk, NflPlayer.positions("k").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <hr />
   <div class="field">
     <%= f.label :bench1 %><br>
-    <%= f.select :bench1, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
-  </div>
-  <div class="field">
-    <%= f.label :bench1 %><br>
-    <%= f.select :bench1, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench1, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :bench2 %><br>
-    <%= f.select :bench2, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench2, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :bench3 %><br>
-    <%= f.select :bench3, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench3, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :bench4 %><br>
-    <%= f.select :bench4, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench4, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :bench5 %><br>
-    <%= f.select :bench5, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench5, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :bench6 %><br>
-    <%= f.select :bench6, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]} %>
+    <%= f.select :bench6, NflPlayer.positions("all").order(:full_name).map {|c| [c.full_name_with_salary, c.id, {:salary => c.salary}]}, :include_blank => true %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
   </div>
+    <div class="col-sm-3">
+      <div class="field" data-spy="affix">
+        <h3 id="js-total-salary">$0</h3>
+        <h5>out of $32,000,000</h5>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

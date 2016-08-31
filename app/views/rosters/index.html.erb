@@ -6,16 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Qb1</th>
-      <th>Rb1</th>
-      <th>Rb2</th>
-      <th>Wr1</th>
-      <th>Wr2</th>
-      <th>Te</th>
-      <th>Flex</th>
-      <th>Utility</th>
-      <th>Pk</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -23,18 +14,8 @@
     <% @rosters.each do |roster| %>
       <tr>
         <td><%= roster.name %></td>
-        <td><%= roster.qb1 %></td>
-        <td><%= roster.rb1 %></td>
-        <td><%= roster.rb2 %></td>
-        <td><%= roster.wr1 %></td>
-        <td><%= roster.wr2 %></td>
-        <td><%= roster.te %></td>
-        <td><%= roster.flex %></td>
-        <td><%= roster.utility %></td>
-        <td><%= roster.pk %></td>
         <td><%= link_to 'Show', roster %></td>
         <td><%= link_to 'Edit', edit_roster_path(roster) %></td>
-        <td><%= link_to 'Destroy', roster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

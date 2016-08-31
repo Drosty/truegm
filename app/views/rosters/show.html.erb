@@ -9,52 +9,80 @@
 
 <p>
   <strong>Qb1:</strong>
-  <%= NflPlayer.find(@roster.qb1).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.qb1).full_name_with_salary if @roster.qb1 %>
 </p>
 
 <p>
   <strong>Rb1:</strong>
-  <%= NflPlayer.find(@roster.rb1).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.rb1).full_name_with_salary if @roster.rb1 %>
 </p>
 
 <p>
   <strong>Rb2:</strong>
-  <%= NflPlayer.find(@roster.rb2).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.rb2).full_name_with_salary if @roster.rb2 %>
 </p>
 
 <p>
   <strong>Wr1:</strong>
-  <%= NflPlayer.find(@roster.wr1).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.wr1).full_name_with_salary if @roster.wr1 %>
 </p>
 
 <p>
   <strong>Wr2:</strong>
-  <%= NflPlayer.find(@roster.wr2).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.wr2).full_name_with_salary if @roster.wr2 %>
 </p>
 
 <p>
   <strong>Te:</strong>
-  <%= NflPlayer.find(@roster.te).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.te).full_name_with_salary if @roster.te %>
 </p>
 
 <p>
   <strong>Flex:</strong>
-  <%= NflPlayer.find(@roster.flex).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.flex).full_name_with_salary if @roster.flex %>
 </p>
 
 <p>
   <strong>Utility:</strong>
-  <%= NflPlayer.find(@roster.utility).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.utility).full_name_with_salary if @roster.utility %>
 </p>
 
 <p>
   <strong>Pk:</strong>
-  <%= NflPlayer.find(@roster.pk).full_name_with_salary %>
+  <%= NflPlayer.find(@roster.pk).full_name_with_salary if @roster.pk %>
 </p>
 
 <hr>
 
+<p>
+  <strong>Bench 1:</strong>
+  <%= NflPlayer.find(@roster.bench1).full_name_with_salary if @roster.bench1 %>
+</p>
 
+<p>
+  <strong>Bench 2:</strong>
+  <%= NflPlayer.find(@roster.bench2).full_name_with_salary if @roster.bench2 %>
+</p>
+
+<p>
+  <strong>Bench 3:</strong>
+  <%= NflPlayer.find(@roster.bench3).full_name_with_salary if @roster.bench3 %>
+</p>
+
+<p>
+  <strong>Bench 4:</strong>
+  <%= NflPlayer.find(@roster.bench4).full_name_with_salary if @roster.bench4 %>
+</p>
+
+<p>
+  <strong>Bench 5:</strong>
+  <%= NflPlayer.find(@roster.bench5).full_name_with_salary if @roster.bench5 %>
+</p>
+
+<p>
+  <strong>Bench 6:</strong>
+  <%= NflPlayer.find(@roster.bench6).full_name_with_salary if @roster.bench6 %>
+</p>
 </div>
 </div>
 <%= link_to 'Edit', edit_roster_path(@roster) %> |

@@ -15,44 +15,17 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# include angular files
-gem 'angularjs-rails'
-
-# angular-ui-bootstrap
-gem 'angular-ui-bootstrap-rails'
-
-# For templates in asset pipeline for AngularJs
-gem 'angular-rails-templates'
-
-# for the CSRF token on Angular calls
-gem 'ng-rails-csrf'
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
-# Devise for user authentication
-gem 'devise'
-
-# Pundit for User Authorization
-gem "pundit"
-
-# For using Twitter with Authentication
-gem 'omniauth-twitter'
-
 # For making forms simpler
 gem 'simple_form'
 
 # To Keep attr_accessible
 gem 'protected_attributes'
-
-# For Pagination
-gem 'will_paginate', '~> 3.0'
 
 # For LESS Rails
 gem "less-rails"
@@ -95,9 +68,6 @@ gem 'dotenv-rails'
 gem 'paper_trail', '~> 3.0.2'
 
 gem 'newrelic_rpm'
-
-#public activity
-gem 'public_activity'
 
 # printing all awesome like
 gem 'awesome_print', group: [:development, :test]

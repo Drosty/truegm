@@ -69,6 +69,6 @@ class RostersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roster_params
-      params.require(:roster).permit(:name, :qb1, :rb1, :rb2, :wr1, :wr2, :te, :flex, :utility, :pk)
+      params.require(:roster).permit(:name, :qb1, :rb1, :rb2, :wr1, :wr2, :te, :flex, :utility, :pk, :bench1, :bench2, :bench3, :bench4, :bench5, :bench6)
     end
 end
