@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+<div class="row">
+<p>
+  <strong>Roster Name:</strong>
+  <%= @roster.name %>
+</p>
+
+<p>
+  <strong>Qb1:</strong>
+  <%= NflPlayer.find(@roster.qb1).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Rb1:</strong>
+  <%= NflPlayer.find(@roster.rb1).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Rb2:</strong>
+  <%= NflPlayer.find(@roster.rb2).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Wr1:</strong>
+  <%= NflPlayer.find(@roster.wr1).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Wr2:</strong>
+  <%= NflPlayer.find(@roster.wr2).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Te:</strong>
+  <%= NflPlayer.find(@roster.te).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Flex:</strong>
+  <%= NflPlayer.find(@roster.flex).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Utility:</strong>
+  <%= NflPlayer.find(@roster.utility).full_name_with_salary %>
+</p>
+
+<p>
+  <strong>Pk:</strong>
+  <%= NflPlayer.find(@roster.pk).full_name_with_salary %>
+</p>
+
+<hr>
+
+
+</div>
+</div>
+<%= link_to 'Edit', edit_roster_path(@roster) %> |
+<%= link_to 'Back', rosters_path %>
