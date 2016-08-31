@@ -26,39 +26,28 @@ class RostersController < ApplicationController
   def create
     @roster = Roster.new(roster_params)
 
-    respond_to do |format|
       if @roster.save
         format.html { redirect_to @roster, notice: 'Roster was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @roster }
       else
         format.html { render action: 'new' }
-        format.json { render json: @roster.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /rosters/1
   # PATCH/PUT /rosters/1.json
   def update
-    respond_to do |format|
       if @roster.update(roster_params)
         format.html { redirect_to @roster, notice: 'Roster was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @roster.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # DELETE /rosters/1
   # DELETE /rosters/1.json
   def destroy
     @roster.destroy
-    respond_to do |format|
-      format.html { redirect_to rosters_url }
-      format.json { head :no_content }
-    end
+    format.html { redirect_to rosters_url }
   end
 
   private
