@@ -40,7 +40,7 @@ module Spotrac
     end
 
     def self.process_spotrac_salary_data
-      NflPlayer.where(salary: 0).find_each do |player|
+      NflPlayer.find_each do |player|
         next if player.full_name == "Kevin Norwood"
 
         puts "processing: " + player.full_name
