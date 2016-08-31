@@ -27,9 +27,9 @@ class RostersController < ApplicationController
     @roster = Roster.new(roster_params)
 
       if @roster.save
-        format.html { redirect_to @roster, notice: 'Roster was successfully created.' }
+        redirect_to @roster, notice: 'Roster was successfully created.'
       else
-        format.html { render action: 'new' }
+        render action: 'new'
       end
   end
 
@@ -37,9 +37,9 @@ class RostersController < ApplicationController
   # PATCH/PUT /rosters/1.json
   def update
       if @roster.update(roster_params)
-        format.html { redirect_to @roster, notice: 'Roster was successfully updated.' }
+        redirect_to @roster, notice: 'Roster was successfully updated.'
       else
-        format.html { render action: 'edit' }
+        render action: 'edit'
       end
   end
 
@@ -47,7 +47,7 @@ class RostersController < ApplicationController
   # DELETE /rosters/1.json
   def destroy
     @roster.destroy
-    format.html { redirect_to rosters_url }
+    redirect_to rosters_url
   end
 
   private
