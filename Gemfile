@@ -56,6 +56,10 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 gem 'pry'
 
+group :production, :staging do
+  gem 'rails_12factor'
+end
+
 gem 'thin'
 
 gem 'fantasydata'
