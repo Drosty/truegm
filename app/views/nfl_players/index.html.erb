@@ -15,7 +15,7 @@
       <tr>
         <td><%= player.full_name %></td>
         <td><%= player.position.upcase %></td>
-        <td><%= player.salary %></td>
+        <td><%= format_as_money player.salary %></td>
         <td><%= player.nfl_team_name %></td>
       </tr>
     <% end %>
