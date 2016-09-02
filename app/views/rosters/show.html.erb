@@ -1,10 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+
 <div class="container">
 <div class="row">
 <p>
   <strong>Roster Name:</strong>
   <%= @roster.name %>
+</p>
+
+<p>
+  <strong>Total Salary:</strong>
+  <%= format_as_money @roster.salary %>
 </p>
 
 <p>
