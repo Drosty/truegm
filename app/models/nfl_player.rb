@@ -25,6 +25,7 @@
 #  fantasy_data_id :integer
 #
 require 'open-uri'
+include ActionView::Helpers::NumberHelper
 
 class NflPlayer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :salary,
@@ -52,9 +53,6 @@ class NflPlayer < ActiveRecord::Base
     Position::ALL_POSITION_INCLUDING_FLEX_AND_ALL
   end
 
-  # This is for pagination
-  self.per_page = 15
-
   # Named_Scopes
   scope :positions, ->(pos) {
                               case pos.downcase
@@ -71,6 +69,14 @@ class NflPlayer < ActiveRecord::Base
 
   def self.with_salary
     where("salary IS NOT NULL and salary != 0")
+  end
+
+  def full_name_with_salary
+    "#{full_name} - #{number_to_currency(salary, precision: 0)}"
+  end
+
+  def full_name_with_salary_and_position
+    "#{full_name} - #{number_to_currency(salary, precision: 0)} - #{position}"    
   end
 
   def self.by_status(status, league)
@@ -191,6 +197,11 @@ class NflPlayer < ActiveRecord::Base
 
     self.salary = salary_node.text.gsub(/[^\d]/, '').strip
     save
+  end
+
+  def nfl_team_name
+    return "NA" unless nfl_team
+    nfl_team.code
   end
 
 private

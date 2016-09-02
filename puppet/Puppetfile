@@ -1,5 +1,0 @@
-forge "https://forgeapi.puppetlabs.com"
-
-mod "saz/timezone",
-  :git => "https://github.com/saz/puppet-timezone"
-mod "puppetlabs/postgresql"

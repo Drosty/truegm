@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rosters</h1>
+
+<table class="table responsive">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Salary</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rosters.each do |roster| %>
+      <tr>
+        <td><%= roster.name %></td>
+        <td><%= format_as_money roster.salary %></td>
+        <td><%= link_to 'Show', roster %></td>
+        <td><%= link_to 'Edit', edit_roster_path(roster) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Roster', new_roster_path %>

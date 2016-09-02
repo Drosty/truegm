@@ -11,8 +11,6 @@
 #
 
 class ForumPost < ActiveRecord::Base
-  include PublicActivity::Common
-
   attr_accessible :post_body, :user_id, :forum_topic_id, :id, :created_at, :updated_at
 
   # These are here for updating the Topic's updated date

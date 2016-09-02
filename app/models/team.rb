@@ -14,7 +14,6 @@
 #
 
 class Team < ActiveRecord::Base
-  include PublicActivity::Common
 
   attr_accessible :name, :tagline, :total_salary, :invite_code
 

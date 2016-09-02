@@ -1,0 +1,53 @@
+<h1>All NFL Players</h1>
+
+<table id="playersTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Salary</th>
+      <th>Nfl Team</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= player.full_name %></td>
+        <td><%= player.position.upcase %></td>
+        <td><%= format_as_money player.salary %></td>
+        <td><%= player.nfl_team_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<% content_for :javascript do %>
+    <script>
+    $(document).ready(function(){
+        $('#playersTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+    
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+    
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        });
+    });
+    </script>
+<% end %>

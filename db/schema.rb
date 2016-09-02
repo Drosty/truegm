@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828180428) do
+ActiveRecord::Schema.define(version: 20160902171310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -377,6 +377,28 @@ ActiveRecord::Schema.define(version: 20150828180428) do
   add_index "return_stats", ["nfl_matchup_id"], name: "index_return_stats_on_nfl_matchup_id", using: :btree
   add_index "return_stats", ["nfl_player_id"], name: "index_return_stats_on_nfl_player_id", using: :btree
   add_index "return_stats", ["nfl_team_id"], name: "index_return_stats_on_nfl_team_id", using: :btree
+
+  create_table "rosters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "qb1"
+    t.integer  "rb1"
+    t.integer  "rb2"
+    t.integer  "wr1"
+    t.integer  "wr2"
+    t.integer  "te"
+    t.integer  "flex"
+    t.integer  "utility"
+    t.integer  "pk"
+    t.integer  "bench1"
+    t.integer  "bench2"
+    t.integer  "bench3"
+    t.integer  "bench4"
+    t.integer  "bench5"
+    t.integer  "bench6"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "salary"
+  end
 
   create_table "rushing_stats", force: :cascade do |t|
     t.integer  "nfl_matchup_id"

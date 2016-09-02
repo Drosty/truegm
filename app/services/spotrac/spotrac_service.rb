@@ -42,6 +42,14 @@ module Spotrac
     def self.process_spotrac_salary_data
       NflPlayer.where(salary: 0).find_each do |player|
         next if player.full_name == "Kevin Norwood"
+        next if player.full_name == "Rueben Randle"
+        next if player.full_name == "Chris Givens"
+        next if player.full_name == "David Cobb"
+        next if player.full_name == "Brandon Tate"
+        next if player.full_name == "Jerome Simpson"
+        next if player.full_name == "Gerald Christian"
+        next if player.full_name == "Austin Davis"
+        next if player.full_name == "Sean Renfree"
 
         puts "processing: " + player.full_name
         player.update_spotrac_salary
