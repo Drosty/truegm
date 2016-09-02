@@ -199,6 +199,11 @@ class NflPlayer < ActiveRecord::Base
     save
   end
 
+  def nfl_team_name
+    return "NA" unless nfl_team
+    nfl_team.code
+  end
+
 private
 
   def self.get_name_variations name
