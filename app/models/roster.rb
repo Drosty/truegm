@@ -7,7 +7,7 @@ class Roster < ActiveRecord::Base
     def calculate_salary
         player_ids = [self.qb1, self.rb1, self.rb2, 
                       self.wr1, self.wr2, self.te, 
-                      self.flex, self.utility, 
+                      self.flex, self.utility, self.pk,
                       self.bench1, self.bench2, self.bench3, 
                       self.bench4, self.bench5, self.bench6].flatten.uniq.compact
         self.salary = NflPlayer.where(id: player_ids).pluck(:salary).sum
