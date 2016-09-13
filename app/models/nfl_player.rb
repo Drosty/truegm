@@ -193,6 +193,7 @@ class NflPlayer < ActiveRecord::Base
 
     if salary_node.nil?
       puts "#{full_name} :: Salary not found on table"
+      return
     end
 
     self.salary = salary_node.text.gsub(/[^\d]/, '').strip
