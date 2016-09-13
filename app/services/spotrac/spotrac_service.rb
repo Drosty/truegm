@@ -50,6 +50,7 @@ module Spotrac
         next if player.full_name == "Gerald Christian"
         next if player.full_name == "Austin Davis"
         next if player.full_name == "Sean Renfree"
+        next if player.full_name == "Jace Amaro"
 
         puts "processing: " + player.full_name
         player.update_spotrac_salary
