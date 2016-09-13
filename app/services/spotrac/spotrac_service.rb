@@ -65,7 +65,7 @@ module Spotrac
       # calling save so that it will update
       # each fantasy teams overal total salary
       # just in case someones salary changed
-      Team.all.each do |t|
+      Roster.all.each do |t|
         t.save
       end
     end
